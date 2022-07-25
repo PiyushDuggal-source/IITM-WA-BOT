@@ -18,8 +18,10 @@ export const PING_REPLIES: PingReplies = {
     "🤘 hey",
     "What iz up?",
     "👀 you called me?",
+    "Yes please!",
+    "Yes? ",
   ],
-  memberMsgNumber: 6,
+  memberMsgNumber: 8,
 };
 
 const getUserCommands = (userCmdList: string[][]): CommandButtons => {
@@ -36,7 +38,6 @@ const getUserCommands = (userCmdList: string[][]): CommandButtons => {
   });
   return commands;
 };
-console.log(getUserCommands(User_AllCommands));
 export const USER_COMMANDS = new List(
   "These are the commands of the bot",
   "Commands",

@@ -1,1 +1,2 @@
-export const COMMANDS = ["cmds", "commands", "command", "cmd", "list"];
+export const COMMANDS = ["cmds", "cmd"];
+export const CALENDAR_COMMANDS = ["classes", "calendar"];

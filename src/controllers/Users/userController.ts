@@ -1,6 +1,7 @@
 import WAWebJS from "whatsapp-web.js";
+import { sendCalendar } from "../../actions/sendCalendar";
 import { sendMessage, random } from "../../actions/sendMessage";
-import { COMMANDS } from "../../utils/Commands/instructions";
+import { CALENDAR_COMMANDS, COMMANDS } from "../../utils/Commands/instructions";
 import { USER_PING_MESSAGES } from "../../utils/messages/messages";
 import { PING_REPLIES, USER_COMMANDS } from "../../utils/reply/replies";
 export const userControl = (bot: WAWebJS.Chat, message: string) => {
@@ -15,5 +16,7 @@ export const userControl = (bot: WAWebJS.Chat, message: string) => {
   } else if (COMMANDS.includes(message.toLocaleLowerCase())) {
     sendMessage(bot, USER_COMMANDS, true);
     return;
+  } else if (CALENDAR_COMMANDS.includes(message.toLocaleLowerCase())) {
+    sendCalendar(bot);
   }
 };

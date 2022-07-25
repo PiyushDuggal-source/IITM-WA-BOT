@@ -19,3 +19,13 @@ export type CommandButtons = {
   title: string;
   description?: string;
 }[];
+
+// Calendar Types
+
+export type Calendar = {
+  topic: string;
+  time: string;
+  date: Date;
+  courseName: string;
+  description?: string;
+}[];
