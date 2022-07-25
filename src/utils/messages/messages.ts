@@ -1,4 +1,4 @@
-export const userMessages: string[] = [
+export const USER_PING_MESSAGES: string[] = [
   "hi",
   "hello",
   "whatsup?",

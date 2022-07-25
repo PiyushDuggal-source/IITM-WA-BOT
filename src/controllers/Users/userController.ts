@@ -1,19 +1,19 @@
 import WAWebJS from "whatsapp-web.js";
-import { sendMessage } from "../../actions/sendMessage";
-import secretVariables from "../../config/config";
-import { userMessages } from "../../utils/Commands/messages";
-import { PING_REPLIES } from "../../utils/Commands/replies";
-import { random } from "../../utils/common";
-
+import { sendMessage, random } from "../../actions/sendMessage";
+import { COMMANDS } from "../../utils/Commands/instructions";
+import { USER_PING_MESSAGES } from "../../utils/messages/messages";
+import { PING_REPLIES, USER_COMMANDS } from "../../utils/reply/replies";
 export const userControl = (bot: WAWebJS.Chat, message: string) => {
-  if (
-    message[0] === secretVariables.BOT_PREFIX &&
-    userMessages.includes(message.slice(1).toLocaleLowerCase())
-  ) {
+  // Ping Message Reply
+  if (USER_PING_MESSAGES.includes(message.toLocaleLowerCase())) {
     sendMessage(
       bot,
       PING_REPLIES.members[random(PING_REPLIES.memberMsgNumber)]
     );
+    return;
+    // Commands Message Reply
+  } else if (COMMANDS.includes(message.toLocaleLowerCase())) {
+    sendMessage(bot, USER_COMMANDS, true);
     return;
   }
 };
