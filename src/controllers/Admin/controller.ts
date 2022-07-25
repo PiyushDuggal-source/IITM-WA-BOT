@@ -1,11 +1,15 @@
 import WAWebJS, { Buttons, List } from "whatsapp-web.js";
 import { sendMessage } from "../../actions/sendMessage";
 import { userMessages } from "../../utils/Commands/messages";
+import secretVariables from "../../config/config";
 import { PING_REPLIES } from "../../utils/Commands/replies";
 import { random } from "../../utils/common";
 
 export const adminControl = (bot: WAWebJS.Chat, message: string) => {
-  if (userMessages.includes(message.toLocaleLowerCase())) {
+  if (
+    message[0] === secretVariables.BOT_PREFIX &&
+    userMessages.includes(message.slice(1).toLocaleLowerCase())
+  ) {
     const button = new Buttons("These are the btns", [
       {
         body: "hello",
@@ -38,8 +42,8 @@ export const adminControl = (bot: WAWebJS.Chat, message: string) => {
       "home",
       "jelfekfe"
     );
-    // sendMessage(bot, PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]);
-    bot.sendMessage(button);
+    sendMessage(bot, PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]);
+    // bot.sendMessage(button);
     return;
   }
 };

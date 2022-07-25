@@ -2,6 +2,7 @@ import WAWebJS, { Client, LocalAuth } from "whatsapp-web.js";
 import qrcode from "qrcode-terminal";
 import { checkMessage } from "./actions/messageActions";
 import { main } from "./controllers/main";
+
 const client = new Client({
   puppeteer: {
     headless: true,
