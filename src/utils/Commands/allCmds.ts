@@ -1,7 +1,8 @@
 import { USER_PING_MESSAGES } from "../messages/messages";
-import { CALENDAR_COMMANDS, COMMANDS } from "./instructions";
+import { CALENDAR_COMMANDS, CLASS_COMMAND, COMMANDS } from "./instructions";
 export const User_AllCommands: string[][] = [
-  COMMANDS,
   CALENDAR_COMMANDS,
+  CLASS_COMMAND,
+  COMMANDS,
   USER_PING_MESSAGES,
 ];
