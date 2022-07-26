@@ -1,6 +1,7 @@
 import { List } from "whatsapp-web.js";
+import { random } from "../../actions/sendMessage";
 import secretVariables from "../../config/config";
-import { CommandButtons, PingReplies } from "../../types/types";
+import { CommandButtons, Greetings, PingReplies } from "../../types/types";
 import { User_AllCommands } from "../Commands/allCmds";
 export const PING_REPLIES: PingReplies = {
   admin: [
@@ -39,7 +40,7 @@ const getUserCommands = (userCmdList: string[][]): CommandButtons => {
   return commands;
 };
 export const USER_COMMANDS = new List(
-  "Hey.. Wanna checkout what ELIZA can do?\nCheckout these commands!! 😉",
+  `Hey.. Wanna checkout what ${secretVariables.BOT_NAME} can do?\nCheckout these commands!! 😉`,
   "Commands",
   [
     {
@@ -49,28 +50,47 @@ export const USER_COMMANDS = new List(
   ]
 );
 
+export const GREETINGS: Greetings = {
+  admin: ["Sir", "Master", "Monsieur"],
+  adminMsgNumer: 3,
+  member: [
+    "Fellow",
+    "Person",
+    "Dude",
+    "Gentle-men/women",
+    "Brother/Sister",
+    "My Friend!",
+  ],
+  memberMsgNumber: 6,
+};
+
 export const HOLIDAY_REPLIES = {
   members: [
-    `FINALLY *IITian* you are *free*... but wait.. not so fast... THIS IS ONLY FOR THIS DAY... from next day... you will suffer again..... 😈
-    
-    ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
-    ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
-    ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
-    ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
-    
-    Process loading: 0%
-    Process loading: 50%
-    Process loading: 100%
-    
-    back online::
-    ELIZA : Sorry fellas, an Evil took my place, now everything is fine!!! and yea... *There is no class today!* 😅
+    // `FINALLY *IITian* you are *free*... but wait.. not so fast... THIS IS ONLY FOR THIS DAY... from next day... you will suffer again..... 😈
 
-    `,
-    `*There is no Class Today!!* \nGive some of your precious time and think about me and help me be a better BOT!! \nor Go take some rest and work on *something special* to you, utilize your *free* time!!
+    // ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
+    // ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
+    // ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
+    // ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
+
+    // Process loading: 0%
+    // Process loading: 50%
+    // Process loading: 100%
+
+    // back online::
+    // ${secretVariables.BOT_NAME} : Sorry fellas, an Evil took my place, now everything is fine!!! and yea... *There is no class today!* 😅
+
+    // `,
+    `*There is no Class Today!!* \nGive some of your precious time and think about me and help me be a better BOT!!\nor Go take some rest and work on *something special* to you, utilize your *free* time!\n*Never stop learning!*
      `,
-    // "no class",
+    `Cool, there is *no* class today ${
+      GREETINGS.member[random(GREETINGS.adminMsgNumer)]
+    }!`,
+    `Q1: There are N number of classes today and N = 0 then guess how many classes are there? *1 Point*\nA: NO Class\nB: C\nC: A`,
 
-    // "no class today",
+    "no class today",
   ],
-  memberMsgNumber: 2,
+  memberMsgNumber: 3,
 };
+
+export const HEY_EMOJIES = ["✌", "👋", "🤘", "👐", "🤓", "🤗"];

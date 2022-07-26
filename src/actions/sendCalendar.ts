@@ -13,10 +13,10 @@ const calendarMessageFormat = (calendar: Calendar): MessageContent => {
         event.topic
       }* \n🕰 *Timing* : _${event.time}_ \n📅 *Date* : ${format(
         event.date,
-        "eeee, LLLL Lo, yyyy"
+        "eeee, LLLL d, yyyy"
       )}  \n🏫 *Course* : ${event.courseName}\n `)
   );
-  return message + `\n\n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
+  return message + `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
 };
 
 export const sendCalendar = (bot: WAWebJS.Chat) => {

@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import WAWebJS from "whatsapp-web.js";
 import secretVariables from "../config/config";
 import { CALENDAR } from "../resources/calendar";
@@ -19,7 +20,14 @@ export const sendClassMessage = (bot: WAWebJS.Chat) => {
     bot.sendMessage(
       `${secretVariables.BOT_NAME} : ${
         HOLIDAY_REPLIES.members[random(HOLIDAY_REPLIES.memberMsgNumber)]
-      } \n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`
+      } \n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`
     );
+  } else {
+    let message = "📘*Today's Classes*📘";
+    events.forEach(
+      (event) =>
+        (message += `\n -------------------------------- \n📖 *Topic* : *${event.topic}* \n🕰 *Timing* : _${event.time}_ \n📅 *Date* : *Today!* \n🏫 *Course* : ${event.courseName}\n `)
+    );
+    bot.sendMessage(message);
   }
 };

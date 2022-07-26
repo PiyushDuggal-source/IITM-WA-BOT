@@ -29,3 +29,11 @@ export type Calendar = {
   courseName: string;
   description?: string;
 }[];
+
+// Introduction Type
+export type Greetings = {
+  member: string[];
+  memberMsgNumber: number;
+  admin: string[];
+  adminMsgNumer: number;
+};

@@ -9,8 +9,8 @@ export const main = (
   role: MessageType
 ) => {
   if (role === "ADMIN") {
-    adminControl(bot, message.body.slice(1));
-  } else if (role === "USER") {
     userControl(bot, message.body.slice(1));
+  } else if (role === "USER") {
+    adminControl(bot, message.body.slice(1));
   }
 };

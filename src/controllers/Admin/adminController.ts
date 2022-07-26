@@ -19,7 +19,6 @@ export const adminControl = (bot: WAWebJS.Chat, message: string) => {
     sendMessage(bot, USER_COMMANDS, true);
     return;
   } else if (CLASS_COMMAND.includes(message.toLocaleLowerCase())) {
-    console.log(message);
     sendClassMessage(bot);
   }
 };
