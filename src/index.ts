@@ -23,12 +23,10 @@ client.on("ready", async () => {
 
 client.on("message_create", async (message: WAWebJS.Message) => {
   const bool = checkMessage(message);
-  console.log(bool);
   if (
     (bool === "ADMIN" || bool === "USER") &&
     message.body[0] === secretVariables.BOT_PREFIX
   ) {
-    console.log("COOOL");
     const allChats = await client.getChats();
     const WA_BOT = allChats[0];
     main(WA_BOT, message, bool);

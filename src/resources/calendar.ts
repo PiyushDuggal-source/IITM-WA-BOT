@@ -1,4 +1,3 @@
-import { calendar } from "googleapis/build/src/apis/calendar";
 import { Calendar } from "../types/types";
 
 export const CALENDAR: Calendar = [
