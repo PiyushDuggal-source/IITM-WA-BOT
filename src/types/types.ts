@@ -37,3 +37,10 @@ export type Greetings = {
   admin: string[];
   adminMsgNumer: number;
 };
+
+// User Join Greetings Type
+
+export type UserJoinGreetings = {
+  messages: string[];
+  messageNum: number;
+};

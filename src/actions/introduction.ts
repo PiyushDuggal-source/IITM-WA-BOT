@@ -32,14 +32,14 @@ export const introduction = (bot: WAWebJS.Chat, admin: boolean) => {
       secretVariables.BOT_NAME
     }* (named after the first ever chatbot ${
       HEY_EMOJIES[random(HEY_EMOJIES.length)]
-    })\n\nMy Purpose is to help you in your journey to become an *IITian* 🤩 fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\nThese are the Bot Commands!!${getCommands(
+    })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\n-------------These are the Bot Commands!!-------------\n${getCommands(
       User_AllCommands
     )}`;
     bot.sendMessage(content);
   } else {
     const content = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
       GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
-    }!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* 🤩 fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL!\n\n-----------These are the Bot Commands!!-----------\n${getCommands(
+    }!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL!\n\n-------------These are the Bot Commands!!-------------\n${getCommands(
       User_AllCommands
     )}`;
     bot.sendMessage(content);

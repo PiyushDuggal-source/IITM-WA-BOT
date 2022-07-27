@@ -1,7 +1,12 @@
 import { List } from "whatsapp-web.js";
 import { random } from "../../actions/sendMessage";
 import secretVariables from "../../config/config";
-import { CommandButtons, Greetings, PingReplies } from "../../types/types";
+import {
+  CommandButtons,
+  Greetings,
+  PingReplies,
+  UserJoinGreetings,
+} from "../../types/types";
 import { User_AllCommands } from "../Commands/allCmds";
 export const PING_REPLIES: PingReplies = {
   admin: [
@@ -93,4 +98,9 @@ export const HOLIDAY_REPLIES = {
   memberMsgNumber: 3,
 };
 
-export const HEY_EMOJIES = ["✌", "👋", "🤘", "👐", "🤓", "🤗"];
+export const HEY_EMOJIES = ["✌", "👋", "🤘", "👐", "🤗"];
+
+export const USER_JOIN_GREETINGS: UserJoinGreetings = {
+  messages: [`Hey everyone, someone joined... say Helloo to our new friend!!`],
+  messageNum: 1,
+};

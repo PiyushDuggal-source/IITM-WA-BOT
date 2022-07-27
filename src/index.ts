@@ -1,9 +1,16 @@
-import WAWebJS, { Client, LocalAuth } from "whatsapp-web.js";
+import WAWebJS, {
+  Client,
+  GroupNotification,
+  LocalAuth,
+  MessageMedia,
+} from "whatsapp-web.js";
 import qrcode from "qrcode-terminal";
 import { checkMessage } from "./actions/messageActions";
 import { main } from "./controllers/main";
 import secretVariables from "./config/config";
 import { introduction } from "./actions/introduction";
+import { USER_JOIN_GREETINGS } from "./utils/reply/replies";
+import { random } from "./actions/sendMessage";
 
 const client = new Client({
   puppeteer: {
@@ -49,6 +56,27 @@ client.on("message_create", async (message: WAWebJS.Message) => {
     const WA_BOT = allChats[0];
     main(WA_BOT, message, bool);
   }
+});
+
+client.on("group_join", async (msg: GroupNotification) => {
+  const contact = await client.getNumberId(msg.recipientIds[0]);
+  const details = await client.getContactById(contact?._serialized || "");
+  if (details.name) {
+    client.sendMessage(
+      secretVariables.WA_BOT_ID,
+      `${secretVariables.BOT_NAME}: *${details.name}* Joined the Group!\n${
+        USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
+      }`
+    );
+  }
+});
+
+client.on("group_leave", async () => {
+  const allChats = await client.getChats();
+  const WA_BOT = allChats[0];
+  const sticker = MessageMedia.fromFilePath(`${__dirname}/leave.png`);
+  WA_BOT.sendMessage(`${secretVariables.BOT_NAME}:`);
+  WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
 });
 
 client.initialize();
