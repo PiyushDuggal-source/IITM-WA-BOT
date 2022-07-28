@@ -1,4 +1,4 @@
-import WAWebJS from "whatsapp-web.js";
+import * as WAWebJS from "whatsapp-web.js";
 import secretVariables from "../config/config";
 import { User_AllCommands } from "../utils/Commands/allCmds";
 import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
@@ -15,7 +15,7 @@ const getCommands = (allCommands: string[][]): string => {
     msg += CMD_NAMES[index];
     cmds.forEach(
       (cmd, index) =>
-        (msg += `${index + 1}. ${secretVariables.BOT_PREFIX}${cmd}\n`)
+        (msg += `${index + 1}. ${process.env.BOT_PREFIX as string}${cmd}\n`)
     );
   });
 
@@ -29,7 +29,7 @@ export const introduction = (bot: WAWebJS.Chat, admin: boolean) => {
     }!\n\nI am WhatsApp Bot!!\n\nMy ${
       GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
     } calls me *${
-      secretVariables.BOT_NAME
+      process.env.BOT_NAME as String
     }* (named after the first ever chatbot ${
       HEY_EMOJIES[random(HEY_EMOJIES.length)]
     })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\n-------------These are the Bot Commands!!-------------\n${getCommands(

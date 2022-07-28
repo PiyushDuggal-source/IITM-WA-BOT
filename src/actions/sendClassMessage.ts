@@ -1,5 +1,4 @@
-import { format } from "date-fns";
-import WAWebJS from "whatsapp-web.js";
+import * as WAWebJS from "whatsapp-web.js";
 import secretVariables from "../config/config";
 import { CALENDAR } from "../resources/calendar";
 import { Calendar } from "../types/types";
@@ -18,7 +17,7 @@ export const sendClassMessage = (bot: WAWebJS.Chat) => {
   const events = checkForClass(CALENDAR);
   if (!events.length) {
     bot.sendMessage(
-      `${secretVariables.BOT_NAME} : ${
+      `${process.env.BOT_NAME as String} : ${
         HOLIDAY_REPLIES.members[random(HOLIDAY_REPLIES.memberMsgNumber)]
       } \n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`
     );

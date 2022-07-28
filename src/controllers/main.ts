@@ -1,4 +1,4 @@
-import WAWebJS from "whatsapp-web.js";
+import * as WAWebJS from "whatsapp-web.js";
 import { MessageType } from "../types/types";
 import { adminControl } from "./Admin/adminController";
 import { userControl } from "./Users/userController";

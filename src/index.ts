@@ -1,10 +1,11 @@
-import WAWebJS, {
+import * as WAWebJS from "whatsapp-web.js";
+import {
   Client,
   GroupNotification,
   LocalAuth,
   MessageMedia,
 } from "whatsapp-web.js";
-import qrcode from "qrcode-terminal";
+import qrcode = require("qrcode-terminal");
 import { checkMessage } from "./actions/messageActions";
 import { main } from "./controllers/main";
 import secretVariables from "./config/config";
@@ -15,7 +16,13 @@ import {
   USER_JOIN_GREETINGS,
 } from "./utils/reply/replies";
 import { random } from "./actions/sendMessage";
+const express = require("express");
+import axios from "axios";
+import * as dotenv from "dotenv";
+import { Request, Response } from "express";
+dotenv.config({ path: __dirname + "/.env" });
 
+const app = express();
 const client = new Client({
   puppeteer: {
     headless: true,
@@ -43,7 +50,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
     message.body
       .toLowerCase()
       .split(" ")
-      .includes(`@${secretVariables.BOT_NAME.toLocaleLowerCase()}`);
+      .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
   if (isMention) {
     const allChats = await client.getChats();
     const WA_BOT = allChats[0];
@@ -55,7 +62,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
   }
   if (
     (bool === "ADMIN" || bool === "USER") &&
-    message.body[0] === secretVariables.BOT_PREFIX
+    message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
     const allChats = await client.getChats();
     const WA_BOT = allChats[0];
@@ -68,15 +75,17 @@ client.on("group_join", async (msg: GroupNotification) => {
   const details = await client.getContactById(contact?._serialized || "");
   if (details.name) {
     client.sendMessage(
-      secretVariables.WA_BOT_ID,
-      `${secretVariables.BOT_NAME}: *${details.name}* Joined the Group!\n${
+      process.env.WA_BOT_ID as string,
+      `${process.env.BOT_NAME as String}: *${
+        details.name
+      }* Joined the Group!\n${
         USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
       }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
         HEY_EMOJIES[random(HEY_EMOJIES.length)]
       }!\nCheck out what bot(${
-        secretVariables.BOT_NAME
+        process.env.BOT_NAME as String
       }) can do by *Mentioning* me!\nor check the Commands of ${
-        secretVariables.BOT_NAME
+        process.env.BOT_NAME as String
       } by typing "!cmd" (without quotes)`
     );
   }
@@ -86,8 +95,35 @@ client.on("group_leave", async () => {
   const allChats = await client.getChats();
   const WA_BOT = allChats[0];
   const sticker = MessageMedia.fromFilePath(`${__dirname}/leave.png`);
-  WA_BOT.sendMessage(`${secretVariables.BOT_NAME}:`);
+  WA_BOT.sendMessage(`${process.env.BOT_NAME as String}:`);
   WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
 });
 
 client.initialize();
+
+// Get Bot LIVE
+
+// Continuously ping the server to prevent it from becoming idle
+setInterval(async () => {
+  await axios.get("https://iitm-wa-bot.herokuapp.com/");
+  console.log("[SERVER] Pinged server");
+}, 15 * 60 * 1000); // every 15 minutes
+
+const port = Number(process.env.PORT) || 3000;
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("BOT");
+});
+
+app.listen(port, () =>
+  console.log(`[SERVER] Server is running on port ${port}`)
+);
+
+// All other pages should be returned as error pages
+app.all("*", (req: Request, res: Response) => {
+  res
+    .status(404)
+    .send(
+      "<h1>Sorry, this page does not exist!</h1><br><a href='/'>Back to Home</a>"
+    );
+});

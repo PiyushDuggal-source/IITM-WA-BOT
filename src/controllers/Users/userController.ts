@@ -1,4 +1,4 @@
-import WAWebJS from "whatsapp-web.js";
+import * as WAWebJS from "whatsapp-web.js";
 import { sendCalendar } from "../../actions/sendCalendar";
 import { sendClassMessage } from "../../actions/sendClassMessage";
 import { sendMessage, random } from "../../actions/sendMessage";

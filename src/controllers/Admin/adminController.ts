@@ -1,4 +1,4 @@
-import WAWebJS, { Buttons, List } from "whatsapp-web.js";
+import * as WAWebJS from "whatsapp-web.js";
 import { sendMessage, random } from "../../actions/sendMessage";
 import { USER_PING_MESSAGES } from "../../utils/messages/messages";
 import { PING_REPLIES, USER_COMMANDS } from "../../utils/reply/replies";

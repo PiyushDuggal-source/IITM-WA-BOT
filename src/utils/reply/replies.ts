@@ -37,7 +37,7 @@ const getUserCommands = (userCmdList: string[][]): CommandButtons => {
       if (index < 3) {
         commands.push({
           id: `${index}`,
-          title: `${secretVariables.BOT_PREFIX}${cmd}`,
+          title: `${process.env.BOT_PREFIX as string}${cmd}`,
         });
       }
     });
@@ -45,7 +45,9 @@ const getUserCommands = (userCmdList: string[][]): CommandButtons => {
   return commands;
 };
 export const USER_COMMANDS = new List(
-  `Hey.. Wanna checkout what ${secretVariables.BOT_NAME} can do?\nCheckout these commands!! 😉`,
+  `Hey.. Wanna checkout what ${
+    process.env.BOT_NAME as String
+  } can do?\nCheckout these commands!! 😉`,
   "Commands",
   [
     {
@@ -83,7 +85,7 @@ export const HOLIDAY_REPLIES = {
     // Process loading: 100%
 
     // back online::
-    // ${secretVariables.BOT_NAME} : Sorry fellas, an Evil took my place, now everything is fine!!! and yea... *There is no class today!* 😅
+    // ${(process.env.BOT_NAME as String)} : Sorry fellas, an Evil took my place, now everything is fine!!! and yea... *There is no class today!* 😅
 
     // `,
     `*There is no Class Today!!* \nGive some of your precious time and think about me and help me be a better BOT!!\nor Go take some rest and work on *something special* to you, utilize your *free* time!\n*Never stop learning!*

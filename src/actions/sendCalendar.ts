@@ -1,4 +1,5 @@
-import WAWebJS, { MessageContent } from "whatsapp-web.js";
+import * as WAWebJS from "whatsapp-web.js";
+import { MessageContent } from "whatsapp-web.js";
 import { CALENDAR } from "../resources/calendar";
 import { Calendar } from "../types/types";
 import { format } from "date-fns";
