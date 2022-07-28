@@ -1,0 +1,19 @@
+2022/07/28-16:13:55.389 e78b Reusing MANIFEST /home/piyushduggal/Piyush/Personal-Projects/Javascript/IITM-WA-BOT/src/sessions/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/07/28-16:13:55.389 e78b Recovering log #107
+2022/07/28-16:13:55.435 e78b Reusing old log /home/piyushduggal/Piyush/Personal-Projects/Javascript/IITM-WA-BOT/src/sessions/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000107.log 
+2022/07/28-16:14:06.259 e78b Level-0 table #116: started
+2022/07/28-16:14:06.277 e78b Level-0 table #116: 1109325 bytes OK
+2022/07/28-16:14:06.278 e78b Delete type=0 #107
+2022/07/28-16:14:06.282 e78b Compacting 1@1 + 4@2 files
+2022/07/28-16:14:06.332 e78b Generated table #117@1: 43911 keys, 2255005 bytes
+2022/07/28-16:14:06.351 e78b Generated table #118@1: 2917 keys, 2157882 bytes
+2022/07/28-16:14:06.386 e78b Generated table #119@1: 16761 keys, 2203391 bytes
+2022/07/28-16:14:06.423 e78b Generated table #120@1: 37981 keys, 2199700 bytes
+2022/07/28-16:14:06.426 e78b Generated table #121@1: 4621 keys, 103722 bytes
+2022/07/28-16:14:06.426 e78b Compacted 1@1 + 4@2 files => 8919700 bytes
+2022/07/28-16:14:06.427 e78b compacted to: files[ 0 0 7 0 0 0 0 ]
+2022/07/28-16:14:06.428 e78b Delete type=2 #112
+2022/07/28-16:14:06.428 e78b Delete type=2 #110
+2022/07/28-16:14:06.428 e78b Delete type=2 #109
+2022/07/28-16:14:06.428 e78b Delete type=2 #111
+2022/07/28-16:14:06.428 e78b Delete type=2 #116
