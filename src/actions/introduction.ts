@@ -1,5 +1,4 @@
 import * as WAWebJS from "whatsapp-web.js";
-import secretVariables from "../config/config";
 import { User_AllCommands } from "../utils/Commands/allCmds";
 import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { random } from "./sendMessage";

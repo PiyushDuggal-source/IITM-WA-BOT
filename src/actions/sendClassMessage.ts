@@ -1,5 +1,4 @@
 import * as WAWebJS from "whatsapp-web.js";
-import secretVariables from "../config/config";
 import { CALENDAR } from "../resources/calendar";
 import { Calendar } from "../types/types";
 import { FOOTERS } from "../utils/reply/footers";

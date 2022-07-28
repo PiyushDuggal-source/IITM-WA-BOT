@@ -1,6 +1,5 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { MessageContent } from "whatsapp-web.js";
-import secretVariables from "../config/config";
 import { FOOTERS } from "../utils/reply/footers";
 
 export const sendMessage = (

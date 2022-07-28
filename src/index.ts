@@ -8,7 +8,6 @@ import {
 import qrcode = require("qrcode-terminal");
 import { checkMessage } from "./actions/messageActions";
 import { main } from "./controllers/main";
-import secretVariables from "./config/config";
 import { introduction } from "./actions/introduction";
 import {
   GREETINGS,

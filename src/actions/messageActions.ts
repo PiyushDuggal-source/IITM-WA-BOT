@@ -1,5 +1,4 @@
 import * as WAWebJS from "whatsapp-web.js";
-import secretVariables from "../config/config";
 import { MessageType } from "../types/types";
 
 export const checkMessage = (message: WAWebJS.Message): MessageType => {
