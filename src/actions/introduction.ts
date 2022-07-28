@@ -4,7 +4,7 @@ import { User_AllCommands } from "../utils/Commands/allCmds";
 import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { random } from "./sendMessage";
 const CMD_NAMES = [
-  "\n*These are the Calendar Commands! : You can see the IIT-M Google Calendar Events from RIGHT HERE 🤩 Just by using these commands!*\n",
+  "\n*These are the Calendar Commands! : You can see the IIT-M Google Calendar Events from RIGHT HERE ✌ Just by using these commands!*\n",
   "\n*These are the Class Commands: You can see if there is any class today or not!*\n",
   '\n*And these are the commands which will show you the other commands, LOL "Commands representing Commands" its like commenting the commented code:*\n',
   "\n*These are the commands for chatting with me...*\n",

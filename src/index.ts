@@ -9,7 +9,11 @@ import { checkMessage } from "./actions/messageActions";
 import { main } from "./controllers/main";
 import secretVariables from "./config/config";
 import { introduction } from "./actions/introduction";
-import { USER_JOIN_GREETINGS } from "./utils/reply/replies";
+import {
+  GREETINGS,
+  HEY_EMOJIES,
+  USER_JOIN_GREETINGS,
+} from "./utils/reply/replies";
 import { random } from "./actions/sendMessage";
 
 const client = new Client({
@@ -17,7 +21,9 @@ const client = new Client({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   },
-  authStrategy: new LocalAuth(),
+  authStrategy: new LocalAuth({
+    dataPath: `${__dirname}/sessions`,
+  }),
 });
 
 client.on("qr", (qr: string) => {
@@ -32,7 +38,6 @@ client.on("ready", async () => {
 client.on("message_create", async (message: WAWebJS.Message) => {
   const bool = checkMessage(message);
   const str: string[] = message.mentionedIds;
-
   const isMention =
     (message.body[0] === "@" && str.includes("919871453667@c.us")) ||
     message.body
@@ -66,7 +71,13 @@ client.on("group_join", async (msg: GroupNotification) => {
       secretVariables.WA_BOT_ID,
       `${secretVariables.BOT_NAME}: *${details.name}* Joined the Group!\n${
         USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
-      }`
+      }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
+        HEY_EMOJIES[random(HEY_EMOJIES.length)]
+      }!\nCheck out what bot(${
+        secretVariables.BOT_NAME
+      }) can do by *Mentioning* me!\nor check the Commands of ${
+        secretVariables.BOT_NAME
+      } by typing "!cmd" (without quotes)`
     );
   }
 });
