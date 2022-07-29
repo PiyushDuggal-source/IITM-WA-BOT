@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec \"ts-node src/index.ts\" -e  -r dotenv/config ts",
-    "build": "tsc --skipLibCheck src/index.ts && rm ./**/*.js",
+    "build": "tsc --skipLibCheck src/index.ts ",
     "start": "node src/index.js",
     "tst": "nodemon  src/index.ts"
   },
