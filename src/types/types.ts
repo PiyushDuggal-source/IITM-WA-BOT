@@ -44,3 +44,13 @@ export type UserJoinGreetings = {
   messages: string[];
   messageNum: number;
 };
+
+// Notes Types
+
+export type Notes = {
+  name: string;
+  content: {
+    name: string;
+    link: string;
+  }[];
+}[];

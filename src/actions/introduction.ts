@@ -1,7 +1,10 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { User_AllCommands } from "../utils/Commands/allCmds";
+import { COMMANDS } from "../utils/Commands/instructions";
 import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { random } from "./sendMessage";
+import dotenv from "dotenv";
+dotenv.config();
 const CMD_NAMES = [
   "\n*These are the Calendar Commands! : You can see the IIT-M Google Calendar Events from RIGHT HERE ✌ Just by using these commands!*\n",
   "\n*These are the Class Commands: You can see if there is any class today or not!*\n",
@@ -14,10 +17,22 @@ const getCommands = (allCommands: string[][]): string => {
     msg += CMD_NAMES[index];
     cmds.forEach(
       (cmd, index) =>
-        (msg += `${index + 1}. ${process.env.BOT_PREFIX as string}${cmd}\n`)
+        (msg += `${index + 1}. ${process.env.BOT_PREFIX as string}${cmd}${
+          index !== CMD_NAMES.length ? "\n" : ""
+        }`)
     );
   });
 
+  return msg;
+};
+
+const commands = (cmds: string[]): string => {
+  let msg = "";
+  cmds.forEach((cmd, index) => {
+    msg += `${index + 1}. ${process.env.BOT_PREFIX as string}${cmd}${
+      index + 1 !== cmds.length ? "\n" : ""
+    }`;
+  });
   return msg;
 };
 
@@ -31,16 +46,20 @@ export const introduction = (bot: WAWebJS.Chat, admin: boolean) => {
       process.env.BOT_NAME as String
     }* (named after the first ever chatbot ${
       HEY_EMOJIES[random(HEY_EMOJIES.length)]
-    })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\n-------------These are the Bot Commands!!-------------\n${getCommands(
-      User_AllCommands
-    )}`;
+    })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n!AllCmds`;
     bot.sendMessage(content);
   } else {
     const content = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
       GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
-    }!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL!\n\n-------------These are the Bot Commands!!-------------\n${getCommands(
-      User_AllCommands
-    )}`;
+    }!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n!AllCmds`;
     bot.sendMessage(content);
   }
+};
+
+export const sendCommands = (bot: WAWebJS.Chat) => {
+  bot.sendMessage(
+    `-------------These are the Bot Commands!!-------------\n${getCommands(
+      User_AllCommands
+    )}`
+  );
 };

@@ -25,7 +25,15 @@ dotenv.config();
 
 const app = express();
 
-mongoose.connect(process.env.DB_URL as string, () => {
+const LOCAL = String(process.env.dev) === "true";
+
+const DB_URL = LOCAL
+  ? String(process.env.DEV_DB_URL)
+  : String(process.env.PROD_DB_URL);
+
+console.log(DB_URL);
+
+mongoose.connect(DB_URL, () => {
   const store = new MongoStore({ mongoose: mongoose });
   const client = new Client({
     puppeteer: {
