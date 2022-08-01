@@ -6,18 +6,31 @@ import {
   CALENDAR_COMMANDS,
   CLASS_COMMAND,
   COMMANDS,
+  NOTES_CMD,
 } from "../../utils/Commands/instructions";
 import { sendCalendar } from "../../actions/sendCalendar";
 import { sendClassMessage } from "../../actions/sendClassMessage";
+import { sendNotes } from "../../actions/sendNotes";
 
 export const adminControl = (bot: WAWebJS.Chat, message: string) => {
+  // Ping Replies
   if (USER_PING_MESSAGES.includes(message.toLocaleLowerCase())) {
     sendMessage(bot, PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]);
+
+    // Notes Replies
+  } else if (NOTES_CMD.includes(message.toLocaleLowerCase())) {
+    console.log("hello");
+    sendNotes(bot, "ADMIN");
+
+    // Calender Replies
   } else if (CALENDAR_COMMANDS.includes(message.toLocaleLowerCase())) {
     sendCalendar(bot);
+
+    // Commands Replies
   } else if (COMMANDS.includes(message.toLocaleLowerCase())) {
     sendMessage(bot, USER_COMMANDS, true);
-    return;
+
+    // Class Commands Replies
   } else if (CLASS_COMMAND.includes(message.toLocaleLowerCase())) {
     sendClassMessage(bot);
   }
