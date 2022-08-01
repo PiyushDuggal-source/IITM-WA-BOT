@@ -1,9 +1,8 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { User_AllCommands } from "../utils/Commands/allCmds";
-import { COMMANDS } from "../utils/Commands/instructions";
 import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { random } from "./sendMessage";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 import { MessageType } from "../types/types";
 dotenv.config();
 const CMD_NAMES = [

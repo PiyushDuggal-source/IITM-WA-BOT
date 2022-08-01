@@ -1,7 +1,7 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { MessageContent } from "whatsapp-web.js";
 import { FOOTERS } from "../utils/reply/footers";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 dotenv.config();
 
 export const sendMessage = (

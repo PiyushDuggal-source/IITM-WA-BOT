@@ -7,7 +7,7 @@ import {
   UserJoinGreetings,
 } from "../../types/types";
 import { User_AllCommands } from "../Commands/allCmds";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 dotenv.config();
 export const PING_REPLIES: PingReplies = {
   admin: [
