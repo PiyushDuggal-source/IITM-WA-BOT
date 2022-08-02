@@ -1,4 +1,4 @@
-import WAWebJS from "whatsapp-web.js";
+import * as WAWebJS from "whatsapp-web.js";
 import * as dotenv from "dotenv";
 import { HEY_EMOJIES } from "../utils/reply/replies";
 import { random } from "./sendMessage";
