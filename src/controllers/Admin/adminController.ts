@@ -4,13 +4,18 @@ import { USER_PING_MESSAGES } from "../../utils/messages/messages";
 import { PING_REPLIES, USER_COMMANDS } from "../../utils/reply/replies";
 import {
   CALENDAR_COMMANDS,
+  CALENDAR_TYPOS,
   CLASS_COMMAND,
   COMMANDS,
+  HELP_CMDS,
   NOTES_CMD,
+  SOURCE,
 } from "../../utils/Commands/instructions";
 import { sendCalendar } from "../../actions/sendCalendar";
 import { sendClassMessage } from "../../actions/sendClassMessage";
 import { sendNotes } from "../../actions/sendNotes";
+import { help } from "../../actions/help";
+import { sendSource } from "../../actions/sendSource";
 
 export const adminControl = (bot: WAWebJS.Chat, message: string) => {
   // Ping Replies
@@ -22,8 +27,11 @@ export const adminControl = (bot: WAWebJS.Chat, message: string) => {
     console.log("hello");
     sendNotes(bot, "ADMIN");
 
-    // Calender Replies
-  } else if (CALENDAR_COMMANDS.includes(message.toLocaleLowerCase())) {
+    // Calender Replies WITH Typos
+  } else if (
+    CALENDAR_COMMANDS.includes(message.toLocaleLowerCase()) ||
+    CALENDAR_TYPOS.includes(message.toLocaleLowerCase())
+  ) {
     sendCalendar(bot);
 
     // Commands Replies
@@ -33,5 +41,15 @@ export const adminControl = (bot: WAWebJS.Chat, message: string) => {
     // Class Commands Replies
   } else if (CLASS_COMMAND.includes(message.toLocaleLowerCase())) {
     sendClassMessage(bot);
+  }
+
+  // Help Commands Replies
+  else if (HELP_CMDS.includes(message.toLocaleLowerCase())) {
+    help(bot, "ADMIN");
+  }
+
+  // Source Command Reply
+  else if (SOURCE.includes(message.toLocaleLowerCase())) {
+    sendSource(bot);
   }
 };

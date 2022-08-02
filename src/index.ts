@@ -27,8 +27,11 @@ dotenv.config();
 
 const app = express();
 
-// const LOCAL = String(process.env.dev) === "true";
-
+const LOCAL = String(process.env.dev) === "true";
+const BOT = LOCAL ? 1 : 0;
+export const WA_BOT_ID = LOCAL
+  ? (process.env.WA_BOT_ID_DEV as string)
+  : (process.env.WA_BOT_ID as string);
 // const DB_URL = LOCAL
 //   ? String(process.env.DEV_DB_URL)
 //   : String(process.env.PROD_DB_URL);
@@ -64,7 +67,7 @@ client.on("qr", (qr: string) => {
 client.on("ready", async () => {
   console.log("Connected");
   client.sendMessage(
-    process.env.WA_BOT_ID as string,
+    WA_BOT_ID,
     `${process.env.BOT_NAME as string}: I am Connected BOSS`
   );
 });
@@ -80,7 +83,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
       .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
   if (isMention && bool !== "NONE") {
     const allChats = await client.getChats();
-    const WA_BOT = allChats[0];
+    const WA_BOT = allChats[BOT];
     introduction(WA_BOT, bool);
   }
   if (
@@ -89,7 +92,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
     COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
   ) {
     const allChats = await client.getChats();
-    const WA_BOT = allChats[0];
+    const WA_BOT = allChats[BOT];
     sendCommands(WA_BOT);
   }
   if (
@@ -97,7 +100,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
     message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
     const allChats = await client.getChats();
-    const WA_BOT = allChats[0];
+    const WA_BOT = allChats[BOT];
     main(WA_BOT, message, bool);
   }
 });
@@ -118,12 +121,14 @@ client.on("group_join", async (msg: GroupNotification) => {
         process.env.BOT_NAME as String
       }) can do by *Mentioning* me!\nor check the Commands of ${
         process.env.BOT_NAME as String
-      } by typing]\n*${process.env.BOT_PREFIX as string}AllCmds*`
+      } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
     );
   } else {
     client.sendMessage(
       process.env.WA_BOT_ID as string,
-      `${process.env.BOT_NAME as String}: A Good Person Joined the Group!\n${
+      `${process.env.BOT_NAME as String}: ${
+        GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+      } Joined the Group!\n${
         USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
       }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
         HEY_EMOJIES[random(HEY_EMOJIES.length)]
@@ -139,9 +144,9 @@ client.on("group_join", async (msg: GroupNotification) => {
 client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
   console.log(notification);
   const sticker = MessageMedia.fromFilePath(`${__dirname}/leave.png`);
-  if (notification.chatId === process.env.WA_BOT_ID) {
+  if (notification.chatId === WA_BOT_ID) {
     const allChats = await client.getChats();
-    const WA_BOT = allChats[0];
+    const WA_BOT = allChats[BOT];
     WA_BOT.sendMessage(`${process.env.BOT_NAME as String}:`);
     WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
   }

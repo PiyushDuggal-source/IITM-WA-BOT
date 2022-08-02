@@ -22,4 +22,25 @@ export const NOTES: Notes = [
       },
     ],
   },
+  {
+    name: "ET Foundational QPs with Ans KEYS",
+    content: [
+      {
+        name: "3rd April 2022, SET AN1",
+        link: "https://drive.google.com/file/d/19lDX_r-zIQHirmFDZF9xied_6z56RWxR/view?usp=sharing",
+      },
+      {
+        name: "3rd April 2022, SET FN1",
+        link: "https://drive.google.com/file/d/1_ei5Aj60UAUuv6GrZ0YEJ7YvhLjmaAP5/view?usp=sharing",
+      },
+      {
+        name: "3rd April 2022, SET AN2",
+        link: "https://drive.google.com/file/d/17vtd5Hpkk5TKdDLplkOUxRJ0w3Q-6K9y/view?usp=sharing",
+      },
+      {
+        name: "3rd April 2022, SET FN2",
+        link: "https://drive.google.com/file/d/1_ctTxKPNkWNmWlmk2KOLtQ3QFkI2C015/view?usp=sharing",
+      },
+    ],
+  },
 ];

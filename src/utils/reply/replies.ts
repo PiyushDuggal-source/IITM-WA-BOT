@@ -25,10 +25,11 @@ export const PING_REPLIES: PingReplies = {
     "🤘 hey",
     "What iz up?",
     "👀 you called me?",
-    "Yes please!",
-    "Yes? ",
+    "Yes, my friend!",
+    "Hii!",
+    "Hey, hows going?",
   ],
-  memberMsgNumber: 8,
+  memberMsgNumber: 9,
 };
 
 const getUserCommands = (userCmdList: string[][]): CommandButtons => {

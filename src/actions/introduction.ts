@@ -9,7 +9,10 @@ const CMD_NAMES = [
   "\n*These are the Calendar Commands! : You can see the IIT-M Google Calendar Events from RIGHT HERE ✌ Just by using these commands!*\n",
   "\n*These are the Class Commands: You can see if there is any class today or not!*\n",
   '\n*And these are the commands which will show you the other commands, LOL "Commands representing Commands" its like commenting the commented code:*\n',
+  `\n*These are the commands for getting Notes from RIGHT HERE* _If you have notes and want to share, please Share, I will add them in *${process.env.BOT_NAME}*, then it will be accessible for ALL of us!_\n`,
   "\n*These are the commands for chatting with me...*\n",
+  "\n*Want some Help?? try these commands!!*\n",
+  "\n*Want to check my _Source Code_?* Use this command:\n",
 ];
 const getCommands = (allCommands: string[][]): string => {
   let msg = "";
