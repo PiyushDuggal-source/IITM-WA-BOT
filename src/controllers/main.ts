@@ -9,6 +9,7 @@ export const main = (
   role: MessageType
 ) => {
   if (role === "ADMIN") {
+    // Slice for removing BOT_PREFIX
     adminControl(bot, message.body.slice(1));
   } else if (role === "USER") {
     userControl(bot, message.body.slice(1));

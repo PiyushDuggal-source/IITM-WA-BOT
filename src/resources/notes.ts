@@ -43,4 +43,43 @@ export const NOTES: Notes = [
       },
     ],
   },
+  {
+    name: "Foundational Level *Statistics*",
+    content: [
+      // {
+      //   name: "Stats week 1 - week 9",
+      //   link: "https://drive.google.com/file/d/1qFplfEds6Ij9hon8vMhe6WErmoApS1mO/view",
+      // },
+      {
+        name: "Stats week 1 - week 12",
+        link: "https://drive.google.com/file/d/1XnZOjJPpBNUn3lk-7ynCgT-AIjTL9AK_/view",
+      },
+      {
+        name: "Stats week 5 - week 6 PnC",
+        link: "https://drive.google.com/file/d/1qVj5F7HJ8WIWkG4oIaWBd8XQdft1etk2/view",
+      },
+    ],
+  },
+  {
+    name: "Foundational Level *Mathematics*",
+    content: [
+      {
+        name: "Maths week 1 - week 10",
+        link: "https://drive.google.com/file/d/1XblPLzfSM7OIETPAvc8DeoqPqZa6RiLm/view",
+      },
+    ],
+  },
+  {
+    name: "Foundational Level *Computational Thinking*",
+    content: [
+      {
+        name: "CT week 1 - week 10",
+        link: "https://drive.google.com/file/d/1RP9PPtHSdmF2BCcl5H7p0pkxiQ1_8olb/view",
+      },
+      {
+        name: "CT Course Book",
+        link: "https://drive.google.com/file/d/1BeLLh8BrQx6jnQSzg7NvD7URxqNmRt2i/view",
+      },
+    ],
+  },
 ];

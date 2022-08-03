@@ -74,6 +74,8 @@ client.on("ready", async () => {
 
 client.on("message_create", async (message: WAWebJS.Message) => {
   const bool = checkMessage(message);
+
+  // Mention Logic
   const str: string[] = message.mentionedIds;
   const isMention =
     (message.body[0] === "@" && str.includes("919871453667@c.us")) ||
@@ -81,14 +83,16 @@ client.on("message_create", async (message: WAWebJS.Message) => {
       .toLowerCase()
       .split(" ")
       .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
+
   if (isMention && bool !== "NONE") {
     const allChats = await client.getChats();
     const WA_BOT = allChats[BOT];
     introduction(WA_BOT, bool);
   }
+
+  // Command check logic
   if (
     bool !== "NONE" &&
-    message.body.split(",")[0][0] === (process.env.BOT_PREFIX as string) &&
     COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
   ) {
     const allChats = await client.getChats();
@@ -136,7 +140,7 @@ client.on("group_join", async (msg: GroupNotification) => {
         process.env.BOT_NAME as String
       }) can do by *Mentioning* me!\nor check the Commands of ${
         process.env.BOT_NAME as String
-      } by typing]\n*${process.env.BOT_PREFIX as string}AllCmds*`
+      } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
     );
   }
 });

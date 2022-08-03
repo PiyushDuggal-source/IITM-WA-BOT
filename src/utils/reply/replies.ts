@@ -64,47 +64,58 @@ export const GREETINGS: Greetings = {
   adminMsgNumer: 3,
   member: [
     "Fellow",
-    "Person",
+    "Good Person",
     "Dude",
     "Gentle-men/women",
     "Brother/Sister",
     "My Friend!",
+    "Good Guy",
+    "An IITian",
   ],
-  memberMsgNumber: 6,
+  memberMsgNumber: 8,
 };
 
 export const HOLIDAY_REPLIES = {
   members: [
-    // `FINALLY *IITian* you are *free*... but wait.. not so fast... THIS IS ONLY FOR THIS DAY... from next day... you will suffer again..... 😈
+    `FINALLY *IITian* you are *free*... but wait.. not so fast... THIS IS ONLY FOR THIS DAY... from next day... you will suffer again..... 😈
 
-    // ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
-    // ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
-    // ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
-    // ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
+    ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
+    ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
+    ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
+    ERROR 🚫 ERROR 🚫 ERROR 🚫 ERROR
 
-    // Process loading: 0%
-    // Process loading: 50%
-    // Process loading: 100%
+    Process loading: 0%
+    Process loading: 50%
+    Process loading: 100%
 
-    // back online::
-    // ${(process.env.BOT_NAME as String)} : Sorry fellas, an Evil took my place, now everything is fine!!! and yea... *There is no class today!* 😅
+    back online::
+    ${
+      process.env.BOT_NAME as String
+    } : Sorry fellas, an Evil took my place, now everything is fine!!! and yea... *There is no class today!* 😅
 
-    // `,
+    `,
+
     `*There is no Class Today!!* \nGive some of your precious time and think about me and help me be a better BOT!!\nor Go take some rest and work on *something special* to you, utilize your *free* time!\n*Never stop learning!*
      `,
+
     `Cool, there is *no* class today ${
       GREETINGS.member[random(GREETINGS.adminMsgNumer)]
     }!`,
+
     `Q1: There are N number of classes today and N = 0 then guess how many classes are there? *1 Point*\nA: NO Class\nB: C\nC: A`,
 
     "no class today",
   ],
-  memberMsgNumber: 3,
+  memberMsgNumber: 5,
 };
 
 export const HEY_EMOJIES = ["✌", "👋", "🤘", "👐", "🤗"];
 
 export const USER_JOIN_GREETINGS: UserJoinGreetings = {
-  messages: [`Hey everyone, someone joined... say Helloo to our new friend!!`],
-  messageNum: 1,
+  messages: [
+    `Hey everyone, someone joined... say Helloo to our new friend!!`,
+    "Hey All, Someone joined, say Hi!!",
+    "We got a new Member, Greetings, we are glad you joined our Group!",
+  ],
+  messageNum: 3,
 };

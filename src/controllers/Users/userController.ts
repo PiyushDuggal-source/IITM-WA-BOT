@@ -3,7 +3,7 @@ import { help } from "../../actions/help";
 import { sendCalendar } from "../../actions/sendCalendar";
 import { sendClassMessage } from "../../actions/sendClassMessage";
 import { sendMessage, random } from "../../actions/sendMessage";
-import { sendNotes } from "../../actions/sendNotes";
+import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
 import { sendSource } from "../../actions/sendSource";
 import {
   CALENDAR_COMMANDS,
@@ -29,8 +29,12 @@ export const userControl = (bot: WAWebJS.Chat, message: string) => {
     return;
 
     // Notes Replies
-  } else if (NOTES_CMD.includes(message.toLocaleLowerCase())) {
-    sendNotes(bot, "USER");
+  } else if (NOTES_CMD.includes(message.split(" ")[0].toLocaleLowerCase())) {
+    if (message.split(" ").length > 1) {
+      sendNotesByFilter(bot, message);
+    } else {
+      sendNotes(bot, "USER");
+    }
 
     // Calender Replies
   } else if (CALENDAR_COMMANDS.includes(message.toLocaleLowerCase())) {

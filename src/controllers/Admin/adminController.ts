@@ -13,7 +13,7 @@ import {
 } from "../../utils/Commands/instructions";
 import { sendCalendar } from "../../actions/sendCalendar";
 import { sendClassMessage } from "../../actions/sendClassMessage";
-import { sendNotes } from "../../actions/sendNotes";
+import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
 import { help } from "../../actions/help";
 import { sendSource } from "../../actions/sendSource";
 
@@ -23,9 +23,12 @@ export const adminControl = (bot: WAWebJS.Chat, message: string) => {
     sendMessage(bot, PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]);
 
     // Notes Replies
-  } else if (NOTES_CMD.includes(message.toLocaleLowerCase())) {
-    console.log("hello");
-    sendNotes(bot, "ADMIN");
+  } else if (NOTES_CMD.includes(message.split(" ")[0].toLocaleLowerCase())) {
+    if (message.split(" ").length > 1) {
+      sendNotesByFilter(bot, message);
+    } else {
+      sendNotes(bot, "ADMIN");
+    }
 
     // Calender Replies WITH Typos
   } else if (
