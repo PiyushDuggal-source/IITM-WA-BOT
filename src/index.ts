@@ -156,6 +156,10 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
   }
 });
 
+export const sendInvalidFiltersToDevEnv = (msg: string) => {
+  client.sendMessage(process.env.INVALID_FILTER_CHAT_ID as string, msg);
+};
+
 client.initialize();
 // });
 // Get Bot LIVE
