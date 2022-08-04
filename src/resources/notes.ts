@@ -82,4 +82,81 @@ export const NOTES: Notes = [
       },
     ],
   },
+  {
+    name: "Database Management Systems | DMS",
+    content: [
+      {
+        name: "DMS Notes All Week",
+        link: "https://drive.google.com/file/d/1VdqyTvNtUH1RjoI6znwIYgOixFn-cbbC/view?usp=sharing",
+      },
+      {
+        name: "BMS Formulas",
+        link: "https://drive.google.com/file/d/1TODvW5yZL-U17HvzgSBZdmk8_UaWgcrp/view?usp=sharing",
+      },
+    ],
+  },
+  {
+    name: "Tools for Data Science | TDS",
+    content: [
+      {
+        name: "Tools for DS | All week | TSD",
+        link: "https://drive.google.com/file/d/1P2S1YpOCV3LXGY_1wEjuhFBj9loBTXGj/view?usp=sharing",
+      },
+      {
+        name: "TSD | Week 1-8 | Jan 2022",
+        link: "https://drive.google.com/file/d/1PjAnVR5KwqCnpnGX3bex55Dqt-t-yYB-/view?usp=sharing",
+      },
+    ],
+  },
+  {
+    name: "Business Analytics",
+    content: [
+      {
+        name: "All Week Notes | Business Analytics | BA",
+        link: "https://drive.google.com/file/d/1_QBJYmhFyM16naka1-uImvmhm9L2C04U/view?usp=sharing",
+      },
+      {
+        name: "Week 1-4 Notes | Business Analytics | BA",
+        link: "https://drive.google.com/file/d/1Grcpc3hjb5UOqD9EQhWMXSdoD0TBhhhw/view?usp=sharing",
+      },
+    ],
+  },
+  {
+    name: "Machine Learning CheatSheet | ML",
+    content: [
+      {
+        name: "Machine Learning CheatSheet",
+        link: "https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning",
+      },
+      {
+        name: "Machine Learning Practice | MLP",
+        link: "https://github.com/faizanxmulla/machine-learning-practice",
+      },
+      {
+        name: "Scikit Learn CheatSheet | SLC",
+        link: "https://github.com/faizanxmulla/machine-learning-practice",
+      },
+    ],
+  },
+  {
+    name: "Machine Learning Techniques | MLT",
+    content: [
+      {
+        name: "Machine Learning Techniques",
+        link: "https://drive.google.com/file/d/1Xr8CVaDq6aOWWhU_uOic-YLrHSN8UQik/view?usp=sharing",
+      },
+      {
+        name: "ML Techniques Formulas",
+        link: "https://drive.google.com/file/d/1uuVgHzwZEO5SW8BiLNZgSyMvCAywtr0T/view?usp=sharing",
+      },
+      {
+        name: "MLT | Github | ananddotiyer",
+        link: "https://github.com/ananddotiyer/IIT-M/tree/main/My%20Notes/MLT",
+      },
+      {
+        name: "Standford ML CheatSheet",
+        link: "https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning",
+      },
+    ],
+  },
 ];
