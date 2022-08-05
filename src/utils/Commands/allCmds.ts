@@ -4,14 +4,14 @@ import {
   CLASS_COMMAND,
   COMMANDS,
   HELP_CMDS,
-  NOTES_CMD_Show,
+  NOTES_CMD,
   SOURCE,
 } from "./instructions";
 export const User_AllCommands: string[][] = [
   CALENDAR_COMMANDS,
   CLASS_COMMAND,
+  NOTES_CMD,
   COMMANDS,
-  NOTES_CMD_Show,
   USER_PING_MESSAGES,
   HELP_CMDS,
   SOURCE,
