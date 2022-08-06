@@ -7,7 +7,7 @@ export const CALENDAR_TYPOS = [
   "celandar",
   "calandar",
 ];
-export const CLASS_COMMAND = ["class", "today", "cls"];
+export const CLASS_COMMAND = ["class", "today", "cls", "subject"];
 export const BOT_NAME_S = [`${process.env.BOT_NAME as String}`];
 export const NOTES_CMD = ["notes", "cheats", "note", "cheat"];
 export const NOTES_CMD_Show = [
