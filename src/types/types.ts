@@ -28,6 +28,8 @@ export type Calendar = {
   date: Date;
   courseName: string;
   description?: string;
+  //Number of Minutes before class starts of for class notifications
+  numberOfMinutes?: number;
 }[];
 
 // Introduction Type

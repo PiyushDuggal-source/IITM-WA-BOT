@@ -21,6 +21,7 @@ import axios from "axios";
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
+import { sendClassNotification } from "./actions/sendClassNotification";
 // import mongoose from "mongoose";
 // import { MongoStore } from "wwebjs-mongo";
 dotenv.config();
@@ -110,38 +111,40 @@ client.on("message_create", async (message: WAWebJS.Message) => {
 });
 
 client.on("group_join", async (msg: GroupNotification) => {
-  const contact = await client.getNumberId(msg.recipientIds[0]);
-  const details = await client.getContactById(contact?._serialized || "");
-  if (details.name) {
-    client.sendMessage(
-      process.env.WA_BOT_ID as string,
-      `${process.env.BOT_NAME as String}: *${
-        details.name
-      }* Joined the Group!\n${
-        USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
-      }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
-        HEY_EMOJIES[random(HEY_EMOJIES.length)]
-      }!\nCheck out what bot(${
-        process.env.BOT_NAME as String
-      }) can do by *Mentioning* me!\nor check the Commands of ${
-        process.env.BOT_NAME as String
-      } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
-    );
-  } else {
-    client.sendMessage(
-      process.env.WA_BOT_ID as string,
-      `${process.env.BOT_NAME as String}: ${
-        GREETINGS.member[random(GREETINGS.memberMsgNumber)]
-      } Joined the Group!\n${
-        USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
-      }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
-        HEY_EMOJIES[random(HEY_EMOJIES.length)]
-      }!\nCheck out what bot(${
-        process.env.BOT_NAME as String
-      }) can do by *Mentioning* me!\nor check the Commands of ${
-        process.env.BOT_NAME as String
-      } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
-    );
+  if (msg.chatId === WA_BOT_ID) {
+    const contact = await client.getNumberId(msg.recipientIds[0]);
+    const details = await client.getContactById(contact?._serialized || "");
+    if (details.name) {
+      client.sendMessage(
+        process.env.WA_BOT_ID as string,
+        `${process.env.BOT_NAME as String}: *${
+          details.name
+        }* Joined the Group!\n${
+          USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
+        }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
+          HEY_EMOJIES[random(HEY_EMOJIES.length)]
+        }!\nCheck out what bot(${
+          process.env.BOT_NAME as String
+        }) can do by *Mentioning* me!\nor check the Commands of ${
+          process.env.BOT_NAME as String
+        } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
+      );
+    } else {
+      client.sendMessage(
+        process.env.WA_BOT_ID as string,
+        `${process.env.BOT_NAME as String}: ${
+          GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+        } Joined the Group!\n${
+          USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
+        }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
+          HEY_EMOJIES[random(HEY_EMOJIES.length)]
+        }!\nCheck out what bot(${
+          process.env.BOT_NAME as String
+        }) can do by *Mentioning* me!\nor check the Commands of ${
+          process.env.BOT_NAME as String
+        } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
+      );
+    }
   }
 });
 
@@ -160,6 +163,15 @@ export const sendInvalidFiltersToDevEnv = (msg: string) => {
   client.sendMessage(process.env.INVALID_FILTER_CHAT_ID as string, msg);
 };
 
+client.on("disconnected", () => {
+  client.sendMessage(
+    WA_BOT_ID,
+    `Stepping out for sometimes folks, My ${
+      GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
+    } is updating something.`
+  );
+});
+
 client.initialize();
 // });
 // Get Bot LIVE
@@ -169,6 +181,14 @@ setInterval(async () => {
   await axios.get("https://iitm-wa-bot.herokuapp.com/");
   console.log("[SERVER] Pinged server");
 }, 15 * 60 * 1000); // every 15 minutes
+
+// // For checking the classes
+setInterval(async () => {
+  const chats = await client.getChats();
+  const WA_BOT = chats[BOT];
+  sendClassNotification(WA_BOT);
+  console.log("checked");
+}, 5 * 30 * 1000); // every 5 minutes
 
 const port = Number(process.env.PORT) || 3000;
 
