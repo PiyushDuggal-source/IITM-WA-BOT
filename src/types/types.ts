@@ -56,3 +56,10 @@ export type Notes = {
     link: string;
   }[];
 }[];
+
+// Group Leave/Join Image Type
+
+export type GroupLeaveORJoinImg = {
+  images: string[];
+  numOfImgs: number;
+};

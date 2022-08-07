@@ -4,7 +4,6 @@ import {
   GroupNotification,
   LocalAuth,
   MessageMedia,
-  // RemoteAuth,
 } from "whatsapp-web.js";
 import qrcode = require("qrcode-terminal");
 import { checkMessage } from "./actions/messageActions";
@@ -22,6 +21,7 @@ import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import { sendClassNotification } from "./actions/sendClassNotification";
+import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 // import mongoose from "mongoose";
 // import { MongoStore } from "wwebjs-mongo";
 dotenv.config();
@@ -33,22 +33,6 @@ const BOT = LOCAL ? 1 : 0;
 export const WA_BOT_ID = LOCAL
   ? (process.env.WA_BOT_ID_DEV as string)
   : (process.env.WA_BOT_ID as string);
-// const DB_URL = LOCAL
-//   ? String(process.env.DEV_DB_URL)
-//   : String(process.env.PROD_DB_URL);
-
-// mongoose.connect(DB_URL, () => {
-//   const store = new MongoStore({ mongoose: mongoose });
-//   const client = new Client({
-//     puppeteer: {
-//       headless: true,
-//       args: ["--no-sandbox", "--disable-setuid-sandbox"],
-//     },
-//     authStrategy: new RemoteAuth({
-//       store: store,
-//       backupSyncIntervalMs: 300000,
-//     }),
-//   });
 
 const client = new Client({
   puppeteer: {
@@ -116,7 +100,7 @@ client.on("group_join", async (msg: GroupNotification) => {
     const details = await client.getContactById(contact?._serialized || "");
     if (details.name) {
       client.sendMessage(
-        process.env.WA_BOT_ID as string,
+        WA_BOT_ID,
         `${process.env.BOT_NAME as String}: *${
           details.name
         }* Joined the Group!\n${
@@ -129,6 +113,13 @@ client.on("group_join", async (msg: GroupNotification) => {
           process.env.BOT_NAME as String
         } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
       );
+
+      const sticker = MessageMedia.fromFilePath(
+        `${__dirname}/assets/images/${
+          grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
+        }.png`
+      );
+      client.sendMessage(WA_BOT_ID, sticker, { sendMediaAsSticker: true });
     } else {
       client.sendMessage(
         process.env.WA_BOT_ID as string,
@@ -144,13 +135,22 @@ client.on("group_join", async (msg: GroupNotification) => {
           process.env.BOT_NAME as String
         } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
       );
+      const sticker = MessageMedia.fromFilePath(
+        `${__dirname}/assets/images/${
+          grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
+        }.png`
+      );
+      client.sendMessage(WA_BOT_ID, sticker, { sendMediaAsSticker: true });
     }
   }
 });
-
 client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
   console.log(notification);
-  const sticker = MessageMedia.fromFilePath(`${__dirname}/leave.png`);
+  const sticker = MessageMedia.fromFilePath(
+    `${__dirname}/assets/images/${
+      grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
+    }.png`
+  );
   if (notification.chatId === WA_BOT_ID) {
     const allChats = await client.getChats();
     const WA_BOT = allChats[BOT];
@@ -173,7 +173,7 @@ client.on("disconnected", () => {
 });
 
 client.initialize();
-// });
+
 // Get Bot LIVE
 
 // Continuously ping the server to prevent it from becoming idle
@@ -190,7 +190,7 @@ setInterval(async () => {
   console.log("checked");
 }, 5 * 30 * 1000); // every 5 minutes
 
-const port = Number(process.env.PORT) || 3000;
+const port = Number(process.env.PORT) || 3005;
 
 app.get("/", (req: Request, res: Response) => {
   res.send("BOT");
