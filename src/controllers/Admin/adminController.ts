@@ -7,7 +7,9 @@ import {
   CALENDAR_TYPOS,
   CLASS_COMMAND,
   COMMANDS,
+  ELIGIBILITY,
   HELP_CMDS,
+  IMP_DATES,
   NOTES_CMD,
   SOURCE,
 } from "../../utils/Commands/instructions";
@@ -16,6 +18,7 @@ import { sendClassMessage } from "../../actions/sendClassMessage";
 import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
 import { help } from "../../actions/help";
 import { sendSource } from "../../actions/sendSource";
+import { sendEligibility, sendImpDates } from "../../actions/courseInfo";
 
 export const adminControl = (bot: WAWebJS.Chat, message: string) => {
   // Ping Replies
@@ -54,5 +57,15 @@ export const adminControl = (bot: WAWebJS.Chat, message: string) => {
   // Source Command Reply
   else if (SOURCE.includes(message.toLocaleLowerCase())) {
     sendSource(bot);
+  }
+
+  // For sending Important Dates
+  else if (IMP_DATES.includes(message.toLocaleLowerCase())) {
+    sendImpDates(bot);
+  }
+
+  // For sending Eligibility
+  else if (ELIGIBILITY.includes(message.toLocaleLowerCase())) {
+    sendEligibility(bot);
   }
 };

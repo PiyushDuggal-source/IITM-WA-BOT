@@ -22,18 +22,19 @@ import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import { sendClassNotification } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
-// import mongoose from "mongoose";
-// import { MongoStore } from "wwebjs-mongo";
 dotenv.config();
 
+// Initialized App
 const app = express();
 
+// For Development Enviornment
 const LOCAL = String(process.env.dev) === "true";
 const BOT = LOCAL ? 1 : 0;
 export const WA_BOT_ID = LOCAL
   ? (process.env.WA_BOT_ID_DEV as string)
   : (process.env.WA_BOT_ID as string);
 
+// Initializing Client
 const client = new Client({
   puppeteer: {
     headless: true,
@@ -44,11 +45,13 @@ const client = new Client({
   }),
 });
 
+// For QR Code
 client.on("qr", (qr: string) => {
   qrcode.generate(qr, { small: true });
   console.log(qr);
 });
 
+// Event "READY"
 client.on("ready", async () => {
   console.log("Connected");
   client.sendMessage(
@@ -57,7 +60,9 @@ client.on("ready", async () => {
   );
 });
 
+// Event "MESSAGE_CREATE"
 client.on("message_create", async (message: WAWebJS.Message) => {
+  // Check if message is from Group or Not
   const bool = checkMessage(message);
 
   // Mention Logic
@@ -94,6 +99,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
   }
 });
 
+// Event "GROUP_JOIN"
 client.on("group_join", async (msg: GroupNotification) => {
   if (msg.chatId === WA_BOT_ID) {
     const contact = await client.getNumberId(msg.recipientIds[0]);
@@ -115,7 +121,7 @@ client.on("group_join", async (msg: GroupNotification) => {
       );
 
       const sticker = MessageMedia.fromFilePath(
-        `${__dirname}/assets/images/${
+        `${__dirname}/assets/images/grpJoinLeaveImgs/${
           grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
         }.png`
       );
@@ -136,7 +142,7 @@ client.on("group_join", async (msg: GroupNotification) => {
         } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
       );
       const sticker = MessageMedia.fromFilePath(
-        `${__dirname}/assets/images/${
+        `${__dirname}/assets/images/grpJoinLeaveImgs/${
           grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
         }.png`
       );
@@ -147,7 +153,7 @@ client.on("group_join", async (msg: GroupNotification) => {
 client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
   console.log(notification);
   const sticker = MessageMedia.fromFilePath(
-    `${__dirname}/assets/images/${
+    `${__dirname}/assets/images/grpJoinLeaveImgs/${
       grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
     }.png`
   );

@@ -2,6 +2,7 @@ import * as WAWebJS from "whatsapp-web.js";
 import { help } from "../../actions/help";
 import { sendCalendar } from "../../actions/sendCalendar";
 import { sendClassMessage } from "../../actions/sendClassMessage";
+import { sendEligibility, sendImpDates } from "../../actions/courseInfo";
 import { sendMessage, random } from "../../actions/sendMessage";
 import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
 import { sendSource } from "../../actions/sendSource";
@@ -9,7 +10,9 @@ import {
   CALENDAR_COMMANDS,
   CLASS_COMMAND,
   COMMANDS,
+  ELIGIBILITY,
   HELP_CMDS,
+  IMP_DATES,
   NOTES_CMD,
   SOURCE,
 } from "../../utils/Commands/instructions";
@@ -53,5 +56,15 @@ export const userControl = (bot: WAWebJS.Chat, message: string) => {
   // Source Command Reply
   else if (SOURCE.includes(message.toLocaleLowerCase())) {
     sendSource(bot);
+  }
+
+  // For sending Important Dates
+  else if (IMP_DATES.includes(message.toLocaleLowerCase())) {
+    sendImpDates(bot);
+  }
+
+  // For sending Eligibility
+  else if (ELIGIBILITY.includes(message.toLocaleLowerCase())) {
+    sendEligibility(bot);
   }
 };

@@ -7,7 +7,7 @@ export const CALENDAR_TYPOS = [
   "celandar",
   "calandar",
 ];
-export const CLASS_COMMAND = ["class", "today", "cls", "subject"];
+export const CLASS_COMMAND = ["class", "today", "subject"];
 export const BOT_NAME_S = [`${process.env.BOT_NAME as String}`];
 export const NOTES_CMD = ["notes", "cheats", "note", "cheat"];
 export const NOTES_CMD_Show = [
@@ -20,5 +20,7 @@ export const COMMANDS_CMDS = [
   `${process.env.BOT_PREFIX}allcmds`,
   `${process.env.BOT_PREFIX}allcmd`,
 ];
-export const HELP_CMDS = ["help", "hlp"];
+export const HELP_CMDS = ["help"];
 export const SOURCE = ["source"];
+export const IMP_DATES = ["impdates", "importantdates", "dates"];
+export const ELIGIBILITY = ["eligibility", "eligible"];
