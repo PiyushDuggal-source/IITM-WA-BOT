@@ -1,5 +1,4 @@
 import * as WAWebJS from "whatsapp-web.js";
-import { sendInvalidFiltersToDevEnv } from "..";
 import { NOTES } from "../resources/notes";
 import { MessageType } from "../types/types";
 import { FOOTERS } from "../utils/reply/footers";
@@ -66,7 +65,6 @@ export const sendNotesByFilter = (bot: WAWebJS.Chat, message: string) => {
           "The filter is invalid or notes are not updated with the respective subject, please wait for a while we will upload the respective notes soon"
         );
         console.log(message.split(" ")[1]);
-        sendInvalidFiltersToDevEnv(message.split(" ")[1]);
       } else {
         content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
         bot.sendMessage(content);
