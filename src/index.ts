@@ -23,7 +23,7 @@ import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import { sendClassNotification } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
@@ -54,6 +54,10 @@ mongoose.connect(process.env.PROD_DB_URL as string).then(() => {
     });
   } else {
     client = new Client({
+      puppeteer: {
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      },
       authStrategy: new RemoteAuth({
         store: store,
         backupSyncIntervalMs: 300000,
