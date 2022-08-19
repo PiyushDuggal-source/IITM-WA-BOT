@@ -14,10 +14,12 @@ import {
   HELP_CMDS,
   IMP_DATES,
   NOTES_CMD,
+  PLALIST_CMD_ALISA,
   SOURCE,
 } from "../../utils/Commands/instructions";
 import { USER_PING_MESSAGES } from "../../utils/messages/messages";
 import { PING_REPLIES, USER_COMMANDS } from "../../utils/reply/replies";
+import { sendPlayList } from "../../actions/sendPlaylist";
 export const userControl = (bot: WAWebJS.Chat, message: string) => {
   // Ping Message Reply
   if (USER_PING_MESSAGES.includes(message.toLocaleLowerCase())) {
@@ -66,5 +68,10 @@ export const userControl = (bot: WAWebJS.Chat, message: string) => {
   // For sending Eligibility
   else if (ELIGIBILITY.includes(message.toLocaleLowerCase())) {
     sendEligibility(bot);
+  }
+
+  // For sending Playlists
+  else if (PLALIST_CMD_ALISA.includes(message.toLocaleLowerCase())) {
+    sendPlayList(bot);
   }
 };

@@ -24,3 +24,5 @@ export const HELP_CMDS = ["help"];
 export const SOURCE = ["source"];
 export const IMP_DATES = ["impdates", "importantdates", "dates"];
 export const ELIGIBILITY = ["eligibility", "eligible"];
+export const PLALIST_CMD = ["playlist"];
+export const PLALIST_CMD_ALISA = ["playlist", "plst"];

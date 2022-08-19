@@ -1,4 +1,4 @@
-import { Notes } from "../types/types";
+import { Notes, YT_Playlist } from "../types/types";
 
 export const NOTES: Notes = [
   {
@@ -158,5 +158,40 @@ export const NOTES: Notes = [
         link: "https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning",
       },
     ],
+  },
+];
+
+export const PLAYLISTS: YT_Playlist = [
+  {
+    name: "Mathematics for Data Science",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZYDZo9A0pZ_i0xhstrk5cR",
+  },
+  {
+    name: "Statistics for Data Science 1",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYrMs3zybOqr1DzMFCX49xG",
+  },
+  {
+    name: "CT Qualifier 1",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbCPjOE82l24XSCCfemEZJ_",
+  },
+  {
+    name: "English 1 (Basic English)",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbf28nnkgAuFwaWjGtjaNck",
+  },
+  {
+    name: "Mathematics for Data Science 2",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBboGlwPVSsWP8loAJCLrKc8",
+  },
+  {
+    name: "Statistics for Data Science 2",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbLZ6RdNTIXvFdaMpvqagt0",
+  },
+  {
+    name: "CT Qualifier 2",
+    link: "Unavailable :( _share if you have please :)_",
+  },
+  {
+    name: "English 2 (Advance English)",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbWy3GL4oWKXGrwf6Ul8Cry",
   },
 ];

@@ -75,7 +75,7 @@ mongoose.connect(process.env.PROD_DB_URL as string).then(() => {
   client.on("ready", async () => {
     console.log("Connected");
     client.sendMessage(
-      WA_BOT_ID,
+      process.env.WA_BOT_ID_DEV as string,
       `${process.env.BOT_NAME as string}: I am Connected BOSS`
     );
   });

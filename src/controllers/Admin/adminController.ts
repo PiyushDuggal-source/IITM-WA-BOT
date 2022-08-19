@@ -11,6 +11,7 @@ import {
   HELP_CMDS,
   IMP_DATES,
   NOTES_CMD,
+  PLALIST_CMD_ALISA,
   SOURCE,
 } from "../../utils/Commands/instructions";
 import { sendCalendar } from "../../actions/sendCalendar";
@@ -19,6 +20,7 @@ import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
 import { help } from "../../actions/help";
 import { sendSource } from "../../actions/sendSource";
 import { sendEligibility, sendImpDates } from "../../actions/courseInfo";
+import { sendPlayList } from "../../actions/sendPlaylist";
 
 export const adminControl = (bot: WAWebJS.Chat, message: string) => {
   // Ping Replies
@@ -67,5 +69,10 @@ export const adminControl = (bot: WAWebJS.Chat, message: string) => {
   // For sending Eligibility
   else if (ELIGIBILITY.includes(message.toLocaleLowerCase())) {
     sendEligibility(bot);
+  }
+
+  // For sending Playlists
+  else if (PLALIST_CMD_ALISA.includes(message.toLocaleLowerCase())) {
+    sendPlayList(bot);
   }
 };

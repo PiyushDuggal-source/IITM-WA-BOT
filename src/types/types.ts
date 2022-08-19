@@ -63,3 +63,10 @@ export type GroupLeaveORJoinImg = {
   images: string[];
   numOfImgs: number;
 };
+
+// YT Playlist Types
+
+export type YT_Playlist = {
+  name: string;
+  link: string;
+}[];

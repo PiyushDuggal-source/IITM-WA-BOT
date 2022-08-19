@@ -5,13 +5,15 @@ import {
   COMMANDS,
   HELP_CMDS,
   NOTES_CMD,
+  PLALIST_CMD,
   SOURCE,
 } from "./instructions";
 export const User_AllCommands: string[][] = [
   CALENDAR_COMMANDS,
   CLASS_COMMAND,
-  NOTES_CMD,
   COMMANDS,
+  NOTES_CMD,
+  PLALIST_CMD,
   USER_PING_MESSAGES,
   HELP_CMDS,
   SOURCE,
