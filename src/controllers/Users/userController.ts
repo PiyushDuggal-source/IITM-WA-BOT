@@ -8,6 +8,7 @@ import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
 import { sendSource } from "../../actions/sendSource";
 import {
   CALENDAR_COMMANDS,
+  CALENDAR_TYPOS,
   CLASS_COMMAND,
   COMMANDS,
   ELIGIBILITY,
@@ -42,7 +43,7 @@ export const userControl = (bot: WAWebJS.Chat, message: string) => {
     }
 
     // Calender Replies
-  } else if (CALENDAR_COMMANDS.includes(message.toLocaleLowerCase())) {
+  } else if (CALENDAR_TYPOS.includes(message.toLocaleLowerCase())) {
     sendCalendar(bot);
 
     // Class Commands Replies

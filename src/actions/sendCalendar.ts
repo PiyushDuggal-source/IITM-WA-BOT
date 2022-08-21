@@ -7,7 +7,7 @@ import { FOOTERS } from "../utils/reply/footers";
 import { random } from "./sendMessage";
 
 const calendarMessageFormat = (calendar: Calendar): MessageContent => {
-  let message: string = "*This is you Calender!!! 🗓*";
+  let message: string = "*This is you Calendar!!! 🗓*";
   calendar.forEach(
     (event) =>
       (message += `\n -------------------------------- \n📖 *Topic* : *${
