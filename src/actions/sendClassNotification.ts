@@ -1,27 +1,29 @@
+import { differenceInMinutes, isToday } from "date-fns";
 import * as WAWebJS from "whatsapp-web.js";
 import { CALENDAR } from "../resources/calendar";
 import { Calendar } from "../types/types";
 
-const getDifferenceInMins = (date1: Date, date2: Date) => {
-  var diff = (date1.getTime() - date2.getTime()) / 60000;
-  return Math.abs(Math.round(diff));
-};
+// const getDifferenceInMins = (date1: Date, date2: Date) => {
+//   var diff = (date1.getTime() - date2.getTime()) / 60000;
+//   return Math.abs(Math.round(diff));
+// };
 
-const checkForClass = (calendar: Calendar): Calendar => {
+const checkForClass = (calendar: Calendar): Calendar | [] => {
   let todayCalendar: Calendar = [];
   const date = new Date();
   calendar.forEach((clndr) => {
-    const difference = getDifferenceInMins(clndr.date, date);
-    if (difference < 5) {
-      todayCalendar.push({ ...clndr, numberOfMinutes: 5 });
-    } else if (difference < 10) {
-      todayCalendar.push({ ...clndr, numberOfMinutes: 10 });
+    if (isToday(clndr.date)) {
+      const difference = differenceInMinutes(clndr.date, date);
+      if (difference < 5) {
+        todayCalendar.push({ ...clndr, numberOfMinutes: 5 });
+      } else if (difference < 10) {
+        todayCalendar.push({ ...clndr, numberOfMinutes: 10 });
+      }
     }
   });
   return todayCalendar;
 };
 
-checkForClass(CALENDAR);
 export const sendClassNotification = (bot: WAWebJS.Chat) => {
   const classes = checkForClass(CALENDAR);
   if (!!classes.length) {

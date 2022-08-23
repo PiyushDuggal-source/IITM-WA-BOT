@@ -23,6 +23,7 @@ import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import { sendClassNotification } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
+import { log } from "./utils/log";
 const mongoose = require("mongoose");
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
@@ -67,12 +68,12 @@ mongoose.connect(process.env.PROD_DB_URL as string).then(() => {
 
   // Event "REMOTE SESSION SAVED"
   client.on("remote_session_saved", () => {
-    console.log("Remote auth session saved");
+    log("Remote auth session saved");
   });
 
   // Event "DISCONNECTED"
   client.on("disconnected", () => {
-    console.error("Client got disconnected!");
+    log("Client got disconnected!");
   });
 
   // For QR Code
@@ -83,7 +84,7 @@ mongoose.connect(process.env.PROD_DB_URL as string).then(() => {
 
   // Event "READY"
   client.on("ready", async () => {
-    console.log("Connected");
+    log("Connected");
     await client.sendMessage(
       process.env.WA_BOT_ID_DEV as string,
       `${process.env.BOT_NAME as string}: I am Connected BOSS`
@@ -209,7 +210,7 @@ mongoose.connect(process.env.PROD_DB_URL as string).then(() => {
     const chats = await client.getChats();
     const WA_BOT = chats[BOT];
     sendClassNotification(WA_BOT);
-    console.log("checked");
+    log("Checked");
   }, 5 * 30 * 1000); // every 5 minutes
 
   client.initialize();
@@ -228,9 +229,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("BOT");
 });
 
-app.listen(port, () =>
-  console.log(`[SERVER] Server is running on port ${port}`)
-);
+app.listen(port, () => log(`[SERVER] Server is running on port ${port}`));
 
 // All other pages should be returned as error pages
 app.all("*", (req: Request, res: Response) => {

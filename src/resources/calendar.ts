@@ -1,5 +1,9 @@
 import { Calendar } from "../types/types";
 
+/**
+ * ! ADD TIME ALSO with DATE
+ */
+
 export const CALENDAR: Calendar = [
   {
     topic: "Revision Session (Week 10 to Week 11)",
@@ -9,7 +13,7 @@ export const CALENDAR: Calendar = [
   },
   {
     topic: "End-Term Mock Session",
-    date: new Date("Friday, August 5, 2022"),
+    date: new Date("Friday, August 5, 2022, 17:57"),
     time: "8:00 – 10:00pm",
     courseName: "Statistics-1 - May - 2022",
   },
