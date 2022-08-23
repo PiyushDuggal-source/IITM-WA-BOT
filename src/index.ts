@@ -195,27 +195,23 @@ mongoose.connect(process.env.PROD_DB_URL as string).then(() => {
   });
 
   // For checking the classes
-  const intervalID = setInterval(async () => {
+  setInterval(async () => {
     const chats = await client.getChats();
     const WA_BOT = chats[BOT];
     sendClassNotification(WA_BOT);
     console.log("checked");
   }, 5 * 30 * 1000); // every 5 minutes
 
-  // Prevent from memory leak
-  clearInterval(intervalID);
   client.initialize();
 });
 
 // Get Bot LIVE
 // Continuously ping the server to prevent it from becoming idle
-const intervalID = setInterval(async () => {
+setInterval(async () => {
   await axios.get("https://iitm-wa-bot.herokuapp.com/");
   console.log("[SERVER] Pinged server");
 }, 28 * 60 * 1000); // every 15 minutes
 
-// Prevent From Memory leak
-clearInterval(intervalID);
 const port = Number(process.env.PORT) || 3005;
 
 app.get("/", (req: Request, res: Response) => {
