@@ -65,6 +65,16 @@ mongoose.connect(process.env.PROD_DB_URL as string).then(() => {
     });
   }
 
+  // Event "REMOTE SESSION SAVED"
+  client.on("remote_session_saved", () => {
+    console.log("Remote auth session saved");
+  });
+
+  // Event "DISCONNECTED"
+  client.on("disconnected", () => {
+    console.error("Client got disconnected!");
+  });
+
   // For QR Code
   client.on("qr", (qr: string) => {
     qrcode.generate(qr, { small: true });
