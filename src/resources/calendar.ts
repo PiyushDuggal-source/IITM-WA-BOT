@@ -2,6 +2,7 @@ import { Calendar } from "../types/types";
 
 /**
  * ! ADD TIME ALSO with DATE
+ * date: new Date("Thursday, September 8, 2022, 7:00"),
  */
 
 export const CALENDAR: Calendar = [
@@ -24,10 +25,28 @@ export const CALENDAR: Calendar = [
     courseName: "Computational Thinking - May - 2022",
   },
   {
+    topic: "Activity/Practice Session - Week 1",
+    date: new Date("Friday, September 9, 2022, 18:00"),
+    time: "6:00 - 8:00pm",
+    courseName: "Mathematics for Data Science-2 - May - 2022",
+  },
+  {
+    topic: "Open Session - Week 1",
+    date: new Date("Saturday, September 10, 2022, 20:00"),
+    time: "8:00 - 10:00pm",
+    courseName: "Mathematics for Data Science-2 - May - 2022",
+  },
+  {
     topic: "Read with us – A Virtual Reading Session",
     date: new Date("Sunday, September 11, 2022, 19:00"),
     time: "7:00 – 8:00pm",
     courseName: "Student Academic Calendar",
+  },
+  {
+    topic: "Open Session - Week 1",
+    date: new Date("Sunday, September 11, 2022, 19:00"),
+    time: "6:00 – 8:00pm",
+    courseName: "Statistics-1 - May - 2022",
   },
   {
     topic: "Solve with US - Week 1",
@@ -46,6 +65,12 @@ export const CALENDAR: Calendar = [
     date: new Date("Tuesday, September 13, 2022,18:00"),
     time: "6:00 – 8:00pm",
     courseName: "Mathematics for Data Science-1 - May - 2022",
+  },
+  {
+    topic: "Solve with Us - Week 1",
+    date: new Date("Tuesday, September 13, 2022,18:00"),
+    time: "6:00 – 8:00pm",
+    courseName: "Mathematics for Data Science-2 - May - 2022",
   },
   {
     topic: "Solve with Us - Week 1",
