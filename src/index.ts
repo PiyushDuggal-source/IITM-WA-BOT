@@ -236,13 +236,6 @@ const intervalId = setInterval(async () => {
   console.log("[SERVER] Pinged server");
 }, 28 * 60 * 1000); // every 28 minutes
 
-// const etaMs =
-//   new Date("Sunday, September 4, 2022, 00:30").getTime() - new Date().getTime();
-// console.log(etaMs);
-// setTimeout(() => {
-//   clearInterval(intervalId);
-// }, etaMs);
-
 // To stop the bot at Night
 const etaMs = endOfToday().getTime() - new Date().getTime();
 setInterval(() => {
