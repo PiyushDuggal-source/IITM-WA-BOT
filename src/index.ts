@@ -24,6 +24,7 @@ import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import { sendClassNotification } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
+import { endOfDay, endOfToday } from "date-fns";
 const mongoose = require("mongoose");
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
@@ -230,10 +231,23 @@ mongoose
 
 // Get Bot LIVE
 // Continuously ping the server to prevent it from becoming idle
-setInterval(async () => {
+const intervalId = setInterval(async () => {
   await axios.get("https://iitm-wa-bot.herokuapp.com/");
   console.log("[SERVER] Pinged server");
-}, 28 * 60 * 1000); // every 15 minutes
+}, 28 * 60 * 1000); // every 28 minutes
+
+const etaMs =
+  new Date("Sunday, September 4, 2022, 00:30").getTime() - new Date().getTime();
+console.log(etaMs);
+setTimeout(() => {
+  clearInterval(intervalId);
+}, etaMs);
+
+// // To stop the bot at Night
+// const etaMs = endOfToday().getTime() - new Date().getTime()
+// setInterval(()=> {
+// clearInterval(intervalId)
+// }etaMs)
 
 const port = Number(process.env.PORT) || 3005;
 
