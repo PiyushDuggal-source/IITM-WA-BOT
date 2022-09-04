@@ -215,13 +215,13 @@ mongoose
       );
     });
 
-    // For checking the classes
-    setInterval(async () => {
-      const chats = await client.getChats();
-      const WA_BOT = chats[BOT];
-      sendClassNotification(WA_BOT);
-      log("Checked");
-    }, 5 * 30 * 1000); // every 5 minutes
+    // // For checking the classes
+    // setInterval(async () => {
+    //   const chats = await client.getChats();
+    //   const WA_BOT = chats[BOT];
+    //   sendClassNotification(WA_BOT);
+    //   log("Checked");
+    // }, 1 * 60 * 1000); // every 5 minutes
 
     client.initialize();
   })
