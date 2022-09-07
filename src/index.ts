@@ -21,7 +21,10 @@ import axios from "axios";
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
-import { sendClassNotification } from "./actions/sendClassNotification";
+import {
+  addIndianTime,
+  sendClassNotification,
+} from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { endOfDay, endOfToday } from "date-fns";
@@ -237,7 +240,7 @@ const intervalId = setInterval(async () => {
 }, 28 * 60 * 1000); // every 28 minutes
 
 // To stop the bot at Night
-const etaMs = endOfToday().getTime() - new Date().getTime();
+const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
 setInterval(() => {
   clearInterval(intervalId);
 }, etaMs);

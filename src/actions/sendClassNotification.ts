@@ -9,7 +9,7 @@ import { Calendar } from "../types/types";
 // };
 
 // Add Indian Time - `Classic Function`
-function addIndianTime(date: Date): Date {
+export function addIndianTime(date: Date): Date {
   let numberOfMilliseconds = date.getTime();
   let t0530inMilliseconds = 19800000;
   date = new Date(numberOfMilliseconds + t0530inMilliseconds);
