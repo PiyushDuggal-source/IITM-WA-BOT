@@ -187,11 +187,31 @@ export const PLAYLISTS: YT_Playlist = [
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbLZ6RdNTIXvFdaMpvqagt0",
   },
   {
-    name: "CT Qualifier 2",
-    link: "Unavailable :( _share if you have please :)_",
+    name: "Programming in Python",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBb2cXAu5PevO_mzgS3Fj3Fs",
   },
   {
     name: "English 2 (Advance English)",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbWy3GL4oWKXGrwf6Ul8Cry",
+  },
+  {
+    name: "Database Management Systems",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYc4jkUk_yQAjYEVFzVzhdU",
+  },
+  {
+    name: "Programming, Data Structures and Algorithms using Python",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaDccbZRgiU1sHX2gZrQ-XT",
+  },
+  {
+    name: "Modern Application Development - I",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZGVuyXs2l3KJtiHs0KMVE7",
+  },
+  {
+    name: "Programming Concepts using Java( LIVE )",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYlX88C2ds88HOZMOOcPz6j",
+  },
+  {
+    name: "LIVE System Commands- Term 1 Jan 22",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbOTRxyyNBd4iptSrFzA_Py",
   },
 ];
