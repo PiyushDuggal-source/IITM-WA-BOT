@@ -38,7 +38,7 @@ export const sendClassNotification = (bot: WAWebJS.Chat) => {
     let message = "⚠ Attention Guys!! ⚠ CLASS!\n\n📘*Today's Classes*📘";
     classes.forEach(
       (event) =>
-        (message += `\n -------------------------------- \n📖 *Topic*      : *${event.topic}* \n🕰 *Time*   : _Starting in *${event.numberOfMinutes}* minutes_\n📅 *Date*       : *Today!* \n🏫 *Course*  : ${event.courseName}\n `)
+        (message += `\n -------------------------------- \n📖 *Topic*      : *${event.topic}* \n🕰 *Time*   : _Starting in *${event.numberOfMinutes}* minutes_\n📅 *Date*       : *Today!* \n🏫 *Course*  : ${event.courseName}\n*Calendar Link*: https://calendar.google.com/calendar/u/0/r/day `)
     );
     bot.sendMessage(message);
   }
