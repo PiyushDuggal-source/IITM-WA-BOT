@@ -42,10 +42,12 @@ export const userControl = (bot: WAWebJS.Chat, message: string) => {
       sendNotes(bot, "USER");
     }
 
-    // Calender Replies
-  } else if (CALENDAR_TYPOS.includes(message.toLocaleLowerCase())) {
+    // Calender Replies WITH Typos
+  } else if (
+    CALENDAR_COMMANDS.includes(message.toLocaleLowerCase()) ||
+    CALENDAR_TYPOS.includes(message.toLocaleLowerCase())
+  ) {
     sendCalendar(bot);
-
     // Class Commands Replies
   } else if (CLASS_COMMAND.includes(message.toLocaleLowerCase())) {
     sendClassMessage(bot);
