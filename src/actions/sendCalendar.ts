@@ -2,7 +2,7 @@ import * as WAWebJS from "whatsapp-web.js";
 import { MessageContent } from "whatsapp-web.js";
 import { CALENDAR } from "../resources/calendar";
 import { Calendar } from "../types/types";
-import { format } from "date-fns";
+import { format, isToday } from "date-fns";
 import { FOOTERS } from "../utils/reply/footers";
 import { random } from "./sendMessage";
 
@@ -15,7 +15,13 @@ const calendarMessageFormat = (calendar: Calendar): MessageContent => {
       }* \n🕰 *Timing* : _${event.time}_ \n📅 *Date* : ${format(
         event.date,
         "eeee, LLLL d, yyyy"
-      )}  \n🏫 *Course* : ${event.courseName}\n `)
+      )}  \n🏫 *Course* : ${event.courseName}\n*Calendar Link* : ${
+        isToday(event.date)
+          ? "https://calendar.google.com/calendar/u/0/r/day"
+          : `https://calendar.google.com/calendar/u/0/r/day/${event.date.getFullYear()}/${
+              event.date.getMonth() + 1
+            }/${event.date.getDate()}`
+      }`)
   );
   return message + `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
 };
