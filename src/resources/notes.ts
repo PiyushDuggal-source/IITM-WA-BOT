@@ -159,6 +159,112 @@ export const NOTES: Notes = [
       },
     ],
   },
+  {
+    name: "Python Notes",
+    content: [
+      {
+        name: "Python | Week 1",
+        link: "https://drive.google.com/file/d/1aRheiSTm2oEAVdfYx1GfgyUsrWzv_I1A/view *Jupyter File*",
+      },
+      {
+        name: "Python Colab Notes | Week 2",
+        link: "https://colab.research.google.com/drive/106ws-hcozUOYt2MkeHssfvO9euNlp3gk?usp=sharing",
+      },
+      {
+        name: "Python Colab Notes | Week 3",
+        link: "https://colab.research.google.com/drive/1XIYfiXNocxLAkuHIRmo8iaSZJVmPI1fP?usp=sharing",
+      },
+      {
+        name: "Python Colab Notes | Week 4 *NEED IITM EMAIL*",
+        link: "https://drive.google.com/file/u/0/d/1V9AKt3TGLsZIyvECyHRC5YZvobXeFxu8/view",
+      },
+      {
+        name: "Python Colab Notes | Week 5 *NEED IITM EMAIL*",
+        link: "https://drive.google.com/file/u/0/d/1wS4ZObWmO3XYGuA8ETnk3XrZnJX4pfmn/edit",
+      },
+      {
+        name: "Python Notes | Week 5",
+        link: "https://drive.google.com/file/d/1p3o6XB49N7TfJKnleXSkZjqSTTWOkTCT/view",
+      },
+      {
+        name: "Python Notes | Week 6",
+        link: "https://drive.google.com/file/d/17bGF5BRTYagGK97_IXvbI1wrwx-fzNNs/view",
+      },
+      {
+        name: "Python Notes | Week 7",
+        link: "https://drive.google.com/file/d/1fCvMgQM8AOMp6GYRNG8aaH8YbDtQ7eYJ/view",
+      },
+      {
+        name: "Python IITM Book",
+        link: "https://pdsaiitm.github.io/",
+      },
+    ],
+  },
+  {
+    name: "System Commands | cmd | SC",
+    content: [
+      {
+        name: "System Commands | Week 1",
+        link: "https://drive.google.com/file/d/1cgLWUJLr3buyTLAomusjQnjow0yBI9d8/view",
+      },
+      {
+        name: "System Commands | Week 2",
+        link: "https://drive.google.com/drive/folders/1T8j0DKmllNyhili_AgyRb4NxtS4Ezpy6",
+      },
+      {
+        name: "System Commands | Week 3",
+        link: "https://drive.google.com/drive/folders/1iet9KIQOAzQQacXJJ3ESaOrsGJgYTtCv",
+      },
+      {
+        name: "System Commands | Week 4",
+        link: "https://drive.google.com/file/d/1zy1cnXhvIqryMlKKvgKH9Lz7opQuVeiu/view",
+      },
+      {
+        name: "System Commands | Quiz 1 Notes",
+        link: "https://drive.google.com/file/d/1RWw7uoletNoSv9TKHOvZiMcpHfeDME7z/view",
+      },
+      {
+        name: "System Commands | Week 5",
+        link: "https://drive.google.com/file/d/1Wg7QOpd2UdxUge8ihFsPiktpMeAifHj_/view",
+      },
+      {
+        name: "System Commands | Week 6",
+        link: "https://drive.google.com/file/d/1VD8jZx717gWTrHRmpf_11-iZoIP8dxjI/view",
+      },
+      {
+        name: "System Commands | Regex Consolidation",
+        link: "https://drive.google.com/file/d/1VD8jZx717gWTrHRmpf_11-iZoIP8dxjI/view",
+      },
+      {
+        name: "System Commands | Week 7",
+        link: "https://drive.google.com/file/d/1i2kgx6HQcPQVn571JIqciMMGYajZ-oqB/view",
+      },
+      {
+        name: "System Commands | Week 8",
+        link: "https://drive.google.com/file/d/1Btlm0eQ0mZEzNtOf44p-jveF5LRY0AOp/view",
+      },
+      {
+        name: "System Commands | Command Line Editors | CLE",
+        link: "https://drive.google.com/file/d/1WD4R8UHsl7Zg7x7c4felrau7ExvJ8Pg9/view",
+      },
+      {
+        name: "System Commands | Bash",
+        link: "https://drive.google.com/file/d/1YTDb-Pf6yZZbWyArJDz902sgDNZ-Bi72/view",
+      },
+      {
+        name: "System Commands | AWK",
+        link: "https://drive.google.com/file/d/1QUL6IYOQ6EHXcpr7ZUqNwzRtTqJihFYu/view",
+      },
+      {
+        name: "System Commands | Stream Editor | SED",
+        link: "https://drive.google.com/file/d/1SaNppTN6HWGIL1avwHsi4KC0sPuytfOA/view",
+      },
+      {
+        name: "System Commands | Quiz 2 Notes",
+        link: "https://drive.google.com/file/d/1KMjoEsSJMxnk-2DNxCDqP9_Pd1FLOfH4/view",
+      },
+    ],
+  },
 ];
 
 export const PLAYLISTS: YT_Playlist = [
