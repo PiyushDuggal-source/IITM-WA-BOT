@@ -1,3 +1,5 @@
+import * as WAWebJS from "whatsapp-web.js";
+
 // Ping Replies
 export type PingReplies = {
   admin: string[];
@@ -70,3 +72,15 @@ export type YT_Playlist = {
   name: string;
   link: string;
 }[];
+
+export interface WA_Grp extends WAWebJS.Chat {
+  participants?: {
+    id: {
+      user: string;
+      _serialized: string;
+    };
+
+    isAdmin: boolean;
+    isSuperAdmin: boolean;
+  }[];
+}

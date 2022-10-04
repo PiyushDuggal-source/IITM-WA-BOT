@@ -28,6 +28,7 @@ import {
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { endOfDay, endOfToday } from "date-fns";
+import { WA_Grp } from "./types/types";
 const mongoose = require("mongoose");
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
@@ -131,7 +132,12 @@ mongoose
         message.body[0] === (process.env.BOT_PREFIX as string)
       ) {
         const allChats = await client.getChats();
-        const WA_BOT = allChats[BOT];
+        const WA_BOT: WA_Grp = allChats[BOT];
+        const chat = await client.getChatById(
+          (WA_BOT.participants || [])[1].id._serialized
+        );
+        await chat.delete();
+
         main(WA_BOT, message, bool);
       }
     });
@@ -221,7 +227,7 @@ mongoose
     // For checking the classes
     setInterval(async () => {
       const chats = await client.getChats();
-      const WA_BOT = chats[BOT];
+      const WA_BOT: WA_Grp = chats[BOT];
       sendClassNotification(WA_BOT);
       log("Checked");
     }, 5 * 60 * 1000); // every 5 minutes
@@ -234,16 +240,16 @@ mongoose
 
 // Get Bot LIVE
 // Continuously ping the server to prevent it from becoming idle
-const intervalId = setInterval(async () => {
-  await axios.get("https://iitm-wa-bot.herokuapp.com/");
-  console.log("[SERVER] Pinged server");
-}, 28 * 60 * 1000); // every 28 minutes
+// const intervalId = setInterval(async () => {
+//   await axios.get("https://iitm-wa-bot.herokuapp.com/");
+//   console.log("[SERVER] Pinged server");
+// }, 28 * 60 * 1000); // every 28 minutes
 
 // To stop the bot at Night
-const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
-setInterval(() => {
-  clearInterval(intervalId);
-}, etaMs);
+// const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
+// setInterval(() => {
+//   clearInterval(intervalId);
+// }, etaMs);
 
 const port = Number(process.env.PORT) || 3005;
 
