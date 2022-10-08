@@ -8,7 +8,7 @@ export const main = (
   message: WAWebJS.Message,
   role: MessageType
 ) => {
-  if (role === "ADMIN") {
+  if (role) {
     // Slice for removing BOT_PREFIX
     adminControl(bot, message.body.slice(1));
   } else if (role === "USER") {

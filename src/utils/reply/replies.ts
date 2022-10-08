@@ -119,3 +119,15 @@ export const USER_JOIN_GREETINGS: UserJoinGreetings = {
   ],
   messageNum: 3,
 };
+
+export const REACT_EMOGIES = [
+  "😌",
+  "✌",
+  "🤟",
+  "🤝",
+  "👌",
+  "🫂",
+  "🌚",
+  "🌝",
+  "⚡",
+];

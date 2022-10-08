@@ -21,3 +21,6 @@ export const FOOTERS = {
   ],
   footerMsgLength: 11,
 };
+
+export const END_FOOTER =
+  "*NOTE*: _This message is *deleted* from *my side*, if you have any query bro/sis, send message to *ELIZA Group* or *ME* ✌_";

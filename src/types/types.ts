@@ -12,7 +12,7 @@ export type ADMIN = "ADMIN";
 export type USER = "USER";
 export type NONE = "NONE";
 
-export type MessageType = ADMIN | USER | NONE;
+export type MessageType = string | NONE | boolean;
 
 // Commands btn List
 

@@ -30,6 +30,7 @@ import { log } from "./utils/log";
 import { endOfDay, endOfToday } from "date-fns";
 import { WA_Grp } from "./types/types";
 import { UserModel } from "./services/modals";
+import { connectToDb } from "./utils/db/connect";
 const mongoose = require("mongoose");
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
@@ -49,192 +50,185 @@ const DB_URL = LOCAL
   : (process.env.PROD_DB_URL as string);
 
 // Initializing Client
+connectToDb(DB_URL);
 
-mongoose
-  .connect(DB_URL)
-  .then(() => {
-    const store = new MongoStore({ mongoose: mongoose });
-    let client: Client;
-    if (LOCAL) {
-      client = new Client({
-        puppeteer: {
-          headless: true,
-          args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        },
-        authStrategy: new LocalAuth({
-          dataPath: `${__dirname}/sessions`,
-        }),
+const store = new MongoStore({ mongoose: mongoose });
+let client: Client;
+if (LOCAL) {
+  client = new Client({
+    puppeteer: {
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    },
+    authStrategy: new LocalAuth({
+      dataPath: `${__dirname}/sessions`,
+    }),
+  });
+} else {
+  client = new Client({
+    puppeteer: {
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    },
+    authStrategy: new RemoteAuth({
+      store: store,
+      backupSyncIntervalMs: 300000,
+    }),
+  });
+}
+// Event "REMOTE SESSION SAVED"
+client.on("remote_session_saved", () => {
+  log("Remote auth session saved");
+});
+
+// Event "DISCONNECTED"
+client.on("disconnected", () => {
+  log("Client got disconnected!");
+});
+
+// For QR Code
+client.on("qr", (qr: string) => {
+  qrcode.generate(qr, { small: true });
+  console.log(qr);
+});
+
+// Event "READY"
+client.on("ready", async () => {
+  log("Connected");
+  await client.sendMessage(
+    process.env.WA_BOT_ID_DEV as string,
+    `${process.env.BOT_NAME as string}: I am Connected BOSS`
+  );
+});
+
+// Event "MESSAGE_CREATE"
+client.on("message_create", async (message: WAWebJS.Message) => {
+  // Check if message is from Group or Not
+  const bool = checkMessage(message);
+
+  // Mention Logic
+  const str: string[] = message.mentionedIds;
+  const isMention =
+    (message.body[0] === "@" && str.includes("919871453667@c.us")) ||
+    message.body
+      .toLowerCase()
+      .split(" ")
+      .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
+
+  if (isMention && bool !== "NONE") {
+    introduction(client, bool, message);
+  }
+
+  const allChats = await client.getChats();
+  const WA_BOT: WA_Grp = allChats[BOT];
+  // Command check logic
+  if (
+    bool !== "NONE" &&
+    COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
+  ) {
+    sendCommands(client, message);
+  }
+  if (
+    (bool || bool !== "NONE") &&
+    message.body[0] === (process.env.BOT_PREFIX as string)
+  ) {
+    main(WA_BOT, message, bool);
+  }
+  if (bool === "ADMIN" && message.body === "load") {
+    WA_BOT.participants?.forEach(async (participant) => {
+      await UserModel.create({
+        name: participant.id.user,
+        chatId: participant.id._serialized,
       });
-    } else {
-      client = new Client({
-        puppeteer: {
-          headless: true,
-          args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        },
-        authStrategy: new RemoteAuth({
-          store: store,
-          backupSyncIntervalMs: 300000,
-        }),
-      });
-    }
-
-    // Event "REMOTE SESSION SAVED"
-    client.on("remote_session_saved", () => {
-      log("Remote auth session saved");
     });
+    WA_BOT.sendMessage("ADDED ALL THE STUDENTS TO THE DB SUCCESSFULLY MASTER!");
+  }
+});
 
-    // Event "DISCONNECTED"
-    client.on("disconnected", () => {
-      log("Client got disconnected!");
-    });
-
-    // For QR Code
-    client.on("qr", (qr: string) => {
-      qrcode.generate(qr, { small: true });
-      console.log(qr);
-    });
-
-    // Event "READY"
-    client.on("ready", async () => {
-      log("Connected");
-      await client.sendMessage(
-        process.env.WA_BOT_ID_DEV as string,
-        `${process.env.BOT_NAME as string}: I am Connected BOSS`
-      );
-    });
-
-    // Event "MESSAGE_CREATE"
-    client.on("message_create", async (message: WAWebJS.Message) => {
-      // Check if message is from Group or Not
-      const bool = checkMessage(message);
-
-      // Mention Logic
-      const str: string[] = message.mentionedIds;
-      const isMention =
-        (message.body[0] === "@" && str.includes("919871453667@c.us")) ||
-        message.body
-          .toLowerCase()
-          .split(" ")
-          .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
-
-      if (isMention && bool !== "NONE") {
-        const allChats = await client.getChats();
-        const WA_BOT = allChats[BOT];
-        introduction(WA_BOT, bool);
-      }
-
-      const allChats = await client.getChats();
-      const WA_BOT: WA_Grp = allChats[BOT];
-      // Command check logic
-      if (
-        bool !== "NONE" &&
-        COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
-      ) {
-        sendCommands(WA_BOT);
-      }
-      if (
-        (bool === "ADMIN" || bool === "USER") &&
-        message.body[0] === (process.env.BOT_PREFIX as string)
-      ) {
-        main(WA_BOT, message, bool);
-      }
-    });
-
-    // Event "GROUP_JOIN"
-    client.on("group_join", async (msg: GroupNotification) => {
-      if (msg.chatId === WA_BOT_ID) {
-        const contact = await client.getNumberId(msg.recipientIds[0]);
-        const details = await client.getContactById(contact?._serialized || "");
-        if (details.name) {
-          client.sendMessage(
-            WA_BOT_ID,
-            `${process.env.BOT_NAME as String}: *${
-              details.name
-            }* Joined the Group!\n${
-              USER_JOIN_GREETINGS.messages[
-                random(USER_JOIN_GREETINGS.messageNum)
-              ]
-            }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
-              HEY_EMOJIES[random(HEY_EMOJIES.length)]
-            }!\nCheck out what bot(${
-              process.env.BOT_NAME as String
-            }) can do by *Mentioning* me!\nor check the Commands of ${
-              process.env.BOT_NAME as String
-            } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
-          );
-
-          const sticker = MessageMedia.fromFilePath(
-            `${__dirname}/assets/images/grpJoinLeaveImgs/${
-              grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
-            }.png`
-          );
-          client.sendMessage(WA_BOT_ID, sticker, { sendMediaAsSticker: true });
-        } else {
-          client.sendMessage(
-            process.env.WA_BOT_ID as string,
-            `${process.env.BOT_NAME as String}: ${
-              GREETINGS.member[random(GREETINGS.memberMsgNumber)]
-            } Joined the Group!\n${
-              USER_JOIN_GREETINGS.messages[
-                random(USER_JOIN_GREETINGS.messageNum)
-              ]
-            }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
-              HEY_EMOJIES[random(HEY_EMOJIES.length)]
-            }!\nCheck out what bot(${
-              process.env.BOT_NAME as String
-            }) can do by *Mentioning* me!\nor check the Commands of ${
-              process.env.BOT_NAME as String
-            } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
-          );
-          const sticker = MessageMedia.fromFilePath(
-            `${__dirname}/assets/images/grpJoinLeaveImgs/${
-              grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
-            }.png`
-          );
-          client.sendMessage(WA_BOT_ID, sticker, { sendMediaAsSticker: true });
-        }
-      }
-    });
-    client.on(
-      "group_leave",
-      async (notification: WAWebJS.GroupNotification) => {
-        console.log(notification);
-        const sticker = MessageMedia.fromFilePath(
-          `${__dirname}/assets/images/grpJoinLeaveImgs/${
-            grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
-          }.png`
-        );
-        if (notification.chatId === WA_BOT_ID) {
-          const allChats = await client.getChats();
-          const WA_BOT = allChats[BOT];
-          WA_BOT.sendMessage(`${process.env.BOT_NAME as String}:`);
-          WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
-        }
-      }
-    );
-
-    client.on("disconnected", () => {
+// Event "GROUP_JOIN"
+client.on("group_join", async (msg: GroupNotification) => {
+  if (msg.chatId === WA_BOT_ID) {
+    const contact = await client.getNumberId(msg.recipientIds[0]);
+    const details = await client.getContactById(contact?._serialized || "");
+    if (details.name) {
       client.sendMessage(
         WA_BOT_ID,
-        `Stepping out for sometimes folks, My ${
-          GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
-        } is updating something.`
+        `${process.env.BOT_NAME as String}: *${
+          details.name
+        }* Joined the Group!\n${
+          USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
+        }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
+          HEY_EMOJIES[random(HEY_EMOJIES.length)]
+        }!\nCheck out what bot(${
+          process.env.BOT_NAME as String
+        }) can do by *Mentioning* me!\nor check the Commands of ${
+          process.env.BOT_NAME as String
+        } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
       );
-    });
 
-    // For checking the classes
-    setInterval(async () => {
-      const chats = await client.getChats();
-      const WA_BOT: WA_Grp = chats[BOT];
-      sendClassNotification(WA_BOT);
-      log("Checked");
-    }, 5 * 60 * 1000); // every 5 minutes
+      const sticker = MessageMedia.fromFilePath(
+        `${__dirname}/assets/images/grpJoinLeaveImgs/${
+          grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
+        }.png`
+      );
+      client.sendMessage(WA_BOT_ID, sticker, { sendMediaAsSticker: true });
+    } else {
+      client.sendMessage(
+        process.env.WA_BOT_ID as string,
+        `${process.env.BOT_NAME as String}: ${
+          GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+        } Joined the Group!\n${
+          USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
+        }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
+          HEY_EMOJIES[random(HEY_EMOJIES.length)]
+        }!\nCheck out what bot(${
+          process.env.BOT_NAME as String
+        }) can do by *Mentioning* me!\nor check the Commands of ${
+          process.env.BOT_NAME as String
+        } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
+      );
+      const sticker = MessageMedia.fromFilePath(
+        `${__dirname}/assets/images/grpJoinLeaveImgs/${
+          grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
+        }.png`
+      );
+      client.sendMessage(WA_BOT_ID, sticker, { sendMediaAsSticker: true });
+    }
+  }
+});
+client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
+  console.log(notification);
+  const sticker = MessageMedia.fromFilePath(
+    `${__dirname}/assets/images/grpJoinLeaveImgs/${
+      grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
+    }.png`
+  );
+  if (notification.chatId === WA_BOT_ID) {
+    const allChats = await client.getChats();
+    const WA_BOT = allChats[BOT];
+    WA_BOT.sendMessage(`${process.env.BOT_NAME as String}:`);
+    WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
+  }
+});
 
-    client.initialize();
-  })
-  .catch((err: any) => {
-    log(err, true);
-  });
+client.on("disconnected", () => {
+  client.sendMessage(
+    WA_BOT_ID,
+    `Stepping out for sometimes folks, My ${
+      GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
+    } is updating something.`
+  );
+});
+
+// For checking the classes
+setInterval(async () => {
+  const chats = await client.getChats();
+  const WA_BOT: WA_Grp = chats[BOT];
+  sendClassNotification(WA_BOT);
+  log("Checked");
+}, 5 * 60 * 1000); // every 5 minutes
+
+client.initialize();
 
 // Get Bot LIVE
 // Continuously ping the server to prevent it from becoming idle
