@@ -79,7 +79,6 @@ export interface WA_Grp extends WAWebJS.Chat {
       user: string;
       _serialized: string;
     };
-
     isAdmin: boolean;
     isSuperAdmin: boolean;
   }[];

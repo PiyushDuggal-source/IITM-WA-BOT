@@ -29,6 +29,7 @@ import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { endOfDay, endOfToday } from "date-fns";
 import { WA_Grp } from "./types/types";
+import { UserModel } from "./services/modals";
 const mongoose = require("mongoose");
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
@@ -43,10 +44,14 @@ export const WA_BOT_ID = LOCAL
   ? (process.env.WA_BOT_ID_DEV as string)
   : (process.env.WA_BOT_ID as string);
 
+const DB_URL = LOCAL
+  ? (process.env.DEV_DB_URL as string)
+  : (process.env.PROD_DB_URL as string);
+
 // Initializing Client
 
 mongoose
-  .connect(process.env.PROD_DB_URL as string)
+  .connect(DB_URL)
   .then(() => {
     const store = new MongoStore({ mongoose: mongoose });
     let client: Client;
@@ -118,26 +123,19 @@ mongoose
         introduction(WA_BOT, bool);
       }
 
+      const allChats = await client.getChats();
+      const WA_BOT: WA_Grp = allChats[BOT];
       // Command check logic
       if (
         bool !== "NONE" &&
         COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
       ) {
-        const allChats = await client.getChats();
-        const WA_BOT = allChats[BOT];
         sendCommands(WA_BOT);
       }
       if (
         (bool === "ADMIN" || bool === "USER") &&
         message.body[0] === (process.env.BOT_PREFIX as string)
       ) {
-        const allChats = await client.getChats();
-        const WA_BOT: WA_Grp = allChats[BOT];
-        const chat = await client.getChatById(
-          (WA_BOT.participants || [])[1].id._serialized
-        );
-        await chat.delete();
-
         main(WA_BOT, message, bool);
       }
     });
