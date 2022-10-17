@@ -8,3 +8,4 @@ export const connectToDb = async (dbUrl: string) => {
     process.exit(0);
   }
 };
+

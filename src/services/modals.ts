@@ -1,5 +1,4 @@
 import { model, Schema } from "mongoose";
-
 type Roles = "ADMIN" | "STUDENT";
 
 type User = {

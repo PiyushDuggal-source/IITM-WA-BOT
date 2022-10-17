@@ -4,14 +4,13 @@ import { adminControl } from "./Admin/adminController";
 import { userControl } from "./Users/userController";
 
 export const main = (
-  bot: WAWebJS.Chat,
+  client: WAWebJS.Client,
   message: WAWebJS.Message,
   role: MessageType
 ) => {
-  if (role) {
-    // Slice for removing BOT_PREFIX
-    adminControl(bot, message.body.slice(1));
-  } else if (role === "USER") {
-    userControl(bot, message.body.slice(1));
-  }
+  // if (role) {
+  //   adminControl(client, message));
+  // } else if (role === "USER") {
+  //   userControl(client, message));
+  // }
 };

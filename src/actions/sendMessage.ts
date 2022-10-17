@@ -2,24 +2,30 @@ import * as WAWebJS from "whatsapp-web.js";
 import { MessageContent } from "whatsapp-web.js";
 import { FOOTERS } from "../utils/reply/footers";
 import * as dotenv from "dotenv";
+import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
+import { MessageType } from "../types/types";
 dotenv.config();
 
 export const sendMessage = (
-  bot: WAWebJS.Chat,
-  message: MessageContent,
+  client: WAWebJS.Client,
+  messageToSend: MessageContent,
+  message: WAWebJS.Message,
+  userId: MessageType,
   cmds?: boolean,
   help?: boolean
 ) => {
-  if (cmds) {
-    bot.sendMessage(message);
+  if (cmds && typeof userId === 'string') {
+    sendAndDeleteMsg(client, message,userId as string, messageToSend )
+    // bot.sendMessage(message);
   } else if (help) {
-    bot.sendMessage(
-      `${process.env.BOT_NAME as String}: ${message} \n:${
+    const msg = 
+      `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
         FOOTERS.footers[random(FOOTERS.footerMsgLength)]
       }`
-    );
+    sendAndDeleteMsg(client, message,userId, msg )
   } else {
-    bot.sendMessage(`${process.env.BOT_NAME as String}: ${message}`);
+    const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`
+    sendAndDeleteMsg(client, message,userId, msg )
   }
 };
 

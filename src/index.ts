@@ -17,17 +17,14 @@ import {
 } from "./utils/reply/replies";
 import { random } from "./actions/sendMessage";
 const express = require("express");
-import axios from "axios";
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import {
-  addIndianTime,
   sendClassNotification,
 } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
-import { endOfDay, endOfToday } from "date-fns";
 import { WA_Grp } from "./types/types";
 import { UserModel } from "./services/modals";
 import { connectToDb } from "./utils/db/connect";

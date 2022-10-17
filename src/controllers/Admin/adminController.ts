@@ -21,11 +21,12 @@ import { help } from "../../actions/help";
 import { sendSource } from "../../actions/sendSource";
 import { sendEligibility, sendImpDates } from "../../actions/courseInfo";
 import { sendPlayList } from "../../actions/sendPlaylist";
+import { MessageType } from "../../types/types";
 
-export const adminControl = (bot: WAWebJS.Chat, message: string) => {
+export const adminControl = (client: WAWebJS.Client, message: string, userId: MessageType) => {
   // Ping Replies
   if (USER_PING_MESSAGES.includes(message.toLocaleLowerCase())) {
-    sendMessage(bot, PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]);
+    sendMessage(client, PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)], message,userId );
 
     // Notes Replies
   } else if (NOTES_CMD.includes(message.split(" ")[0].toLocaleLowerCase())) {
