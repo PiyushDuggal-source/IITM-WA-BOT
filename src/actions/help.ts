@@ -3,10 +3,10 @@ import { MessageType } from "../types/types";
 import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { random } from "./sendMessage";
 
-let ADMIN_HELP = `Hey ${GREETINGS.admin[random(GREETINGS.adminMsgNumer)]} ${
+let ADMIN_HELP = `Hey ${GREETINGS.admin[random(GREETINGS.adminMsgNumber)]} ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
 }, Need my help!!\n\nJust do one of these simple things ${
-  GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
+  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
 }:\n1. *Mention me*\n2. Type: !allCmds\n3. !cmd`;
 
 let USER_HELP = `Hey ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${

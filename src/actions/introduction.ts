@@ -18,6 +18,20 @@ const CMD_NAMES = [
   "\n*Want some Help?? try these commands!!*\n",
   "\n*Want to check my _Source Code_?* Use this command:\n",
 ];
+
+const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
+  GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+}!\nI am WhatsApp Bot!!\n\nMy ${
+  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
+} calls me *${
+  process.env.BOT_NAME as String
+}* (named after the first ever chatbot ${
+  HEY_EMOJIES[random(HEY_EMOJIES.length)]
+})\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*\n\n${END_FOOTER}`;
+const adminContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
+  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
+}!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
+
 const getCommands = (allCommands: string[][]): string => {
   let msg = "";
   allCommands.forEach((cmds, index) => {
@@ -42,18 +56,6 @@ const getCommands = (allCommands: string[][]): string => {
 //   return msg;
 // };
 
-const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
-  GREETINGS.member[random(GREETINGS.memberMsgNumber)]
-}!\nI am WhatsApp Bot!!\n\nMy ${
-  GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
-} calls me *${
-  process.env.BOT_NAME as String
-}* (named after the first ever chatbot ${
-  HEY_EMOJIES[random(HEY_EMOJIES.length)]
-})\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*\n\n${END_FOOTER}`;
-const adminContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
-  GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
-}!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
 
 export const introduction = async (
   client: WAWebJS.Client,

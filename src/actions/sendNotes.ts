@@ -6,7 +6,7 @@ import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { random } from "./sendMessage";
 
 let adminMsg = `*These are the Notes ${
-  GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
+  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
 }* ${HEY_EMOJIES[random(HEY_EMOJIES.length)]}`;
 
 let userMsg = `*These are the Notes ${

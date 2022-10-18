@@ -12,6 +12,9 @@ export type ADMIN = "ADMIN";
 export type USER = "USER";
 export type NONE = "NONE";
 
+/**
+ * userID as string or "NONE" or Boolean
+ */
 export type MessageType = string | NONE | boolean;
 
 // Commands btn List
@@ -39,7 +42,7 @@ export type Greetings = {
   member: string[];
   memberMsgNumber: number;
   admin: string[];
-  adminMsgNumer: number;
+  adminMsgNumber: number;
 };
 
 // User Join Greetings Type

@@ -61,7 +61,7 @@ export const USER_COMMANDS = new List(
 
 export const GREETINGS: Greetings = {
   admin: ["Sir", "Master", "Monsieur"],
-  adminMsgNumer: 3,
+  adminMsgNumber: 3,
   member: [
     "Fellow",
     "Good Person",
@@ -98,9 +98,9 @@ export const HOLIDAY_REPLIES = {
     `*There is no Class Today!!* \nGive some of your precious time and think about me and help me be a better BOT!!\nor Go take some rest and work on *something special* to you, utilize your *free* time!\n*Never stop learning!*
      `,
 
-    `Cool, there is *no* class today ${
-      GREETINGS.member[random(GREETINGS.adminMsgNumer)]
-    }!`,
+    // `Cool, there is *no* class today ${
+    //   // GREETINGS.member[random(GREETINGS.adminMsgNumber)]
+    // }!`,
 
     `Q1: There are N number of classes today and N = 0 then guess how many classes are there? *1 Point*\nA: NO Class\nB: C\nC: A`,
 

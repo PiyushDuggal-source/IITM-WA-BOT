@@ -37,7 +37,7 @@ const app = express();
 
 // For Development Enviornment
 const LOCAL = String(process.env.dev) === "true";
-const BOT = LOCAL ? 1 : 0;
+export const BOT = LOCAL ? 1 : 0;
 export const WA_BOT_ID = LOCAL
   ? (process.env.WA_BOT_ID_DEV as string)
   : (process.env.WA_BOT_ID as string);
@@ -46,6 +46,7 @@ const DB_URL = LOCAL
   ? (process.env.DEV_DB_URL as string)
   : (process.env.PROD_DB_URL as string);
 
+console.log(process.env.DEV_DB_URL)
 // Initializing Client
 connectToDb(DB_URL);
 
@@ -100,7 +101,7 @@ client.on("ready", async () => {
 
 // Event "MESSAGE_CREATE"
 client.on("message_create", async (message: WAWebJS.Message) => {
-  // Check if message is from Group or Not
+  // Check if message is from Group or Not, if yes, bool contains boolean or string
   const bool = checkMessage(message);
 
   // Mention Logic
@@ -129,7 +130,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
     (bool || bool !== "NONE") &&
     message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
-    main(WA_BOT, message, bool);
+    main(client, message, bool);
   }
   if (bool === "ADMIN" && message.body === "load") {
     WA_BOT.participants?.forEach(async (participant) => {
@@ -212,7 +213,7 @@ client.on("disconnected", () => {
   client.sendMessage(
     WA_BOT_ID,
     `Stepping out for sometimes folks, My ${
-      GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
+      GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
     } is updating something.`
   );
 });

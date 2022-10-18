@@ -5,12 +5,12 @@ import { userControl } from "./Users/userController";
 
 export const main = (
   client: WAWebJS.Client,
-  message: WAWebJS.Message,
+  messageInstance: WAWebJS.Message,
   role: MessageType
 ) => {
-  // if (role) {
-  //   adminControl(client, message));
-  // } else if (role === "USER") {
-  //   userControl(client, message));
-  // }
+  if (role) {
+    adminControl(client,messageInstance);
+  } else if (role === "USER") {
+    // userControl(client, message));
+  }
 };
