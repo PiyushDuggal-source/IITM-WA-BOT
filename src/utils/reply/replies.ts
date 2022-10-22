@@ -1,5 +1,4 @@
 import { List } from "whatsapp-web.js";
-import { random } from "../../actions/sendMessage";
 import {
   CommandButtons,
   Greetings,

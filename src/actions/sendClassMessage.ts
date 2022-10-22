@@ -38,14 +38,18 @@ export const sendClassMessage = async (
     }
   } else if (who !== "NONE") {
     if (!events.length) {
-      sendMessage(client, HOLYDAY_MSG, messageInstance, who);
+      sendMessage(client, HOLYDAY_MSG, messageInstance, who, undefined, {
+        classMsg: true,
+      });
     } else {
       let message = "📘*Today's Classes*📘";
       events.forEach(
         (event) =>
           (message += `\n -------------------------------- \n📖 *Topic* : *${event.topic}* \n🕰 *Timing* : _${event.time}_ \n📅 *Date* : *Today!* \n🏫 *Course* : ${event.courseName}\n `)
       );
-      sendMessage(client, message, messageInstance, who);
+      sendMessage(client, message, messageInstance, who, undefined, {
+        classMsg: true,
+      });
     }
   }
 };

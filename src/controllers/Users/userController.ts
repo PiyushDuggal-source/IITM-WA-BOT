@@ -3,14 +3,14 @@ import { help } from "../../actions/help";
 import { sendCalendar } from "../../actions/sendCalendar";
 import { sendClassMessage } from "../../actions/sendClassMessage";
 import { sendEligibility, sendImpDates } from "../../actions/courseInfo";
-import { sendMessage } from "../../actions/sendMessage";
+// import { sendMessage } from "../../actions/sendMessage";
 import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
 import { sendSource } from "../../actions/sendSource";
 import {
   CALENDAR_COMMANDS,
   CALENDAR_TYPOS,
   CLASS_COMMAND,
-  COMMANDS,
+  // COMMANDS,
   ELIGIBILITY,
   HELP_CMDS,
   IMP_DATES,
@@ -19,7 +19,7 @@ import {
   SOURCE,
 } from "../../utils/Commands/instructions";
 // import { USER_PING_MESSAGES } from "../../utils/messages/messages";
-import { USER_COMMANDS } from "../../utils/reply/replies";
+// import { USER_COMMANDS } from "../../utils/reply/replies";
 import { sendPlayList } from "../../actions/sendPlaylist";
 import { MessageType } from "../../types/types";
 export const userControl = async (

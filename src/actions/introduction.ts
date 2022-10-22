@@ -6,7 +6,6 @@ import * as dotenv from "dotenv";
 import { MessageType } from "../types/types";
 import { BOT, WA_BOT_ID } from "..";
 import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
-import { END_FOOTER } from "../utils/reply/footers";
 dotenv.config();
 const CMD_NAMES = [
   "\n*These are the Calendar Commands! : You can see the IIT-M Google Calendar Events from RIGHT HERE ✌ Just by using these commands!*\n",
@@ -23,7 +22,7 @@ const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${GREETINGS.
   }!\nI am WhatsApp Bot!!\n\nMy ${GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
   } calls me *${process.env.BOT_NAME as String
   }* (named after the first ever chatbot ${HEY_EMOJIES[random(HEY_EMOJIES.length)]
-  })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*\n\n${END_FOOTER}`;
+  })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
 const adminContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
   }!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
 

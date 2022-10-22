@@ -26,7 +26,7 @@ import { log } from "./utils/log";
 import { MessageType, WA_Grp } from "./types/types";
 import { UserModel } from "./services/modals";
 import { connectToDb } from "./utils/db/connect";
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
@@ -205,15 +205,6 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
   }
 });
 
-client.on("disconnected", () => {
-  client.sendMessage(
-    WA_BOT_ID,
-    `Stepping out for sometimes folks, My ${
-      GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
-    } is updating something.`
-  );
-});
-
 // For checking the classes
 setInterval(async () => {
   const chats = await client.getChats();
@@ -239,14 +230,14 @@ client.initialize();
 
 const port = Number(process.env.PORT) || 3005;
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_: Request, res: Response) => {
   res.send("BOT");
 });
 
 app.listen(port, () => log(`[SERVER] Server is running on port ${port}`));
 
 // All other pages should be returned as error pages
-app.all("*", (req: Request, res: Response) => {
+app.all("*", (_: Request, res: Response) => {
   res
     .status(404)
     .send(
