@@ -16,7 +16,7 @@ import {
   USER_JOIN_GREETINGS,
 } from "./utils/reply/replies";
 import { random } from "./actions/sendMessage";
-import express from "express";
+const express = require("express");
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
