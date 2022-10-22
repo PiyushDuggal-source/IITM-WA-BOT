@@ -45,7 +45,9 @@ const DB_URL = LOCAL
   : (process.env.PROD_DB_URL as string);
 
 // Initializing Client
-connectToDb(DB_URL);
+(async () => {
+ await connectToDb(DB_URL);
+})();
 
 const store = new MongoStore({ mongoose: mongoose });
 let client: Client;
