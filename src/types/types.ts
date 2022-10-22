@@ -15,7 +15,7 @@ export type NONE = "NONE";
 /**
  * userID as string or "NONE" or Boolean
  */
-export type MessageType = string | NONE | boolean;
+export type MessageType = string | NONE | ADMIN;
 
 // Commands btn List
 

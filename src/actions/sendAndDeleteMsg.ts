@@ -5,19 +5,19 @@ import {BOT} from '..'
 
 export const sendAndDeleteMsg = async (
   client: WAWebJS.Client,
-  message: WAWebJS.Message,
+  messageInstance: WAWebJS.Message,
   userId: string,
-  content: WAWebJS.MessageContent
+  messageToSend: WAWebJS.MessageContent
 ) => {
   if (typeof userId == "boolean") {
     const allChats = await client.getChats();
     const WA_BOT = allChats[BOT];
-    WA_BOT.sendMessage(content)
+    WA_BOT.sendMessage(messageToSend)
   }
   else {
     const userChat = await client.getChatById(userId);
-    const msg = userChat.sendMessage(content);
+    const msg = userChat.sendMessage(messageToSend);
     (await msg).delete();
-    await message.react(REACT_EMOGIES[random(REACT_EMOGIES.length)]);
+    await messageInstance.react(REACT_EMOGIES[random(REACT_EMOGIES.length)]);
   }
 };

@@ -16,16 +16,14 @@ import {
   USER_JOIN_GREETINGS,
 } from "./utils/reply/replies";
 import { random } from "./actions/sendMessage";
-const express = require("express");
+import express from "express";
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
-import {
-  sendClassNotification,
-} from "./actions/sendClassNotification";
+import { sendClassNotification } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
-import { WA_Grp } from "./types/types";
+import { MessageType, WA_Grp } from "./types/types";
 import { UserModel } from "./services/modals";
 import { connectToDb } from "./utils/db/connect";
 const mongoose = require("mongoose");
@@ -46,7 +44,6 @@ const DB_URL = LOCAL
   ? (process.env.DEV_DB_URL as string)
   : (process.env.PROD_DB_URL as string);
 
-console.log(process.env.DEV_DB_URL)
 // Initializing Client
 connectToDb(DB_URL);
 
@@ -93,7 +90,7 @@ client.on("qr", (qr: string) => {
 // Event "READY"
 client.on("ready", async () => {
   log("Connected");
-  await client.sendMessage(
+  client.sendMessage(
     process.env.WA_BOT_ID_DEV as string,
     `${process.env.BOT_NAME as string}: I am Connected BOSS`
   );
@@ -101,9 +98,8 @@ client.on("ready", async () => {
 
 // Event "MESSAGE_CREATE"
 client.on("message_create", async (message: WAWebJS.Message) => {
-  // Check if message is from Group or Not, if yes, bool contains boolean or string
-  const bool = checkMessage(message);
-
+  // Check if message is from Group or Not, if yes, who contains whoean or userID
+  const who: MessageType = checkMessage(message);
   // Mention Logic
   const str: string[] = message.mentionedIds;
   const isMention =
@@ -113,26 +109,26 @@ client.on("message_create", async (message: WAWebJS.Message) => {
       .split(" ")
       .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
 
-  if (isMention && bool !== "NONE") {
-    introduction(client, bool, message);
+  if (isMention && who !== "NONE") {
+    introduction(client, who, message);
   }
 
   const allChats = await client.getChats();
   const WA_BOT: WA_Grp = allChats[BOT];
   // Command check logic
   if (
-    bool !== "NONE" &&
+    who !== "NONE" &&
     COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
   ) {
-    sendCommands(client, message);
+    sendCommands(client, message, who);
   }
   if (
-    (bool || bool !== "NONE") &&
+    (who || who !== "NONE") &&
     message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
-    main(client, message, bool);
+    await main(client, message, who);
   }
-  if (bool === "ADMIN" && message.body === "load") {
+  if (who === "ADMIN" && message.body === "load") {
     WA_BOT.participants?.forEach(async (participant) => {
       await UserModel.create({
         name: participant.id.user,

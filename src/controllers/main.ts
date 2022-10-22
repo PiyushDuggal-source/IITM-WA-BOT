@@ -3,14 +3,14 @@ import { MessageType } from "../types/types";
 import { adminControl } from "./Admin/adminController";
 import { userControl } from "./Users/userController";
 
-export const main = (
+export const main = async(
   client: WAWebJS.Client,
   messageInstance: WAWebJS.Message,
-  role: MessageType
+  who: MessageType
 ) => {
-  if (role) {
-    adminControl(client,messageInstance);
-  } else if (role === "USER") {
-    // userControl(client, message));
+  if (who === "ADMIN") {
+    await adminControl(client,messageInstance, who);
+  } else if (who !== "NONE") {
+    await userControl(client, messageInstance, who);
   }
 };

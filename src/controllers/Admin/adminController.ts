@@ -1,90 +1,92 @@
-import * as WAWebJS from "whatsapp-web.js"
-import { sendMessage, random } from "../../actions/sendMessage"
-import { USER_PING_MESSAGES } from "../../utils/messages/messages"
-import { PING_REPLIES, USER_COMMANDS } from "../../utils/reply/replies"
+import * as WAWebJS from "whatsapp-web.js";
+import { random } from "../../actions/sendMessage";
+import { USER_PING_MESSAGES } from "../../utils/messages/messages";
+import { PING_REPLIES } from "../../utils/reply/replies";
 import {
-  // CALENDAR_COMMANDS,
-  // CALENDAR_TYPOS,
-  // CLASS_COMMAND,
+  CALENDAR_COMMANDS,
+  CALENDAR_TYPOS,
+  CLASS_COMMAND,
   // COMMANDS,
-  // ELIGIBILITY,
-  // HELP_CMDS,
-  // IMP_DATES,
+  ELIGIBILITY,
+  HELP_CMDS,
+  IMP_DATES,
   NOTES_CMD,
-  // PLALIST_CMD_ALISA,
-  // SOURCE,
-} from "../../utils/Commands/instructions"
-// import { sendCalendar } from "../../actions/sendCalendar"
-// import { sendClassMessage } from "../../actions/sendClassMessage"
-// import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes"
-// import { help } from "../../actions/help"
-// import { sendSource } from "../../actions/sendSource"
-// import { sendEligibility, sendImpDates } from "../../actions/courseInfo"
-// import { sendPlayList } from "../../actions/sendPlaylist"
+  PLALIST_CMD_ALISA,
+  SOURCE,
+} from "../../utils/Commands/instructions";
+import { BOT } from "../..";
+import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
+import { sendCalendar } from "../../actions/sendCalendar";
+import { sendClassMessage } from "../../actions/sendClassMessage";
+import { help } from "../../actions/help";
+import { sendSource } from "../../actions/sendSource";
+import { sendEligibility, sendImpDates } from "../../actions/courseInfo";
+import { sendPlayList } from "../../actions/sendPlaylist";
+import { MessageType } from "../../types/types";
 
-export const adminControl = (
+export const adminControl = async (
   client: WAWebJS.Client,
   messageInstance: WAWebJS.Message,
+  who: MessageType
 ) => {
-  const messageBody = messageInstance.body.slice(1)
-  console.log(messageBody)
+  const messageBody = messageInstance.body.slice(1);
+  const chats = await client.getChats();
+  const WA_BOT = chats[BOT];
   // Ping Replies
   if (USER_PING_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
-    sendMessage(
-      client,
-      PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)],
-      messageInstance
+    console.log(
+      "helo"
     )
+    await WA_BOT.sendMessage(PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]);
 
     // Notes Replies
   } else if (
     NOTES_CMD.includes(messageBody.split(" ")[0].toLocaleLowerCase())
   ) {
     if (messageBody.split(" ").length > 1) {
-      // sendNotesByFilter(bot, message)
+      sendNotesByFilter(client, messageBody, messageInstance, who);
     } else {
-      // sendNotes(bot, "ADMIN")
-    }
+      sendNotes(client, messageInstance, who);
     }
 
     // Calender Replies WITH Typos
-  // } else if (
-  //   CALENDAR_COMMANDS.includes(message.toLocaleLowerCase()) ||
-  //   CALENDAR_TYPOS.includes(message.toLocaleLowerCase())
-  // ) {
-  //   sendCalendar(bot)
-  //
-  //   // Commands Replies
-  // } else if (COMMANDS.includes(message.toLocaleLowerCase())) {
-  //   sendMessage(bot, USER_COMMANDS, true)
-  //
-  //   // Class Commands Replies
-  // } else if (CLASS_COMMAND.includes(message.toLocaleLowerCase())) {
-  //   sendClassMessage(bot)
-  // }
-  //
-  // // Help Commands Replies
-  // else if (HELP_CMDS.includes(message.toLocaleLowerCase())) {
-  //   help(bot, "ADMIN")
-  // }
-  //
-  // // Source Command Reply
-  // else if (SOURCE.includes(message.toLocaleLowerCase())) {
-  //   sendSource(bot)
-  // }
-  //
-  // // For sending Important Dates
-  // else if (IMP_DATES.includes(message.toLocaleLowerCase())) {
-  //   sendImpDates(bot)
-  // }
-  //
-  // // For sending Eligibility
-  // else if (ELIGIBILITY.includes(message.toLocaleLowerCase())) {
-  //   sendEligibility(bot)
-  // }
-  //
-  // // For sending Playlists
-  // else if (PLALIST_CMD_ALISA.includes(message.toLocaleLowerCase())) {
-  //   sendPlayList(bot)
-  // }
-}
+  } else if (
+    CALENDAR_COMMANDS.includes(messageBody.toLocaleLowerCase()) ||
+    CALENDAR_TYPOS.includes(messageBody.toLocaleLowerCase())
+  ) {
+    sendCalendar(client, messageInstance, who);
+
+    // Commands Replies
+    // } else if (COMMANDS.includes(messageBody.toLocaleLowerCase())) {
+    //   sendMessage(client, USER_COMMANDS, messageInstance, who, true);
+
+    // Class Commands Replies
+  } else if (CLASS_COMMAND.includes(messageBody.toLocaleLowerCase())) {
+    sendClassMessage(client, messageInstance, "ADMIN");
+  }
+
+  // Help Commands Replies
+  else if (HELP_CMDS.includes(messageBody.toLocaleLowerCase())) {
+    help(client, messageInstance, who);
+  }
+
+  // Source Command Reply
+  else if (SOURCE.includes(messageBody.toLocaleLowerCase())) {
+    sendSource(client, messageInstance, who);
+  }
+
+  // For sending Important Dates
+  else if (IMP_DATES.includes(messageBody.toLocaleLowerCase())) {
+    sendImpDates(client, messageInstance, who);
+  }
+
+  // For sending Eligibility
+  else if (ELIGIBILITY.includes(messageBody.toLocaleLowerCase())) {
+    sendEligibility(client, messageInstance, who);
+  }
+
+  // For sending Playlists
+  else if (PLALIST_CMD_ALISA.includes(messageBody.toLocaleLowerCase())) {
+    sendPlayList(client, messageInstance, who);
+  }
+};

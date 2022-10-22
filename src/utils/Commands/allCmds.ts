@@ -1,4 +1,4 @@
-import { USER_PING_MESSAGES } from "../messages/messages";
+// import { USER_PING_MESSAGES } from "../messages/messages";
 import {
   CALENDAR_COMMANDS,
   CLASS_COMMAND,
@@ -14,7 +14,7 @@ export const User_AllCommands: string[][] = [
   COMMANDS,
   NOTES_CMD,
   PLALIST_CMD,
-  USER_PING_MESSAGES,
+  // USER_PING_MESSAGES,
   HELP_CMDS,
   SOURCE,
 ];

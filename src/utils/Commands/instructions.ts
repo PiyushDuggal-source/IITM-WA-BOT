@@ -20,7 +20,7 @@ export const COMMANDS_CMDS = [
   `${process.env.BOT_PREFIX}allcmds`,
   `${process.env.BOT_PREFIX}allcmd`,
 ];
-export const HELP_CMDS = ["help"];
+export const HELP_CMDS = ["help", "hlp"];
 export const SOURCE = ["source"];
 export const IMP_DATES = ["impdates", "importantdates", "dates"];
 export const ELIGIBILITY = ["eligibility", "eligible"];
