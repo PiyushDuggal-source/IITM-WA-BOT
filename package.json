@@ -20,7 +20,6 @@
     "mongoose": "^6.6.3",
     "qrcode-terminal": "^0.12.0",
     "ts-node": "^10.9.1",
-    "whatsapp-web.js": "github:jtourisNS/whatsapp-web.js#fix-buttons-list",
     "wwebjs-mongo": "^1.1.0"
   },
   "devDependencies": {
