@@ -20,12 +20,17 @@ const express = require("express");
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
-import { sendClassNotification } from "./actions/sendClassNotification";
+import {
+  addIndianTime,
+  sendClassNotification,
+} from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { MessageType, WA_Grp } from "./types/types";
 import { UserModel } from "./services/modals";
 import mongoose from "mongoose";
+import { endOfToday } from "date-fns";
+import axios from "axios";
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
@@ -227,18 +232,19 @@ mongoose
   .catch((err: any) => {
     log(err, true);
   });
+
 // Get Bot LIVE
 // Continuously ping the server to prevent it from becoming idle
-// const intervalId = setInterval(async () => {
-//   await axios.get("https://iitm-wa-bot.herokuapp.com/");
-//   console.log("[SERVER] Pinged server");
-// }, 28 * 60 * 1000); // every 28 minutes
+const intervalId = setInterval(async () => {
+  await axios.get("https://iitm-wa-bot.herokuapp.com/");
+  console.log("[SERVER] Pinged server");
+}, 28 * 60 * 1000); // every 28 minutes
 
 // To stop the bot at Night
-// const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
-// setInterval(() => {
-//   clearInterval(intervalId);
-// }, etaMs);
+const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
+setInterval(() => {
+  clearInterval(intervalId);
+}, etaMs);
 
 const port = Number(process.env.PORT) || 3005;
 
