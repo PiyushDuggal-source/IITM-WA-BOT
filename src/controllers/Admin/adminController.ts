@@ -34,9 +34,6 @@ export const adminControl = async (
   const WA_BOT = chats[BOT];
   // Ping Replies
   if (USER_PING_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
-    console.log(
-      "helo"
-    )
     await WA_BOT.sendMessage(PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]);
 
     // Notes Replies
