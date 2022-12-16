@@ -34,6 +34,7 @@ import axios from "axios";
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
+console.log(new Date());
 // Initialized App
 const app = express();
 
