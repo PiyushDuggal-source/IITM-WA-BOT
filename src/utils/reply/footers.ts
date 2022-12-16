@@ -1,3 +1,5 @@
+import { addIndianTime } from "../../actions/sendClassNotification";
+
 export const FOOTERS = {
   footers: [
     "Hope you are having a great day! 🥳",
@@ -5,9 +7,11 @@ export const FOOTERS = {
     "Have a wonderful day 🤘",
     "Do enjoy the rest of your day 👍",
     `Good ${
-      new Date().getHours() >= 0 && new Date().getHours() <= 11
+      addIndianTime(new Date()).getHours() >= 0 &&
+      addIndianTime(new Date()).getHours() <= 11
         ? "Morning"
-        : new Date().getHours() >= 12 && new Date().getHours() <= 16
+        : addIndianTime(new Date()).getHours() >= 12 &&
+          addIndianTime(new Date()).getHours() <= 16
         ? "Afternoon"
         : "Evening"
     } 🥳`,
@@ -21,3 +25,6 @@ export const FOOTERS = {
   ],
   footerMsgLength: 11,
 };
+
+export const END_FOOTER =
+  "*NOTE*: _This message is *deleted* from *my side*, if you have any query bro/sis, send message to *ELIZA Group* or *ME* ✌_";

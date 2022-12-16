@@ -2,24 +2,58 @@ import * as WAWebJS from "whatsapp-web.js";
 import { MessageContent } from "whatsapp-web.js";
 import { FOOTERS } from "../utils/reply/footers";
 import * as dotenv from "dotenv";
+import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
+import { MessageType } from "../types/types";
+import { BOT } from "..";
 dotenv.config();
 
-export const sendMessage = (
-  bot: WAWebJS.Chat,
-  message: MessageContent,
+export const sendMessage = async (
+  client: WAWebJS.Client,
+  messageToSend: MessageContent,
+  messageInstance: WAWebJS.Message,
+  who: MessageType,
   cmds?: boolean,
+  classMsg?: {
+    classMsg: boolean;
+  },
   help?: boolean
 ) => {
-  if (cmds) {
-    bot.sendMessage(message);
-  } else if (help) {
-    bot.sendMessage(
-      `${process.env.BOT_NAME as String}: ${message} \n:${
+  if (who === "ADMIN") {
+    const chats = await client.getChats();
+    const WA_BOT = chats[BOT];
+    if (cmds) {
+      WA_BOT.sendMessage(messageToSend);
+    } else if (help) {
+      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
         FOOTERS.footers[random(FOOTERS.footerMsgLength)]
-      }`
-    );
-  } else {
-    bot.sendMessage(`${process.env.BOT_NAME as String}: ${message}`);
+      }`;
+      WA_BOT.sendMessage(msg);
+    } else {
+      const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
+      WA_BOT.sendMessage(msg);
+    }
+  } else if (who !== "NONE") {
+    const userId = messageInstance.author;
+    if (classMsg?.classMsg) {
+      const chats = await client.getChats();
+      const WA_BOT = chats[BOT];
+      WA_BOT.sendMessage(messageToSend);
+    } else if (cmds) {
+      sendAndDeleteMsg(
+        client,
+        messageInstance,
+        userId as string,
+        messageToSend
+      );
+    } else if (help) {
+      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
+        FOOTERS.footers[random(FOOTERS.footerMsgLength)]
+      }`;
+      sendAndDeleteMsg(client, messageInstance, userId as string, msg);
+    } else {
+      const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
+      sendAndDeleteMsg(client, messageInstance, userId as string, msg);
+    }
   }
 };
 

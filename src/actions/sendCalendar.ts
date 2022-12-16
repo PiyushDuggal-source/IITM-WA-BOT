@@ -1,10 +1,12 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { MessageContent } from "whatsapp-web.js";
 import { CALENDAR } from "../resources/calendar";
-import { Calendar } from "../types/types";
+import { Calendar, MessageType } from "../types/types";
 import { format, isToday } from "date-fns";
 import { FOOTERS } from "../utils/reply/footers";
 import { random } from "./sendMessage";
+import { BOT } from "..";
+import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
 
 const calendarMessageFormat = (calendar: Calendar): MessageContent => {
   let message: string = "*This is you Calendar!!! 🗓*";
@@ -26,6 +28,21 @@ const calendarMessageFormat = (calendar: Calendar): MessageContent => {
   return message + `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
 };
 
-export const sendCalendar = (bot: WAWebJS.Chat) => {
-  bot.sendMessage(calendarMessageFormat(CALENDAR));
+export const sendCalendar = async (
+  client: WAWebJS.Client,
+  messageInstance: WAWebJS.Message,
+  who: MessageType
+) => {
+  if (who === "ADMIN") {
+    const chats = await client.getChats();
+    const bot = chats[BOT];
+    bot.sendMessage(calendarMessageFormat(CALENDAR));
+  } else if (who !== "NONE") {
+    sendAndDeleteMsg(
+      client,
+      messageInstance,
+      who,
+      calendarMessageFormat(CALENDAR)
+    );
+  }
 };

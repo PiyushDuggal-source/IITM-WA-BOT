@@ -7,13 +7,13 @@ dotenv.config();
 /**
  *
  * @param { string } message Get the `Message` object
- * @returns { boolean } `true` if message is from group
+ * @returns  { MessageType } `NONE` | userID | `ADMIN`
  */
 export const checkMessage = (message: WAWebJS.Message): MessageType => {
-  if (message.fromMe) {
-    return String(message.to) === String(WA_BOT_ID) ? "ADMIN" : "NONE";
+  if (message.fromMe && String(message.to) === String(WA_BOT_ID)) {
+    return "ADMIN"
   } else if (String(message.from) === String(WA_BOT_ID)) {
-    return "USER";
+    return message.author || '';
   } else {
     return "NONE";
   }

@@ -17,7 +17,6 @@ import {
 } from "./utils/reply/replies";
 import { random } from "./actions/sendMessage";
 const express = require("express");
-import axios from "axios";
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
@@ -27,10 +26,11 @@ import {
 } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
-import { endOfDay, endOfToday } from "date-fns";
-import { WA_Grp } from "./types/types";
+import { MessageType, WA_Grp } from "./types/types";
 import { UserModel } from "./services/modals";
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import { endOfToday } from "date-fns";
+import axios from "axios";
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
@@ -39,7 +39,7 @@ const app = express();
 
 // For Development Enviornment
 const LOCAL = String(process.env.dev) === "true";
-const BOT = LOCAL ? 1 : 0;
+export const BOT = LOCAL ? 1 : 0;
 export const WA_BOT_ID = LOCAL
   ? (process.env.WA_BOT_ID_DEV as string)
   : (process.env.WA_BOT_ID as string);
@@ -49,7 +49,6 @@ const DB_URL = LOCAL
   : (process.env.PROD_DB_URL as string);
 
 // Initializing Client
-
 mongoose
   .connect(DB_URL)
   .then(() => {
@@ -77,7 +76,6 @@ mongoose
         }),
       });
     }
-
     // Event "REMOTE SESSION SAVED"
     client.on("remote_session_saved", () => {
       log("Remote auth session saved");
@@ -97,7 +95,7 @@ mongoose
     // Event "READY"
     client.on("ready", async () => {
       log("Connected");
-      await client.sendMessage(
+      client.sendMessage(
         process.env.WA_BOT_ID_DEV as string,
         `${process.env.BOT_NAME as string}: I am Connected BOSS`
       );
@@ -105,9 +103,8 @@ mongoose
 
     // Event "MESSAGE_CREATE"
     client.on("message_create", async (message: WAWebJS.Message) => {
-      // Check if message is from Group or Not
-      const bool = checkMessage(message);
-
+      // Check if message is from Group or Not, if yes, who contains whoean or userID
+      const who: MessageType = checkMessage(message);
       // Mention Logic
       const str: string[] = message.mentionedIds;
       const isMention =
@@ -117,26 +114,35 @@ mongoose
           .split(" ")
           .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
 
-      if (isMention && bool !== "NONE") {
-        const allChats = await client.getChats();
-        const WA_BOT = allChats[BOT];
-        introduction(WA_BOT, bool);
+      if (isMention && who !== "NONE") {
+        introduction(client, who, message);
       }
 
       const allChats = await client.getChats();
       const WA_BOT: WA_Grp = allChats[BOT];
       // Command check logic
       if (
-        bool !== "NONE" &&
+        who !== "NONE" &&
         COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
       ) {
-        sendCommands(WA_BOT);
+        sendCommands(client, message, who);
       }
       if (
-        (bool === "ADMIN" || bool === "USER") &&
+        (who || who !== "NONE") &&
         message.body[0] === (process.env.BOT_PREFIX as string)
       ) {
-        main(WA_BOT, message, bool);
+        await main(client, message, who);
+      }
+      if (who === "ADMIN" && message.body === "load") {
+        WA_BOT.participants?.forEach(async (participant) => {
+          await UserModel.create({
+            name: participant.id.user,
+            chatId: participant.id._serialized,
+          });
+        });
+        WA_BOT.sendMessage(
+          "ADDED ALL THE STUDENTS TO THE DB SUCCESSFULLY MASTER!"
+        );
       }
     });
 
@@ -213,15 +219,6 @@ mongoose
       }
     );
 
-    client.on("disconnected", () => {
-      client.sendMessage(
-        WA_BOT_ID,
-        `Stepping out for sometimes folks, My ${
-          GREETINGS.admin[random(GREETINGS.adminMsgNumer)]
-        } is updating something.`
-      );
-    });
-
     // For checking the classes
     setInterval(async () => {
       const chats = await client.getChats();
@@ -238,27 +235,27 @@ mongoose
 
 // Get Bot LIVE
 // Continuously ping the server to prevent it from becoming idle
-// const intervalId = setInterval(async () => {
-//   await axios.get("https://iitm-wa-bot.herokuapp.com/");
-//   console.log("[SERVER] Pinged server");
-// }, 28 * 60 * 1000); // every 28 minutes
+const intervalId = setInterval(async () => {
+  await axios.get("https://iitm-wa-bot.herokuapp.com/");
+  console.log("[SERVER] Pinged server");
+}, 28 * 60 * 1000); // every 28 minutes
 
 // To stop the bot at Night
-// const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
-// setInterval(() => {
-//   clearInterval(intervalId);
-// }, etaMs);
+const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
+setInterval(() => {
+  clearInterval(intervalId);
+}, etaMs);
 
 const port = Number(process.env.PORT) || 3005;
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_: Request, res: Response) => {
   res.send("BOT");
 });
 
 app.listen(port, () => log(`[SERVER] Server is running on port ${port}`));
 
 // All other pages should be returned as error pages
-app.all("*", (req: Request, res: Response) => {
+app.all("*", (_: Request, res: Response) => {
   res
     .status(404)
     .send(
