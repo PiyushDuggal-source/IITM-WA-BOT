@@ -1,4 +1,4 @@
-export const COMMANDS = ["cmds", "cmd", "list"];
+export const COMMANDS = ["allcmd"];
 export const CALENDAR_COMMANDS = ["classes", "calendar", "clss"];
 export const CALENDAR_TYPOS = [
   "calender",

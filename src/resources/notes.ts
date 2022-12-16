@@ -119,6 +119,10 @@ export const NOTES: Notes = [
         name: "Week 1-4 Notes | Business Analytics | BA",
         link: "https://drive.google.com/file/d/1Grcpc3hjb5UOqD9EQhWMXSdoD0TBhhhw/view?usp=sharing",
       },
+      {
+        name: "Notes from Github Repo W1-W7",
+        link: "https://github.com/ananddotiyer/IIT-M",
+      },
     ],
   },
   {
@@ -265,6 +269,138 @@ export const NOTES: Notes = [
       },
     ],
   },
+  {
+    name: "Foundational Course English 2 - by Arushi",
+    content: [
+      {
+        name: "English 2 | week 1-3",
+        link: "https://drive.google.com/file/d/1Vie2GlwyayCXGl8UEOhTZwstzUipUZcL/view",
+      },
+      {
+        name: "English 2 | week 4-6",
+        link: "https://drive.google.com/file/d/1ewBT4TZ-s6u4CuZbXJBYTr5Mo0lxDi4v/view",
+      },
+      {
+        name: "English 2 | week 7-8",
+        link: "https://drive.google.com/file/d/1Ut9v-zpuUgHz7MeoXiYeNVfBO138D6Yu/view",
+      },
+      {
+        name: "English 2 | week 9-10",
+        link: "https://drive.google.com/file/d/1nUk9FZ9Tios-P_sXZauTWjujVxc4KNGB/view",
+      },
+      {
+        name: "English 2 | week 11-12",
+        link: "https://drive.google.com/file/d/16jm3-7Z_nungiTWNsMvraiJkXpNU68zQ/view",
+      },
+    ],
+  },
+  {
+    name: "Mathematics 2 for DS | MDS2 - by Aditya D",
+    content: [
+      {
+        name: "Mathematics 2 | week 1-3",
+        link: "https://drive.google.com/file/d/1WxTb8fLGh3UEwNBGCvU6AIUJaHQRfR2l/view",
+      },
+      {
+        name: "Mathematics 2 | week 4-5",
+        link: "https://drive.google.com/file/d/1V5jwnwtvtEvInCrJT_8MSHN-oNaK1ZAR/view",
+      },
+      {
+        name: "Mathematics 2 | week 6-7",
+        link: "https://drive.google.com/file/d/11TdYvF77pVEkV7P2jnZiL2bVEtSLocET/view",
+      },
+      {
+        name: "Mathematics 2 | week 8-9",
+        link: "https://drive.google.com/file/d/140wSEVwwtE-vHTFOJA7ukWAbqTMRG0Fd/view",
+      },
+      {
+        name: "Mathematics 2 | week 10",
+        link: "https://drive.google.com/file/d/14oq3nswJDts1MO8BeEHxxbT6m1oRHOL-/view",
+      },
+      {
+        name: "Mathematics 2 | week 11",
+        link: "https://drive.google.com/file/d/14wMdZiI_9XtwjweAeej5NWWsKWxpSdos/view",
+      },
+    ],
+  },
+  {
+    name: "Statistics 2 for DS | SDS2",
+    content: [
+      {
+        name: "Statistics 2 | week 1-3",
+        link: "https://drive.google.com/file/d/1z79MOmEbzuEH4nf5bEktmnW6qSaMTpt5/view",
+      },
+      {
+        name: "Statistics 2 | week 4",
+        link: "https://drive.google.com/file/d/1z5TzObbHczAqjguDwRhn0QitIvxcrtei/view",
+      },
+      {
+        name: "Statistics 2 | week 5",
+        link: "https://drive.google.com/file/d/1z8nJwqqn5AyXpEjKhEvsnFV471wPP4qs/view",
+      },
+      {
+        name: "Statistics 2 | week 6",
+        link: "https://drive.google.com/file/d/1z9gygumUUkU84yYfuFma5MCrGx2h3CoP/view",
+      },
+      {
+        name: "Statistics 2 | week 7",
+        link: "https://drive.google.com/file/d/1UJ6y2xdtNKDHiurbm6740ECJQCqOgaiB/view",
+      },
+      {
+        name: "Statistics 2 | week 8",
+        link: "https://drive.google.com/file/d/1F2590hhvWIewP3rbVTQrnevd1STX1jSd/view",
+      },
+      {
+        name: "Statistics 2 | week 9-10",
+        link: "https://drive.google.com/file/d/1mGiDyeh5L9mnmQjfsAvvFyTq4bcJFSVP/view",
+      },
+    ],
+  },
+  {
+    name: "Python for DS | PDS1 - by Gagneet",
+    content: [
+      {
+        name: "Intro to Python | week 1",
+        link: "https://drive.google.com/file/d/1giCvH99enz5UJACBJ2rqQhXiHrdxyP7j/view"
+      },
+      {
+        name: "Intro to Python | week 2",
+        link: "https://drive.google.com/file/d/1TBxnFrR2Q-9EE6V8h3N-GXgCTY9W2pfL/view"
+      },
+      {
+        name: "Intro to Python | week 3",
+        link: "https://drive.google.com/file/d/13MSbXkRHZ8D6r8SJZ1oAkiISYlmB_hah/view"
+      },
+      {
+        name: "Intro to Python | week 4",
+        link: "https://drive.google.com/file/d/1n71fweeo7vgiyZ3F-nIDY9VQcSmlblRh/view"
+      },
+      {
+        name: "Intro to Python | week 5",
+        link: "https://drive.google.com/file/d/1sMV0lN5_tA6plUIhtkXENbDDb7A5UzNS/view"
+      },
+      {
+        name: "Intro to Python | week 6",
+        link: "https://drive.google.com/file/d/1tyrOyERdNke1DTZqGtUKEohkj4x9uvv8/view"
+      },
+      {
+        name: "Intro to Python | week 8",
+        link: "https://drive.google.com/file/d/1AWoeuxdLwUmLn-ixIKJSBBA57sKoJbV1/view"
+      },
+      {
+        name: "Intro to Python | week 9",
+        link: "https://drive.google.com/file/d/1CM0Hbkk2PvbmFvDPBZh2UNlO5UBlX-tn/view"
+      },
+      {
+        name: "Intro to Python | week 10",
+        link: "https://drive.google.com/file/d/1NngbghSqdOA9cAS-cgucbDuGnPnUeFDh/view"
+      },
+      {
+        name: "Intro to Python | week 11",
+        link: "https://drive.google.com/file/d/1BSFxwqE98hBS1q1cv-59VmiQ5UEx3VOm/view"
+      },
+    ]
+  }
 ];
 
 export const PLAYLISTS: YT_Playlist = [
@@ -319,5 +455,13 @@ export const PLAYLISTS: YT_Playlist = [
   {
     name: "LIVE System Commands- Term 1 Jan 22",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbOTRxyyNBd4iptSrFzA_Py",
+  },
+  {
+    name: "Business Analytics",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaLi6KQP_MHx_oGQHnqlTji",
+  },
+  {
+    name: "Machine Learning Practice",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBb3ovNQam2c_WcGeiW9OhQo",
   },
 ];
