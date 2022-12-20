@@ -88,8 +88,8 @@ mongoose
 
     // For QR Code
     client.on("qr", (qr: string) => {
-      qrcode.generate(qr, { small: true });
       console.log(qr);
+      qrcode.generate(qr, { small: true });
     });
 
     // Event "READY"
