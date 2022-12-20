@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
-    "build": "tsc --skipLibCheck src/index.ts && rm -rf **/*.js",
+    "build": "tsc --skipLibCheck src/index.ts && rm -rf **/*.ts",
     "start": "node src/index.js"
   },
   "author": "",
