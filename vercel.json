@@ -4,5 +4,6 @@
       "src": "/(.*)",
       "dest": "/index.js"
     }
-  ]
+  ],
+    "outputDirectory": "."
 }
