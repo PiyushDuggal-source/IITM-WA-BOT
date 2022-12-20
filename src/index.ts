@@ -21,6 +21,7 @@ import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import {
+    addIndianTime,
   sendClassNotification,
 } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
@@ -28,6 +29,8 @@ import { log } from "./utils/log";
 import { MessageType, WA_Grp } from "./types/types";
 import { UserModel } from "./services/modals";
 import mongoose from "mongoose";
+import axios from "axios";
+import { endOfToday } from "date-fns";
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
@@ -232,17 +235,17 @@ mongoose
 
 // Get Bot LIVE
 // Continuously ping the server to prevent it from becoming idle
-// const intervalId = setInterval(async () => {
-//   await axios.get("https://iitm-wa-bot.herokuapp.com/");
-//   console.log("[SERVER] Pinged server");
-// }, 28 * 60 * 1000); // every 28 minutes
+ const intervalId = setInterval(async () => {
+   await axios.get("https://iitm-wa-bot.onrender.com/");
+   console.log("[SERVER] Pinged server");
+ }, 14 * 60 * 1000); // every 14 minutes
 
-// To stop the bot at Night
-// const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
-// setInterval(() => {
-//   clearInterval(intervalId);
-// }, etaMs);
-//
+ // To stop the bot at Night
+ const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
+ setInterval(() => {
+   clearInterval(intervalId);
+ }, etaMs);
+
 const port = Number(process.env.PORT) || 3005;
 
 app.get("/", (_: Request, res: Response) => {

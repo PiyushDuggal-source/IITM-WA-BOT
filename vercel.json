@@ -1,9 +1,0 @@
-{
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.js"
-    }
-  ],
-    "outputDirectory": "."
-}
