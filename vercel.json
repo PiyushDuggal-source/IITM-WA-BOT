@@ -1,10 +1,4 @@
 {
-  "version": 2,
   "buildCommand": "npm run build",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ]
+  "installCommand": "npm install"
 }
