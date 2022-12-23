@@ -15,13 +15,13 @@ import {
   HEY_EMOJIES,
   USER_JOIN_GREETINGS,
 } from "./utils/reply/replies";
-import { random } from "./actions/sendMessage";
+import { random, sendMessage } from "./actions/sendMessage";
 const express = require("express");
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import {
-    addIndianTime,
+  addIndianTime,
   sendClassNotification,
 } from "./actions/sendClassNotification";
 import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
@@ -31,6 +31,7 @@ import { UserModel } from "./services/modals";
 import mongoose from "mongoose";
 import axios from "axios";
 import { endOfToday } from "date-fns";
+import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
@@ -148,15 +149,18 @@ mongoose
 
     // Event "GROUP_JOIN"
     client.on("group_join", async (msg: GroupNotification) => {
+      console.log(msg);
       if (msg.chatId === WA_BOT_ID) {
         const contact = await client.getNumberId(msg.recipientIds[0]);
         const details = await client.getContactById(contact?._serialized || "");
         if (details.name) {
-          client.sendMessage(
-            WA_BOT_ID,
+          sendAndDeleteMsg(
+            client,
+            msg,
+            msg.author,
             `${process.env.BOT_NAME as String}: *${
               details.name
-            }* Joined the Group!\n${
+            }* Thanks for joining the Group!\n${
               USER_JOIN_GREETINGS.messages[
                 random(USER_JOIN_GREETINGS.messageNum)
               ]
@@ -174,10 +178,14 @@ mongoose
               grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
             }.png`
           );
-          client.sendMessage(WA_BOT_ID, sticker, { sendMediaAsSticker: true });
+          client.sendMessage(msg.recipientIds[0], sticker, {
+            sendMediaAsSticker: true,
+          });
         } else {
-          client.sendMessage(
-            process.env.WA_BOT_ID as string,
+          sendAndDeleteMsg(
+            client,
+            msg,
+            msg.recipientIds[0],
             `${process.env.BOT_NAME as String}: ${
               GREETINGS.member[random(GREETINGS.memberMsgNumber)]
             } Joined the Group!\n${
@@ -197,7 +205,9 @@ mongoose
               grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
             }.png`
           );
-          client.sendMessage(WA_BOT_ID, sticker, { sendMediaAsSticker: true });
+          client.sendMessage(msg.recipientIds[0], sticker, {
+            sendMediaAsSticker: true,
+          });
         }
       }
     });
@@ -235,16 +245,16 @@ mongoose
 
 // Get Bot LIVE
 // Continuously ping the server to prevent it from becoming idle
- const intervalId = setInterval(async () => {
-   await axios.get("https://iitm-wa-bot.onrender.com/");
-   console.log("[SERVER] Pinged server");
- }, 14 * 60 * 1000); // every 14 minutes
+const intervalId = setInterval(async () => {
+  await axios.get("https://iitm-wa-bot.onrender.com/");
+  console.log("[SERVER] Pinged server");
+}, 14 * 60 * 1000); // every 14 minutes
 
- // To stop the bot at Night
- const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
- setInterval(() => {
-   clearInterval(intervalId);
- }, etaMs);
+// To stop the bot at Night
+const etaMs = endOfToday().getTime() - addIndianTime(new Date()).getTime();
+setInterval(() => {
+  clearInterval(intervalId);
+}, etaMs);
 
 const port = Number(process.env.PORT) || 3005;
 

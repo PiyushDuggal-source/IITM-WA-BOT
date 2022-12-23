@@ -15,7 +15,7 @@ let userMsg = `*These are the Notes ${
   GREETINGS.member[random(GREETINGS.memberMsgNumber)]
 }* ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
-}\nNote: _I am not connected, associated, affiliated with any of the Owners of these links to Promote, Encourage any Channel/Group, I found the links on internet only._`;
+}\n\n*Use filter if you want specific subject's notes*\nEg: *!notes {SubjectName}*\n\nNote: _I am not connected, associated, affiliated with any of the Owners of these links to Promote, Encourage any Channel/Group, I found the links on internet only._`;
 // }\n\n`;
 
 export const sendNotes = async (

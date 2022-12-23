@@ -6,7 +6,7 @@ import { END_FOOTER } from "../utils/reply/footers";
 
 export const sendAndDeleteMsg = async (
   client: WAWebJS.Client,
-  messageInstance: WAWebJS.Message,
+  messageInstance: WAWebJS.Message | WAWebJS.GroupNotification,
   userId: string,
   messageToSend: WAWebJS.MessageContent
 ) => {
@@ -18,7 +18,9 @@ export const sendAndDeleteMsg = async (
     const userChat = await client.getChatById(userId);
     messageToSend += `\n\n${END_FOOTER}`;
     const msg = userChat.sendMessage(messageToSend);
-    (await msg).delete();
+    await (await msg).delete();
+    if("react" in messageInstance){
     await messageInstance.react(REACT_EMOGIES[random(REACT_EMOGIES.length)]);
+    }
   }
 };
