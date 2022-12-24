@@ -14,7 +14,7 @@ const checkForClass = (calendar: Calendar) => {
 };
 
 const HOLYDAY_MSG = `${process.env.BOT_NAME as String} : ${
-  HOLIDAY_REPLIES.members[random(HOLIDAY_REPLIES.memberMsgNumber)]
+  HOLIDAY_REPLIES.members[random(HOLIDAY_REPLIES.members.length)]
 } \n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
 
 export const sendClassMessage = async (

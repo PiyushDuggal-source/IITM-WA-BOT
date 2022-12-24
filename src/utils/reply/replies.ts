@@ -105,7 +105,7 @@ export const HOLIDAY_REPLIES = {
 
     "no class today",
   ],
-  memberMsgNumber: 5,
+  memberMsgNumber: 3,
 };
 
 export const HEY_EMOJIES = ["✌", "👋", "🤘", "👐", "🤗"];
