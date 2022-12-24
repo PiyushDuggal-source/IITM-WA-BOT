@@ -1,6 +1,6 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { random } from "../../actions/sendMessage";
-import { USER_PING_MESSAGES } from "../../utils/messages/messages";
+import { ADMIN_CHECK_MESSAGES } from "../../utils/messages/messages";
 import { PING_REPLIES } from "../../utils/reply/replies";
 import {
   CALENDAR_COMMANDS,
@@ -33,8 +33,12 @@ export const adminControl = async (
   const chats = await client.getChats();
   const WA_BOT = chats[BOT];
   // Ping Replies
-  if (USER_PING_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
-    await WA_BOT.sendMessage(PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]);
+  if (ADMIN_CHECK_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
+    await WA_BOT.sendMessage(
+      `${process.env.BOT_NAME}: ${
+        PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]
+      }`
+    );
 
     // Notes Replies
   } else if (
@@ -69,7 +73,7 @@ export const adminControl = async (
 
   // Source Command Reply
   else if (SOURCE.includes(messageBody.toLocaleLowerCase())) {
-    sendSource(client, messageInstance, who);
+    sendSource(client, who);
   }
 
   // For sending Important Dates

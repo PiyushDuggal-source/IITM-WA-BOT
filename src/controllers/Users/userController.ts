@@ -70,7 +70,7 @@ export const userControl = async (
 
   // Source Command Reply
   else if (SOURCE.includes(messageBody.toLocaleLowerCase())) {
-    sendSource(client, messageInstance, who);
+    sendSource(client, who);
   }
 
   // For sending Important Dates

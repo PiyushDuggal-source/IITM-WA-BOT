@@ -9,16 +9,17 @@ import { Calendar } from "../types/types";
 // };
 
 // Add Indian Time - `Classic Function`
-export function addIndianTime(date: Date): Date {
-  let numberOfMilliseconds = date.getTime();
-  let t0530inMilliseconds = 19800000;
-  date = new Date(numberOfMilliseconds + t0530inMilliseconds);
-  return date;
-}
+// export function addIndianTime(date: Date): Date {
+//   let numberOfMilliseconds = date.getTime();
+//   let t0530inMilliseconds = 19800000;
+//   date = new Date(numberOfMilliseconds + t0530inMilliseconds);
+//   return date;
+// }
 
 const checkForClass = (calendar: Calendar): Calendar | [] => {
   let todayCalendar: Calendar = [];
-  const date = addIndianTime(new Date());
+  // const date = addIndianTime(new Date());
+  const date = new Date();
   calendar.forEach((clndr) => {
     if (isToday(clndr.date)) {
       const difference = differenceInMinutes(clndr.date, date);

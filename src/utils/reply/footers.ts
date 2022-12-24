@@ -1,4 +1,4 @@
-import { addIndianTime } from "../../actions/sendClassNotification";
+// import { addIndianTime } from "../../actions/sendClassNotification";
 
 export const FOOTERS = {
   footers: [
@@ -7,11 +7,13 @@ export const FOOTERS = {
     "Have a wonderful day 🤘",
     "Do enjoy the rest of your day 👍",
     `Good ${
-      addIndianTime(new Date()).getHours() >= 0 &&
-      addIndianTime(new Date()).getHours() <= 11
+      // addIndianTime(new Date()).getHours() >= 0 &&
+      // addIndianTime(new Date()).getHours() <= 11
+      new Date().getHours() >= 0 && new Date().getHours() <= 11
         ? "Morning"
-        : addIndianTime(new Date()).getHours() >= 12 &&
-          addIndianTime(new Date()).getHours() <= 16
+        : // : addIndianTime(new Date()).getHours() >= 12 &&
+        //   addIndianTime(new Date()).getHours() <= 16
+        new Date().getHours() >= 12 && new Date().getHours() <= 16
         ? "Afternoon"
         : "Evening"
     } 🥳`,
@@ -19,7 +21,7 @@ export const FOOTERS = {
     "Keep on, keeping on 👍",
     "Keep on and keep going! 🤘",
     "Glad I could be of help 😁",
-    "I hope this was helpful for you 🙂",
+    "I hope this was helpful for you 🗿",
     "Happy to help ☺",
     "Crack the thing..",
   ],

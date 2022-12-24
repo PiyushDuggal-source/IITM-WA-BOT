@@ -24,7 +24,7 @@ import {
   // addIndianTime,
   sendClassNotification,
 } from "./actions/sendClassNotification";
-import { grpJoinStickers, grpLeaveStickers } from "./assets/assets";
+import { grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { MessageType, WA_Grp } from "./types/types";
 import { UserModel } from "./services/modals";
@@ -32,6 +32,7 @@ import mongoose from "mongoose";
 // import axios from "axios";
 // import { endOfToday } from "date-fns";
 import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
+import { pingEveryone } from "./actions/pingEveryone";
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
@@ -122,6 +123,7 @@ mongoose
 
       const allChats = await client.getChats();
       const WA_BOT: WA_Grp = allChats[BOT];
+
       // Command check logic
       if (
         who !== "NONE" &&
@@ -129,8 +131,15 @@ mongoose
       ) {
         sendCommands(client, message, who);
       }
+
+      // Ping Everyone
+      if (who == "ADMIN" && ["everyone"].includes(message.body)) {
+        await pingEveryone(client, message);
+      }
+
+      // Checks if message's first letter is BOT_PREFIX
       if (
-        (who || who !== "NONE") &&
+        who !== "NONE" &&
         message.body[0] === (process.env.BOT_PREFIX as string)
       ) {
         await main(client, message, who);
@@ -150,7 +159,7 @@ mongoose
 
     // Event "GROUP_JOIN"
     client.on("group_join", async (msg: GroupNotification) => {
-      console.log(msg);
+      console.log("Group Message: \n", msg);
       if (msg.chatId === WA_BOT_ID) {
         const contact = await client.getNumberId(msg.recipientIds[0]);
         const details = await client.getContactById(contact?._serialized || "");
@@ -158,7 +167,7 @@ mongoose
           sendAndDeleteMsg(
             client,
             msg,
-            msg.author,
+            msg.recipientIds[0],
             `${process.env.BOT_NAME as String}: *${
               details.name
             }* Thanks for joining the Group!\n${
@@ -171,17 +180,19 @@ mongoose
               process.env.BOT_NAME as String
             }) can do by *Mentioning* me!\nor check the Commands of ${
               process.env.BOT_NAME as String
-            } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
+            } by typing\n*${
+              process.env.BOT_PREFIX as string
+            }AllCmds*\n*IN THE GROUP*\nSimply watch the Video: https://drive.google.com/file/d/1tl33VralV0AXQ2EDJYnjC6r2eaCUHr-l/view?usp=sharing`
           );
 
-          const sticker = MessageMedia.fromFilePath(
-            `${__dirname}/assets/images/grpJoinLeaveImgs/${
-              grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
-            }.png`
-          );
-          client.sendMessage(msg.recipientIds[0], sticker, {
-            sendMediaAsSticker: true,
-          });
+          // const sticker = MessageMedia.fromFilePath(
+          //   `${__dirname}/assets/images/grpJoinLeaveImgs/${
+          //     grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
+          //   }.png`
+          // );
+          // client.sendMessage(msg.recipientIds[0], sticker, {
+          //   sendMediaAsSticker: true,
+          // });
         } else {
           sendAndDeleteMsg(
             client,
@@ -189,7 +200,7 @@ mongoose
             msg.recipientIds[0],
             `${process.env.BOT_NAME as String}: ${
               GREETINGS.member[random(GREETINGS.memberMsgNumber)]
-            } Joined the Group!\n${
+            }, Thanks for Joining the Group!\n${
               USER_JOIN_GREETINGS.messages[
                 random(USER_JOIN_GREETINGS.messageNum)
               ]
@@ -199,16 +210,18 @@ mongoose
               process.env.BOT_NAME as String
             }) can do by *Mentioning* me!\nor check the Commands of ${
               process.env.BOT_NAME as String
-            } by typing\n*${process.env.BOT_PREFIX as string}AllCmds*`
+            } by typing\n*${
+              process.env.BOT_PREFIX as string
+            }AllCmds*\n*IN THE GROUP*\nSimply watch the Video: https://drive.google.com/file/d/1tl33VralV0AXQ2EDJYnjC6r2eaCUHr-l/view?usp=sharing`
           );
-          const sticker = MessageMedia.fromFilePath(
-            `${__dirname}/assets/images/grpJoinLeaveImgs/${
-              grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
-            }.png`
-          );
-          client.sendMessage(msg.recipientIds[0], sticker, {
-            sendMediaAsSticker: true,
-          });
+          // const sticker = MessageMedia.fromFilePath(
+          //   `${__dirname}/assets/images/grpJoinLeaveImgs/${
+          //     grpJoinStickers.images[random(grpJoinStickers.numOfImgs)]
+          //   }.png`
+          // );
+          // client.sendMessage(msg.recipientIds[0], sticker, {
+          //   sendMediaAsSticker: true,
+          // });
         }
       }
     });

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/utils/db/connect.ts"],
+  "sourcesContent": ["import { connect } from \"mongoose\";\n\nexport const connectToDb = async (dbUrl: string) => {\n  try {\n    await connect(dbUrl);\n  } catch (error) {\n    console.log(error);\n    process.exit(0);\n  }\n};\n"],
+  "mappings": "mlBAAA,qCAAwB,uBAEjB,KAAM,GAAc,KAAO,IAAkB,CAClD,GAAI,CACF,KAAM,cAAQ,SACP,EAAP,CACA,QAAQ,IAAI,GACZ,QAAQ,KAAK",
+  "names": []
+}

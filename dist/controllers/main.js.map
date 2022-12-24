@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/controllers/main.ts"],
+  "sourcesContent": ["import * as WAWebJS from \"whatsapp-web.js\";\nimport { MessageType } from \"../types/types\";\nimport { adminControl } from \"./Admin/adminController\";\nimport { userControl } from \"./Users/userController\";\n\nexport const main = async (\n  client: WAWebJS.Client,\n  messageInstance: WAWebJS.Message,\n  who: MessageType\n) => {\n  if (who === \"ADMIN\") {\n    await adminControl(client, messageInstance, who);\n  } else if (who !== \"NONE\") {\n    await userControl(client, messageInstance, who);\n  }\n};\n"],
+  "mappings": "mlBAAA,wBAEA,MAA6B,sCAC7B,EAA4B,qCAErB,KAAM,GAAO,MAClB,EACA,EACA,IACG,CACH,AAAI,IAAQ,QACV,KAAM,mBAAa,EAAQ,EAAiB,GACnC,IAAQ,QACjB,KAAM,kBAAY,EAAQ,EAAiB",
+  "names": []
+}

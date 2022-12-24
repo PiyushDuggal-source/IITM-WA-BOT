@@ -44,7 +44,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Foundational Level *Statistics*",
+    name: "Foundational Level *Statistics* | stat | stat1",
     content: [
       // {
       //   name: "Stats week 1 - week 9",
@@ -61,7 +61,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Foundational Level *Mathematics*",
+    name: "Foundational Level *Mathematics* | Maths1 | Maths1 | Maths",
     content: [
       {
         name: "Maths week 1 - week 10",
@@ -109,7 +109,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Business Analytics",
+    name: "Business Analytics | BA",
     content: [
       {
         name: "All Week Notes | Business Analytics | BA",
@@ -208,69 +208,69 @@ export const NOTES: Notes = [
     name: "System Commands | cmd | SC",
     content: [
       {
-        name: "System Commands | Week 1",
+        name: "System Commands | SC | Week 1",
         link: "https://drive.google.com/file/d/1cgLWUJLr3buyTLAomusjQnjow0yBI9d8/view",
       },
       {
-        name: "System Commands | Week 2",
+        name: "System Commands | SC | Week 2",
         link: "https://drive.google.com/drive/folders/1T8j0DKmllNyhili_AgyRb4NxtS4Ezpy6",
       },
       {
-        name: "System Commands | Week 3",
+        name: "System Commands | SC | Week 3",
         link: "https://drive.google.com/drive/folders/1iet9KIQOAzQQacXJJ3ESaOrsGJgYTtCv",
       },
       {
-        name: "System Commands | Week 4",
+        name: "System Commands | SC | Week 4",
         link: "https://drive.google.com/file/d/1zy1cnXhvIqryMlKKvgKH9Lz7opQuVeiu/view",
       },
       {
-        name: "System Commands | Quiz 1 Notes",
+        name: "System Commands | SC | Quiz 1 Notes",
         link: "https://drive.google.com/file/d/1RWw7uoletNoSv9TKHOvZiMcpHfeDME7z/view",
       },
       {
-        name: "System Commands | Week 5",
+        name: "System Commands | SC | Week 5",
         link: "https://drive.google.com/file/d/1Wg7QOpd2UdxUge8ihFsPiktpMeAifHj_/view",
       },
       {
-        name: "System Commands | Week 6",
+        name: "System Commands | SC | Week 6",
         link: "https://drive.google.com/file/d/1VD8jZx717gWTrHRmpf_11-iZoIP8dxjI/view",
       },
       {
-        name: "System Commands | Regex Consolidation",
+        name: "System Commands | SC | Regex Consolidation",
         link: "https://drive.google.com/file/d/1VD8jZx717gWTrHRmpf_11-iZoIP8dxjI/view",
       },
       {
-        name: "System Commands | Week 7",
+        name: "System Commands | SC | Week 7",
         link: "https://drive.google.com/file/d/1i2kgx6HQcPQVn571JIqciMMGYajZ-oqB/view",
       },
       {
-        name: "System Commands | Week 8",
+        name: "System Commands | SC | Week 8",
         link: "https://drive.google.com/file/d/1Btlm0eQ0mZEzNtOf44p-jveF5LRY0AOp/view",
       },
       {
-        name: "System Commands | Command Line Editors | CLE",
+        name: "System Commands | SC | Command Line Editors | CLE",
         link: "https://drive.google.com/file/d/1WD4R8UHsl7Zg7x7c4felrau7ExvJ8Pg9/view",
       },
       {
-        name: "System Commands | Bash",
+        name: "System Commands | SC | Bash",
         link: "https://drive.google.com/file/d/1YTDb-Pf6yZZbWyArJDz902sgDNZ-Bi72/view",
       },
       {
-        name: "System Commands | AWK",
+        name: "System Commands | SC | AWK",
         link: "https://drive.google.com/file/d/1QUL6IYOQ6EHXcpr7ZUqNwzRtTqJihFYu/view",
       },
       {
-        name: "System Commands | Stream Editor | SED",
+        name: "System Commands | SC | Stream Editor | SED",
         link: "https://drive.google.com/file/d/1SaNppTN6HWGIL1avwHsi4KC0sPuytfOA/view",
       },
       {
-        name: "System Commands | Quiz 2 Notes",
+        name: "System Commands | SC | Quiz 2 Notes",
         link: "https://drive.google.com/file/d/1KMjoEsSJMxnk-2DNxCDqP9_Pd1FLOfH4/view",
       },
     ],
   },
   {
-    name: "Foundational Course English 2 - by Arushi",
+    name: "Foundational Course English 2 | English2 | - by Arushi",
     content: [
       {
         name: "English 2 | week 1-3",
@@ -295,7 +295,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Mathematics 2 for DS | MDS2 - by Aditya D",
+    name: "Mathematics 2 for DS | Maths2 | Maths | MDS2 - by Aditya D",
     content: [
       {
         name: "Mathematics 2 | week 1-3",
@@ -437,31 +437,31 @@ export const PLAYLISTS: YT_Playlist = [
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbWy3GL4oWKXGrwf6Ul8Cry",
   },
   {
-    name: "Database Management Systems",
+    name: "Database Management Systems | DBMS",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYc4jkUk_yQAjYEVFzVzhdU",
   },
   {
-    name: "Programming, Data Structures and Algorithms using Python",
+    name: "Programming, Data Structures and Algorithms using Python | DSA",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaDccbZRgiU1sHX2gZrQ-XT",
   },
   {
-    name: "Modern Application Development - I",
+    name: "Modern Application Development - I | MAD",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZGVuyXs2l3KJtiHs0KMVE7",
   },
   {
-    name: "Programming Concepts using Java( LIVE )",
+    name: "Programming Concepts using Java( LIVE ) | Java",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYlX88C2ds88HOZMOOcPz6j",
   },
   {
-    name: "LIVE System Commands- Term 1 Jan 22",
+    name: "LIVE System Commands- Term 1 Jan 22 | SC",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbOTRxyyNBd4iptSrFzA_Py",
   },
   {
-    name: "Business Analytics",
+    name: "Business Analytics | BA",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaLi6KQP_MHx_oGQHnqlTji",
   },
   {
-    name: "Machine Learning Practice",
+    name: "Machine Learning Practice | MLP",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBb3ovNQam2c_WcGeiW9OhQo",
   },
 ];

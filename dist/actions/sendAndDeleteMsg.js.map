@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/actions/sendAndDeleteMsg.ts"],
+  "sourcesContent": ["import * as WAWebJS from \"whatsapp-web.js\";\nimport { REACT_EMOGIES } from \"../utils/reply/replies\";\nimport { random } from \"./sendMessage\";\nimport { BOT } from \"..\";\nimport { END_FOOTER } from \"../utils/reply/footers\";\n\nexport const sendAndDeleteMsg = async (\n  client: WAWebJS.Client,\n  messageInstance: WAWebJS.Message | WAWebJS.GroupNotification,\n  userId: string,\n  messageToSend: WAWebJS.MessageContent\n) => {\n  if (typeof userId == \"boolean\") {\n    const allChats = await client.getChats();\n    const WA_BOT = allChats[BOT];\n    WA_BOT.sendMessage(messageToSend);\n  } else {\n    const userChat = await client.getChatById(userId);\n    messageToSend += `\\n\\n${END_FOOTER}`;\n    const msg = userChat.sendMessage(messageToSend);\n    await (await msg).delete();\n    if(\"react\" in messageInstance){\n    await messageInstance.react(REACT_EMOGIES[random(REACT_EMOGIES.length)]);\n    }\n  }\n};\n"],
+  "mappings": "mlBAAA,oCACA,MAA8B,qCAC9B,EAAuB,4BACvB,EAAoB,iBACpB,EAA2B,qCAEpB,KAAM,GAAmB,MAC9B,EACA,EACA,EACA,IACG,CACH,GAAI,MAAO,IAAU,UAGnB,AADe,AADE,MAAM,GAAO,YACN,OACjB,YAAY,OACd,CACL,KAAM,GAAW,KAAM,GAAO,YAAY,GAC1C,GAAiB;AAAA;AAAA,EAAO,eAExB,KAAO,MADK,GAAS,YAAY,IACf,SACf,SAAW,IACd,KAAM,GAAgB,MAAM,gBAAc,aAAO,gBAAc",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/utils/messages/messages.ts"],
+  "sourcesContent": ["export const ADMIN_CHECK_MESSAGES: string[] = [\"check\", \"checking\", \"bot\", \"chk\"];\n"],
+  "mappings": "qIAAA,wCAAO,KAAM,GAAiC,CAAC,QAAS,WAAY,MAAO",
+  "names": []
+}

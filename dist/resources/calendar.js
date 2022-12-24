@@ -1,0 +1,2 @@
+var d=Object.defineProperty;var n=e=>d(e,"__esModule",{value:!0});var r=(e,a)=>{n(e);for(var t in a)d(e,t,{get:a[t],enumerable:!0})};r(exports,{CALENDAR:()=>i});const i=[{courseName:"Student Academic Calendar",date:new Date("Sunday, December 18, 2022, 19:00"),time:"7:00 \u2013 8:00pm",topic:"Read with us \u2013 A Virtual Reading Session"}];0&&(module.exports={CALENDAR});
+//# sourceMappingURL=calendar.js.map

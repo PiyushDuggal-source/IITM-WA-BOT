@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/utils/Commands/allCmds.ts"],
+  "sourcesContent": ["// import { USER_PING_MESSAGES } from \"../messages/messages\";\nimport {\n  CALENDAR_COMMANDS,\n  CLASS_COMMAND,\n  COMMANDS,\n  HELP_CMDS,\n  NOTES_CMD,\n  PLALIST_CMD,\n  SOURCE,\n} from \"./instructions\";\nexport const User_AllCommands: string[][] = [\n  CALENDAR_COMMANDS,\n  CLASS_COMMAND,\n  COMMANDS,\n  NOTES_CMD,\n  PLALIST_CMD,\n  // USER_PING_MESSAGES,\n  HELP_CMDS,\n  SOURCE,\n];\n"],
+  "mappings": "mlBAAA,oCACA,MAQO,6BACA,KAAM,GAA+B,CAC1C,oBACA,gBACA,WACA,YACA,cAEA,YACA",
+  "names": []
+}

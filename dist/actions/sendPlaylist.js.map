@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/actions/sendPlaylist.ts"],
+  "sourcesContent": ["import * as WAWebJS from \"whatsapp-web.js\";\nimport { BOT } from \"..\";\nimport { PLAYLISTS } from \"../resources/notes\";\nimport { MessageType } from \"../types/types\";\nimport { FOOTERS } from \"../utils/reply/footers\";\nimport { HEY_EMOJIES } from \"../utils/reply/replies\";\nimport { sendAndDeleteMsg } from \"./sendAndDeleteMsg\";\nimport { random } from \"./sendMessage\";\n\nexport const sendPlayList = async (\n  client: WAWebJS.Client,\n  messageInstance: WAWebJS.Message,\n  who: MessageType\n) => {\n  let message = `*These are your course PlayLists ${\n    HEY_EMOJIES[random(HEY_EMOJIES.length)]\n  }*`;\n  PLAYLISTS.forEach((playlist) => {\n    message += `\\n\\n${playlist.name}\\n${playlist.link}`;\n  });\n\n  message += `\\n\\n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;\n  if (who === \"ADMIN\") {\n    const chats = await client.getChats();\n    const bot = chats[BOT];\n    bot.sendMessage(message);\n  } else if (who !== \"NONE\") {\n    sendAndDeleteMsg(client, messageInstance, who, message);\n  }\n};\n"],
+  "mappings": "mlBAAA,gCACA,MAAoB,iBACpB,EAA0B,iCAE1B,EAAwB,qCACxB,EAA4B,qCAC5B,EAAiC,iCACjC,EAAuB,4BAEhB,KAAM,GAAe,MAC1B,EACA,EACA,IACG,CACH,GAAI,GAAU,oCACZ,cAAY,aAAO,cAAY,YAEjC,YAAU,QAAQ,AAAC,GAAa,CAC9B,GAAW;AAAA;AAAA,EAAO,EAAS;AAAA,EAAS,EAAS,SAG/C,GAAW;AAAA;AAAA,GAAQ,UAAQ,QAAQ,aAAO,UAAQ,oBAClD,AAAI,IAAQ,QAGV,AADY,AADE,MAAM,GAAO,YACT,OACd,YAAY,GACP,IAAQ,QACjB,uBAAiB,EAAQ,EAAiB,EAAK",
+  "names": []
+}

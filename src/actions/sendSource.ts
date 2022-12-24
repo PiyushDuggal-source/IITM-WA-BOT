@@ -4,7 +4,6 @@ import { HEY_EMOJIES } from "../utils/reply/replies";
 import { random } from "./sendMessage";
 import { MessageType } from "../types/types";
 import { BOT } from "..";
-import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
 dotenv.config();
 
 const CONTENT = `Hey, Checkout how I *${process.env.BOT_NAME}* created!!${
@@ -13,14 +12,11 @@ const CONTENT = `Hey, Checkout how I *${process.env.BOT_NAME}* created!!${
 
 export const sendSource = async (
   client: WAWebJS.Client,
-  messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  if (who === "ADMIN") {
     const chats = await client.getChats();
     const bot = chats[BOT];
+  if (who !== "NONE") {
     bot.sendMessage(CONTENT);
-  } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, CONTENT);
   }
 };

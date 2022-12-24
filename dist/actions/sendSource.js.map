@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/actions/sendSource.ts"],
+  "sourcesContent": ["import * as WAWebJS from \"whatsapp-web.js\";\nimport * as dotenv from \"dotenv\";\nimport { HEY_EMOJIES } from \"../utils/reply/replies\";\nimport { random } from \"./sendMessage\";\nimport { MessageType } from \"../types/types\";\nimport { BOT } from \"..\";\ndotenv.config();\n\nconst CONTENT = `Hey, Checkout how I *${process.env.BOT_NAME}* created!!${\n  HEY_EMOJIES[random(HEY_EMOJIES.length)]\n}\\nCheck the Source Code from here:\\nhttps://github.com/PiyushDuggal-source/IITM-WA-BOT\\n\\n*Give it a star, if you like it!*\\n\\n*Got any _Suggestion/Issue_?* Report here:\\nhttps://github.com/PiyushDuggal-source/IITM-WA-BOT/issues\\n\\n*Want to contribute?\uD83D\uDE0E _Direct Messege me!_*`;\n\nexport const sendSource = async (\n  client: WAWebJS.Client,\n  who: MessageType\n) => {\n    const chats = await client.getChats();\n    const bot = chats[BOT];\n  if (who !== \"NONE\") {\n    bot.sendMessage(CONTENT);\n  }\n};\n"],
+  "mappings": "mlBAAA,8BACA,MAAwB,qBACxB,EAA4B,qCAC5B,EAAuB,4BAEvB,EAAoB,iBACpB,EAAO,SAEP,KAAM,GAAU,wBAAwB,QAAQ,IAAI,sBAClD,cAAY,aAAO,cAAY;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,qDAGpB,EAAa,MACxB,EACA,IACG,CAED,KAAM,GAAM,AADE,MAAM,GAAO,YACT,OACpB,AAAI,IAAQ,QACV,EAAI,YAAY",
+  "names": []
+}
