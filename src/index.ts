@@ -15,7 +15,7 @@ import {
   HEY_EMOJIES,
   USER_JOIN_GREETINGS,
 } from "./utils/reply/replies";
-import { random, sendMessage } from "./actions/sendMessage";
+import { random } from "./actions/sendMessage";
 const express = require("express");
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
@@ -53,6 +53,7 @@ const DB_URL = LOCAL
 mongoose
   .connect(DB_URL)
   .then(() => {
+    console.log("connected to DB");
     const store = new MongoStore({ mongoose: mongoose });
     let client: Client;
     if (LOCAL) {
