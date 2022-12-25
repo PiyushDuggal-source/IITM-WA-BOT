@@ -70,7 +70,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Foundational Level *Computational Thinking*",
+    name: "Foundational Level *Computational Thinking* | CT",
     content: [
       {
         name: "CT week 1 - week 10",

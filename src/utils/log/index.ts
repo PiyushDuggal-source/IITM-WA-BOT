@@ -1,4 +1,19 @@
-export const log = (msg: string, error: boolean = false) => {
+type Types =
+  | "ERROR"
+  | "INFO"
+  | "WARNING"
+  | "GROUP_JOIN"
+  | "GROUP_LEFT"
+  | "DISCONNECTED"
+  | "CONNECTED";
+
+type Log = {
+  msg: string;
+  type: Types;
+  error: boolean;
+};
+
+export const log = ({ msg, type, error }: Log) => {
   let today = new Date();
   let formattedDateTime =
     "[" +
@@ -16,10 +31,10 @@ export const log = (msg: string, error: boolean = false) => {
     "] ";
 
   if (!error) {
-    console.log(formattedDateTime + "INFO: " + msg + "\n");
+    console.log(formattedDateTime + ` [${type}] ` + msg + "\n");
     // log_file.write(formattedDateTime+'INFO: '+msg+'\n');
   } else {
-    console.error(formattedDateTime + "ERROR: " + msg + "\n");
+    console.error(formattedDateTime + ` [${type}] ` + msg + "\n");
     // log_file.write(formattedDateTime+'ERROR: '+msg+'\n');
   }
 };

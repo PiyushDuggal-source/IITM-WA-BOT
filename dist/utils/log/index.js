@@ -1,4 +1,4 @@
-var n=Object.defineProperty;var a=t=>n(t,"__esModule",{value:!0});var g=(t,o)=>{a(t);for(var e in o)n(t,e,{get:o[e],enumerable:!0})};g(exports,{log:()=>r});const r=(t,o=!1)=>{let e=new Date,l="["+e.getFullYear()+"-"+(e.getMonth()+1)+"-"+e.getDate()+" "+e.getHours()+":"+e.getMinutes()+":"+e.getSeconds()+"] ";o?console.error(l+"ERROR: "+t+`
-`):console.log(l+"INFO: "+t+`
+var r=Object.defineProperty;var l=e=>r(e,"__esModule",{value:!0});var s=(e,o)=>{l(e);for(var g in o)r(e,g,{get:o[g],enumerable:!0})};s(exports,{log:()=>N});const N=({msg:e,type:o,error:g})=>{let t=new Date,n="["+t.getFullYear()+"-"+(t.getMonth()+1)+"-"+t.getDate()+" "+t.getHours()+":"+t.getMinutes()+":"+t.getSeconds()+"] ";g?console.error(n+` [${o}] `+e+`
+`):console.log(n+` [${o}] `+e+`
 `)};0&&(module.exports={log});
 //# sourceMappingURL=index.js.map
