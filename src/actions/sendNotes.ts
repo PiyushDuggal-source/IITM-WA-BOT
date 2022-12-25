@@ -1,7 +1,7 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { BOT } from "..";
 import { NOTES } from "../resources/notes";
-import { MessageType } from "../types/types";
+import { MessageType, Notes } from "../types/types";
 import { FOOTERS } from "../utils/reply/footers";
 import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
@@ -15,7 +15,7 @@ let userMsg = `*These are the Notes ${
   GREETINGS.member[random(GREETINGS.memberMsgNumber)]
 }* ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
-}\n\n*Use filter if you want specific subject's notes*\nEg: *!notes {SubjectName}*\n\nNote: _I am not connected, associated, affiliated with any of the Owners of these links to Promote, Encourage any Channel/Group, I found the links on internet only._`;
+}\n\n*Use filter if you want specific subject's notes*\nEg: *!notes {SubjectName}* _without {}_\n\nNote: _I am not connected, associated, affiliated with any of the Owners of these links to Promote, Encourage any Channel/Group, I found the links on internet only._`;
 // }\n\n`;
 
 export const sendNotes = async (
@@ -49,6 +49,16 @@ const sorryMsg = `Sorry ${
 const invalidMsg =
   "The filter is invalid or notes are not updated with the respective subject, please wait for a while we will upload the respective notes soon";
 
+const notesFormatter = (notes: Notes, content: string) => {
+  notes.forEach((note) => {
+    content += `\n\n*_NAME_* : *${note.name}*\n\n -----------*Content*------------`;
+    note.content.forEach((noteContent) => {
+      content += `\n\nName of the Content: _${noteContent.name}_\nLink: ${noteContent.link}`;
+    });
+  });
+  return content;
+};
+
 export const sendNotesByFilter = async (
   client: WAWebJS.Client,
   messageBody: string,
@@ -56,94 +66,100 @@ export const sendNotesByFilter = async (
   who: MessageType
 ) => {
   const msgList = messageBody.split(" ");
-
-  if (who === "ADMIN") {
+  if (who !== "NONE") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     if (msgList.length > 2) {
       bot.sendMessage(sorryMsg);
     } else {
-      // First check in the Contents
-      const filteredNotes = NOTES.map((note) =>
-        note.content.filter((not) =>
-          not.name.toLocaleLowerCase().includes(msgList[1].toLocaleLowerCase())
-        )
-      );
+      // First check in the Names
+      const filteredNotes = NOTES.filter((note) => {
+        return note.name
+          .toLocaleLowerCase()
+          .includes(msgList[1].toLocaleLowerCase());
+      });
 
-      // If not in the content, check in the upper names
-      if (!filteredNotes.flat().length) {
-        const filteredNotes = NOTES.filter((note) =>
-          note.name.toLocaleLowerCase().includes(msgList[1].toLocaleLowerCase())
-        );
-        let content = userMsg;
-        filteredNotes.forEach((note) => {
-          content += `\n\n*_NAME_* : *${note.name}*\n\n -----------*Content*------------`;
-          note.content.forEach((noteContent) => {
-            content += `\n\nName of the Content: _${noteContent.name}_\nLink: ${noteContent.link}`;
+      // If not in the Upper Names, check inside
+      if (!filteredNotes.length) {
+        NOTES.forEach((note) => {
+          note.content.filter((contNote) => {
+            if (
+              contNote.name
+                .toLocaleLowerCase()
+                .includes(msgList[1].toLocaleLowerCase())
+            ) {
+              filteredNotes.push(note);
+            }
           });
         });
-
-        if (!filteredNotes.length) {
-          bot.sendMessage(invalidMsg);
-        } else {
-          content += `\n\n: ${
-            FOOTERS.footers[random(FOOTERS.footerMsgLength)]
-          }`;
-          bot.sendMessage(content);
-        }
-      } else {
-        let content = userMsg;
-        filteredNotes.forEach((note) => {
-          note.forEach((not) => {
-            content += `\n\nName of the Content: _${not.name}_\nLink: ${not.link}`;
-          });
-        });
+      }
+      let content = userMsg;
+      if (!filteredNotes.length) {
+        bot.sendMessage(invalidMsg);
+      } else if (who === "ADMIN") {
+        content = notesFormatter(filteredNotes, content);
         content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
         bot.sendMessage(content);
-      }
-    }
-  } else if (who !== "NONE") {
-    if (msgList.length > 2) {
-      sendAndDeleteMsg(client, messageInstance, who, sorryMsg);
-    } else {
-      // First check in the Contents
-      const filteredNotes = NOTES.map((note) =>
-        note.content.filter((not) =>
-          not.name.toLocaleLowerCase().includes(msgList[1].toLocaleLowerCase())
-        )
-      );
-
-      // If not in the content, check in the upper names
-      if (!filteredNotes.flat().length) {
-        const filteredNotes = NOTES.filter((note) =>
-          note.name.toLocaleLowerCase().includes(msgList[1].toLocaleLowerCase())
-        );
-        let content = userMsg;
-        filteredNotes.forEach((note) => {
-          content += `\n\n*_NAME_* : *${note.name}*\n\n -----------*Content*------------`;
-          note.content.forEach((noteContent) => {
-            content += `\n\nName of the Content: _${noteContent.name}_\nLink: ${noteContent.link}`;
-          });
-        });
-
-        if (!filteredNotes.length) {
-          sendAndDeleteMsg(client, messageInstance, who, invalidMsg);
-        } else {
-          content += `\n\n: ${
-            FOOTERS.footers[random(FOOTERS.footerMsgLength)]
-          }`;
-          sendAndDeleteMsg(client, messageInstance, who, content);
-        }
       } else {
-        let content = userMsg;
-        filteredNotes.forEach((note) => {
-          note.forEach((not) => {
-            content += `\n\nName of the Content: _${not.name}_\nLink: ${not.link}`;
-          });
-        });
+        content = notesFormatter(filteredNotes, content);
         content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
         sendAndDeleteMsg(client, messageInstance, who, content);
       }
+
+      //     if (who === "ADMIN") {
+      //     } else {
+      //       let content = userMsg;
+      //       filteredNotes.forEach((note) => {
+      //         note.content.forEach((not) => {
+      //           content += `\n\nName of the Content: _${not.name}_\nLink: ${not.link}`;
+      //         });
+      //       });
+      //       content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
+      //       bot.sendMessage(content);
+      //     }
+      //   }
+      // } else if (who !== "NONE") {
+      //   if (msgList.length > 2) {
+      //     sendAndDeleteMsg(client, messageInstance, who, sorryMsg);
+      //   } else {
+      //     // First check in the Contents
+      //     const filteredNotes = NOTES.map((note) =>
+      //       note.content.filter((not) =>
+      //         not.name.toLocaleLowerCase().includes(msgList[1].toLocaleLowerCase())
+      //       )
+      //     );
+      //
+      //     // If not in the content, check in the upper names
+      //     if (!filteredNotes.flat().length) {
+      //       const filteredNotes = NOTES.filter((note) =>
+      //         note.name.toLocaleLowerCase().includes(msgList[1].toLocaleLowerCase())
+      //       );
+      //       let content = userMsg;
+      //       filteredNotes.forEach((note) => {
+      //         content += `\n\n*_NAME_* : *${note.name}*\n\n -----------*Content*------------`;
+      //         note.content.forEach((noteContent) => {
+      //           content += `\n\nName of the Content: _${noteContent.name}_\nLink: ${noteContent.link}`;
+      //         });
+      //       });
+      //
+      //       if (!filteredNotes.length) {
+      //         sendAndDeleteMsg(client, messageInstance, who, invalidMsg);
+      //       } else {
+      //         content += `\n\n: ${
+      //           FOOTERS.footers[random(FOOTERS.footerMsgLength)]
+      //         }`;
+      //         sendAndDeleteMsg(client, messageInstance, who, content);
+      //       }
+      //     } else {
+      //       let content = userMsg;
+      //       filteredNotes.forEach((note) => {
+      //         note.forEach((not) => {
+      //           content += `\n\nName of the Content: _${not.name}_\nLink: ${not.link}`;
+      //         });
+      //       });
+      //       content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
+      //       sendAndDeleteMsg(client, messageInstance, who, content);
+      //     }
     }
   }
 };

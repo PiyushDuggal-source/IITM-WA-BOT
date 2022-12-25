@@ -1,2 +1,2 @@
-var h=Object.defineProperty;var k=c=>h(c,"__esModule",{value:!0});var n=(c,t)=>{k(c);for(var e in t)h(c,e,{get:t[e],enumerable:!0})};n(exports,{ADMIN_CHECK_MESSAGES:()=>o});const o=["check","checking","bot","chk"];0&&(module.exports={ADMIN_CHECK_MESSAGES});
+var n=Object.defineProperty;var t=o=>n(o,"__esModule",{value:!0});var E=(o,c)=>{t(o);for(var e in c)n(o,e,{get:c[e],enumerable:!0})};E(exports,{BOT_CHECK_MESSAGES:()=>S});const S=["check","up","bot","online"];0&&(module.exports={BOT_CHECK_MESSAGES});
 //# sourceMappingURL=messages.js.map

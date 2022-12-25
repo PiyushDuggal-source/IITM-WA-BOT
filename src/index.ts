@@ -82,12 +82,12 @@ mongoose
     }
     // Event "REMOTE SESSION SAVED"
     client.on("remote_session_saved", () => {
-      log({msg: "Remote auth session saved", type: "INFO", error: false})
+      log({ msg: "Remote auth session saved", type: "INFO", error: false });
     });
 
     // Event "DISCONNECTED"
     client.on("disconnected", () => {
-      log({msg: "Client DISCONNECTED", type: "DISCONNECTED", error: false});
+      log({ msg: "Client DISCONNECTED", type: "DISCONNECTED", error: false });
     });
 
     // For QR Code
@@ -98,7 +98,7 @@ mongoose
 
     // Event "READY"
     client.on("ready", async () => {
-      log({msg: "Client Connected", type:"CONNECTED", error: false });
+      log({ msg: "Client Connected", type: "CONNECTED", error: false });
       client.sendMessage(
         process.env.WA_BOT_ID_DEV as string,
         `${process.env.BOT_NAME as string}: I am Connected BOSS`
@@ -159,7 +159,11 @@ mongoose
 
     // Event "GROUP_JOIN"
     client.on("group_join", async (msg: GroupNotification) => {
-      log({msg: `${msg.recipientIds[0]} Joined the Group`, type: "GROUP_JOIN", error: false})
+      log({
+        msg: `${msg.recipientIds[0]} Joined the Group`,
+        type: "GROUP_JOIN",
+        error: false,
+      });
       if (msg.chatId === WA_BOT_ID) {
         const contact = await client.getNumberId(msg.recipientIds[0]);
         const details = await client.getContactById(contact?._serialized || "");
@@ -228,7 +232,11 @@ mongoose
     client.on(
       "group_leave",
       async (notification: WAWebJS.GroupNotification) => {
-      log({msg: `${notification.recipientIds[0]} left the Group`, type: "GROUP_LEFT", error: false})
+        log({
+          msg: `${notification.recipientIds[0]} left the Group`,
+          type: "GROUP_LEFT",
+          error: false,
+        });
         const sticker = MessageMedia.fromFilePath(
           `${__dirname}/../src/assets/images/grpJoinLeaveImgs/${
             grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
@@ -248,13 +256,13 @@ mongoose
       const chats = await client.getChats();
       const WA_BOT: WA_Grp = chats[BOT];
       sendClassNotification(WA_BOT);
-      log({msg: "Checked", type: "INFO", error: false});
+      log({ msg: "Checked", type: "INFO", error: false });
     }, 5 * 60 * 1000); // every 5 minutes
 
     client.initialize();
   })
   .catch((err: any) => {
-    log({msg: err, type: "ERROR", error: true })
+    log({ msg: err, type: "ERROR", error: true });
   });
 
 // Get Bot LIVE
@@ -275,7 +283,13 @@ const port = Number(process.env.PORT) || 3005;
 app.get("/", (_: Request, res: Response) => {
   res.send("BOT");
 });
-app.listen(port, () => log({msg: `[SERVER] Server is running on port ${port}`, type: "INFO", error: false}));
+app.listen(port, () =>
+  log({
+    msg: `[SERVER] Server is running on port ${port}`,
+    type: "INFO",
+    error: false,
+  })
+);
 
 // All other pages should be returned as error pages
 app.all("*", (_: Request, res: Response) => {

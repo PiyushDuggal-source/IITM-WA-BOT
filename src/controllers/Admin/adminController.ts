@@ -1,6 +1,6 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { random } from "../../actions/sendMessage";
-import { ADMIN_CHECK_MESSAGES } from "../../utils/messages/messages";
+import { BOT_CHECK_MESSAGES } from "../../utils/messages/messages";
 import { PING_REPLIES } from "../../utils/reply/replies";
 import {
   CALENDAR_COMMANDS,
@@ -30,10 +30,10 @@ export const adminControl = async (
   who: MessageType
 ) => {
   const messageBody = messageInstance.body.slice(1);
+  // Ping Replies
+  if (BOT_CHECK_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
   const chats = await client.getChats();
   const WA_BOT = chats[BOT];
-  // Ping Replies
-  if (ADMIN_CHECK_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
     await WA_BOT.sendMessage(
       `${process.env.BOT_NAME}: ${
         PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]

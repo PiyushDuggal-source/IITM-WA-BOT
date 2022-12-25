@@ -13,7 +13,7 @@ export const sendAndDeleteMsg = async (
   messageToSend += `\n\n${END_FOOTER}`;
   const msg = userChat.sendMessage(messageToSend);
   await (await msg).delete();
-  const chatMsgs = await userChat.fetchMessages({});
+  const chatMsgs = await userChat.fetchMessages({ limit: 4 });
   if (chatMsgs.length < 2) {
     await userChat.delete();
   }

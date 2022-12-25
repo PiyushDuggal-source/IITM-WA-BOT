@@ -1,1 +1,1 @@
-export const ADMIN_CHECK_MESSAGES: string[] = ["check", "checking", "bot", "chk"];
+export const BOT_CHECK_MESSAGES = ["check", "up", "bot", "online"];

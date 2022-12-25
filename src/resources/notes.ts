@@ -83,16 +83,12 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Database Management Systems | DMS",
+    name: "Database Management Systems | DBMS",
     content: [
       {
-        name: "DMS Notes All Week",
-        link: "https://drive.google.com/file/d/1VdqyTvNtUH1RjoI6znwIYgOixFn-cbbC/view?usp=sharing",
-      },
-      {
-        name: "BMS Formulas",
-        link: "https://drive.google.com/file/d/1TODvW5yZL-U17HvzgSBZdmk8_UaWgcrp/view?usp=sharing",
-      },
+        name: "DBMS - Quick Guide",
+        link: "https://www.tutorialspoint.com/dbms/pdf/dbms_quick_guide.pdf"
+      }
     ],
   },
   {
@@ -105,6 +101,19 @@ export const NOTES: Notes = [
       {
         name: "TSD | Week 1-8 | Jan 2022",
         link: "https://drive.google.com/file/d/1PjAnVR5KwqCnpnGX3bex55Dqt-t-yYB-/view?usp=sharing",
+      },
+    ],
+  },
+  {
+    name: "Business Data Management",
+    content: [
+      {
+        name: "BMS Formulas",
+        link: "https://drive.google.com/file/d/1TODvW5yZL-U17HvzgSBZdmk8_UaWgcrp/view?usp=sharing",
+      },
+      {
+        name: "DMS Notes All Week",
+        link: "https://drive.google.com/file/d/1VdqyTvNtUH1RjoI6znwIYgOixFn-cbbC/view?usp=sharing",
       },
     ],
   },
@@ -164,7 +173,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Python Notes",
+    name: "Python Notes | PDAS | Data Structures and Algorithms using Python",
     content: [
       {
         name: "Python | Week 1",
@@ -295,7 +304,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Mathematics 2 for DS | Maths2 | Maths | MDS2 - by Aditya D",
+    name: "Mathematics 2 for DS | Maths2 | Maths | Math | MDS2 - by Aditya D",
     content: [
       {
         name: "Mathematics 2 | week 1-3",
@@ -324,7 +333,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Statistics 2 for DS | SDS2",
+    name: "Statistics 2 for DS | Stat2 | Stats | SDS2",
     content: [
       {
         name: "Statistics 2 | week 1-3",
@@ -361,46 +370,46 @@ export const NOTES: Notes = [
     content: [
       {
         name: "Intro to Python | week 1",
-        link: "https://drive.google.com/file/d/1giCvH99enz5UJACBJ2rqQhXiHrdxyP7j/view"
+        link: "https://drive.google.com/file/d/1giCvH99enz5UJACBJ2rqQhXiHrdxyP7j/view",
       },
       {
         name: "Intro to Python | week 2",
-        link: "https://drive.google.com/file/d/1TBxnFrR2Q-9EE6V8h3N-GXgCTY9W2pfL/view"
+        link: "https://drive.google.com/file/d/1TBxnFrR2Q-9EE6V8h3N-GXgCTY9W2pfL/view",
       },
       {
         name: "Intro to Python | week 3",
-        link: "https://drive.google.com/file/d/13MSbXkRHZ8D6r8SJZ1oAkiISYlmB_hah/view"
+        link: "https://drive.google.com/file/d/13MSbXkRHZ8D6r8SJZ1oAkiISYlmB_hah/view",
       },
       {
         name: "Intro to Python | week 4",
-        link: "https://drive.google.com/file/d/1n71fweeo7vgiyZ3F-nIDY9VQcSmlblRh/view"
+        link: "https://drive.google.com/file/d/1n71fweeo7vgiyZ3F-nIDY9VQcSmlblRh/view",
       },
       {
         name: "Intro to Python | week 5",
-        link: "https://drive.google.com/file/d/1sMV0lN5_tA6plUIhtkXENbDDb7A5UzNS/view"
+        link: "https://drive.google.com/file/d/1sMV0lN5_tA6plUIhtkXENbDDb7A5UzNS/view",
       },
       {
         name: "Intro to Python | week 6",
-        link: "https://drive.google.com/file/d/1tyrOyERdNke1DTZqGtUKEohkj4x9uvv8/view"
+        link: "https://drive.google.com/file/d/1tyrOyERdNke1DTZqGtUKEohkj4x9uvv8/view",
       },
       {
         name: "Intro to Python | week 8",
-        link: "https://drive.google.com/file/d/1AWoeuxdLwUmLn-ixIKJSBBA57sKoJbV1/view"
+        link: "https://drive.google.com/file/d/1AWoeuxdLwUmLn-ixIKJSBBA57sKoJbV1/view",
       },
       {
         name: "Intro to Python | week 9",
-        link: "https://drive.google.com/file/d/1CM0Hbkk2PvbmFvDPBZh2UNlO5UBlX-tn/view"
+        link: "https://drive.google.com/file/d/1CM0Hbkk2PvbmFvDPBZh2UNlO5UBlX-tn/view",
       },
       {
         name: "Intro to Python | week 10",
-        link: "https://drive.google.com/file/d/1NngbghSqdOA9cAS-cgucbDuGnPnUeFDh/view"
+        link: "https://drive.google.com/file/d/1NngbghSqdOA9cAS-cgucbDuGnPnUeFDh/view",
       },
       {
         name: "Intro to Python | week 11",
-        link: "https://drive.google.com/file/d/1BSFxwqE98hBS1q1cv-59VmiQ5UEx3VOm/view"
+        link: "https://drive.google.com/file/d/1BSFxwqE98hBS1q1cv-59VmiQ5UEx3VOm/view",
       },
-    ]
-  }
+    ],
+  },
 ];
 
 export const PLAYLISTS: YT_Playlist = [
