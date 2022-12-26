@@ -29,4 +29,4 @@ export const FOOTERS = {
 };
 
 export const END_FOOTER =
-  "*NOTE*: _This message is *deleted* from *my side*, if you have any query bro/sis, send message to *ELIZA Group* or *ME* ✌_";
+  "*NOTE*: _This message is *deleted* from *my side*, if you have any query, send message to *ELIZA Group* or *ME* ✌_";

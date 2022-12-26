@@ -66,7 +66,6 @@ export const GREETINGS: Greetings = {
     "Good Person",
     "Dude",
     "Gentle-men/women",
-    "Brother/Sister",
     "My Friend!",
     "Good Guy",
     "An IITian",
