@@ -7,6 +7,18 @@ import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
 import { random } from "./sendMessage";
 
+// Helper functions
+const notesFormatter = (notes: Notes, content: string) => {
+  notes.forEach((note) => {
+    content += `\n\n*_NAME_* : *${note.name}*\n\n -----------*Content*------------`;
+    note.content.forEach((noteContent) => {
+      content += `\n\nName of the Notes: _${noteContent.name}_\nLink: ${noteContent.link}`;
+    });
+  });
+  content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
+  return content;
+};
+
 let adminMsg = `*These are the Notes ${
   GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
 }* ${HEY_EMOJIES[random(HEY_EMOJIES.length)]}`;
@@ -24,13 +36,7 @@ export const sendNotes = async (
   who: MessageType
 ) => {
   let content = who === "ADMIN" ? adminMsg : userMsg;
-  content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
-  NOTES.forEach((note) => {
-    content += `\n\n*_NAME_* : *${note.name}*\n\n -----------*Content*------------`;
-    note.content.forEach((noteContent) => {
-      content += `\n\nName of the Content: _${noteContent.name}_\nLink: ${noteContent.link}`;
-    });
-  });
+  content = notesFormatter(NOTES, content)
   if (who === "ADMIN") {
     const chats = await client.getChats();
     const bot = chats[BOT];
@@ -48,16 +54,6 @@ const sorryMsg = `Sorry ${
 
 const invalidMsg =
   "The filter is invalid or notes are not updated with the respective subject, please wait for a while we will upload the respective notes soon";
-
-const notesFormatter = (notes: Notes, content: string) => {
-  notes.forEach((note) => {
-    content += `\n\n*_NAME_* : *${note.name}*\n\n -----------*Content*------------`;
-    note.content.forEach((noteContent) => {
-      content += `\n\nName of the Content: _${noteContent.name}_\nLink: ${noteContent.link}`;
-    });
-  });
-  return content;
-};
 
 export const sendNotesByFilter = async (
   client: WAWebJS.Client,
@@ -98,11 +94,9 @@ export const sendNotesByFilter = async (
         bot.sendMessage(invalidMsg);
       } else if (who === "ADMIN") {
         content = notesFormatter(filteredNotes, content);
-        content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
         bot.sendMessage(content);
       } else {
         content = notesFormatter(filteredNotes, content);
-        content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
         sendAndDeleteMsg(client, messageInstance, who, content);
       }
 

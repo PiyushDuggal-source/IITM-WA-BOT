@@ -1,23 +1,42 @@
 import { Notes, YT_Playlist } from "../types/types";
 
+// Format/ Example
+
+// List
+// [
+//   Object List
+//   {
+//     Main Name of the Notes : /// Filter will search from this name first
+//     name: < Main Name >,
+//     List of Objects of Content of the Notes
+//     content: [
+//       Object of Name and Link of Notes
+//       {
+//         name: < Name of the Notes >,
+//         link: < Link of the notes >
+//       }
+//     ]
+//   }
+// ]
+
 export const NOTES: Notes = [
   {
     name: "IITM BSc Qualifier",
     content: [
       {
-        name: `Week 3 *Maths*`,
+        name: `Week 3 *Maths Solutions*`,
         link: "https://drive.google.com/file/d/1n6BHNj97NbX3j5CxCrdoT6o367E7dMtY/view?usp=sharing",
       },
       {
-        name: "Week 3 *English*",
+        name: "Week 3 *English Solutions*",
         link: "https://drive.google.com/file/d/1lv2ZAHQCTH5lYTl5xeqARcaGexciUzo1/view?usp=sharing",
       },
       {
-        name: "Week 3 *Computational Thinking*",
+        name: "Week 3 *Computational Thinking Solutions*",
         link: "https://drive.google.com/file/d/1LNClDC4UKjx6I-wgpgqScNfGT0dmf8M7/view?usp=sharing",
       },
       {
-        name: "Week 3 *Statistics*",
+        name: "Week 3 *Statistics Solutions*",
         link: "https://drive.google.com/file/d/19_bxpZMrKJo1GnV7rxI8_vCqVzfFVMQj/view?usp=sharing",
       },
     ],
@@ -44,7 +63,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Foundational Level *Statistics* | stat | stat1",
+    name: "Foundational Level *Statistics* | stats | stats1 | Statistics1",
     content: [
       // {
       //   name: "Stats week 1 - week 9",
@@ -55,7 +74,7 @@ export const NOTES: Notes = [
         link: "https://drive.google.com/file/d/1XnZOjJPpBNUn3lk-7ynCgT-AIjTL9AK_/view",
       },
       {
-        name: "Stats week 5 - week 6 PnC",
+        name: "Stats week 5 & 6 detailed notes | PnC",
         link: "https://drive.google.com/file/d/1qVj5F7HJ8WIWkG4oIaWBd8XQdft1etk2/view",
       },
     ],
@@ -105,14 +124,14 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Business Data Management",
+    name: "Business Data Management | BDM",
     content: [
       {
-        name: "BMS Formulas",
+        name: "BDM Formulas",
         link: "https://drive.google.com/file/d/1TODvW5yZL-U17HvzgSBZdmk8_UaWgcrp/view?usp=sharing",
       },
       {
-        name: "DMS Notes All Week",
+        name: "BDM Notes All Week",
         link: "https://drive.google.com/file/d/1VdqyTvNtUH1RjoI6znwIYgOixFn-cbbC/view?usp=sharing",
       },
     ],
