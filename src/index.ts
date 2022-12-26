@@ -122,7 +122,6 @@ mongoose
 
       let allChats = await client.getChats();
       const WA_BOT: WA_Grp = allChats[BOT];
-      allChats = [];
 
       // Command check logic
       if (
