@@ -36,7 +36,6 @@ import { pingEveryone } from "./actions/pingEveryone";
 const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
-console.log(__dirname);
 // Initialized App
 const app = express();
 

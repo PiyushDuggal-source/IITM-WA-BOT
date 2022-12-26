@@ -44,48 +44,48 @@ export const userControl = async (
     //   return;
 
     // Notes Replies
-    // } else
-    if (NOTES_CMD.includes(messageBody.split(" ")[0].toLocaleLowerCase())) {
-      if (messageBody.split(" ").length > 1) {
-        sendNotesByFilter(client, messageBody, messageInstance, who);
-      } else {
-        sendNotes(client, messageInstance, who);
-      }
-
-      // Calender Replies WITH Typos
-    } else if (
-      CALENDAR_COMMANDS.includes(messageBody.toLocaleLowerCase()) ||
-      CALENDAR_TYPOS.includes(messageBody.toLocaleLowerCase())
-    ) {
-      sendCalendar(client, messageInstance, who);
-      // Class Commands Replies
-    } else if (CLASS_COMMAND.includes(messageBody.toLocaleLowerCase())) {
-      sendClassMessage(client, messageInstance, who);
+  } else if (
+    NOTES_CMD.includes(messageBody.split(" ")[0].toLocaleLowerCase())
+  ) {
+    if (messageBody.split(" ").length > 1) {
+      sendNotesByFilter(client, messageBody, messageInstance, who);
+    } else {
+      sendNotes(client, messageInstance, who);
     }
 
-    // Help Commands Replies
-    else if (HELP_CMDS.includes(messageBody.toLocaleLowerCase())) {
-      help(client, messageInstance, who);
-    }
+    // Calender Replies WITH Typos
+  } else if (
+    CALENDAR_COMMANDS.includes(messageBody.toLocaleLowerCase()) ||
+    CALENDAR_TYPOS.includes(messageBody.toLocaleLowerCase())
+  ) {
+    sendCalendar(client, messageInstance, who);
+    // Class Commands Replies
+  } else if (CLASS_COMMAND.includes(messageBody.toLocaleLowerCase())) {
+    sendClassMessage(client, messageInstance, who);
+  }
 
-    // Source Command Reply
-    else if (SOURCE.includes(messageBody.toLocaleLowerCase())) {
-      sendSource(client, who);
-    }
+  // Help Commands Replies
+  else if (HELP_CMDS.includes(messageBody.toLocaleLowerCase())) {
+    help(client, messageInstance, who);
+  }
 
-    // For sending Important Dates
-    else if (IMP_DATES.includes(messageBody.toLocaleLowerCase())) {
-      sendImpDates(client, messageInstance, who);
-    }
+  // Source Command Reply
+  else if (SOURCE.includes(messageBody.toLocaleLowerCase())) {
+    sendSource(client, who);
+  }
 
-    // For sending Eligibility
-    else if (ELIGIBILITY.includes(messageBody.toLocaleLowerCase())) {
-      sendEligibility(client, messageInstance, who);
-    }
+  // For sending Important Dates
+  else if (IMP_DATES.includes(messageBody.toLocaleLowerCase())) {
+    sendImpDates(client, messageInstance, who);
+  }
 
-    // For sending Playlists
-    else if (PLALIST_CMD_ALISA.includes(messageBody.toLocaleLowerCase())) {
-      sendPlayList(client, messageInstance, who);
-    }
+  // For sending Eligibility
+  else if (ELIGIBILITY.includes(messageBody.toLocaleLowerCase())) {
+    sendEligibility(client, messageInstance, who);
+  }
+
+  // For sending Playlists
+  else if (PLALIST_CMD_ALISA.includes(messageBody.toLocaleLowerCase())) {
+    sendPlayList(client, messageInstance, who);
   }
 };

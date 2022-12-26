@@ -12,7 +12,6 @@ export const pingEveryone = async (
   const mentions: Contact[] = [];
   let text = "";
   for (const participants of ( WA_BOT as WA_Grp )?.participants || []) {
-    console.log(participants);
     text += `@${participants.id.user} `;
     const cont = await client.getContactById(participants.id._serialized);
     mentions.push(cont);
