@@ -106,8 +106,8 @@ export const NOTES: Notes = [
     content: [
       {
         name: "DBMS - Quick Guide",
-        link: "https://www.tutorialspoint.com/dbms/pdf/dbms_quick_guide.pdf"
-      }
+        link: "https://www.tutorialspoint.com/dbms/pdf/dbms_quick_guide.pdf",
+      },
     ],
   },
   {
@@ -191,6 +191,177 @@ export const NOTES: Notes = [
       },
     ],
   },
+
+  {
+    name: "Machine Learning Foundation | MLF",
+    content: [
+      {
+        name: "Machine Learning Foundation",
+        link: "https://www.cse.iitb.ac.in/~cs725/notes/classNotes/extra_lecturenotes_cs725.pdf",
+      },
+      {
+        name: "MLF Github Repository",
+        link: "https://github.com/ananddotiyer/IIT-M/tree/main/My%20Notes/MLF",
+      },
+      {
+        name: "Week 1 Notes",
+        link: "https://drive.google.com/file/d/1CW_lEfS-JakBvovKHQnxHJhnIp27us5L/view",
+      },
+      {
+        name: "Week 1 Notes",
+        link: "https://drive.google.com/file/d/1vG7LHVaBSKLByIw0wu3trYW4_rOrdxyn/view",
+      },
+      {
+        name: "Week 1 Notes",
+        link: "https://drive.google.com/file/d/1k1Dx8kqp3EFTkTvsRDvHXYDchoRuiG0z/view",
+      },
+      {
+        name: "Week 1 Notes",
+        link: "https://drive.google.com/file/d/11Nh4GgkxXoK-QeEWIqe1pXGrf_0HIrxq/view",
+      },
+      {
+        name: "Week 1 Notes",
+        link: "https://drive.google.com/file/d/1QU6Kr2uXDp2Ek9oGPOQ8MO97qp7asjU1/view",
+      },
+      {
+        name: "Week 2 Notes",
+        link: "https://drive.google.com/file/d/14TnY9X0RnCVu0UmV9uWLb4qHrcWYdJ7v/view",
+      },
+      {
+        name: "Week 2 Notes",
+        link: "https://drive.google.com/file/d/1yHTI1gU-rniMjrfQ1tCVRNDvaYN2BsNV/view",
+      },
+      {
+        name: "Week 2 Notes",
+        link: "https://drive.google.com/file/d/1z7178KpMbbmWkcMkE4HmF0s2oZF9I-aD/view",
+      },
+      {
+        name: "Week 2 Notes",
+        link: "https://drive.google.com/file/d/1kDS6elyfpKD8vmMBHfayPfZG4ea5Z3ju/view",
+      },
+      {
+        name: "Week 3 notes",
+        link: "https://drive.google.com/file/d/1elpwiyQob8XUYm8JVQH8uGfGEq3jIIVP/view",
+      },
+      {
+        name: "Week 3 notes",
+        link: "https://drive.google.com/file/d/1-fZTYab5_EgvW93aur5IbgRQ_cEsleOr/view",
+      },
+      {
+        name: "Week 3 notes",
+        link: "https://drive.google.com/file/d/1eg-Q13WDnW-0y8_uAD0OE7zInHsYCDDR/view",
+      },
+      {
+        name: "Week 4 Notes",
+        link: "https://drive.google.com/file/d/1NYq7R_6wRcNjpGd_XI36t5FVi9NaqcDv/view",
+      },
+      {
+        name: "Week 4 Notes",
+        link: "https://drive.google.com/file/d/1dEF4xpvVOnEfiDyo8PU6mQgUCsYEc3C_/view",
+      },
+      {
+        name: "Week 4 Notes",
+        link: "https://drive.google.com/file/d/1cj53-MfJdW2L-vjbiDkYLzKWBIoKsAg9/view",
+      },
+      {
+        name: "MLF Quiz 1 - Problems for Practice",
+        link: "https://drive.google.com/file/d/1_Osa0QT8cCPEBDNNKD2snDvKZrHcTvRj/view",
+      },
+      {
+        name: "Short Notes for Quiz 1",
+        link: "https://drive.google.com/file/d/1qr1CT3Phq9eDBMC2c1iR_RQ3gkXTUYx_/view",
+      },
+      {
+        name: "Week 5 Notes",
+        link: "https://drive.google.com/file/d/1hK_XsN9IF8CHvLLPtMLE8I4k7sNwIsdp/view",
+      },
+      {
+        name: "Week 5 Notes",
+        link: "https://drive.google.com/file/d/1Oh__8wCP2kOSbDm0hnGD17Q3i_cKyqnG/view",
+      },
+      {
+        name: "Week 5 Notes",
+        link: "https://drive.google.com/file/d/1Yc3eDgUej_n07tDHgKopbem5octBYU_6/view",
+      },
+      {
+        name: "Week 6 Notes",
+        link: "https://drive.google.com/file/d/19UA9mTCOdNcY0QXfAzQWjlSsUlAthvI8/view",
+      },
+      {
+        name: "Week 6 Notes",
+        link: "https://drive.google.com/file/d/1d7iOK1YjD5-eOw-DyxBaNdAfi_U4Kh9t/view",
+      },
+      {
+        name: "Week 6 Notes",
+        link: "https://drive.google.com/file/d/11nWxFuaGLH71whlQBwPz5KN_ziJSwhF6/view",
+      },
+      {
+        name: "Week 7 Notes",
+        link: "https://drive.google.com/file/d/1V2-EoALW1IwzuvkD7-9472F07D8qwq7T/view",
+      },
+      {
+        name: "Week 7 Notes",
+        link: "https://drive.google.com/file/d/1d9S0sZzIIWfStPaSqnLGXDcXEwLZ7LsY/view",
+      },
+      {
+        name: "Week 7 Notes",
+        link: "https://drive.google.com/file/d/1j9nDd2z-QJZGvy5B1_PZ34y9JH2SSKlo/view",
+      },
+      {
+        name: "Week 8 Notes",
+        link: "https://drive.google.com/file/d/1cnpJDyyy7a0pB-9qnmjgUG9DRGYoS0qe/view",
+      },
+      {
+        name: "Week 8 Notes",
+        link: "https://drive.google.com/file/d/1n6HIP0Tz6DJsV3whc59x0CG6SfS5KB2s/view",
+      },
+      {
+        name: "Week 8 Notes",
+        link: "https://drive.google.com/file/d/13q0cePBGjRE565eEM2lCC3Op6ZxuQhgx/view",
+      },
+      {
+        name: "Quiz 2 | Formula Sheet W5-W8",
+        link: "https://drive.google.com/file/d/11gPt33uq7QDv13JwD0UqmZwQ0h-Ripif/view",
+      },
+      {
+        name: "Week 9 Notes",
+        link: "https://drive.google.com/file/d/1Krj1Dk5UHv7F8rSqGu7Xb1dcCW4jfsRd/view",
+      },
+      {
+        name: "Week 9 Notes",
+        link: "https://drive.google.com/file/d/1gvDYSF4N-mL2cnfmjpL2BRXbPZZCXUpS/view",
+      },
+      {
+        name: "Week 9 Notes",
+        link: "https://drive.google.com/file/d/1wX3UnayHWI6gKKaea-WuKUMTvRjEIe1z/view",
+      },
+      {
+        name: "Week 10 Notes",
+        link: "https://drive.google.com/file/d/1z1KQGkZDHwAzhqNpSi75qUH4THr3V7yu/view",
+      },
+      {
+        name: "Week 10 Notes",
+        link: "https://drive.google.com/file/d/1ZmjhBzGIBPBtORl8BdjJ3k-gdVkjh4B8/view",
+      },
+      {
+        name: "Week 11 Notes",
+        link: "https://drive.google.com/file/d/1Vyo8NZyXTvxosS1R4EgX-gANErNUp-SJ/view",
+      },
+      {
+        name: "Week 12 Notes",
+        link: "https://drive.google.com/file/d/1dFrJqhOWViUWBf294m6SERE1oQYCR2G-/view",
+      },
+      {
+        name: "Week 12 Notes",
+        link: "https://drive.google.com/file/d/1i8rWKzUnp2q-8mGeOyI5fTYuwS1RJpGW/view",
+      },
+      {
+        name: "Week 1 - 12 | Formula Sheet",
+        link: "https://drive.google.com/file/d/12wiwPUaugeMuZBQTteRsXaxeeo3ElKrq/view",
+      },
+    ],
+  },
+
   {
     name: "Python Notes | PDAS | Data Structures and Algorithms using Python",
     content: [
@@ -491,5 +662,9 @@ export const PLAYLISTS: YT_Playlist = [
   {
     name: "Machine Learning Practice | MLP",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBb3ovNQam2c_WcGeiW9OhQo",
+  },
+  {
+    name: "Machine Learning Foundations",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBammhVmBE9f5eezTj2kDfTN",
   },
 ];

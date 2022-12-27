@@ -70,7 +70,7 @@ export const GREETINGS: Greetings = {
     "Good Guy",
     "An IITian",
   ],
-  memberMsgNumber: 8,
+  memberMsgNumber: 7,
 };
 
 export const HOLIDAY_REPLIES = {
