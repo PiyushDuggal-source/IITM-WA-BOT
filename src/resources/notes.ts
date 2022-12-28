@@ -610,7 +610,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Previous Year QP Solutions | October 16, 2022 | Qualifier",
+    name: "Previous Year QPs Solution | October 16, 2022 | Qualifier",
     content: [
       {
         name: "Quiz 1 | set 1 | T6 V4",
@@ -623,11 +623,114 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: "Previous Year QPs Solution | Aug 2022 Qualifier",
+    name: "Previous Year QPs Solution | Aug 2022 | Qualifier",
     content: [
       {
         name: "August 2022 | Qualifier",
         link: "https://drive.google.com/file/d/1H75PHzRQyBRZZiYTiyfxMOO7LV168Htw/view",
+      },
+    ],
+  },
+  {
+    name: "Previous Year QPs Solution | Jan 2022 | Qualifier",
+    content: [
+      {
+        name: "QPA1 | January 30, 2022 | Qualifier",
+        link: "https://drive.google.com/file/d/118YV7mFiBKvFp4zW_mBXAPU1Q5RaHHiz/view",
+      },
+      {
+        name: "QPA2 | January 30,2022 | Qualifier",
+        link: "https://drive.google.com/file/d/1B-qamtKZEp-7mIXumUQUmmBVEVBTm068/view",
+      },
+    ],
+  },
+  {
+    name: "Previous Year QPs Solution | July 2022 | Qualifier",
+    content: [
+      {
+        name: "QPA1 | July 10, 2022 | Qualifier",
+        link: "https://drive.google.com/file/d/1PZ3nq2Yd065gM-tfyCEiDWLDFKSLHN2V/view",
+      },
+    ],
+  },
+  {
+    name: "Previous Year QPs Solution | July 2021 | Qualifier",
+    content: [
+      {
+        name: "QPA | AN | July 2021 | Qualifier",
+        link: "https://drive.google.com/file/d/1d5OEfFWGIXmjatEYcqL1o0Nt6EsItrUh/view",
+      },
+      {
+        name: "QPB | AN | July 2021 | Qualifier",
+        link: "https://drive.google.com/file/d/19y6U_4hjeo5F-XrLzcH-vDgMJpk9x9E6/view",
+      },
+    ],
+  },
+  {
+    name: "Previous Year QPs Solution | June 2022 | Qualifier",
+    content: [
+      {
+        name: "QPA1 | June 5, 2022 | Qualifier | India",
+        link: "https://drive.google.com/file/d/1DngNx4wVKVRSqO1dREYsr7oShK0NZgNu/view",
+      },
+      {
+        name: "QPA2 | June 5, 2022 | Qualifier | India",
+        link: "https://drive.google.com/file/d/1cVepwok3CkNrZYZyDklZEf1LLjOZvegh/view",
+      },
+      {
+        name: "QPA1 | June 5, 2022 | Qualifier | Outside India",
+        link: "https://drive.google.com/file/d/1V4w83K7TM_dIWwFCMiD46O3oT-Wb1t-e/view",
+      },
+      {
+        name: "QPA2 | June 5, 2022 | Qualifier | Outside India",
+        link: "https://drive.google.com/file/d/1Mn6JtD7Pv008Zge-XMidZOd9tuyOsl7e/view",
+      },
+    ],
+  },
+  {
+    name: "Previous Year Reattempt QPs Solution | Mar 2022 | Reattempt Qualifier",
+    content: [
+      {
+        name: "QPA1 | Mar 13, 2022 | Reattempt Qualifier",
+        link: "https://drive.google.com/file/d/1qTDvW4iCQTwj3Io9zgQbutlUccQBEyRB/view",
+      },
+    ],
+  },
+  {
+    name: "Previous Year QPs Solution | Nov 2020 |  Qualifier",
+    content: [
+      {
+        name: "Q1 | QP1 | Foundation Qualifier | Nov 22, 2020",
+        link: "https://drive.google.com/file/d/1tsrhOj23I-mbwji_E39-QcJ06Uy1nl__/view",
+      },
+      {
+        name: "Q1 | QP2 | Foundation Qualifier | Nov 22, 2020",
+        link: "https://drive.google.com/file/d/1iIffct4WY9UhwI5CSk2PfQ9hwoH99QzB/view",
+      },
+      {
+        name: "Q1 | QP3 | Foundation Qualifier | Nov 22, 2020",
+        link: "https://drive.google.com/file/d/1lsqi3_ZC1fvmQ90o5ACQ1hX1H8ue5YOs/view",
+      },
+    ],
+  },
+  {
+    name: "Previous Year QPs Solution | Oct 2021 |  Qualifier",
+    content: [
+      {
+        name: "POD21 | QF3 | QPE | Oct 10, 2021 | Qualifier",
+        link: "https://drive.google.com/file/d/17IeOE5RDTQj65Vo-85HIaTH6NP6Hbhnd/view",
+      },
+      {
+        name: "POD21 | QF3 | QPF | Oct 10, 2021 | Qualifier",
+        link: "https://drive.google.com/file/d/1bHmkWgo1NcHTxudUOvEly7VFdkRktcIV/view",
+      },
+      {
+        name: "Quiz1 | Set 1 | Oct 2021 Solution | Maths",
+        link: "https://drive.google.com/file/d/1G6v_6qj06JVqlElRWgjzlHnGEri7C54B/view",
+      },
+      {
+        name: "Quiz1 | Set 2 | Oct 2021 Solution | Maths",
+        link: "https://drive.google.com/file/d/1T-91KL0JC8RuWM1kSNxWTXzXOIj-1lJR/view",
       },
     ],
   },
