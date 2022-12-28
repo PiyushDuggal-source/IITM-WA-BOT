@@ -616,6 +616,10 @@ export const NOTES: Notes = [
         name: "Quiz 1 | set 1 | T6 V4",
         link: "https://drive.google.com/drive/folders/1zcU-Jw3zBfrYYaRdQmYHnIKZ3xwWIr_3",
       },
+      {
+        name: "Qualifier | QPA1 ",
+        link: "https://drive.google.com/file/d/1Q1_7GyudLvK5Sd5Ay3End41zVgYvhSUJ/view",
+      },
     ],
   },
 ];
