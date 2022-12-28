@@ -622,6 +622,15 @@ export const NOTES: Notes = [
       },
     ],
   },
+  {
+    name: "Previous Year QPs Solution | Aug 2022 Qualifier",
+    content: [
+      {
+        name: "August 2022 | Qualifier",
+        link: "https://drive.google.com/file/d/1H75PHzRQyBRZZiYTiyfxMOO7LV168Htw/view",
+      },
+    ],
+  },
 ];
 
 export const PLAYLISTS: YT_Playlist = [
