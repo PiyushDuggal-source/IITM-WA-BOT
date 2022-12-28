@@ -600,6 +600,24 @@ export const NOTES: Notes = [
       },
     ],
   },
+  {
+    name: "Previous Year QPs | 20 Nov 2022",
+    content: [
+      {
+        name: "QP1 | Qualifier",
+        link: "https://drive.google.com/file/d/197w2sIwkSYjoEngsoZgrWc-MSBi7GxDn/view",
+      },
+    ],
+  },
+  {
+    name: "Previous Year QP Solutions | October 16, 2022 | Qualifier",
+    content: [
+      {
+        name: "Quiz 1 | set 1 | T6 V4",
+        link: "https://drive.google.com/drive/folders/1zcU-Jw3zBfrYYaRdQmYHnIKZ3xwWIr_3",
+      },
+    ],
+  },
 ];
 
 export const PLAYLISTS: YT_Playlist = [

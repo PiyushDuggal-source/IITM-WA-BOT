@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# chmod +x gitpush.sh
+
 GIT='git --git-dir='$PWD'/.git'
 
 gitFunction ()
