@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../src/utils/Commands/allCmds.ts"],
-  "sourcesContent": ["import { BOT_CHECK_MESSAGES } from \"../messages/messages\";\r\nimport {\r\n  CALENDAR_COMMANDS,\r\n  CLASS_COMMAND,\r\n  COMMANDS,\r\n  HELP_CMDS,\r\n  NOTES_CMD,\r\n  PLALIST_CMD,\r\n  SOURCE,\r\n} from \"./instructions\";\r\nexport const User_AllCommands: string[][] = [\r\n  CALENDAR_COMMANDS,\r\n  CLASS_COMMAND,\r\n  COMMANDS,\r\n  NOTES_CMD,\r\n  PLALIST_CMD,\r\n  HELP_CMDS,\r\n  BOT_CHECK_MESSAGES,\r\n  SOURCE,\r\n];\r\n"],
-  "mappings": "mlBAAA,0CAAmC,mCACnC,EAQO,6BACA,KAAM,GAA+B,CAC1C,oBACA,gBACA,WACA,YACA,cACA,YACA,qBACA",
+  "sourcesContent": ["import { BOT_CHECK_MESSAGES } from \"../messages/messages\";\nimport {\n  CALENDAR_COMMANDS,\n  CLASS_COMMAND,\n  COMMANDS,\n  HELP_CMDS,\n  NOTES_CMD,\n  PLAYLIST_CMD,\n  SOURCE,\n} from \"./instructions\";\nexport const User_AllCommands: string[][] = [\n  CALENDAR_COMMANDS,\n  CLASS_COMMAND,\n  COMMANDS,\n  NOTES_CMD,\n  PLAYLIST_CMD,\n  HELP_CMDS,\n  BOT_CHECK_MESSAGES,\n  SOURCE,\n];\n"],
+  "mappings": "mlBAAA,0CAAmC,mCACnC,EAQO,6BACA,KAAM,GAA+B,CAC1C,oBACA,gBACA,WACA,YACA,eACA,YACA,qBACA",
   "names": []
 }
