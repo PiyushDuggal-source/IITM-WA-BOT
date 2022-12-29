@@ -11,7 +11,7 @@ import {
   HELP_CMDS,
   IMP_DATES,
   NOTES_CMD,
-  PLALIST_CMD_ALISA,
+  PLAYLIST_CMD_ALIAS,
   SOURCE,
 } from "../../utils/Commands/instructions";
 import { BOT } from "../..";
@@ -21,7 +21,7 @@ import { sendClassMessage } from "../../actions/sendClassMessage";
 import { help } from "../../actions/help";
 import { sendSource } from "../../actions/sendSource";
 import { sendEligibility, sendImpDates } from "../../actions/courseInfo";
-import { sendPlayList } from "../../actions/sendPlaylist";
+import { sendPlayList, sendPlayListByFilter } from "../../actions/sendPlaylist";
 import { MessageType } from "../../types/types";
 
 export const adminControl = async (
@@ -87,7 +87,11 @@ export const adminControl = async (
   }
 
   // For sending Playlists
-  else if (PLALIST_CMD_ALISA.includes(messageBody.toLocaleLowerCase())) {
-    sendPlayList(client, messageInstance, who);
+  else if (PLAYLIST_CMD_ALIAS.includes(messageBody.split(" ")[0].toLocaleLowerCase())) {
+    if (messageBody.split(" ").length > 1) {
+      sendPlayListByFilter(client, messageBody, messageInstance, who);
+    } else {
+      sendPlayList(client, messageInstance, who);
+    }
   }
 };

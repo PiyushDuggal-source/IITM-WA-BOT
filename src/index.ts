@@ -39,11 +39,6 @@ dotenv.config();
 // Initialized App
 const app = express();
 
-
-
-
-
-
 // For Development Enviornment
 const LOCAL = String(process.env.dev) === "true";
 export const BOT = LOCAL ? 1 : 0;

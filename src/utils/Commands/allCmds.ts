@@ -5,7 +5,7 @@ import {
   COMMANDS,
   HELP_CMDS,
   NOTES_CMD,
-  PLALIST_CMD,
+  PLAYLIST_CMD,
   SOURCE,
 } from "./instructions";
 export const User_AllCommands: string[][] = [
@@ -13,7 +13,7 @@ export const User_AllCommands: string[][] = [
   CLASS_COMMAND,
   COMMANDS,
   NOTES_CMD,
-  PLALIST_CMD,
+  PLAYLIST_CMD,
   HELP_CMDS,
   BOT_CHECK_MESSAGES,
   SOURCE,
