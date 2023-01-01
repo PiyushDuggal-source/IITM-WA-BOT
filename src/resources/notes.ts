@@ -738,11 +738,11 @@ export const NOTES: Notes = [
 
 export const PLAYLISTS: YT_Playlist = [
   {
-    name: "Mathematics for Data Science",
+    name: "Mathematics for Data Science | Maths",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZYDZo9A0pZ_i0xhstrk5cR",
   },
   {
-    name: "Statistics for Data Science 1",
+    name: "Statistics for Data Science 1 | Stats | Stats1",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYrMs3zybOqr1DzMFCX49xG",
   },
   {
@@ -754,11 +754,11 @@ export const PLAYLISTS: YT_Playlist = [
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbf28nnkgAuFwaWjGtjaNck",
   },
   {
-    name: "Mathematics for Data Science 2",
+    name: "Mathematics for Data Science 2 | Maths",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBboGlwPVSsWP8loAJCLrKc8",
   },
   {
-    name: "Statistics for Data Science 2",
+    name: "Statistics for Data Science 2 | Stats | Stats2",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbLZ6RdNTIXvFdaMpvqagt0",
   },
   {
@@ -774,7 +774,7 @@ export const PLAYLISTS: YT_Playlist = [
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYc4jkUk_yQAjYEVFzVzhdU",
   },
   {
-    name: "Programming, Data Structures and Algorithms using Python | DSA",
+    name: "Programming, Data Structures and Algorithms using Python | DSA | PDSA",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaDccbZRgiU1sHX2gZrQ-XT",
   },
   {
@@ -798,7 +798,11 @@ export const PLAYLISTS: YT_Playlist = [
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBb3ovNQam2c_WcGeiW9OhQo",
   },
   {
-    name: "Machine Learning Foundations",
+    name: "Machine Learning Foundations | MLF",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBammhVmBE9f5eezTj2kDfTN",
+  },
+  {
+    name: "Machine Learning Techniques | MLT",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbim4oKfdSdOpLyUwNd8UQL",
   },
 ];

@@ -13,7 +13,7 @@ export type USER = "USER";
 export type NONE = "NONE";
 
 /**
- * userID as string or "NONE" or Boolean
+ * userID as string or "NONE"
  */
 export type MessageType = string | NONE | ADMIN;
 
@@ -63,7 +63,6 @@ export type Notes = {
 }[];
 
 // Group Leave/Join Image Type
-
 export type GroupLeaveORJoinImg = {
   images: string[];
   numOfImgs: number;
