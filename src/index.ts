@@ -143,26 +143,30 @@ mongoose
       ) {
         await main(client, message, who);
       }
+      // !@onlyUseOnce ONLY USE ONCE
       if (who === "ADMIN" && message.body === "load") {
+        console.log(WA_BOT.participants);
         WA_BOT.participants?.forEach(async (participant) => {
-          await UserModel.create({
+          UserModel.create({
             name: participant.id.user,
             chatId: participant.id._serialized,
           });
         });
         WA_BOT.sendMessage(
-          "ADDED ALL THE STUDENTS TO THE DB SUCCESSFULLY MASTER!"
+          "SUCCESSFULLY ADDED ALL THE STUDENTS IN THE DB, MASTER!"
         );
       }
     });
 
     // Event "GROUP_JOIN"
     client.on("group_join", async (msg: GroupNotification) => {
-      log({
-        msg: `${msg.recipientIds[0]} Joined the Group`,
-        type: "GROUP_JOIN",
-        error: false,
-      });
+      if (msg.chatId === (process.env.WA_BOT_ID as string)) {
+        log({
+          msg: `${msg.recipientIds[0]} Joined the Group`,
+          type: "GROUP_JOIN",
+          error: false,
+        });
+      }
       if (msg.chatId === WA_BOT_ID) {
         const contact = await client.getNumberId(msg.recipientIds[0]);
         const details = await client.getContactById(contact?._serialized || "");
@@ -170,8 +174,7 @@ mongoose
           sendAndDeleteMsg(
             client,
             msg,
-            msg.recipientIds[0],
-            `${process.env.BOT_NAME as String}: *${
+            msg.recipientIds[0], `${process.env.BOT_NAME as String}: *${
               details.name
             }* Thanks for joining the Group!\n${
               USER_JOIN_GREETINGS.messages[
@@ -228,14 +231,33 @@ mongoose
         }
       }
     });
+
+    // GroupNotification {
+    //   id: {
+    //     fromMe: boolean,
+    //     remote: '1203630xxxxxxxxx@g.us',
+    //     id: '26650709261xxxxxxxxxx',
+    //     participant: '919990xxxxxxxx@c.us',
+    //     _serialized: 'false_12036xxxxxxxxxxxxx475@g.us_2665xxxxxxxxxxxx72395334_91xxxxxxxxxxxxx656@c.us'
+    //   },
+    //   body: '',
+    //   type: 'invite',
+    //   timestamp: 1672395334,
+    //   chatId: '1203630442xxxxxxxxx@g.us',
+    //   author: undefined,
+    //   recipientIds: [ '9199902xxxxxxxxx@c.us' ]
+    // }
     client.on(
       "group_leave",
       async (notification: WAWebJS.GroupNotification) => {
-        log({
-          msg: `${notification.recipientIds[0]} left the Group`,
-          type: "GROUP_LEFT",
-          error: false,
-        });
+        let grpId = notification.chatId;
+        if (grpId === (process.env.WA_BOT_ID as string)) {
+          log({
+            msg: `${notification.recipientIds[0]} left the Group`,
+            type: "GROUP_LEFT",
+            error: false,
+          });
+        }
         const sticker = MessageMedia.fromFilePath(
           `${__dirname}/../src/assets/images/grpJoinLeaveImgs/${
             grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
@@ -244,9 +266,12 @@ mongoose
         if (notification.chatId === WA_BOT_ID) {
           const allChats = await client.getChats();
           const WA_BOT = allChats[BOT];
-          WA_BOT.sendMessage(`${process.env.BOT_NAME as String}:`);
+          WA_BOT.sendMessage(
+            `${process.env.BOT_NAME as String}: somebody left`
+          );
           WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
         }
+        await UserModel.findOneAndDelete({ chatId: notification.chatId });
       }
     );
 
