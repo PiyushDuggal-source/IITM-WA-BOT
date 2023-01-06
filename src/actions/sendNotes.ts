@@ -53,7 +53,7 @@ const sorryMsg = `Sorry ${
 }`;
 
 const invalidMsg =
-  "The filter is invalid or notes are not updated with the respective subject, please wait for a while we will upload the respective notes soon";
+  "The filter is invalid, please use your *permutation* and *combination* knowledge to serach for your notes, like:\n*!notes mad1* -> *!notes mad*\nor else, please wait for a while, we will upload the respective notes soon";
 
 export const sendNotesByFilter = async (
   client: WAWebJS.Client,
