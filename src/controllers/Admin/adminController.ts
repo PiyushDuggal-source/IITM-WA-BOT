@@ -1,6 +1,6 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { random } from "../../actions/sendMessage";
-import { BOT_CHECK_MESSAGES } from "../../utils/messages/messages";
+import { BOT_CHECK_MESSAGES } from "../../utils/Commands/instructions";
 import { PING_REPLIES } from "../../utils/reply/replies";
 import {
   CALENDAR_COMMANDS,
@@ -32,8 +32,8 @@ export const adminControl = async (
   const messageBody = messageInstance.body.slice(1);
   // Ping Replies
   if (BOT_CHECK_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
-  const chats = await client.getChats();
-  const WA_BOT = chats[BOT];
+    const chats = await client.getChats();
+    const WA_BOT = chats[BOT];
     await WA_BOT.sendMessage(
       `${process.env.BOT_NAME}: ${
         PING_REPLIES.admin[random(PING_REPLIES.adminMsgNumber)]
@@ -87,7 +87,9 @@ export const adminControl = async (
   }
 
   // For sending Playlists
-  else if (PLAYLIST_CMD_ALIAS.includes(messageBody.split(" ")[0].toLocaleLowerCase())) {
+  else if (
+    PLAYLIST_CMD_ALIAS.includes(messageBody.split(" ")[0].toLocaleLowerCase())
+  ) {
     if (messageBody.split(" ").length > 1) {
       sendPlayListByFilter(client, messageBody, messageInstance, who);
     } else {

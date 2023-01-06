@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../src/utils/messages/messages.ts"],
-  "sourcesContent": ["export const BOT_CHECK_MESSAGES = [\"check\", \"up\", \"bot\", \"online\"];\n"],
-  "mappings": "qIAAA,sCAAO,KAAM,GAAqB,CAAC,QAAS,KAAM,MAAO",
-  "names": []
-}

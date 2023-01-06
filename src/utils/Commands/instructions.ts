@@ -26,3 +26,4 @@ export const IMP_DATES = ["impdates", "importantdates", "dates"];
 export const ELIGIBILITY = ["eligibility", "eligible"];
 export const PLAYLIST_CMD = ["playlist"];
 export const PLAYLIST_CMD_ALIAS = ["playlist", "plst"];
+export const BOT_CHECK_MESSAGES = ["check", "up", "bot", "online"];

@@ -1,4 +1,4 @@
-import { BOT_CHECK_MESSAGES } from "../messages/messages";
+import { BOT_CHECK_MESSAGES } from "../Commands/instructions";
 import {
   CALENDAR_COMMANDS,
   CLASS_COMMAND,

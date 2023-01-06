@@ -19,7 +19,7 @@ import {
 } from "../../utils/Commands/instructions";
 import { sendPlayList, sendPlayListByFilter } from "../../actions/sendPlaylist";
 import { MessageType } from "../../types/types";
-import { BOT_CHECK_MESSAGES } from "../../utils/messages/messages";
+import { BOT_CHECK_MESSAGES } from "../../utils/Commands/instructions";
 import { PING_REPLIES } from "../../utils/reply/replies";
 import { BOT } from "../..";
 export const userControl = async (
@@ -85,7 +85,9 @@ export const userControl = async (
   }
 
   // For sending Playlists
-  else if (PLAYLIST_CMD_ALIAS.includes(messageBody.split(" ")[0].toLocaleLowerCase())) {
+  else if (
+    PLAYLIST_CMD_ALIAS.includes(messageBody.split(" ")[0].toLocaleLowerCase())
+  ) {
     if (messageBody.split(" ").length > 1) {
       sendPlayListByFilter(client, messageBody, messageInstance, who);
     } else {
