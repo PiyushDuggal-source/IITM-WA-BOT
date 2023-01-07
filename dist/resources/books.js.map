@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/resources/books.ts"],
+  "sourcesContent": ["import { BOOKS_Type } from \"../types/types\";\n\nexport const BOOKS: BOOKS_Type = [\n  {\n    name: \"Python For Everybody | PDSA\",\n    link: \"https://drive.google.com/file/d/13IxSb13DHLX1Eyjp-UVW0EM1YiXiw6Rd/view\",\n  },\n  {\n    name: \"Introductory Algebra - A real world Approach 4th Edition\",\n    link: \"https://drive.google.com/file/d/1qBUPE6dizYSZueigxys7d9EegRIwul7p/view\",\n  },\n  {\n    name: \"Calculus book\",\n    link: \"https://drive.google.com/file/d/14MHuam2tPpJ0AHqJ_KarXuDyj930v5HL/view\",\n  },\n];\n"],
+  "mappings": "qIAAA,yBAEO,KAAM,GAAoB,CAC/B,CACE,KAAM,8BACN,KAAM,0EAER,CACE,KAAM,2DACN,KAAM,0EAER,CACE,KAAM,gBACN,KAAM",
+  "names": []
+}
