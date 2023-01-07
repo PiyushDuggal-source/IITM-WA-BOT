@@ -1,11 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/actions/pingEveryone.ts"],
-<<<<<<< HEAD
-  "sourcesContent": ["import { Client, Message } from \"whatsapp-web.js\";\r\nimport { BOT } from \"..\";\r\nimport { WA_Grp } from \"../types/types\";\r\n\r\nexport const pingEveryone = async (\r\n  client: Client,\r\n  message: Message\r\n) => {\r\n  const allChats = await client.getChats();\r\n  const WA_BOT = allChats[BOT];\r\n  const mentions = [];\r\n  let text = \"\";\r\n  for (const participants of ( WA_BOT as WA_Grp )?.participants || []) {\r\n    text += `@${participants.id.user} `;\r\n    const contact = await client.getContactById(participants.id._serialized);\r\n    mentions.push(contact);\r\n  }\r\n  message.reply(text, \"\", { mentions });\r\n};\r\n"],
-=======
   "sourcesContent": ["import { Client, Message } from \"whatsapp-web.js\";\nimport { BOT } from \"..\";\nimport { WA_Grp } from \"../types/types\";\n\nexport const pingEveryone = async (\n  client: Client,\n  message: Message\n) => {\n  const allChats = await client.getChats();\n  const WA_BOT = allChats[BOT];\n  const mentions = [];\n  let text = \"\";\n  for (const participants of ( WA_BOT as WA_Grp )?.participants || []) {\n    text += `@${participants.id.user} `;\n    const contact = await client.getContactById(participants.id._serialized);\n    mentions.push(contact);\n  }\n  message.reply(text, \"\", { mentions });\n};\n"],
->>>>>>> a724465 (added/build)
   "mappings": "mlBAAA,gCACA,MAAoB,iBAGb,KAAM,GAAe,MAC1B,EACA,IACG,CAEH,KAAM,GAAS,AADE,MAAM,GAAO,YACN,OAClB,EAAW,GACjB,GAAI,GAAO,GACX,SAAW,KAAkB,kBAAoB,eAAgB,GAAI,CACnE,GAAQ,IAAI,EAAa,GAAG,QAC5B,KAAM,GAAU,KAAM,GAAO,eAAe,EAAa,GAAG,aAC5D,EAAS,KAAK,GAEhB,EAAQ,MAAM,EAAM,GAAI,CAAE",
   "names": []
 }

@@ -1,12 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/services/modals.ts"],
-<<<<<<< HEAD
-  "sourcesContent": ["import { model, Schema } from \"mongoose\";\r\ntype Roles = \"ADMIN\" | \"STUDENT\";\r\n\r\ntype User = {\r\n  name: string | undefined;\r\n  chatId: string;\r\n  notificationSend: boolean;\r\n  roles: Roles;\r\n};\r\n\r\nconst users = new Schema<User>({\r\n  name: { type: String, required: true },\r\n  notificationSend: { type: Boolean, required: true, default: true },\r\n  chatId: { type: String },\r\n  roles: { type: String, default: \"STUDENT\" },\r\n});\r\n\r\nexport const UserModel = model(\"Users\", users);\r\n"],
+  "sourcesContent": ["import { model, Schema } from \"mongoose\";\ntype Roles = \"ADMIN\" | \"STUDENT\";\n\ntype User = {\n  name: string | undefined;\n  chatId: string;\n  notificationSend: boolean;\n  roles: Roles;\n};\n\nconst users = new Schema<User>({\n  name: { type: String, required: true },\n  notificationSend: { type: Boolean, required: true, default: true },\n  chatId: { type: String },\n  roles: { type: String, default: \"STUDENT\" },\n});\n\nexport const UserModel = model(\"Users\", users);\n"],
   "mappings": "mlBAAA,mCAA8B,uBAU9B,KAAM,GAAQ,GAAI,UAAa,CAC7B,KAAM,CAAE,KAAM,OAAQ,SAAU,IAChC,iBAAkB,CAAE,KAAM,QAAS,SAAU,GAAM,QAAS,IAC5D,OAAQ,CAAE,KAAM,QAChB,MAAO,CAAE,KAAM,OAAQ,QAAS,aAGrB,EAAY,YAAM,QAAS",
-=======
-  "sourcesContent": ["import { Document, model, Schema } from \"mongoose\";\n\ntype Roles = \"USER\" | \"ADMIN\";\n\ninterface User extends Document {\n  name: string | undefined;\n  chatId: string;\n  notificationSend: boolean;\n  roles: Roles;\n}\n\nconst users = new Schema<User>({\n  name: { type: String, required: true, unique: true },\n  notificationSend: { type: Boolean, required: true, default: true },\n  chatId: { type: String },\n  roles: { type: String, default: \"USER\" },\n});\n\nexport const UserModel = model<User>(\"Users\", users);\n"],
-  "mappings": "mlBAAA,mCAAwC,uBAWxC,KAAM,GAAQ,GAAI,UAAa,CAC7B,KAAM,CAAE,KAAM,OAAQ,SAAU,GAAM,OAAQ,IAC9C,iBAAkB,CAAE,KAAM,QAAS,SAAU,GAAM,QAAS,IAC5D,OAAQ,CAAE,KAAM,QAChB,MAAO,CAAE,KAAM,OAAQ,QAAS,UAGrB,EAAY,YAAY,QAAS",
->>>>>>> a724465 (added/build)
   "names": []
 }
