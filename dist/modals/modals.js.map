@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/modals/modals.ts"],
+  "sourcesContent": ["import { model, Schema } from \"mongoose\";\n\ntype Roles = \"ADMIN\" | \"STUDENT\" | \"LITTLE_ADMIN\";\n\ntype User = {\n  recipitantId: string;\n  notifyForEvents: Boolean;\n  roles: Roles;\n  numberOfCmds: number;\n};\n\nconst users = new Schema<User>({\n  recipitantId: { type: String },\n  notifyForEvents: { type: Boolean, default: true },\n  roles: { type: String, default: \"STUDENT\" },\n  numberOfCmds: {type: Number, default: 0}\n});\n\nexport const UserModel = model(\"Users\", users);\n"],
+  "mappings": "mlBAAA,mCAA8B,uBAW9B,KAAM,GAAQ,GAAI,UAAa,CAC7B,aAAc,CAAE,KAAM,QACtB,gBAAiB,CAAE,KAAM,QAAS,QAAS,IAC3C,MAAO,CAAE,KAAM,OAAQ,QAAS,WAChC,aAAc,CAAC,KAAM,OAAQ,QAAS,KAG3B,EAAY,YAAM,QAAS",
+  "names": []
+}

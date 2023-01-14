@@ -13,7 +13,7 @@ Link: ${t.link}`})}),s+=`
 Eg: *!notes {SubjectName}* _without {}_
 
 Note: _I am not connected, associated, affiliated with any of the Owners of these links to Promote, Encourage any Channel/Group, I found the links on internet only._`;const O=async(e,s,o)=>{let t=o==="ADMIN"?C:b;t=u(g.NOTES,t),o==="ADMIN"?(await e.getChats())[p.BOT].sendMessage(t):o!=="NONE"&&(0,M.sendAndDeleteMsg)(e,s,o,t)},_=`Sorry ${n.GREETINGS.member[(0,r.random)(n.GREETINGS.memberMsgNumber)]}
-Only one word is allowed after !notes command ${n.HEY_EMOJIES[(0,r.random)(n.HEY_EMOJIES.length)]}`,I=`The filter is invalid, please use your *permutation* and *combination* knowledge to serach for your notes, like:
+Only one word is allowed after !notes command ${n.HEY_EMOJIES[(0,r.random)(n.HEY_EMOJIES.length)]}`,I=`The filter is invalid, please use your *permutation* and *combination* knowledge to search for your notes, like:
 *!notes mad1* -> *!notes mad*
 or else, please wait for a while, we will upload the respective notes soon`,k=async(e,s,o,t)=>{const m=s.split(" ");if(t!=="NONE"){const d=(await e.getChats())[p.BOT];if(m.length>2)d.sendMessage(_);else{const l=g.NOTES.filter(c=>c.name.toLocaleLowerCase().includes(m[1].toLocaleLowerCase()));l.length||g.NOTES.forEach(c=>{c.content.filter(E=>{E.name.toLocaleLowerCase().includes(m[1].toLocaleLowerCase())&&l.push(c)})});let a=b;l.length?t==="ADMIN"?(a=u(l,a),d.sendMessage(a)):(a=u(l,a),(0,M.sendAndDeleteMsg)(e,o,t,a)):d.sendMessage(I)}}};0&&(module.exports={sendNotes,sendNotesByFilter});
 //# sourceMappingURL=sendNotes.js.map

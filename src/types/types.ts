@@ -18,7 +18,6 @@ export type NONE = "NONE";
 export type MessageType = string | NONE | ADMIN;
 
 // Commands btn List
-
 export type CommandButtons = {
   id: string;
   title: string;
@@ -26,7 +25,6 @@ export type CommandButtons = {
 }[];
 
 // Calendar Types
-
 export type Calendar = {
   topic: string;
   time: string;
@@ -46,14 +44,12 @@ export type Greetings = {
 };
 
 // User Join Greetings Type
-
 export type UserJoinGreetings = {
   messages: string[];
   messageNum: number;
 };
 
 // Notes Types
-
 export type Notes = {
   name: string;
   content: {
@@ -69,7 +65,6 @@ export type GroupLeaveORJoinImg = {
 };
 
 // YT Playlist Types
-
 export type YT_Playlist = {
   name: string;
   link: string;

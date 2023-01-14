@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/services/mongo.ts"],
+  "sourcesContent": ["import { UserModel } from \"../modals/modals\";\n\nexport const addUser = async ({ recipitantId }: { recipitantId: string }) => {\n  try {\n    await UserModel.create({\n      recipitantId,\n    });\n  } catch (error: any) {\n    console.log(error);\n  }\n};\n\n\nexport const removeUser = async ({\n  recipitantId,\n}: {\n  recipitantId: string;\n}) => {\n  try {\n    await UserModel.deleteOne({ recipitantId }).exec();\n  } catch (error: any) {\n    console.log(error);\n  }\n};\n\nexport const increaseNumberOfCmd = async ({\n  recipitantId,\n}: {\n  recipitantId: string;\n}) => {\n  await UserModel.findOneAndUpdate(\n    { recipitantId },\n    {\n      $inc: { numberOfCmds: 1 },\n    }\n  );\n};\n"],
+  "mappings": "mlBAAA,4EAA0B,+BAEnB,KAAM,GAAU,MAAO,CAAE,kBAA6C,CAC3E,GAAI,CACF,KAAM,aAAU,OAAO,CACrB,uBAEK,EAAP,CACA,QAAQ,IAAI,KAKH,EAAa,MAAO,CAC/B,kBAGI,CACJ,GAAI,CACF,KAAM,aAAU,UAAU,CAAE,iBAAgB,aACrC,EAAP,CACA,QAAQ,IAAI,KAIH,EAAsB,MAAO,CACxC,kBAGI,CACJ,KAAM,aAAU,iBACd,CAAE,gBACF,CACE,KAAM,CAAE,aAAc",
+  "names": []
+}
