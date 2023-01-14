@@ -12,7 +12,7 @@ export const sendImpDates = async (
   const impDatesImg = MessageMedia.fromFilePath(
     `${__dirname}/../assets/images/impDates/impDates.png`
   );
-  if (who === "ADMIN") {
+  if (who === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(impDatesImg, {

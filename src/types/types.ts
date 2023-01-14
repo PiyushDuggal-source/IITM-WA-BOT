@@ -9,13 +9,15 @@ export type PingReplies = {
 };
 
 export type ADMIN = "ADMIN";
+export type OWNER = "OWNER";
 export type USER = "USER";
 export type NONE = "NONE";
 
 /**
- * userID as string or "NONE"
+ * Returns "OWNER", "ADMIN", "USER_ID" or NONE 
+ * `OWNER`
  */
-export type MessageType = string | NONE | ADMIN;
+export type MessageType = string | NONE | ADMIN | OWNER;
 
 // Commands btn List
 

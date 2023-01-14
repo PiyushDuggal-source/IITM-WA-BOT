@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-type Roles = "ADMIN" | "STUDENT" | "SUPER_ADMIN";
+type Roles = "ADMIN" | "STUDENT" | "LITTLE_ADMIN";
 
 type User = {
   recipitantId: string;

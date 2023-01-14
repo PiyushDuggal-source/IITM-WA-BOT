@@ -14,19 +14,18 @@ export const sendMessage = async (
   who: MessageType,
   cmds?: boolean,
   classMsg?: {
-    classMsg: boolean;
+    classMsg: boolean
   },
   help?: boolean
 ) => {
-  if (who === "ADMIN") {
+  if (who === "OWNER") {
     const chats = await client.getChats();
     const WA_BOT = chats[BOT];
     if (cmds) {
       WA_BOT.sendMessage(messageToSend);
     } else if (help) {
-      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
-        FOOTERS.footers[random(FOOTERS.footerMsgLength)]
-      }`;
+      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]
+        }`;
       WA_BOT.sendMessage(msg);
     } else {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
@@ -34,11 +33,12 @@ export const sendMessage = async (
     }
   } else if (who !== "NONE") {
     const userId = messageInstance.author;
-    if (classMsg?.classMsg) {
-      const chats = await client.getChats();
-      const WA_BOT = chats[BOT];
-      WA_BOT.sendMessage(messageToSend);
-    } else if (cmds) {
+    if(classMsg?.classMsg){
+    const chats = await client.getChats();
+    const WA_BOT = chats[BOT];
+  WA_BOT.sendMessage(messageToSend);
+    }
+    if (cmds) {
       sendAndDeleteMsg(
         client,
         messageInstance,
@@ -46,9 +46,8 @@ export const sendMessage = async (
         messageToSend
       );
     } else if (help) {
-      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
-        FOOTERS.footers[random(FOOTERS.footerMsgLength)]
-      }`;
+      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]
+        }`;
       sendAndDeleteMsg(client, messageInstance, userId as string, msg);
     } else {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;

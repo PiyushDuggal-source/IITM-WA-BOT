@@ -22,6 +22,7 @@ import { MessageType } from "../../types/types";
 import { BOT_CHECK_MESSAGES } from "../../utils/Commands/instructions";
 import { PING_REPLIES } from "../../utils/reply/replies";
 import { BOT } from "../..";
+import { increaseNumberOfCmd } from "../../services/mongo";
 export const userControl = async (
   client: WAWebJS.Client,
   messageInstance: WAWebJS.Message,
@@ -42,8 +43,8 @@ export const userControl = async (
     // if (COMMANDS.includes(messageBody.toLocaleLowerCase())) {
     //   sendMessage(client, USER_COMMANDS, messageInstance, who, true);
     //   return;
-
     // Notes Replies
+    increaseNumberOfCmd({ recipitantId: who });
   } else if (
     NOTES_CMD.includes(messageBody.split(" ")[0].toLocaleLowerCase())
   ) {
@@ -52,7 +53,7 @@ export const userControl = async (
     } else {
       sendNotes(client, messageInstance, who);
     }
-
+    increaseNumberOfCmd({ recipitantId: who });
     // Calender Replies WITH Typos
   } else if (
     CALENDAR_COMMANDS.includes(messageBody.toLocaleLowerCase()) ||
@@ -60,6 +61,7 @@ export const userControl = async (
   ) {
     sendCalendar(client, messageInstance, who);
     // Class Commands Replies
+    increaseNumberOfCmd({ recipitantId: who });
   } else if (CLASS_COMMAND.includes(messageBody.toLocaleLowerCase())) {
     sendClassMessage(client, messageInstance, who);
   }
@@ -67,21 +69,25 @@ export const userControl = async (
   // Help Commands Replies
   else if (HELP_CMDS.includes(messageBody.toLocaleLowerCase())) {
     help(client, messageInstance, who);
+    increaseNumberOfCmd({ recipitantId: who });
   }
 
   // Source Command Reply
   else if (SOURCE.includes(messageBody.toLocaleLowerCase())) {
     sendSource(client, who);
+    increaseNumberOfCmd({ recipitantId: who });
   }
 
   // For sending Important Dates
   else if (IMP_DATES.includes(messageBody.toLocaleLowerCase())) {
     sendImpDates(client, messageInstance, who);
+    increaseNumberOfCmd({ recipitantId: who });
   }
 
   // For sending Eligibility
   else if (ELIGIBILITY.includes(messageBody.toLocaleLowerCase())) {
     sendEligibility(client, messageInstance, who);
+    increaseNumberOfCmd({ recipitantId: who });
   }
 
   // For sending Playlists
@@ -93,5 +99,6 @@ export const userControl = async (
     } else {
       sendPlayList(client, messageInstance, who);
     }
+    increaseNumberOfCmd({ recipitantId: who });
   }
 };

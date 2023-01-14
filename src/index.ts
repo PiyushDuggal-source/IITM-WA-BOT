@@ -108,7 +108,7 @@ mongoose
     // Event "MESSAGE_CREATE"
     client.on("message_create", async (message: WAWebJS.Message) => {
       // Check if message is from Group or Not, if yes, who contains whoean or userID
-      const who: MessageType = checkMessage(message);
+      const who: MessageType = await checkMessage(message);
       // Mention Logic
       const str: string[] = message.mentionedIds;
       const isMention =
@@ -133,7 +133,7 @@ mongoose
       }
 
       // Ping Everyone
-      if (who == "ADMIN" && ["everyone"].includes(message.body)) {
+      if (who == "OWNER" && ["everyone"].includes(message.body)) {
         await pingEveryone(client, message);
       }
 
@@ -145,13 +145,11 @@ mongoose
         await main(client, message, who);
       }
       // !@onlyUseOnce ONLY USE ONCE
-      if (who === "ADMIN" && message.body === "load") {
+      if (who=== "OWNER" && message.body === "load") {
         console.log(WA_BOT.participants);
         WA_BOT.participants?.forEach(async (participant) => {
-          UserModel.create({
-            name: participant.id.user,
-            chatId: participant.id._serialized,
-          });
+          let recipitantId = participant.id._serialized
+          await addUser({recipitantId})
         });
         WA_BOT.sendMessage(
           "SUCCESSFULLY ADDED ALL THE STUDENTS IN THE DB, MASTER!"
