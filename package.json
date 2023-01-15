@@ -24,7 +24,7 @@
     "express": "^4.18.1",
     "mongoose": "^6.6.3",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.18.4",
+    "whatsapp-web.js": "github:wictornogueira/whatsapp-web.js#fix_legacyphonefeatures",
     "wwebjs-mongo": "^1.1.0"
   },
   "devDependencies": {
