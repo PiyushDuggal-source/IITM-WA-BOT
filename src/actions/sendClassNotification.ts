@@ -1,4 +1,5 @@
-import { differenceInMinutes, isToday } from "date-fns";
+import isToday from "date-fns/isToday"
+import { differenceInMinutes } from "date-fns";
 import * as WAWebJS from "whatsapp-web.js";
 import { CALENDAR } from "../resources/calendar";
 import { Calendar } from "../types/types";

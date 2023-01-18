@@ -66,8 +66,6 @@ mongoose
     // For QR Code
     client.on("qr", (qr: string) => {
       qrcode.generate(qr, { small: true });
-      console.log("\n");
-      console.log("\n");
       console.log(qr);
     });
 
