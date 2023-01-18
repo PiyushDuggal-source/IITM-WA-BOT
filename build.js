@@ -1,4 +1,3 @@
-
 const { exec } = require('child_process');
 const { build } = require('esbuild');
 const madge = require('madge');
@@ -21,7 +20,7 @@ const buildProject = () => {
       outdir: outDir,
       format: 'cjs',
       platform: 'node',
-      target: 'node14',
+      target: 'node16',
       bundle: false,
       sourcemap: true,
       minify: true,

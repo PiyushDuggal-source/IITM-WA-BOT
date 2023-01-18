@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["../../src/assets/assets.ts"],
   "sourcesContent": ["import { GroupLeaveORJoinImg } from \"../types/types\";\n\nexport const grpLeaveStickers: GroupLeaveORJoinImg = {\n  images: [\"leave1\", \"leave2\", \"leave3\", \"leave4\", \"leave5\", \"leave6\"],\n  numOfImgs: 6,\n};\n\nexport const grpJoinStickers: GroupLeaveORJoinImg = {\n  images: [\"join1\", \"join2\", \"join3\", \"join4\", \"join5\", \"join6\"],\n  numOfImgs: 6,\n};\n"],
-  "mappings": "qIAAA,0DAEO,KAAM,GAAwC,CACnD,OAAQ,CAAC,SAAU,SAAU,SAAU,SAAU,SAAU,UAC3D,UAAW,GAGA,EAAuC,CAClD,OAAQ,CAAC,QAAS,QAAS,QAAS,QAAS,QAAS,SACtD,UAAW",
-  "names": []
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,qBAAAE,EAAA,qBAAAC,IAAA,eAAAC,EAAAJ,GAEO,MAAMG,EAAwC,CACnD,OAAQ,CAAC,SAAU,SAAU,SAAU,SAAU,SAAU,QAAQ,EACnE,UAAW,CACb,EAEaD,EAAuC,CAClD,OAAQ,CAAC,QAAS,QAAS,QAAS,QAAS,QAAS,OAAO,EAC7D,UAAW,CACb",
+  "names": ["assets_exports", "__export", "grpJoinStickers", "grpLeaveStickers", "__toCommonJS"]
 }

@@ -1,12 +1,12 @@
-var l=Object.create;var r=Object.defineProperty;var M=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var b=Object.getPrototypeOf,y=Object.prototype.hasOwnProperty;var a=e=>r(e,"__esModule",{value:!0});var N=(e,m)=>{a(e);for(var n in m)r(e,n,{get:m[n],enumerable:!0})},f=(e,m,n)=>{if(m&&typeof m=="object"||typeof m=="function")for(let t of g(m))!y.call(e,t)&&t!=="default"&&r(e,t,{get:()=>m[t],enumerable:!(n=M(m,t))||n.enumerable});return e},p=e=>f(a(r(e!=null?l(b(e)):{},"default",e&&e.__esModule&&"default"in e?{get:()=>e.default,enumerable:!0}:{value:e,enumerable:!0})),e);N(exports,{help:()=>E});var i=p(require("..")),s=p(require("../utils/reply/replies")),d=p(require("./sendAndDeleteMsg")),o=p(require("./sendMessage"));let h=`Hey ${s.GREETINGS.admin[(0,o.random)(s.GREETINGS.adminMsgNumber)]} ${s.HEY_EMOJIES[(0,o.random)(s.HEY_EMOJIES.length)]}, Need my help!!
+"use strict";var i=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var l=Object.getOwnPropertyNames;var M=Object.prototype.hasOwnProperty;var g=(n,m)=>{for(var s in m)i(n,s,{get:m[s],enumerable:!0})},b=(n,m,s,r)=>{if(m&&typeof m=="object"||typeof m=="function")for(let o of l(m))!M.call(n,o)&&o!==s&&i(n,o,{get:()=>m[o],enumerable:!(r=p(m,o))||r.enumerable});return n};var N=n=>b(i({},"__esModule",{value:!0}),n);var y={};g(y,{help:()=>h});module.exports=N(y);var a=require(".."),e=require("../utils/reply/replies"),d=require("./sendAndDeleteMsg"),t=require("./sendMessage");let f=`Hey ${e.GREETINGS.admin[(0,t.random)(e.GREETINGS.adminMsgNumber)]} ${e.HEY_EMOJIES[(0,t.random)(e.HEY_EMOJIES.length)]}, Need my help!!
 
-Just do one of these simple things ${s.GREETINGS.admin[(0,o.random)(s.GREETINGS.adminMsgNumber)]}:
+Just do one of these simple things ${e.GREETINGS.admin[(0,t.random)(e.GREETINGS.adminMsgNumber)]}:
 1. *Mention me*
 2. Type: !allCmds
-3. !cmd`,c=`Hey ${s.GREETINGS.member[(0,o.random)(s.GREETINGS.memberMsgNumber)]} ${s.HEY_EMOJIES[(0,o.random)(s.HEY_EMOJIES.length)]}, Need my help!!
+3. !cmd`,c=`Hey ${e.GREETINGS.member[(0,t.random)(e.GREETINGS.memberMsgNumber)]} ${e.HEY_EMOJIES[(0,t.random)(e.HEY_EMOJIES.length)]}, Need my help!!
 
-Just do one of these simple things ${s.GREETINGS.member[(0,o.random)(s.GREETINGS.memberMsgNumber)]}:
+Just do one of these simple things ${e.GREETINGS.member[(0,t.random)(e.GREETINGS.memberMsgNumber)]}:
 1. *Mention me*
 2. Type: !allCmds
-3. !cmd`;const E=async(e,m,n)=>{const t=n==="ADMIN"?h:c;n==="ADMIN"?(await e.getChats())[i.BOT].sendMessage(t):n!=="NONE"&&(0,d.sendAndDeleteMsg)(e,m,n,t)};0&&(module.exports={help});
+3. !cmd`;const h=async(n,m,s)=>{const r=s==="ADMIN"?f:c;s==="ADMIN"?(await n.getChats())[a.BOT].sendMessage(r):s!=="NONE"&&(0,d.sendAndDeleteMsg)(n,m,s,r)};0&&(module.exports={help});
 //# sourceMappingURL=help.js.map

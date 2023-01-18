@@ -4,7 +4,6 @@ import {
   GroupNotification,
   LocalAuth,
   MessageMedia,
-  RemoteAuth,
 } from "whatsapp-web.js";
 import qrcode = require("qrcode-terminal");
 import { checkMessage } from "./actions/messageActions";
@@ -56,38 +55,14 @@ mongoose
   .connect(DB_URL)
   .then(() => {
     console.log("connected to DB");
-    const store = new MongoStore({ mongoose: mongoose });
-    let client: Client;
-    if (LOCAL) {
-      client = new Client({
-        puppeteer: {
-          headless: true,
-          args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        },
-        authStrategy: new LocalAuth({
-          dataPath: `${__dirname}/sessions`,
-        }),
-      });
-    } else {
-      client = new Client({
-        puppeteer: {
-          headless: true,
-          args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        },
-        authStrategy: new RemoteAuth({
-          store: store,
-          backupSyncIntervalMs: 300000,
-        }),
-      });
-    }
-    // Event "REMOTE SESSION SAVED"
-    client.on("remote_session_saved", () => {
-      log({ msg: "Remote auth session saved", type: "INFO", error: false });
-    });
-
-    // Event "DISCONNECTED"
-    client.on("disconnected", () => {
-      log({ msg: "Client DISCONNECTED", type: "DISCONNECTED", error: false });
+    const client = new Client({
+      puppeteer: {
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      },
+      authStrategy: new LocalAuth({
+        dataPath: `${__dirname}/sessions`,
+      }),
     });
 
     // For QR Code
