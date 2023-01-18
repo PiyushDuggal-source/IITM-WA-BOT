@@ -4,7 +4,6 @@ import {
   GroupNotification,
   LocalAuth,
   MessageMedia,
-  RemoteAuth,
 } from "whatsapp-web.js";
 import qrcode = require("qrcode-terminal");
 import { checkMessage } from "./actions/messageActions";
@@ -33,7 +32,6 @@ import mongoose from "mongoose";
 // import { endOfToday } from "date-fns";
 import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
 import { pingEveryone } from "./actions/pingEveryone";
-const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
 // Initialized App
@@ -55,48 +53,22 @@ mongoose
   .connect(DB_URL)
   .then(() => {
     console.log("connected to DB");
-    const store = new MongoStore({ mongoose: mongoose });
-    let client: Client;
-    if (LOCAL) {
-      client = new Client({
-        puppeteer: {
-          headless: true,
-          args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        },
-        authStrategy: new LocalAuth({
-          dataPath: `${__dirname}/sessions`,
-        }),
-      });
-    } else {
-      client = new Client({
-        puppeteer: {
-          headless: true,
-          args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        },
-        authStrategy: new RemoteAuth({
-          store: store,
-          backupSyncIntervalMs: 300000,
-        }),
-      });
-    }
-    // Event "REMOTE SESSION SAVED"
-    client.on("remote_session_saved", () => {
-      log({ msg: "Remote auth session saved", type: "INFO", error: false });
-    });
-
-    // Event "DISCONNECTED"
-    client.on("disconnected", () => {
-      log({ msg: "Client DISCONNECTED", type: "DISCONNECTED", error: false });
+    const client = new Client({
+      puppeteer: {
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      },
+      authStrategy: new LocalAuth({
+        dataPath: `${__dirname}/sessions`,
+      }),
     });
 
     // For QR Code
     client.on("qr", (qr: string) => {
       qrcode.generate(qr, { small: true });
-      console.log("\n")
-      console.log("\n")
+      console.log("\n");
+      console.log("\n");
       console.log(qr);
-      console.log("\n")
-      console.log("\n")
     });
 
     // Event "READY"
@@ -178,7 +150,8 @@ mongoose
           sendAndDeleteMsg(
             client,
             msg,
-            msg.recipientIds[0], `${process.env.BOT_NAME as String}: *${
+            msg.recipientIds[0],
+            `${process.env.BOT_NAME as String}: *${
               details.name
             }* Thanks for joining the Group!\n${
               USER_JOIN_GREETINGS.messages[
