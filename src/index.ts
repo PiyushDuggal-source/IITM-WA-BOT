@@ -51,6 +51,7 @@ const DB_URL = LOCAL
   : (process.env.PROD_DB_URL as string);
 
 // Initializing Client
+mongoose.set('strictQuery', false);
 mongoose
   .connect(DB_URL)
   .then(() => {
