@@ -19,7 +19,6 @@ import { Calendar } from "../types/types";
 
 const checkForClass = (calendar: Calendar): Calendar | [] => {
   let todayCalendar: Calendar = [];
-  // const date = addIndianTime(new Date());
   const date = new Date();
   calendar.forEach((clndr) => {
     if (isToday(clndr.date)) {

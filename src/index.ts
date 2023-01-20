@@ -19,15 +19,11 @@ const express = require("express");
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
-// import {
-//   addIndianTime,
-//   sendClassNotification,
-// } from "./actions/sendClassNotification";
+import { sendClassNotification } from "./actions/sendClassNotification";
 import { grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { MessageType, WA_Grp } from "./types/types";
-import { UserModel } from "./services/modals";
-import mongoose from "mongoose";
+import { UserModel } from "./services/models";
 // import axios from "axios";
 // import { endOfToday } from "date-fns";
 import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
@@ -53,7 +49,6 @@ const DB_URL = LOCAL
 (async () => {
   await connectToDb(DB_URL);
 })();
-
 
 // Initializing Client
 const client = new Client({
@@ -245,12 +240,12 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
 });
 
 // For checking the classes
-// setInterval(async () => {
-//   const chats = await client.getChats();
-//   const WA_BOT: WA_Grp = chats[BOT];
-//   sendClassNotification(WA_BOT);
-//   log({ msg: "Checked", type: "INFO", error: false });
-// }, 5 * 60 * 1000); // every 5 minutes
+setInterval(async () => {
+  const chats = await client.getChats();
+  const WA_BOT: WA_Grp = chats[BOT];
+  sendClassNotification(WA_BOT);
+  log({ msg: "Checked", type: "INFO", error: false });
+}, 5 * 60 * 1000); // every 5 minutes
 
 client.initialize();
 
