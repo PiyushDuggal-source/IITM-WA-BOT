@@ -7,9 +7,9 @@ import { Calendar } from "../types/types";
 
 export const CALENDAR: Calendar = [
   {
-    courseName: "Student Academic Calendar",
-    date: new Date("Sunday, December 18, 2022, 19:00"),
-    time: "7:00 – 8:00pm",
-    topic: "Read with us – A Virtual Reading Session"
-  }
+    courseName: "Modern Application Development 1/ AppDev1",
+    date: new Date("Friday, January 20, 2023, 14:00"),
+    time: "4:00 onwards",
+    topic: "Brief understanding of the project",
+  },
 ];
