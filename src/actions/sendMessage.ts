@@ -42,16 +42,15 @@ export const sendMessage = async (
       sendAndDeleteMsg(
         client,
         messageInstance,
-        userId as string,
         messageToSend
       );
     } else if (help) {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]
         }`;
-      sendAndDeleteMsg(client, messageInstance, userId as string, msg);
+      sendAndDeleteMsg(client, messageInstance, msg);
     } else {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
-      sendAndDeleteMsg(client, messageInstance, userId as string, msg);
+      sendAndDeleteMsg(client, messageInstance, msg);
     }
   }
 };

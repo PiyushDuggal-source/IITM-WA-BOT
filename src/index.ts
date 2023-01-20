@@ -26,14 +26,12 @@ import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import { grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { MessageType, WA_Grp } from "./types/types";
-import { UserModel } from "./modals/modals";
 import mongoose from "mongoose";
 // import axios from "axios";
 // import { endOfToday } from "date-fns";
 import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
 import { pingEveryone } from "./actions/pingEveryone";
 import { addUser, removeUser } from "./services/mongo";
-const { MongoStore } = require("wwebjs-mongo");
 dotenv.config();
 
 // Initialized App
@@ -51,7 +49,7 @@ const DB_URL = LOCAL
   : (process.env.PROD_DB_URL as string);
 
 // Initializing Client
-mongoose.set('strictQuery', false);
+mongoose.set("strictQuery", false);
 mongoose
   .connect(DB_URL)
   .then(() => {
@@ -121,11 +119,11 @@ mongoose
         await main(client, message, who);
       }
       // !@onlyUseOnce ONLY USE ONCE
-      if (who=== "OWNER" && message.body === "load") {
+      if (who === "OWNER" && message.body === "load") {
         console.log(WA_BOT.participants);
         WA_BOT.participants?.forEach(async (participant) => {
-          let recipitantId = participant.id._serialized
-          await addUser({recipitantId})
+          let recipitantId = participant.id._serialized;
+          await addUser({ recipitantId });
         });
         WA_BOT.sendMessage(
           "SUCCESSFULLY ADDED ALL THE STUDENTS IN THE DB, MASTER!"
@@ -159,7 +157,6 @@ mongoose
           error: false,
         });
       }
-
       if (msg.chatId === WA_BOT_ID) {
         const contact = await client.getNumberId(msg.recipientIds[0]);
         const details = await client.getContactById(contact?._serialized || "");
@@ -167,7 +164,6 @@ mongoose
           sendAndDeleteMsg(
             client,
             msg,
-            msg.recipientIds[0],
             `${process.env.BOT_NAME as String}: *${
               details.name
             }* Thanks for joining the Group!\n${
@@ -197,7 +193,6 @@ mongoose
           sendAndDeleteMsg(
             client,
             msg,
-            msg.recipientIds[0],
             `${process.env.BOT_NAME as String}: ${
               GREETINGS.member[random(GREETINGS.memberMsgNumber)]
             }, Thanks for Joining the Group!\n${

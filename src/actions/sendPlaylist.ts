@@ -44,7 +44,7 @@ export const sendPlayList = async (
     const bot = chats[BOT];
     bot.sendMessage(content);
   } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, content);
+    sendAndDeleteMsg(client, messageInstance, content);
   }
 };
 
@@ -75,7 +75,7 @@ export const sendPlayListByFilter = async (
       } else {
         let content = userMsg;
         content = playlistFormatter(filteredPlaylist, content);
-        sendAndDeleteMsg(client, messageInstance, who, content);
+        sendAndDeleteMsg(client, messageInstance, content);
       }
     }
   }

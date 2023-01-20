@@ -55,7 +55,7 @@ export const introduction = async (
   messageInstance: WAWebJS.Message
 ) => {
   if (typeof user === "string") {
-    sendAndDeleteMsg(client, messageInstance, user, userContent);
+    sendAndDeleteMsg(client, messageInstance, userContent);
   } else {
     client.sendMessage(WA_BOT_ID, adminContent);
   }
@@ -69,11 +69,11 @@ export const sendCommands = async (
   const allCmds = `----------These are the Bot Commands!!----------\n${getCommands(
     User_AllCommands
   )}`;
-  if (who === "ADMIN") {
+  if (who === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(allCmds);
   } else if (who !== "NONE") {
-    await sendAndDeleteMsg(client, messageInstance, who, allCmds);
+    await sendAndDeleteMsg(client, messageInstance, allCmds);
   }
 };

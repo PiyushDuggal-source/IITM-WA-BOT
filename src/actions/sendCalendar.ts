@@ -33,7 +33,7 @@ export const sendCalendar = async (
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  if (who === "ADMIN") {
+  if (who === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(calendarMessageFormat(CALENDAR));
@@ -41,7 +41,6 @@ export const sendCalendar = async (
     sendAndDeleteMsg(
       client,
       messageInstance,
-      who,
       calendarMessageFormat(CALENDAR)
     );
   }

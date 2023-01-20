@@ -42,7 +42,7 @@ export const sendNotes = async (
     const bot = chats[BOT];
     bot.sendMessage(content);
   } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, content);
+    sendAndDeleteMsg(client, messageInstance, content);
   }
 };
 
@@ -97,7 +97,7 @@ export const sendNotesByFilter = async (
         bot.sendMessage(content);
       } else {
         content = notesFormatter(filteredNotes, content);
-        sendAndDeleteMsg(client, messageInstance, who, content);
+        sendAndDeleteMsg(client, messageInstance, content);
       }
 
       //     if (who === "ADMIN") {

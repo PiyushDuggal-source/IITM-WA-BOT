@@ -6,9 +6,9 @@ import { END_FOOTER } from "../utils/reply/footers";
 export const sendAndDeleteMsg = async (
   client: WAWebJS.Client,
   messageInstance: WAWebJS.Message | WAWebJS.GroupNotification,
-  userId: string,
   messageToSend: WAWebJS.MessageContent
 ) => {
+  const userId = messageInstance.author || ''
   const userChat = await client.getChatById(userId);
   messageToSend += `\n\n${END_FOOTER}`;
   const msg = userChat.sendMessage(messageToSend);

@@ -19,7 +19,7 @@ export const sendImpDates = async (
       caption: "<------*Important Dates*------>",
     });
   } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, impDatesImg);
+    sendAndDeleteMsg(client, messageInstance, impDatesImg);
   }
 };
 
@@ -38,6 +38,6 @@ export const sendEligibility = async (
       caption: "*Eligibility to appear for the qualifier exam (regular entry)*",
     });
   } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, eligibilityImg);
+    sendAndDeleteMsg(client, messageInstance, eligibilityImg);
   }
 };

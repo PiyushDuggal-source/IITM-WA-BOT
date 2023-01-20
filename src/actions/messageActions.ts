@@ -21,7 +21,7 @@ export const checkMessage = async (
   } else if (String(message.from) === String(WA_BOT_ID)) {
     const grpAdmins = await UserModel.find({ roles: "ADMIN" });
     if (!grpAdmins.length) {
-      return message.author || "";
+      return message.id.remote;
     } else {
       return "ADMIN";
     }

@@ -22,12 +22,12 @@ export const help = async (
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  const content = who === "ADMIN" ? ADMIN_HELP : USER_HELP;
-  if (who === "ADMIN") {
+  const content = who === "OWNER" ? ADMIN_HELP : USER_HELP;
+  if (who === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(content);
   } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, content);
+    sendAndDeleteMsg(client, messageInstance, content);
   }
 };

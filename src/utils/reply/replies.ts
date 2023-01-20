@@ -22,7 +22,7 @@ export const PING_REPLIES: PingReplies = {
     "Hola",
     "Yo ✌",
     "🤘 hey",
-    "What iz up? I am UP!",
+    "Here I am!",
     "👀 you called me? I am up!",
     "Yes, my friend!",
     "I am HERE!",
