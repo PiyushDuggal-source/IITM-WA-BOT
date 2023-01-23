@@ -738,71 +738,143 @@ export const NOTES: Notes = [
 
 export const PLAYLISTS: YT_Playlist = [
   {
-    name: "Mathematics for Data Science | Maths",
+    name: "Mathematics for Data Science 1 | Maths1 | Math1 | Mathematics1 | Math | BSCMA1001",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZYDZo9A0pZ_i0xhstrk5cR",
   },
   {
-    name: "Statistics for Data Science 1 | Stats | Stats1",
+    name: "Statistics for Data Science 1 | Stats1 | Stat1 | Statistics1 | Stat | BSCMA1002",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYrMs3zybOqr1DzMFCX49xG",
   },
   {
-    name: "CT Qualifier 1",
-    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbCPjOE82l24XSCCfemEZJ_",
+    name: "CT | Computational | Thinking | BSCCS1001",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYSzaAFqpyQKqmoni-EefS7",
   },
   {
-    name: "English 1 (Basic English)",
+    name: "English 1 (Basic English) | Eng1 | English1 | English | BSCHS1001",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbf28nnkgAuFwaWjGtjaNck",
   },
   {
-    name: "Mathematics for Data Science 2 | Maths",
+    name: "Mathematics for Data Science 2 | Maths2 | Math2 | Mathematics2 | BSCMA1003",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBboGlwPVSsWP8loAJCLrKc8",
   },
   {
-    name: "Statistics for Data Science 2 | Stats | Stats2",
+    name: "Statistics for Data Science 2 | Stat2 | Stats2 | Statistics2 | BSCMA1004",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbLZ6RdNTIXvFdaMpvqagt0",
   },
   {
-    name: "Programming in Python",
+    name: "Programming in Python | Python | Pyth | BSCCS1002",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBb2cXAu5PevO_mzgS3Fj3Fs",
   },
   {
-    name: "English 2 (Advance English)",
+    name: "English 2 (Advance English) | Eng2 | English2 | BSCHS1002",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbWy3GL4oWKXGrwf6Ul8Cry",
   },
   {
-    name: "Database Management Systems | DBMS",
+    name: "Database Management Systems | DBMS | DB | BSCCS2001",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYc4jkUk_yQAjYEVFzVzhdU",
   },
   {
-    name: "Programming, Data Structures and Algorithms using Python | DSA | PDSA",
+    name: "Programming, Data Structures and Algorithms using Python | DSA | PDSA | BSCCS2002",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaDccbZRgiU1sHX2gZrQ-XT",
   },
   {
-    name: "Modern Application Development - I | MAD",
+    name: "Modern Application Development - I | MAD1 | APPDEV1 | BSCCS2003",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZGVuyXs2l3KJtiHs0KMVE7",
   },
   {
-    name: "Programming Concepts using Java( LIVE ) | Java",
-    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYlX88C2ds88HOZMOOcPz6j",
+    name: "Programming Concepts using Java | Java | BSCCS2005",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaXTORd_OKXZRXCMh3dGnBZ",
   },
   {
-    name: "LIVE System Commands- Term 1 Jan 22 | SC",
-    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbOTRxyyNBd4iptSrFzA_Py",
+    name: "Modern Application Development - II | MAD2 | APPDEV2 | BSCCS2006",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBY-wnDqzP1JQVaX3A-dfd1o",
   },
   {
-    name: "Business Analytics | BA",
+    name: "System Commands | SC | BSCSE2001",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBajgl-4et7X2BjOIObqlp81",
+  },
+  {
+    name: "Business Analytics | BA | BSCMS2002",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaLi6KQP_MHx_oGQHnqlTji",
   },
   {
-    name: "Machine Learning Practice | MLP",
+    name: "Machine Learning Practice | MLP | BSCCS2008",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBb3ovNQam2c_WcGeiW9OhQo",
   },
   {
-    name: "Machine Learning Foundations | MLF",
+    name: "Machine Learning Foundations | MLF | BSCCS2004",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBammhVmBE9f5eezTj2kDfTN",
   },
   {
-    name: "Machine Learning Techniques | MLT",
-    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbim4oKfdSdOpLyUwNd8UQL",
+    name: "Machine Learning Techniques | MLT | BSCCS2007",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbA_e6_G3FI-BA1f7lCINUu",
+  },
+  {
+    name: "Tools in Data Science | TDS | BSCSE2002",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZEOxUBCkv61WHOu8m7ObpE",
+  },
+  {
+    name: "Business Data Management | BDM | BSCMS2001",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbJ-X4TNz-elPXEvBN30iZq",
+  },
+  {
+    name: "Software Testing | SW Testing | ST | BSCCS3002",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBai6Crbq3wSw5dG-Ro1CJvT",
+  },
+  {
+    name: "Software Engineering | SW Engineering | SW Engg | Software Engg | SE | BSCCS3002",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYt5yvXrYAjjWtf5O399Xea",
+  },
+  {
+    name: "AI Search Methods for Problem Solving | AI Search | AIS | BSCCS3003",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZHM1OFsvzGrUGlBehlXd8w",
+  },
+  {
+    name: "Deep Learning | Deep | DL | BSCCS3004",
+    link: "https://youtube.com/playlist?list=PLZ2ps__7DhBZVxMrSkTIcG6zZBDKUXCnM",
+  },
+  {
+    name: "Strategies for Professional Growth | Prof Growth | SPG | BSCGN3001",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbdLU__X7Q0T7lgdXpbTB-I",
+  },
+  {
+    name: "Algorithmic Thinking in Bioinformatics | BioInformatics | ATIB | BSCBT4001",
+    link: "https://youtube.com/playlist?list=PLZ2ps__7DhBZo3cm7feryq5oLAHbSsLEL",
+  },
+  {
+    name: "Data Visualization Design | Data Visual Design | Data Visualization | DVD | BSCCS4001",
+    link: "https://youtube.com/playlist?list=PLZ2ps__7DhBZ12NClTmMLsnU0mF9ZUSG_",
+  },
+  {
+    name: "Speech Technology | Speech tech | Speech | SPT | BSCEE4001",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaI_g3_V-CFrgFIf-0Yksiv",
+  },
+  {
+    name: "Design Thinking for Data-Driven App Development | Design Thinking | Design | DTD | DAD | BSCMS3001",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBZ2MC9A8oHviHqbZzKnjk5d",
+  },
+  {
+    name: "Industry 4.0 | Industry | IOT4 | IND4 | BSCMS4001",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYMPKbh4tomTEoMiXTq9_3e",
+  },
+  {
+    name: "Market Research | Mkt Rsrch | MT | Mrkt | BSCMS3002",
+    link: "https://youtube.com/playlist?list=PLZ2ps__7DhBYYTW-bxo1D50qqpRRtzl3C",
+  },
+  {
+    name: "Privacy and Security in Online Social Media | Privacy | Security | Social Media | BSCCS3007",
+    link: "https://youtube.com/playlist?list=PLZ2ps__7DhBaKvfv3VjSZlcVueXLymjXB",
+  },
+  {
+    name: "Introduction to Big Data | Intro to Big Data Principles | BigData | Big Data | BSCCS3006",
+    link: "https://youtube.com/playlist?list=PLZ2ps__7DhBZYtBcr1ERnw7Y1QGs7bI3y",
+  },
+  {
+    name: "Financial Forensics | Forensics | Financial | BSCGN3002",
+    link: "https://youtube.com/playlist?list=PLZ2ps__7DhBbo9U5GQ4YTqvp2GX0EO3kq",
+  },
+  {
+    name: "CT Qualifier",
+    link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBbCPjOE82l24XSCCfemEZJ_",
   },
 ];
