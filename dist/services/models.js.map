@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/services/models.ts"],
-  "sourcesContent": ["import { model, Schema } from \"mongoose\";\r\ntype Roles = \"ADMIN\" | \"STUDENT\";\r\n\r\ntype User = {\r\n  name: string | undefined;\r\n  chatId: string;\r\n  notificationSend: boolean;\r\n  roles: Roles;\r\n};\r\n\r\nconst users = new Schema<User>({\r\n  name: { type: String, required: true },\r\n  notificationSend: { type: Boolean, required: true, default: true },\r\n  chatId: { type: String },\r\n  roles: { type: String, default: \"STUDENT\" },\r\n});\r\n\r\nexport const UserModel = model(\"Users\", users);\r\n"],
+  "sourcesContent": ["import { model, Schema } from \"mongoose\";\ntype Roles = \"ADMIN\" | \"STUDENT\";\n\ntype User = {\n  name: string | undefined;\n  chatId: string;\n  notificationSend: boolean;\n  roles: Roles;\n};\n\nconst users = new Schema<User>({\n  name: { type: String, required: true },\n  notificationSend: { type: Boolean, required: true, default: true },\n  chatId: { type: String },\n  roles: { type: String, default: \"STUDENT\" },\n});\n\nexport const UserModel = model(\"Users\", users);\n"],
   "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,eAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA8B,oBAU9B,MAAMC,EAAQ,IAAI,SAAa,CAC7B,KAAM,CAAE,KAAM,OAAQ,SAAU,EAAK,EACrC,iBAAkB,CAAE,KAAM,QAAS,SAAU,GAAM,QAAS,EAAK,EACjE,OAAQ,CAAE,KAAM,MAAO,EACvB,MAAO,CAAE,KAAM,OAAQ,QAAS,SAAU,CAC5C,CAAC,EAEYH,KAAY,SAAM,QAASG,CAAK",
   "names": ["models_exports", "__export", "UserModel", "__toCommonJS", "import_mongoose", "users"]
 }
