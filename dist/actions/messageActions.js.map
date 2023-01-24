@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/actions/messageActions.ts"],
+  "sourcesContent": ["import * as WAWebJS from \"whatsapp-web.js\";\r\nimport { MessageType } from \"../types/types\";\r\nimport * as dotenv from \"dotenv\";\r\nimport { WA_BOT_ID } from \"..\";\r\ndotenv.config();\r\n\r\n/**\r\n *\r\n * @param { string } message Get the `Message` object\r\n * @returns  { MessageType } `NONE` | userID | `ADMIN`\r\n */\r\nexport const checkMessage = (message: WAWebJS.Message): MessageType => {\r\n  if ((message.fromMe || message.id.fromMe) && String(message.to) === String(WA_BOT_ID)) {\r\n    return \"ADMIN\"\r\n  } else if (String(message.from) === String(WA_BOT_ID)) {\r\n    return message.author || '';\r\n  } else {\r\n    return \"NONE\";\r\n  }\r\n};\r\n"],
+  "mappings": "0jBAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,kBAAAE,IAAA,eAAAC,EAAAH,GAEA,IAAAI,EAAwB,qBACxBC,EAA0B,cAC1BD,EAAO,OAAO,EAOP,MAAMF,EAAgBI,IACtBA,EAAQ,QAAUA,EAAQ,GAAG,SAAW,OAAOA,EAAQ,EAAE,IAAM,OAAO,WAAS,EAC3E,QACE,OAAOA,EAAQ,IAAI,IAAM,OAAO,WAAS,EAC3CA,EAAQ,QAAU,GAElB",
+  "names": ["messageActions_exports", "__export", "checkMessage", "__toCommonJS", "dotenv", "import__", "message"]
+}

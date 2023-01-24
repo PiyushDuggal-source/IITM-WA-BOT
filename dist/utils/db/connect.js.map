@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/utils/db/connect.ts"],
+  "sourcesContent": ["import { connect, set } from \"mongoose\";\r\n\r\nexport const connectToDb = async (dbUrl: string) => {\r\n  try {\r\n    set(\"strictQuery\", false); // HACK: To suppress mongo deprecated warning\r\n    await connect(dbUrl);\r\n    console.log(\"connected to db\");\r\n  } catch (error) {\r\n    console.log(error);\r\n    process.exit(0);\r\n  }\r\n};\r\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,iBAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA6B,oBAEtB,MAAMF,EAAc,MAAOG,GAAkB,CAClD,GAAI,IACF,OAAI,cAAe,EAAK,EACxB,QAAM,WAAQA,CAAK,EACnB,QAAQ,IAAI,iBAAiB,CAC/B,OAASC,EAAP,CACA,QAAQ,IAAIA,CAAK,EACjB,QAAQ,KAAK,CAAC,CAChB,CACF",
+  "names": ["connect_exports", "__export", "connectToDb", "__toCommonJS", "import_mongoose", "dbUrl", "error"]
+}
