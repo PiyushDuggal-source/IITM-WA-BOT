@@ -18,13 +18,18 @@ const CMD_NAMES = [
   "\n*Want to check my _Source Code_?* Use this command:\n",
 ];
 
-const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]
-  }!\nI am WhatsApp Bot!!\n\nMy ${GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
-  } calls me *${process.env.BOT_NAME as String
-  }* (named after the first ever chatbot ${HEY_EMOJIES[random(HEY_EMOJIES.length)]
-  })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
-const adminContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
-  }!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
+const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
+  GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+}!\nI am WhatsApp Bot!!\n\nMy ${
+  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
+} calls me *${
+  process.env.BOT_NAME as String
+}* (named after the first ever chatbot ${
+  HEY_EMOJIES[random(HEY_EMOJIES.length)]
+})\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
+const adminContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
+  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
+}!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
 
 const getCommands = (allCommands: string[][]): string => {
   let msg = "";
@@ -32,7 +37,8 @@ const getCommands = (allCommands: string[][]): string => {
     msg += CMD_NAMES[index];
     cmds.forEach(
       (cmd, index) =>
-      (msg += `${index + 1}. ${process.env.BOT_PREFIX as string}${cmd}${index !== cmds.length ? "\n" : ""
+        (msg += `${index + 1}. ${process.env.BOT_PREFIX as string}${cmd}${
+          index !== cmds.length ? "\n" : ""
         }`)
     );
   });
@@ -54,26 +60,27 @@ export const introduction = async (
   user: MessageType,
   messageInstance: WAWebJS.Message
 ) => {
-  if (typeof user === "string") {
-    sendAndDeleteMsg(client, messageInstance, userContent);
-  } else {
+  if (user.role.includes("OWNER") || user.role.includes("ADMIN")) {
     client.sendMessage(WA_BOT_ID, adminContent);
+  } else {
+    sendAndDeleteMsg(client, messageInstance, user.chatId, userContent);
   }
 };
 
 export const sendCommands = async (
   client: WAWebJS.Client,
   messageInstance: WAWebJS.Message,
-  who: MessageType
+  userObj: MessageType
 ) => {
   const allCmds = `----------These are the Bot Commands!!----------\n${getCommands(
     User_AllCommands
   )}`;
-  if (who === "OWNER") {
+  if (userObj.role === "OWNER") {
+    console.log('reached send cmds')
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(allCmds);
-  } else if (who !== "NONE") {
-    await sendAndDeleteMsg(client, messageInstance, allCmds);
+  } else if (userObj.role !== "NONE") {
+    await sendAndDeleteMsg(client, messageInstance, userObj.chatId, allCmds);
   }
 };

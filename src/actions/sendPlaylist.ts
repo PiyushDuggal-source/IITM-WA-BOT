@@ -37,14 +37,14 @@ export const sendPlayList = async (
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  let content = who === "ADMIN" ? adminMsg : userMsg;
+  let content = who.role === "OWNER" ? adminMsg : userMsg;
   content = playlistFormatter(PLAYLISTS, content);
-  if (who === "ADMIN") {
+  if (who.role === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(content);
-  } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, content);
+  } else if (who.role !== "NONE") {
+    sendAndDeleteMsg(client, messageInstance, who.chatId, content);
   }
 };
 
@@ -54,7 +54,7 @@ export const sendPlayListByFilter = async (
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  if (who !== "NONE") {
+  if (who.role !== "NONE") {
     const msgList = messageBody.split(" ");
     const chats = await client.getChats();
     const bot = chats[BOT];
@@ -68,14 +68,14 @@ export const sendPlayListByFilter = async (
       });
       if (!filteredPlaylist.length) {
         bot.sendMessage(invalidMsg);
-      } else if (who === "ADMIN") {
+      } else if (who.role === "OWNER") {
         let content = adminMsg;
         content = playlistFormatter(filteredPlaylist, content);
         bot.sendMessage(content);
       } else {
         let content = userMsg;
         content = playlistFormatter(filteredPlaylist, content);
-        sendAndDeleteMsg(client, messageInstance, content);
+        sendAndDeleteMsg(client, messageInstance, who.chatId, content);
       }
     }
   }

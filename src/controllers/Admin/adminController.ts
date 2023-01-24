@@ -63,7 +63,7 @@ export const adminControl = async (
 
     // Class Commands Replies
   } else if (CLASS_COMMAND.includes(messageBody.toLocaleLowerCase())) {
-    sendClassMessage(client, messageInstance, "ADMIN");
+    sendClassMessage(client, messageInstance, who);
   }
 
   // Help Commands Replies

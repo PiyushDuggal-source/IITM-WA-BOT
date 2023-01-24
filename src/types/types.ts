@@ -1,4 +1,5 @@
 import * as WAWebJS from "whatsapp-web.js";
+import { Roles } from "../models/models";
 
 // Ping Replies
 export type PingReplies = {
@@ -17,7 +18,13 @@ export type NONE = "NONE";
  * Returns "OWNER", "ADMIN", "USER_ID" or NONE 
  * `OWNER`
  */
-export type MessageType = string | NONE | ADMIN | OWNER;
+
+type AllRoles = Roles | "NONE" | "OWNER" | "STUDENT"
+export type MessageType = {
+  name?: string;
+  role: AllRoles;
+  chatId: string;
+}
 
 // Commands btn List
 export type CommandButtons = {

@@ -18,7 +18,7 @@ import { random } from "./actions/sendMessage";
 const express = require("express");
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
-import { COMMANDS_CMDS } from "./utils/Commands/instructions";
+import { COMMANDS_CMDS, USER_REMOVE_CMD } from "./utils/Commands/instructions";
 // import {
 //   addIndianTime,
 //   sendClassNotification,
@@ -30,8 +30,9 @@ import { MessageType, WA_Grp } from "./types/types";
 // import { endOfToday } from "date-fns";
 import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
 import { pingEveryone } from "./actions/pingEveryone";
-import { addUser, removeUser } from "./services/mongo";
+import { addUser, increaseNumberOfCmd, removeUser } from "./services/mongo";
 import { connectToDb } from "./utils/db/connect";
+import { removeMember } from "./actions/removeMember";
 dotenv.config();
 
 // Initialized App
@@ -80,45 +81,56 @@ client.on("ready", async () => {
 // Event "MESSAGE_CREATE"
 client.on("message_create", async (message: WAWebJS.Message) => {
   // Check if message is from Group or Not, if yes, who contains whoean or userID
-  const who: MessageType = await checkMessage(message);
+  const userObj: MessageType = await checkMessage(message);
   // Mention Logic
   const str: string[] = message.mentionedIds;
   const isMention =
-    (message.body[0] === "@" && str.includes("919871453667@c.us")) ||
+    (message.body[0] === "@" &&
+      str.includes(process.env.OWNER_CHAT_ID as string)) ||
     message.body
       .toLowerCase()
       .split(" ")
       .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
-  if (isMention && who !== "NONE" && message.body.split(" ").length === 1) {
-    introduction(client, who, message);
+  if (
+    isMention &&
+    userObj.role !== "NONE" &&
+    message.body.split(" ").length === 1
+  ) {
+    introduction(client, userObj, message);
+  }
+
+  const cmd = message.body.split(",")[0].toLocaleLowerCase();
+
+  // Command check logic
+  if (userObj.role !== "NONE" && COMMANDS_CMDS.includes(cmd)) {
+    sendCommands(client, message, userObj);
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   }
 
   let allChats = await client.getChats();
   const WA_BOT: WA_Grp = allChats[BOT];
 
-  // Command check logic
-  if (
-    who !== "NONE" &&
-    COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
-  ) {
-    sendCommands(client, message, who);
+  const cmd1 = message.body.split(" ")[0].toLocaleLowerCase();
+  // TODO: remove this from here
+  if (USER_REMOVE_CMD.includes(cmd1.slice(1))) {
+    console.log("entering removing")
+    removeMember(WA_BOT as WAWebJS.GroupChat, userObj, message);
   }
 
   // Ping Everyone
-  if (who == "OWNER" && ["everyone"].includes(message.body)) {
+  if (userObj.role === "OWNER" && ["everyone"].includes(message.body)) {
     await pingEveryone(client, message);
   }
 
   // Checks if message's first letter is BOT_PREFIX
   if (
-    who !== "NONE" &&
+    userObj.role !== "NONE" &&
     message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
-    await main(client, message, who);
+    await main(client, message, userObj);
   }
-  // !@onlyUseOnce ONLY USE ONCE
-  if (who === "OWNER" && message.body === "load") {
-    console.log(WA_BOT.participants);
+  // WARN: ONLY USE ONCE
+  if (userObj.role === "OWNER" && message.body === "load") {
     WA_BOT.participants?.forEach(async (participant) => {
       let recipitantId = participant.id._serialized;
       await addUser({ recipitantId });
@@ -129,6 +141,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
   }
 });
 
+//  INFO:
 // ---------- RESPONSE WHEN SOMEBODY JOINS THE GROUP ----------- //
 // GroupNotification {
 //   id: {
@@ -144,11 +157,11 @@ client.on("message_create", async (message: WAWebJS.Message) => {
 //   chatId: '120363044xxxxxxxx70475@g.us', // Group ID
 //   author: undefined,
 //   recipientIds: [ '919xxxxxxxxxx92@c.us' ]
-// }
+//  }
 
 // Event "GROUP_JOIN"
 client.on("group_join", async (msg: GroupNotification) => {
-  if (msg.chatId === (process.env.WA_BOT_ID as string)) {
+  if (msg.chatId === WA_BOT_ID) {
     log({
       msg: `${msg.recipientIds[0]} Joined the Group`,
       type: "GROUP_JOIN",
@@ -162,6 +175,7 @@ client.on("group_join", async (msg: GroupNotification) => {
       sendAndDeleteMsg(
         client,
         msg,
+        msg.recipientIds[0],
         `${process.env.BOT_NAME as String}: *${
           details.name
         }* Thanks for joining the Group!\n${
@@ -189,6 +203,7 @@ client.on("group_join", async (msg: GroupNotification) => {
       sendAndDeleteMsg(
         client,
         msg,
+        msg.recipientIds[0],
         `${process.env.BOT_NAME as String}: ${
           GREETINGS.member[random(GREETINGS.memberMsgNumber)]
         }, Thanks for Joining the Group!\n${
@@ -217,6 +232,7 @@ client.on("group_join", async (msg: GroupNotification) => {
   }
 });
 
+//  INFO:
 // ---------- RESPONSE WHEN SOMEBODY LEAVES THE GROUP ----------- //
 // GroupNotification {
 //   id: {
@@ -232,7 +248,7 @@ client.on("group_join", async (msg: GroupNotification) => {
 //   chatId: '12xxxxxxxxxxxx0475@g.us', // Group ID
 //   author: '91988xxxxxxxx2@c.us',
 //   recipientIds: [ '919xxxxxxxx2@c.us' ]
-// }
+//  }
 
 client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
   let grpId = notification.chatId;
@@ -261,7 +277,7 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
 // For checking the classes
 // setInterval(async () => {
 //   const chats = await client.getChats();
-//   const WA_BOT: WA_Grp = chats[BOT];
+//   const WA_BOT : WA_Grp = chats[BOT];
 //   sendClassNotification(WA_BOT);
 //   log({ msg: "Checked", type: "INFO", error: false });
 // }, 5 * 60 * 1000); // every 5 minutes

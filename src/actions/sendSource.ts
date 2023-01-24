@@ -16,7 +16,7 @@ export const sendSource = async (
 ) => {
     const chats = await client.getChats();
     const bot = chats[BOT];
-  if (who !== "NONE") {
+  if (who.role !== "NONE") {
     bot.sendMessage(CONTENT);
   }
 };

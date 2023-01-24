@@ -7,7 +7,7 @@ export const connectToDb = async (dbUrl: string) => {
     log({ msg: "Connected To Db", type: "INFO", error: false });
     await connect(dbUrl);
   } catch (error) {
-    console.log(error);
+    log({msg: `Connection Error${error}`, type:"ERROR", error: true})
     process.exit(0);
   }
 };

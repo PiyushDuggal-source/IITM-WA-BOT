@@ -5,6 +5,8 @@ import * as dotenv from "dotenv";
 import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
 import { MessageType } from "../types/types";
 import { BOT } from "..";
+import { REACT_EMOGIES } from "../utils/reply/replies";
+import { react } from "./messageActions";
 dotenv.config();
 
 export const sendMessage = async (
@@ -14,43 +16,47 @@ export const sendMessage = async (
   who: MessageType,
   cmds?: boolean,
   classMsg?: {
-    classMsg: boolean
+    classMsg: boolean;
   },
   help?: boolean
 ) => {
-  if (who === "OWNER") {
+  if (who.role === "OWNER") {
     const chats = await client.getChats();
     const WA_BOT = chats[BOT];
     if (cmds) {
       WA_BOT.sendMessage(messageToSend);
+    react(messageInstance)
     } else if (help) {
-      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]
-        }`;
+      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
+        FOOTERS.footers[random(FOOTERS.footerMsgLength)]
+      }`;
       WA_BOT.sendMessage(msg);
+    react(messageInstance)
     } else {
+      console.log("reaching here");
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
       WA_BOT.sendMessage(msg);
+    react(messageInstance)
     }
-  } else if (who !== "NONE") {
-    const userId = messageInstance.author;
-    if(classMsg?.classMsg){
-    const chats = await client.getChats();
-    const WA_BOT = chats[BOT];
-  WA_BOT.sendMessage(messageToSend);
-    }
-    if (cmds) {
-      sendAndDeleteMsg(
-        client,
-        messageInstance,
-        messageToSend
-      );
+  } else if (who.role !== "NONE") {
+    console.log("reached");
+    if (classMsg?.classMsg) {
+      const chats = await client.getChats();
+      const WA_BOT = chats[BOT];
+      WA_BOT.sendMessage(messageToSend);
+      react(messageInstance)
+
+    } else if (cmds) {
+      sendAndDeleteMsg(client, messageInstance, who.chatId, messageToSend);
     } else if (help) {
-      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]
-        }`;
-      sendAndDeleteMsg(client, messageInstance, msg);
+      const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
+        FOOTERS.footers[random(FOOTERS.footerMsgLength)]
+      }`;
+      sendAndDeleteMsg(client, messageInstance, who.chatId, msg);
     } else {
+      console.log("endly reaching here");
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
-      sendAndDeleteMsg(client, messageInstance, msg);
+      sendAndDeleteMsg(client, messageInstance, who.chatId, msg);
     }
   }
 };

@@ -1,4 +1,5 @@
-import { UserModel } from "../modals/modals";
+import { UserModel } from "../models/models";
+import { log } from "../utils/log";
 
 export const addUser = async ({ recipitantId }: { recipitantId: string }) => {
   try {
@@ -6,10 +7,9 @@ export const addUser = async ({ recipitantId }: { recipitantId: string }) => {
       recipitantId,
     });
   } catch (error: any) {
-    console.log(error);
+    log({ msg: `Creation Error${error}`, type: "ERROR", error: true });
   }
 };
-
 
 export const removeUser = async ({
   recipitantId,
@@ -19,7 +19,7 @@ export const removeUser = async ({
   try {
     await UserModel.deleteOne({ recipitantId }).exec();
   } catch (error: any) {
-    console.log(error);
+    log({ msg: `Deletion Error${error}`, type: "ERROR", error: true });
   }
 };
 
@@ -32,6 +32,21 @@ export const increaseNumberOfCmd = async ({
     { recipitantId },
     {
       $inc: { numberOfCmds: 1 },
+    }
+  );
+};
+
+export const disciplinaryAction = async ({
+  recipitantId,
+}: {
+  recipitantId: string;
+}) => {
+  await UserModel.findOneAndUpdate(
+    { recipitantId },
+    {
+      $inc: {
+        banCount: 1,
+      },
     }
   );
 };

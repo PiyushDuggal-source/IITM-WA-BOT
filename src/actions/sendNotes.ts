@@ -35,14 +35,14 @@ export const sendNotes = async (
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  let content = who === "ADMIN" ? adminMsg : userMsg;
+  let content = who.role === "ADMIN" ? adminMsg : userMsg;
   content = notesFormatter(NOTES, content)
-  if (who === "ADMIN") {
+  if (who.role === "ADMIN") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(content);
-  } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, content);
+  } else if (who.role !== "NONE") {
+    sendAndDeleteMsg(client, messageInstance, who.chatId, content);
   }
 };
 
@@ -62,7 +62,7 @@ export const sendNotesByFilter = async (
   who: MessageType
 ) => {
   const msgList = messageBody.split(" ");
-  if (who !== "NONE") {
+  if (who.role !== "NONE") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     if (msgList.length > 2) {
@@ -92,12 +92,12 @@ export const sendNotesByFilter = async (
       let content = userMsg;
       if (!filteredNotes.length) {
         bot.sendMessage(invalidMsg);
-      } else if (who === "ADMIN") {
+      } else if (who.role === "ADMIN") {
         content = notesFormatter(filteredNotes, content);
         bot.sendMessage(content);
       } else {
         content = notesFormatter(filteredNotes, content);
-        sendAndDeleteMsg(client, messageInstance, content);
+        sendAndDeleteMsg(client, messageInstance,who.chatId, content);
       }
 
       //     if (who === "ADMIN") {

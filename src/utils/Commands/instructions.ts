@@ -1,3 +1,5 @@
+import dotenv from 'dotenv'
+dotenv.config()
 export const COMMANDS = ["allcmd"];
 export const CALENDAR_COMMANDS = ["classes", "calendar", "clss"];
 export const CALENDAR_TYPOS = [
@@ -27,3 +29,4 @@ export const ELIGIBILITY = ["eligibility", "eligible"];
 export const PLAYLIST_CMD = ["playlist"];
 export const PLAYLIST_CMD_ALIAS = ["playlist", "plst"];
 export const BOT_CHECK_MESSAGES = ["check", "up", "bot", "online"];
+export const USER_REMOVE_CMD = ['remove', 'kick'];

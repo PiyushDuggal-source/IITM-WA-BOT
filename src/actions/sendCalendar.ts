@@ -33,14 +33,15 @@ export const sendCalendar = async (
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  if (who === "OWNER") {
+  if (who.role === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(calendarMessageFormat(CALENDAR));
-  } else if (who !== "NONE") {
+  } else if (who.role !== "NONE") {
     sendAndDeleteMsg(
       client,
       messageInstance,
+      who.chatId,
       calendarMessageFormat(CALENDAR)
     );
   }
