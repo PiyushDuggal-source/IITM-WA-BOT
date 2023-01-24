@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../src/resources/calendar.ts"],
-  "sourcesContent": ["import { Calendar } from \"../types/types\";\n\n/**\n * ! ADD TIME ALSO with DATE\n * date: new Date(\"Thursday, September 8, 2022, 7:00\"),\n */\n\nexport const CALENDAR: Calendar = [\n  {\n    courseName: \"Modern Application Development 1/ AppDev1\",\n    date: new Date(\"Friday, January 20, 2023, 14:00\"),\n    time: \"4:00 onwards\",\n    topic: \"Brief understanding of the project\",\n  },\n];\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,cAAAE,IAAA,eAAAC,EAAAH,GAOO,MAAME,EAAqB,CAChC,CACE,WAAY,4CACZ,KAAM,IAAI,KAAK,iCAAiC,EAChD,KAAM,eACN,MAAO,oCACT,CACF",
-  "names": ["calendar_exports", "__export", "CALENDAR", "__toCommonJS"]
-}
