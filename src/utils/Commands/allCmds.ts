@@ -1,4 +1,8 @@
-import { BOT_CHECK_MESSAGES } from "../Commands/instructions";
+import {
+  BOT_CHECK_MESSAGES,
+  USER_ADD_CMD,
+  USER_REMOVE_CMD,
+} from "../Commands/instructions";
 import {
   CALENDAR_COMMANDS,
   CLASS_COMMAND,
@@ -18,3 +22,5 @@ export const User_AllCommands: string[][] = [
   BOT_CHECK_MESSAGES,
   SOURCE,
 ];
+
+export const OWNER_ADMIN_CMDS: string[][] = [USER_REMOVE_CMD, USER_ADD_CMD];

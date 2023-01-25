@@ -19,7 +19,7 @@ export type NONE = "NONE";
  * `OWNER`
  */
 
-type AllRoles = Roles | "NONE" | "OWNER" | "STUDENT"
+export type AllRoles = Roles | "NONE" | "OWNER" | "STUDENT"
 export type MessageType = {
   name?: string;
   role: AllRoles;

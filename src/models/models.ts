@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 
 export type Roles = "ADMIN" | "STUDENT" | "LITTLE_ADMIN";
 
-type User = {
+export type User = {
   name: string;
   roles: Roles;
   recipitantId: string;

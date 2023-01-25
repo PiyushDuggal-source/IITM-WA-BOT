@@ -6,7 +6,7 @@ import {
   MessageMedia,
 } from "whatsapp-web.js";
 import qrcode = require("qrcode-terminal");
-import { checkMessage } from "./actions/messageActions";
+import { checkMessage, superCmdFilter } from "./actions/messageActions";
 import { main } from "./controllers/main";
 import { introduction, sendCommands } from "./actions/introduction";
 import {
@@ -15,24 +15,26 @@ import {
   USER_JOIN_GREETINGS,
 } from "./utils/reply/replies";
 import { random } from "./actions/sendMessage";
-const express = require("express");
+import express from "express";
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
-import { COMMANDS_CMDS, USER_REMOVE_CMD } from "./utils/Commands/instructions";
-// import {
-//   addIndianTime,
-//   sendClassNotification,
-// } from "./actions/sendClassNotification";
+import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import { grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { MessageType, WA_Grp } from "./types/types";
-// import axios from "axios";
-// import { endOfToday } from "date-fns";
 import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
 import { pingEveryone } from "./actions/pingEveryone";
 import { addUser, increaseNumberOfCmd, removeUser } from "./services/mongo";
 import { connectToDb } from "./utils/db/connect";
 import { removeMember } from "./actions/removeMember";
+import { ADMIN_OWNER } from "./utils/roles";
+// @ts-ignore
+import {
+  GrpJoinNotification,
+  GrpLeaveNotification,
+  MessageTypeOfWA,
+} from "./utils/returnTypeOfWA";
+import { sendClassNotification } from "./actions/sendClassNotification";
 dotenv.config();
 
 // Initialized App
@@ -78,7 +80,11 @@ client.on("ready", async () => {
   );
 });
 
-// Event "MESSAGE_CREATE"
+/**
+ * INFO:
+ * Event "MESSAGE_CREATE"
+ * @returns { MessageTypeOfWA }
+ */
 client.on("message_create", async (message: WAWebJS.Message) => {
   // Check if message is from Group or Not, if yes, who contains whoean or userID
   const userObj: MessageType = await checkMessage(message);
@@ -98,28 +104,34 @@ client.on("message_create", async (message: WAWebJS.Message) => {
   ) {
     introduction(client, userObj, message);
   }
+  let allChats = await client.getChats();
+  const WA_BOT: WA_Grp = allChats[BOT];
 
   const cmd = message.body.split(",")[0].toLocaleLowerCase();
 
   // Command check logic
-  if (userObj.role !== "NONE" && COMMANDS_CMDS.includes(cmd)) {
+  if (ADMIN_OWNER.includes(userObj.role) && COMMANDS_CMDS.includes(cmd)) {
     sendCommands(client, message, userObj);
-    increaseNumberOfCmd({ recipitantId: userObj.chatId });
+    await increaseNumberOfCmd({ recipitantId: userObj.chatId });
+    return;
+  }
+  if (userObj.role === "STUDENT" && superCmdFilter(message.body)) {
+    WA_BOT.sendMessage(
+      "You cannot perform this action, because you are not a BOT ADMIN, you will get ban if you use this frequently :)"
+    );
+    return;
   }
 
-  let allChats = await client.getChats();
-  const WA_BOT: WA_Grp = allChats[BOT];
-
-  const cmd1 = message.body.split(" ")[0].toLocaleLowerCase();
-  // TODO: remove this from here
-  if (USER_REMOVE_CMD.includes(cmd1.slice(1))) {
-    console.log("entering removing")
-    removeMember(WA_BOT as WAWebJS.GroupChat, userObj, message);
+  if (userObj.role !== "NONE" && superCmdFilter(message.body)) {
+    console.log("entering removing");
+    await removeMember(WA_BOT as WAWebJS.GroupChat, userObj, message);
+    return;
   }
 
   // Ping Everyone
   if (userObj.role === "OWNER" && ["everyone"].includes(message.body)) {
     await pingEveryone(client, message);
+    return;
   }
 
   // Checks if message's first letter is BOT_PREFIX
@@ -128,6 +140,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
     message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
     await main(client, message, userObj);
+    return;
   }
   // WARN: ONLY USE ONCE
   if (userObj.role === "OWNER" && message.body === "load") {
@@ -135,31 +148,18 @@ client.on("message_create", async (message: WAWebJS.Message) => {
       let recipitantId = participant.id._serialized;
       await addUser({ recipitantId });
     });
-    WA_BOT.sendMessage(
+    allChats[1].sendMessage(
       "SUCCESSFULLY ADDED ALL THE STUDENTS IN THE DB, MASTER!"
     );
+    return;
   }
 });
 
-//  INFO:
-// ---------- RESPONSE WHEN SOMEBODY JOINS THE GROUP ----------- //
-// GroupNotification {
-//   id: {
-//     fromMe: false,
-//     remote: '1203630xxxxxxx0475@g.us', // Group ID
-//     id: '4125308xxxxxxxxxx28',
-//     participant: '91988xxxxx92@c.us',
-//     _serialized: 'false_12036xxxxxxxx670475@g.us_41xxxxxxxxxxxxxxx3374128_9198xxxxxxxxxxxx2@c.us'
-//   },
-//   body: '',
-//   type: 'invite',
-//   timestamp: 1673374128,
-//   chatId: '120363044xxxxxxxx70475@g.us', // Group ID
-//   author: undefined,
-//   recipientIds: [ '919xxxxxxxxxx92@c.us' ]
-//  }
-
-// Event "GROUP_JOIN"
+/**
+ * INFO:
+ * Event "GROUP_JOIN"
+ * @returns { GrpJoinNotification }
+ */
 client.on("group_join", async (msg: GroupNotification) => {
   if (msg.chatId === WA_BOT_ID) {
     log({
@@ -167,8 +167,6 @@ client.on("group_join", async (msg: GroupNotification) => {
       type: "GROUP_JOIN",
       error: false,
     });
-  }
-  if (msg.chatId === WA_BOT_ID) {
     const contact = await client.getNumberId(msg.recipientIds[0]);
     const details = await client.getContactById(contact?._serialized || "");
     if (details.name) {
@@ -232,24 +230,11 @@ client.on("group_join", async (msg: GroupNotification) => {
   }
 });
 
-//  INFO:
-// ---------- RESPONSE WHEN SOMEBODY LEAVES THE GROUP ----------- //
-// GroupNotification {
-//   id: {
-//     fromMe: false,
-//     remote: '1203630xxxxxxxxxx75@g.us', // Group ID
-//     id: '34145880xxxxxxxxxx99',
-//     participant: '919xxxxxxxx92@c.us',
-//     _serialized: 'false_1203xxxxxxxxxxx0670475@g.us_34145880xxxxxxxxxxxx9_919xxxxxxxxxx92@c.us'
-//   },
-//   body: '',
-//   type: 'leave',
-//   timestamp: 1673373799,
-//   chatId: '12xxxxxxxxxxxx0475@g.us', // Group ID
-//   author: '91988xxxxxxxx2@c.us',
-//   recipientIds: [ '919xxxxxxxx2@c.us' ]
-//  }
-
+/**
+ * INFO:
+ * Event "GROUP_LEAVE"
+ * @returns { GrpLeaveNotification }
+ */
 client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
   let grpId = notification.chatId;
   if (grpId === WA_BOT_ID) {
@@ -259,7 +244,7 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
       error: false,
     });
   }
-  if (notification.chatId === WA_BOT_ID) {
+  if (notification.chatId === WA_BOT_ID && notification.type !== "remove") {
     const sticker = MessageMedia.fromFilePath(
       `${__dirname}/../src/assets/images/grpJoinLeaveImgs/${
         grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
@@ -275,12 +260,12 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
 });
 
 // For checking the classes
-// setInterval(async () => {
-//   const chats = await client.getChats();
-//   const WA_BOT : WA_Grp = chats[BOT];
-//   sendClassNotification(WA_BOT);
-//   log({ msg: "Checked", type: "INFO", error: false });
-// }, 5 * 60 * 1000); // every 5 minutes
+setInterval(async () => {
+  const chats = await client.getChats();
+  const WA_BOT: WA_Grp = chats[BOT];
+  sendClassNotification(WA_BOT);
+  log({ msg: "Checked", type: "INFO", error: false });
+}, 5 * 60 * 1000); // every 5 minutes
 
 client.initialize();
 
