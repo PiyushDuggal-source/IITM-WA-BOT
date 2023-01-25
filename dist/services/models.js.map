@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../src/services/models.ts"],
-  "sourcesContent": ["import { model, Schema } from \"mongoose\";\ntype Roles = \"ADMIN\" | \"STUDENT\";\n\ntype User = {\n  name: string | undefined;\n  chatId: string;\n  notificationSend: boolean;\n  roles: Roles;\n};\n\nconst users = new Schema<User>({\n  name: { type: String, required: true },\n  notificationSend: { type: Boolean, required: true, default: true },\n  chatId: { type: String },\n  roles: { type: String, default: \"STUDENT\" },\n});\n\nexport const UserModel = model(\"Users\", users);\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,eAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA8B,oBAU9B,MAAMC,EAAQ,IAAI,SAAa,CAC7B,KAAM,CAAE,KAAM,OAAQ,SAAU,EAAK,EACrC,iBAAkB,CAAE,KAAM,QAAS,SAAU,GAAM,QAAS,EAAK,EACjE,OAAQ,CAAE,KAAM,MAAO,EACvB,MAAO,CAAE,KAAM,OAAQ,QAAS,SAAU,CAC5C,CAAC,EAEYH,KAAY,SAAM,QAASG,CAAK",
-  "names": ["models_exports", "__export", "UserModel", "__toCommonJS", "import_mongoose", "users"]
-}

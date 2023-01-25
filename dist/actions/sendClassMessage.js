@@ -1,15 +1,15 @@
-"use strict";var m=Object.defineProperty;var T=Object.getOwnPropertyDescriptor;var M=Object.getOwnPropertyNames;var C=Object.prototype.hasOwnProperty;var A=(s,e)=>{for(var t in e)m(s,t,{get:e[t],enumerable:!0})},u=(s,e,t,a)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of M(e))!C.call(s,o)&&o!==t&&m(s,o,{get:()=>e[o],enumerable:!(a=T(e,o))||a.enumerable});return s};var D=s=>u(m({},"__esModule",{value:!0}),s);var E={};A(E,{sendClassMessage:()=>$});module.exports=D(E);var l=require(".."),p=require("../resources/calendar"),g=require("../utils/reply/footers"),c=require("../utils/reply/replies"),r=require("./sendMessage");const S=s=>{const e=new Date;return s.filter(t=>t.date.toDateString()===e.toDateString())},d=`${process.env.BOT_NAME} : ${c.HOLIDAY_REPLIES.members[(0,r.random)(c.HOLIDAY_REPLIES.members.length)]} 
-: ${g.FOOTERS.footers[(0,r.random)(g.FOOTERS.footerMsgLength)]}`,$=async(s,e,t)=>{const a=S(p.CALENDAR);if(t==="ADMIN"){const n=(await s.getChats())[l.BOT];if(!a.length)n.sendMessage(d);else{let f="\u{1F4D8}*Today's Classes*\u{1F4D8}";a.forEach(i=>f+=`
+"use strict";var m=Object.defineProperty;var T=Object.getOwnPropertyDescriptor;var M=Object.getOwnPropertyNames;var C=Object.prototype.hasOwnProperty;var u=(s,e)=>{for(var o in e)m(s,o,{get:e[o],enumerable:!0})},A=(s,e,o,a)=>{if(e&&typeof e=="object"||typeof e=="function")for(let t of M(e))!C.call(s,t)&&t!==o&&m(s,t,{get:()=>e[t],enumerable:!(a=T(e,t))||a.enumerable});return s};var E=s=>A(m({},"__esModule",{value:!0}),s);var $={};u($,{sendClassMessage:()=>S});module.exports=E($);var f=require(".."),p=require("../resources/calendar"),g=require("../utils/reply/footers"),c=require("../utils/reply/replies"),n=require("./sendMessage");const O=s=>{const e=new Date;return s.filter(o=>o.date.toDateString()===e.toDateString())},d=`${process.env.BOT_NAME} : ${c.HOLIDAY_REPLIES.members[(0,n.random)(c.HOLIDAY_REPLIES.members.length)]} 
+: ${g.FOOTERS.footers[(0,n.random)(g.FOOTERS.footerMsgLength)]}`,S=async(s,e,o)=>{const a=O(p.CALENDAR);if(o.role==="OWNER"){const r=(await s.getChats())[f.BOT];if(!a.length)r.sendMessage(d);else{let l="\u{1F4D8}*Today's Classes*\u{1F4D8}";a.forEach(i=>l+=`
  -------------------------------- 
 \u{1F4D6} *Topic* : *${i.topic}* 
 \u{1F570} *Timing* : _${i.time}_ 
 \u{1F4C5} *Date* : *Today!* 
 \u{1F3EB} *Course* : ${i.courseName}
- `),n.sendMessage(f)}}else if(t!=="NONE")if(!a.length)(0,r.sendMessage)(s,d,e,t,void 0,{classMsg:!0});else{let o="\u{1F4D8}*Today's Classes*\u{1F4D8}";a.forEach(n=>o+=`
+ `),r.sendMessage(l)}}else if(o.role!=="NONE")if(console.log("reached send msg"),!a.length)(0,n.sendMessage)(s,d,e,o,void 0,{classMsg:!0});else{let t="\u{1F4D8}*Today's Classes*\u{1F4D8}";a.forEach(r=>t+=`
  -------------------------------- 
-\u{1F4D6} *Topic* : *${n.topic}* 
-\u{1F570} *Timing* : _${n.time}_ 
+\u{1F4D6} *Topic* : *${r.topic}* 
+\u{1F570} *Timing* : _${r.time}_ 
 \u{1F4C5} *Date* : *Today!* 
-\u{1F3EB} *Course* : ${n.courseName}
- `),(0,r.sendMessage)(s,o,e,t,void 0,{classMsg:!0})}};0&&(module.exports={sendClassMessage});
+\u{1F3EB} *Course* : ${r.courseName}
+ `),(0,n.sendMessage)(s,t,e,o,void 0,{classMsg:!0})}};0&&(module.exports={sendClassMessage});
 //# sourceMappingURL=sendClassMessage.js.map

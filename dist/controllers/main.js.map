@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/controllers/main.ts"],
-  "sourcesContent": ["import * as WAWebJS from \"whatsapp-web.js\";\nimport { MessageType } from \"../types/types\";\nimport { adminControl } from \"./Admin/adminController\";\nimport { userControl } from \"./Users/userController\";\n\nexport const main = async (\n  client: WAWebJS.Client,\n  messageInstance: WAWebJS.Message,\n  who: MessageType\n) => {\n  if (who === \"ADMIN\") {\n    await adminControl(client, messageInstance, who);\n  } else if (who !== \"NONE\") {\n    await userControl(client, messageInstance, who);\n  }\n};\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,UAAAE,IAAA,eAAAC,EAAAH,GAEA,IAAAI,EAA6B,mCAC7BC,EAA4B,kCAErB,MAAMH,EAAO,MAClBI,EACAC,EACAC,IACG,CACCA,IAAQ,QACV,QAAM,gBAAaF,EAAQC,EAAiBC,CAAG,EACtCA,IAAQ,QACjB,QAAM,eAAYF,EAAQC,EAAiBC,CAAG,CAElD",
-  "names": ["main_exports", "__export", "main", "__toCommonJS", "import_adminController", "import_userController", "client", "messageInstance", "who"]
+  "sourcesContent": ["import * as WAWebJS from \"whatsapp-web.js\";\nimport { MessageType } from \"../types/types\";\nimport { adminControl } from \"./Admin/adminController\";\nimport { userControl } from \"./Users/userController\";\n\nexport const main = async (\n  client: WAWebJS.Client,\n  messageInstance: WAWebJS.Message,\n  userObj: MessageType\n) => {\n  if (userObj.role === \"OWNER\") {\n    await adminControl(client, messageInstance, userObj);\n  } else if (userObj.role !== \"NONE\") {\n    await userControl(client, messageInstance, userObj);\n  }\n};\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,UAAAE,IAAA,eAAAC,EAAAH,GAEA,IAAAI,EAA6B,mCAC7BC,EAA4B,kCAErB,MAAMH,EAAO,MAClBI,EACAC,EACAC,IACG,CACCA,EAAQ,OAAS,QACnB,QAAM,gBAAaF,EAAQC,EAAiBC,CAAO,EAC1CA,EAAQ,OAAS,QAC1B,QAAM,eAAYF,EAAQC,EAAiBC,CAAO,CAEtD",
+  "names": ["main_exports", "__export", "main", "__toCommonJS", "import_adminController", "import_userController", "client", "messageInstance", "userObj"]
 }
