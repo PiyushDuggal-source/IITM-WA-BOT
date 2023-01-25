@@ -1,5 +1,5 @@
 import * as WAWebJS from "whatsapp-web.js";
-import { AllRoles, MessageType } from "../types/types";
+import { MessageType } from "../types/types";
 import * as dotenv from "dotenv";
 import { WA_BOT_ID } from "..";
 import { UserModel } from "../models/models";
@@ -25,7 +25,8 @@ export const checkMessage = async (message: Message): Promise<MessageType> => {
     String(message.to) === String(WA_BOT_ID)
   ) {
     return {
-      name: message._data?.notifyName, role: "ADMIN",
+      name: message._data?.notifyName,
+      role: "OWNER",
       chatId: message.from,
     };
   } else if (String(message.from) === String(WA_BOT_ID)) {
@@ -52,27 +53,6 @@ export const checkMessage = async (message: Message): Promise<MessageType> => {
       chatId: message.author || "",
     };
   }
-
-  //   } else {
-  //     if (isAdmin) {
-  //       return {
-  //         name: message._data?.notifyName,
-  //         role: "ADMIN",
-  //         chatId: message.author || "",
-  //       };
-  //     } else {
-  //       return {
-  //         role: "NONE",
-  //         chatId: message.id.remote,
-  //       };
-  //     }
-  //   }
-  // } else {
-  //   return {
-  //     role: "NONE",
-  //     chatId: message.id.remote,
-  //   };
-  // }
 };
 
 /**
