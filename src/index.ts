@@ -110,7 +110,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
   const cmd = message.body.split(",")[0].toLocaleLowerCase();
 
   // Command check logic
-  if (ADMIN_OWNER.includes(userObj.role) && COMMANDS_CMDS.includes(cmd)) {
+  if (COMMANDS_CMDS.includes(cmd)) {
     sendCommands(client, message, userObj);
     await increaseNumberOfCmd({ recipitantId: userObj.chatId });
     return;
