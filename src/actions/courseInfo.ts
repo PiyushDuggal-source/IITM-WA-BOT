@@ -12,14 +12,14 @@ export const sendImpDates = async (
   const impDatesImg = MessageMedia.fromFilePath(
     `${__dirname}/../assets/images/impDates/impDates.png`
   );
-  if (who === "ADMIN") {
+  if (who.role === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(impDatesImg, {
       caption: "<------*Important Dates*------>",
     });
-  } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, impDatesImg);
+  } else if (who.role !== "NONE") {
+    sendAndDeleteMsg(client, messageInstance, who.chatId, impDatesImg);
   }
 };
 
@@ -31,13 +31,13 @@ export const sendEligibility = async (
   const eligibilityImg = MessageMedia.fromFilePath(
     `${__dirname}/../assets/images/eligibility/eligibility.png`
   );
-  if (who === "ADMIN") {
+  if (who.role === "ADMIN") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(eligibilityImg, {
       caption: "*Eligibility to appear for the qualifier exam (regular entry)*",
     });
-  } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, eligibilityImg);
+  } else if (who.role !== "NONE") {
+    sendAndDeleteMsg(client, messageInstance, who.chatId, eligibilityImg);
   }
 };

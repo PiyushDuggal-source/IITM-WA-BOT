@@ -23,7 +23,7 @@ export const sendClassMessage = async (
   who: MessageType
 ) => {
   const events = checkForClass(CALENDAR);
-  if (who === "ADMIN") {
+  if (who.role === "OWNER") {
     const chats = await client.getChats();
     const WA_BOT = chats[BOT];
     if (!events.length) {
@@ -36,7 +36,8 @@ export const sendClassMessage = async (
       );
       WA_BOT.sendMessage(message);
     }
-  } else if (who !== "NONE") {
+  } else if (who.role !== "NONE") {
+    console.log("reached send msg")
     if (!events.length) {
       sendMessage(client, HOLYDAY_MSG, messageInstance, who, undefined, {
         classMsg: true,

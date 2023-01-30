@@ -7,5 +7,5 @@ https://github.com/PiyushDuggal-source/IITM-WA-BOT
 *Got any _Suggestion/Issue_?* Report here:
 https://github.com/PiyushDuggal-source/IITM-WA-BOT/issues
 
-*Want to contribute?\u{1F60E} _Direct Messege me!_*`,W=async(e,t)=>{const r=(await e.getChats())[m.BOT];t!=="NONE"&&r.sendMessage(O)};0&&(module.exports={sendSource});
+*Want to contribute?\u{1F60E} _Direct Messege me!_*`,W=async(e,t)=>{const r=(await e.getChats())[m.BOT];t.role!=="NONE"&&r.sendMessage(O)};0&&(module.exports={sendSource});
 //# sourceMappingURL=sendSource.js.map

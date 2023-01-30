@@ -22,7 +22,7 @@ export const PING_REPLIES: PingReplies = {
     "Hola",
     "Yo ✌",
     "🤘 hey",
-    "What iz up? I am UP!",
+    "Here I am!",
     "👀 you called me? I am up!",
     "Yes, my friend!",
     "I am HERE!",
@@ -65,12 +65,11 @@ export const GREETINGS: Greetings = {
     "Fellow",
     "Good Person",
     "Dude",
-    "Gentle-men/women",
     "My Friend!",
     "Good Guy",
-    "An IITian",
+    "IITian",
   ],
-  memberMsgNumber: 7,
+  memberMsgNumber: 6,
 };
 
 export const HOLIDAY_REPLIES = {

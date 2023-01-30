@@ -6,11 +6,11 @@ import { userControl } from "./Users/userController";
 export const main = async (
   client: WAWebJS.Client,
   messageInstance: WAWebJS.Message,
-  who: MessageType
+  userObj: MessageType
 ) => {
-  if (who === "ADMIN") {
-    await adminControl(client, messageInstance, who);
-  } else if (who !== "NONE") {
-    await userControl(client, messageInstance, who);
+  if (userObj.role === "OWNER") {
+    await adminControl(client, messageInstance, userObj);
+  } else if (userObj.role !== "NONE") {
+    await userControl(client, messageInstance, userObj);
   }
 };

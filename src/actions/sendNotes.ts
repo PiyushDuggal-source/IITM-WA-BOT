@@ -35,14 +35,14 @@ export const sendNotes = async (
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  let content = who === "ADMIN" ? adminMsg : userMsg;
+  let content = who.role === "ADMIN" ? adminMsg : userMsg;
   content = notesFormatter(NOTES, content)
-  if (who === "ADMIN") {
+  if (who.role === "ADMIN") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(content);
-  } else if (who !== "NONE") {
-    sendAndDeleteMsg(client, messageInstance, who, content);
+  } else if (who.role !== "NONE") {
+    sendAndDeleteMsg(client, messageInstance, who.chatId, content);
   }
 };
 
@@ -53,7 +53,7 @@ const sorryMsg = `Sorry ${
 }`;
 
 const invalidMsg =
-  "The filter is invalid, please use your *permutation* and *combination* knowledge to serach for your notes, like:\n*!notes mad1* -> *!notes mad*\nor else, please wait for a while, we will upload the respective notes soon";
+  "The filter is invalid, please use your *permutation* and *combination* knowledge to search for your notes, like:\n*!notes mad1* -> *!notes mad*\nor else, please wait for a while, we will upload the respective notes soon";
 
 export const sendNotesByFilter = async (
   client: WAWebJS.Client,
@@ -62,7 +62,7 @@ export const sendNotesByFilter = async (
   who: MessageType
 ) => {
   const msgList = messageBody.split(" ");
-  if (who !== "NONE") {
+  if (who.role !== "NONE") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     if (msgList.length > 2) {
@@ -92,12 +92,12 @@ export const sendNotesByFilter = async (
       let content = userMsg;
       if (!filteredNotes.length) {
         bot.sendMessage(invalidMsg);
-      } else if (who === "ADMIN") {
+      } else if (who.role === "ADMIN") {
         content = notesFormatter(filteredNotes, content);
         bot.sendMessage(content);
       } else {
         content = notesFormatter(filteredNotes, content);
-        sendAndDeleteMsg(client, messageInstance, who, content);
+        sendAndDeleteMsg(client, messageInstance,who.chatId, content);
       }
 
       //     if (who === "ADMIN") {

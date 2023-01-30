@@ -1,0 +1,2 @@
+"use strict";var D=Object.defineProperty;var I=Object.getOwnPropertyDescriptor;var M=Object.getOwnPropertyNames;var O=Object.prototype.hasOwnProperty;var R=(o,N)=>{for(var A in N)D(o,A,{get:N[A],enumerable:!0})},W=(o,N,A,E)=>{if(N&&typeof N=="object"||typeof N=="function")for(let t of M(N))!O.call(o,t)&&t!==A&&D(o,t,{get:()=>N[t],enumerable:!(E=I(N,t))||E.enumerable});return o};var c=o=>W(D({},"__esModule",{value:!0}),o);var n={};R(n,{ADMIN_OWNER:()=>e});module.exports=c(n);const e=["ADMIN","OWNER"];0&&(module.exports={ADMIN_OWNER});
+//# sourceMappingURL=index.js.map

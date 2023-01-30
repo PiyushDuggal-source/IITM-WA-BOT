@@ -6,7 +6,7 @@ import {
   MessageMedia,
 } from "whatsapp-web.js";
 import qrcode = require("qrcode-terminal");
-import { checkMessage } from "./actions/messageActions";
+import { checkMessage, superCmdFilter } from "./actions/messageActions";
 import { main } from "./controllers/main";
 import { introduction, sendCommands } from "./actions/introduction";
 import {
@@ -15,20 +15,25 @@ import {
   USER_JOIN_GREETINGS,
 } from "./utils/reply/replies";
 import { random } from "./actions/sendMessage";
-const express = require("express");
+import express from "express";
+import * as dotenv from "dotenv";
 import { Request, Response } from "express";
 import { COMMANDS_CMDS } from "./utils/Commands/instructions";
-import { sendClassNotification } from "./actions/sendClassNotification";
 import { grpLeaveStickers } from "./assets/assets";
-import { MessageType, WA_Grp, LogType } from "./types/types";
-import { UserModel } from "./services/models";
-// import axios from "axios";
-// import { endOfToday } from "date-fns";
+import { MessageType, WA_Grp } from "./types/types";
 import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
 import { pingEveryone } from "./actions/pingEveryone";
+import { addUser, increaseNumberOfCmd, removeUser } from "./services/mongo";
 import { connectToDb } from "./utils/db/connect";
-import * as dotenv from "dotenv";
-import { v4 as uuidv4 } from "uuid";
+import { removeMember } from "./actions/removeMember";
+import { ADMIN_OWNER } from "./utils/roles";
+// @ts-ignore
+import {
+  GrpJoinNotification,
+  GrpLeaveNotification,
+  MessageTypeOfWA,
+} from "./utils/returnTypeOfWA";
+import { sendClassNotification } from "./actions/sendClassNotification";
 dotenv.config();
 
 import logger from "./utils/logger/index";
@@ -47,10 +52,8 @@ const DB_URL = LOCAL
   ? (process.env.DEV_DB_URL as string)
   : (process.env.PROD_DB_URL as string);
 
-// Connecting to DB
-(async () => {
-  await connectToDb(DB_URL);
-})();
+// Connect To DB
+connectToDb(DB_URL);
 
 // Initializing Client
 const client = new Client({
@@ -79,80 +82,94 @@ client.on("ready", async () => {
   );
 });
 
-// Event "MESSAGE_CREATE"
+/**
+ * INFO:
+ * Event "MESSAGE_CREATE"
+ * @returns { MessageTypeOfWA }
+ */
 client.on("message_create", async (message: WAWebJS.Message) => {
   // Check if message is from Group or Not, if yes, who contains whoean or userID
-  // #TODO: Detailed logging
-  const messageId = uuidv4();
-  const botWAId = "919871453667@c.us";
-
-  logger.info(`New message  `, { label: messageId });
-logger.info(`WA_CHAT_ID:  ${message.from}`, { label: messageId });
-
-  const who: MessageType = checkMessage(message);
+  const userObj: MessageType = await checkMessage(message);
   // Mention Logic
   const str: string[] = message.mentionedIds;
   const isMention =
-    (message.body[0] === "@" && str.includes(botWAId)) ||
+    (message.body[0] === "@" &&
+      str.includes(process.env.OWNER_CHAT_ID as string)) ||
     message.body
       .toLowerCase()
       .split(" ")
       .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
-  if (isMention && who !== "NONE" && message.body.split(" ").length === 1) {
-    logger.info(`Mentioned bot ${botWAId}`, { label: messageId });
-    logger.info(`Message content empty, intro-ing`, { label: messageId });
-    introduction(client, who, message);
+  if (
+    isMention &&
+    userObj.role !== "NONE" &&
+    message.body.split(" ").length === 1
+  ) {
+    introduction(client, userObj, message);
   }
-
   let allChats = await client.getChats();
   const WA_BOT: WA_Grp = allChats[BOT];
 
+  const cmd = message.body.split(",")[0].toLocaleLowerCase();
+
   // Command check logic
-  if (
-    who !== "NONE" &&
-    COMMANDS_CMDS.includes(message.body.split(",")[0].toLocaleLowerCase())
-  ) {
-    sendCommands(client, message, who);
+  if (COMMANDS_CMDS.includes(cmd)) {
+    sendCommands(client, message, userObj);
+    await increaseNumberOfCmd({ recipitantId: userObj.chatId });
+    return;
+  }
+  if (userObj.role === "STUDENT" && superCmdFilter(message.body)) {
+    WA_BOT.sendMessage(
+      "You cannot perform this action, because you are not a BOT ADMIN, you will get ban if you use this frequently :)"
+    );
+    return;
+  }
+
+  if (userObj.role !== "NONE" && superCmdFilter(message.body)) {
+    console.log("entering removing");
+    await removeMember(WA_BOT as WAWebJS.GroupChat, userObj, message);
+    return;
   }
 
   // Ping Everyone
-  if (who == "ADMIN" && ["everyone"].includes(message.body)) {
-    logger.info(`Message by admin; ping everyone`, { label: messageId });
+  if (userObj.role === "OWNER" && ["everyone"].includes(message.body)) {
     await pingEveryone(client, message);
+    return;
   }
 
   logger.info(`who ${who}`, { label: messageId });
   // Checks if message's first letter is BOT_PREFIX
   if (
-    who !== "NONE" &&
+    userObj.role !== "NONE" &&
     message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
-    logger.info(`Bot prefix command ${message.body}`, { label: messageId });
-    await main(client, message, who);
+    await main(client, message, userObj);
+    return;
   }
-  // !@onlyUseOnce ONLY USE ONCE
-  if (who === "ADMIN" && message.body === "load") {
-    console.log(WA_BOT.participants);
+  // WARN: ONLY USE ONCE
+  if (userObj.role === "OWNER" && message.body === "load") {
     WA_BOT.participants?.forEach(async (participant) => {
-      UserModel.create({
-        name: participant.id.user,
-        chatId: participant.id._serialized,
-      });
+      let recipitantId = participant.id._serialized;
+      await addUser({ recipitantId });
     });
-    WA_BOT.sendMessage(
+    allChats[1].sendMessage(
       "SUCCESSFULLY ADDED ALL THE STUDENTS IN THE DB, MASTER!"
     );
+    return;
   }
 });
 
-// Event "GROUP_JOIN"
+/**
+ * INFO:
+ * Event "GROUP_JOIN"
+ * @returns { GrpJoinNotification }
+ */
 client.on("group_join", async (msg: GroupNotification) => {
-  if (msg.chatId === (process.env.WA_BOT_ID as string)) {
-    logger.info(`${msg.recipientIds[0]} Joined the Group`, {
-      label: "GROUP_JOIN",
-    });
-  }
   if (msg.chatId === WA_BOT_ID) {
+    log({
+      msg: `${msg.recipientIds[0]} Joined the Group`,
+      type: "GROUP_JOIN",
+      error: false,
+    });
     const contact = await client.getNumberId(msg.recipientIds[0]);
     const details = await client.getContactById(contact?._serialized || "");
     if (details.name) {
@@ -211,43 +228,38 @@ client.on("group_join", async (msg: GroupNotification) => {
       //   sendMediaAsSticker: true,
       // });
     }
+    const recipitantId = msg.recipientIds[0];
+    await addUser({ recipitantId });
   }
 });
 
-// GroupNotification {
-//   id: {
-//     fromMe: boolean,
-//     remote: '1203630xxxxxxxxx@g.us',
-//     id: '26650709261xxxxxxxxxx',
-//     participant: '919990xxxxxxxx@c.us',
-//     _serialized: 'false_12036xxxxxxxxxxxxx475@g.us_2665xxxxxxxxxxxx72395334_91xxxxxxxxxxxxx656@c.us'
-//   },
-//   body: '',
-//   type: 'invite',
-//   timestamp: 1672395334,
-//   chatId: '1203630442xxxxxxxxx@g.us',
-//   author: undefined,
-//   recipientIds: [ '9199902xxxxxxxxx@c.us' ]
-// }
+/**
+ * INFO:
+ * Event "GROUP_LEAVE"
+ * @returns { GrpLeaveNotification }
+ */
 client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
   let grpId = notification.chatId;
-  if (grpId === (process.env.WA_BOT_ID as string)) {
-    logger.info(`${notification.recipientIds[0]} left the Group`, {
-      label: "GROUP_LEFT",
+  if (grpId === WA_BOT_ID) {
+    log({
+      msg: `${notification.recipientIds[0]} left the Group`,
+      type: "GROUP_LEFT",
+      error: false,
     });
   }
-  const sticker = MessageMedia.fromFilePath(
-    `${__dirname}/../src/assets/images/grpJoinLeaveImgs/${
-      grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
-    }.png`
-  );
-  if (notification.chatId === WA_BOT_ID) {
+  if (notification.chatId === WA_BOT_ID && notification.type !== "remove") {
+    const sticker = MessageMedia.fromFilePath(
+      `${__dirname}/../src/assets/images/grpJoinLeaveImgs/${
+        grpLeaveStickers.images[random(grpLeaveStickers.numOfImgs)]
+      }.png`
+    );
     const allChats = await client.getChats();
     const WA_BOT = allChats[BOT];
     WA_BOT.sendMessage(`${process.env.BOT_NAME as String}: somebody left`);
     WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
   }
-  await UserModel.findOneAndDelete({ chatId: notification.chatId });
+  const recipitantId = notification.recipientIds[0];
+  await removeUser({ recipitantId });
 });
 
 // For checking the classes

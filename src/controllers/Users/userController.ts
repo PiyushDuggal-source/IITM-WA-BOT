@@ -22,12 +22,14 @@ import { MessageType } from "../../types/types";
 import { BOT_CHECK_MESSAGES } from "../../utils/Commands/instructions";
 import { PING_REPLIES } from "../../utils/reply/replies";
 import { BOT } from "../..";
+import { increaseNumberOfCmd } from "../../services/mongo";
 export const userControl = async (
   client: WAWebJS.Client,
   messageInstance: WAWebJS.Message,
-  who: MessageType
+  userObj: MessageType
 ) => {
   const messageBody = messageInstance.body.slice(1);
+  console.log("reached User Controller")
   // Ping Message Reply
   if (BOT_CHECK_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
     const chats = await client.getChats();
@@ -42,46 +44,52 @@ export const userControl = async (
     // if (COMMANDS.includes(messageBody.toLocaleLowerCase())) {
     //   sendMessage(client, USER_COMMANDS, messageInstance, who, true);
     //   return;
-
     // Notes Replies
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   } else if (
     NOTES_CMD.includes(messageBody.split(" ")[0].toLocaleLowerCase())
   ) {
     if (messageBody.split(" ").length > 1) {
-      sendNotesByFilter(client, messageBody, messageInstance, who);
+      sendNotesByFilter(client, messageBody, messageInstance, userObj);
     } else {
-      sendNotes(client, messageInstance, who);
+      sendNotes(client, messageInstance, userObj);
     }
-
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
     // Calender Replies WITH Typos
   } else if (
     CALENDAR_COMMANDS.includes(messageBody.toLocaleLowerCase()) ||
     CALENDAR_TYPOS.includes(messageBody.toLocaleLowerCase())
   ) {
-    sendCalendar(client, messageInstance, who);
+    sendCalendar(client, messageInstance, userObj);
     // Class Commands Replies
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   } else if (CLASS_COMMAND.includes(messageBody.toLocaleLowerCase())) {
-    sendClassMessage(client, messageInstance, who);
+    sendClassMessage(client, messageInstance, userObj);
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   }
 
   // Help Commands Replies
   else if (HELP_CMDS.includes(messageBody.toLocaleLowerCase())) {
-    help(client, messageInstance, who);
+    help(client, messageInstance, userObj);
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   }
 
   // Source Command Reply
   else if (SOURCE.includes(messageBody.toLocaleLowerCase())) {
-    sendSource(client, who);
+    sendSource(client, userObj);
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   }
 
   // For sending Important Dates
   else if (IMP_DATES.includes(messageBody.toLocaleLowerCase())) {
-    sendImpDates(client, messageInstance, who);
+    sendImpDates(client, messageInstance, userObj);
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   }
 
   // For sending Eligibility
   else if (ELIGIBILITY.includes(messageBody.toLocaleLowerCase())) {
-    sendEligibility(client, messageInstance, who);
+    sendEligibility(client, messageInstance, userObj);
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   }
 
   // For sending Playlists
@@ -89,9 +97,10 @@ export const userControl = async (
     PLAYLIST_CMD_ALIAS.includes(messageBody.split(" ")[0].toLocaleLowerCase())
   ) {
     if (messageBody.split(" ").length > 1) {
-      sendPlayListByFilter(client, messageBody, messageInstance, who);
+      sendPlayListByFilter(client, messageBody, messageInstance, userObj);
     } else {
-      sendPlayList(client, messageInstance, who);
+      sendPlayList(client, messageInstance, userObj);
     }
+    increaseNumberOfCmd({ recipitantId: userObj.chatId });
   }
 };
