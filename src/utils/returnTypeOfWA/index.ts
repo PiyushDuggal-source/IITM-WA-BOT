@@ -118,3 +118,105 @@ export type GrpLeaveNotification = {}
 //   author: '91988xxxxxxxx2@c.us',
 //   recipientIds: [ '919xxxxxxxx2@c.us' ]
 //   }
+
+export type GroupChat = {}
+// GroupChat {
+//   groupMetadata: {
+//     id: {
+//       server: 'g.us',
+//       user: '120363xxxxxxxxx475',
+//       _serialized: '12036xxxxxxxxxxx475@g.us'
+//     },
+//     creation: 1659366867,
+//     owner: {
+//       server: 'c.us',
+//       user: '9198xxxxxxx67',
+//       _serialized: '919xxxxxxxx7@c.us'
+//     },
+//     subject: 'IIT-M Bot - ELIZA - dev',
+//     subjectTime: 1659594001,
+//     descTime: 0,
+//     restrict: false,
+//     announce: false,
+//     noFrequentlyForwarded: false,
+//     ephemeralDuration: 0,
+//     membershipApprovalMode: false,
+//     size: 4,
+//     support: false,
+//     suspended: false,
+//     terminated: false,
+//     uniqueShortNameMap: {},
+//     isParentGroup: false,
+//     isParentGroupClosed: false,
+//     defaultSubgroup: false,
+//     lastActivityTimestamp: 0,
+//     lastSeenActivityTimestamp: 0,
+//     incognito: false,
+//     participants: [ [Object], [Object], [Object], [Object] ],
+//     pendingParticipants: [],
+//     pastParticipants: [
+//       [Object], [Object],
+//       [Object], [Object],
+//       [Object], [Object],
+//       [Object], [Object],
+//       [Object], [Object],
+//       [Object], [Object]
+//     ],
+//     membershipApprovalRequests: []
+//   },
+//   id: {
+//     server: 'g.us',
+//     user: '12036xxxxxxxx475',
+//     _serialized: '1203xxxxxxxx0475@g.us'
+//   },
+//   name: 'IIT-M Bot - ELIZA - dev',
+//   isGroup: true,
+//   isReadOnly: false,
+//   unreadCount: 0,
+//   timestamp: 1675171518,
+//   archived: false,
+//   pinned: true,
+//   isMuted: false,
+//   muteExpiration: 0
+// }
+
+export const GroupChatParticipants ={}
+
+// [
+//   {
+//     id: {
+//       server: 'c.us',
+//       user: '916xxxxxxxxx760',
+//       _serialized: '9163xxxxxxxxx60@c.us'
+//     },
+//     isAdmin: false,
+//     isSuperAdmin: false
+//   },
+//   {
+//     id: {
+//       server: 'c.us',
+//       user: '91988xxxxxxxx2',
+//       _serialized: '9198xxxxxxxx92@c.us'
+//     },
+//     isAdmin: false,
+//     isSuperAdmin: false
+//   },
+//   {
+//     id: {
+//       server: 'c.us',
+//       user: '919xxxxxxxx783',
+//       _serialized: '919xxxxxxxx783@c.us'
+//     },
+//     isAdmin: false,
+//     isSuperAdmin: false
+//   },
+//   {
+//     id: {
+//       server: 'c.us',
+//       user: '9198xxxxxxxx67',
+//       _serialized: '919xxxxxxxx667@c.us'
+//     },
+//     isAdmin: true,
+//     isSuperAdmin: true
+//   }
+// ]
