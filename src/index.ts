@@ -92,7 +92,7 @@ client.on("message_create", async (message: WAWebJS.Message) => {
   const str: string[] = message.mentionedIds;
   const isMention =
     (message.body[0] === "@" &&
-      str.includes(process.env.OWNER_CHAT_ID as string)) ||
+      str.includes("919871453667@c.us")) ||
     message.body
       .toLowerCase()
       .split(" ")
