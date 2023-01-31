@@ -363,7 +363,7 @@ export const NOTES: Notes = [
   },
 
   {
-    name: "Python Notes | PDAS | Data Structures and Algorithms using Python",
+    name: "Python Notes | PDSA | Data Structures and Algorithms using Python",
     content: [
       {
         name: "Python | Week 1",
@@ -774,7 +774,7 @@ export const PLAYLISTS: YT_Playlist = [
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBYc4jkUk_yQAjYEVFzVzhdU",
   },
   {
-    name: "Programming, Data Structures and Algorithms using Python | DSA | PDSA | BSCCS2002",
+    name: "Programming, Data Structures and Algorithms using Python | PDSA | BSCCS2002",
     link: "https://www.youtube.com/playlist?list=PLZ2ps__7DhBaDccbZRgiU1sHX2gZrQ-XT",
   },
   {
