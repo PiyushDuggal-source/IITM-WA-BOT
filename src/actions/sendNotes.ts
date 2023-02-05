@@ -35,9 +35,9 @@ export const sendNotes = async (
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  let content = who.role === "ADMIN" ? adminMsg : userMsg;
+  let content = who.role === "OWNER" ? adminMsg : userMsg;
   content = notesFormatter(NOTES, content)
-  if (who.role === "ADMIN") {
+  if (who.role === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(content);
@@ -92,7 +92,7 @@ export const sendNotesByFilter = async (
       let content = userMsg;
       if (!filteredNotes.length) {
         bot.sendMessage(invalidMsg);
-      } else if (who.role === "ADMIN") {
+      } else if (who.role === "OWNER") {
         content = notesFormatter(filteredNotes, content);
         bot.sendMessage(content);
       } else {

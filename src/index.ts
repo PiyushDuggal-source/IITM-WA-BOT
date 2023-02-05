@@ -27,7 +27,6 @@ import { pingEveryone } from "./actions/pingEveryone";
 import { addUser, increaseNumberOfCmd, removeUser } from "./services/mongo";
 import { connectToDb } from "./utils/db/connect";
 import { removeMember } from "./actions/removeMember";
-import { ADMIN_OWNER } from "./utils/roles";
 // @ts-ignore
 import {
   GrpJoinNotification,

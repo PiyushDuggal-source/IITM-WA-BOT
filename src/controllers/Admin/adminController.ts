@@ -1,7 +1,7 @@
-import * as WAWebJS from "whatsapp-web.js";
-import { random } from "../../actions/sendMessage";
-import { BOT_CHECK_MESSAGES } from "../../utils/Commands/instructions";
-import { PING_REPLIES } from "../../utils/reply/replies";
+import * as WAWebJS from 'whatsapp-web.js';
+import { random } from '../../actions/sendMessage';
+import { BOT_CHECK_MESSAGES } from '../../utils/Commands/instructions';
+import { PING_REPLIES } from '../../utils/reply/replies';
 import {
   CALENDAR_COMMANDS,
   CALENDAR_TYPOS,
@@ -13,23 +13,28 @@ import {
   NOTES_CMD,
   PLAYLIST_CMD_ALIAS,
   SOURCE,
-} from "../../utils/Commands/instructions";
-import { BOT } from "../..";
-import { sendNotes, sendNotesByFilter } from "../../actions/sendNotes";
-import { sendCalendar } from "../../actions/sendCalendar";
-import { sendClassMessage } from "../../actions/sendClassMessage";
-import { help } from "../../actions/help";
-import { sendSource } from "../../actions/sendSource";
-import { sendEligibility, sendImpDates } from "../../actions/courseInfo";
-import { sendPlayList, sendPlayListByFilter } from "../../actions/sendPlaylist";
-import { MessageType } from "../../types/types";
+} from '../../utils/Commands/instructions';
+import { BOT } from '../..';
+import { sendNotes, sendNotesByFilter } from '../../actions/sendNotes';
+import { sendCalendar } from '../../actions/sendCalendar';
+import { sendClassMessage } from '../../actions/sendClassMessage';
+import { help } from '../../actions/help';
+import { sendSource } from '../../actions/sendSource';
+import { sendEligibility, sendImpDates } from '../../actions/courseInfo';
+import { sendPlayList, sendPlayListByFilter } from '../../actions/sendPlaylist';
+import { MessageType } from '../../types/types';
 
 export const adminControl = async (
   client: WAWebJS.Client,
   messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-  const messageBody = messageInstance.body.slice(1);
+  let messageBody: string;
+  if (messageInstance.body.at(1) === ' ') {
+    messageBody = messageInstance.body.slice(2);
+  } else {
+    messageBody = messageInstance.body.slice(1);
+  }
   // Ping Replies
   if (BOT_CHECK_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
     const chats = await client.getChats();
@@ -42,9 +47,9 @@ export const adminControl = async (
 
     // Notes Replies
   } else if (
-    NOTES_CMD.includes(messageBody.split(" ")[0].toLocaleLowerCase())
+    NOTES_CMD.includes(messageBody.split(' ')[0].toLocaleLowerCase())
   ) {
-    if (messageBody.split(" ").length > 1) {
+    if (messageBody.split(' ').length > 1) {
       sendNotesByFilter(client, messageBody, messageInstance, who);
     } else {
       sendNotes(client, messageInstance, who);
@@ -88,9 +93,9 @@ export const adminControl = async (
 
   // For sending Playlists
   else if (
-    PLAYLIST_CMD_ALIAS.includes(messageBody.split(" ")[0].toLocaleLowerCase())
+    PLAYLIST_CMD_ALIAS.includes(messageBody.split(' ')[0].toLocaleLowerCase())
   ) {
-    if (messageBody.split(" ").length > 1) {
+    if (messageBody.split(' ').length > 1) {
       sendPlayListByFilter(client, messageBody, messageInstance, who);
     } else {
       sendPlayList(client, messageInstance, who);
