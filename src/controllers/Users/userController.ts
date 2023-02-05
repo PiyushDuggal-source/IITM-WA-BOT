@@ -28,7 +28,12 @@ export const userControl = async (
   messageInstance: WAWebJS.Message,
   userObj: MessageType
 ) => {
-  const messageBody = messageInstance.body.slice(1);
+  let messageBody: string;
+  if (messageInstance.body.at(1) === ' ') {
+    messageBody = messageInstance.body.slice(2);
+  } else {
+    messageBody = messageInstance.body.slice(1);
+  }
   console.log("reached User Controller")
   // Ping Message Reply
   if (BOT_CHECK_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
