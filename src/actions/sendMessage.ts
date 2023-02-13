@@ -5,7 +5,6 @@ import * as dotenv from "dotenv";
 import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
 import { MessageType } from "../types/types";
 import { BOT } from "..";
-import { REACT_EMOGIES } from "../utils/reply/replies";
 import { react } from "./messageActions";
 dotenv.config();
 
