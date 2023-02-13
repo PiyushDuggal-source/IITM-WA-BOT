@@ -33,6 +33,10 @@
 
 ⭐ = Commands that can only be used when you are a **bot Admin**.
 
+## Watch is action 👇 (click the img)
+
+[<img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AAOQEOROPzsNEiunYF6dBoVr3CZtfDxkCxHdnbIHlzm57bPJ1Csf0YWLnkD_W63lO2tNZlD1GLXO-x6kamjbblvb3La-SGef=w1920-h1080-k-pd" width="100%" target="_blank">](https://drive.google.com/file/d/1tl33VralV0AXQ2EDJYnjC6r2eaCUHr-l/view)
+
 ## Code Structure
 
 `src/index.ts`: 1st entry point<br>

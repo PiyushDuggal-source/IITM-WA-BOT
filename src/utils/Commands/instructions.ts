@@ -30,4 +30,3 @@ export const PLAYLIST_CMD = ["playlist"];
 export const PLAYLIST_CMD_ALIAS = ["playlist", "plst"];
 export const BOT_CHECK_MESSAGES = ["check", "up", "bot", "online"];
 export const USER_REMOVE_CMD = ['remove', 'kick'];
-export const USER_ADD_CMD = ['add', 'invite'];

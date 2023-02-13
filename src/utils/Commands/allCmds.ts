@@ -1,6 +1,5 @@
 import {
   BOT_CHECK_MESSAGES,
-  USER_ADD_CMD,
   USER_REMOVE_CMD,
 } from "../Commands/instructions";
 import {
@@ -23,4 +22,4 @@ export const User_AllCommands: string[][] = [
   SOURCE,
 ];
 
-export const OWNER_ADMIN_CMDS: string[][] = [USER_REMOVE_CMD, USER_ADD_CMD];
+export const OWNER_ADMIN_CMDS: string[][] = [USER_REMOVE_CMD];
