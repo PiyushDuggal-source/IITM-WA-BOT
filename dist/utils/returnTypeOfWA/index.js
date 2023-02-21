@@ -1,2 +1,0 @@
-"use strict";var r=Object.defineProperty;var a=Object.getOwnPropertyDescriptor;var n=Object.getOwnPropertyNames;var x=Object.prototype.hasOwnProperty;var y=(p,t)=>{for(var o in t)r(p,o,{get:t[o],enumerable:!0})},c=(p,t,o,i)=>{if(t&&typeof t=="object"||typeof t=="function")for(let e of n(t))!x.call(p,e)&&e!==o&&r(p,e,{get:()=>t[e],enumerable:!(i=a(t,e))||i.enumerable});return p};var s=p=>c(r({},"__esModule",{value:!0}),p);var f={};y(f,{GroupChatParticipants:()=>G});module.exports=s(f);const G={};0&&(module.exports={GroupChatParticipants});
-//# sourceMappingURL=index.js.map
