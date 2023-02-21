@@ -523,7 +523,7 @@ export const NOTES: Notes = [
     ],
   },
   {
-    name: 'Statistics 2 for DS | Stat2 | Stats | SDS2',
+    name: 'Statistics 2 for DS | Stat2 | Stats | stats2',
     content: [
       {
         name: 'Statistics 2 | week 1-3',
