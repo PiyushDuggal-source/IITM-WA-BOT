@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/models/models.ts"],
+  "sourcesContent": ["import { model, Schema } from \"mongoose\";\n\nexport type Roles = \"ADMIN\" | \"STUDENT\" | \"LITTLE_ADMIN\";\n\nexport type User = {\n  name: string;\n  roles: Roles;\n  recipitantId: string;\n  banCount: number;\n  notifyForEvents: Boolean;\n  numberOfCmds: number;\n};\n\nconst users = new Schema<User>({\n  name: { type: String },\n  recipitantId: { type: String },\n  notifyForEvents: { type: Boolean, default: true },\n  banCount: { type: Number },\n  roles: { type: String, default: \"STUDENT\" },\n  numberOfCmds: { type: Number },\n});\n\nexport const UserModel = model(\"Users\", users);\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,eAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA8B,oBAa9B,MAAMC,EAAQ,IAAI,SAAa,CAC7B,KAAM,CAAE,KAAM,MAAO,EACrB,aAAc,CAAE,KAAM,MAAO,EAC7B,gBAAiB,CAAE,KAAM,QAAS,QAAS,EAAK,EAChD,SAAU,CAAE,KAAM,MAAO,EACzB,MAAO,CAAE,KAAM,OAAQ,QAAS,SAAU,EAC1C,aAAc,CAAE,KAAM,MAAO,CAC/B,CAAC,EAEYH,KAAY,SAAM,QAASG,CAAK",
+  "names": ["models_exports", "__export", "UserModel", "__toCommonJS", "import_mongoose", "users"]
+}

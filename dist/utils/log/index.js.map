@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/utils/log/index.ts"],
+  "sourcesContent": ["type Types =\n  | \"ERROR\"\n  | \"INFO\"\n  | \"WARNING\"\n  | \"GROUP_JOIN\"\n  | \"GROUP_LEFT\"\n  | \"DISCONNECTED\"\n  | \"CONNECTED\";\n\ntype Log = {\n  msg: string;\n  type: Types;\n  error: boolean;\n};\n\nexport const log = ({ msg, type, error }: Log) => {\n  let today = new Date();\n  let formattedDateTime =\n    \"[\" +\n    today.getFullYear() +\n    \"-\" +\n    (today.getMonth() + 1) +\n    \"-\" +\n    today.getDate() +\n    \" \" +\n    today.getHours() +\n    \":\" +\n    today.getMinutes() +\n    \":\" +\n    today.getSeconds() +\n    \"] \";\n\n  if (!error) {\n    console.log(formattedDateTime + ` [${type}] ` + msg + \"\\n\");\n    // log_file.write(formattedDateTime+'INFO: '+msg+'\\n');\n  } else {\n    console.error(formattedDateTime + ` [${type}] ` + msg + \"\\n\");\n    // log_file.write(formattedDateTime+'ERROR: '+msg+'\\n');\n  }\n};\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,SAAAE,IAAA,eAAAC,EAAAH,GAeO,MAAME,EAAM,CAAC,CAAE,IAAAE,EAAK,KAAAC,EAAM,MAAAC,CAAM,IAAW,CAChD,IAAIC,EAAQ,IAAI,KACZC,EACF,IACAD,EAAM,YAAY,EAClB,KACCA,EAAM,SAAS,EAAI,GACpB,IACAA,EAAM,QAAQ,EACd,IACAA,EAAM,SAAS,EACf,IACAA,EAAM,WAAW,EACjB,IACAA,EAAM,WAAW,EACjB,KAEGD,EAIH,QAAQ,MAAME,EAAoB,KAAKH,MAAWD,EAAM;AAAA,CAAI,EAH5D,QAAQ,IAAII,EAAoB,KAAKH,MAAWD,EAAM;AAAA,CAAI,CAM9D",
+  "names": ["log_exports", "__export", "log", "__toCommonJS", "msg", "type", "error", "today", "formattedDateTime"]
+}

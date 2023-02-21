@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/actions/pingEveryone.ts"],
+  "sourcesContent": ["import { Client, Message } from \"whatsapp-web.js\";\nimport { BOT } from \"..\";\nimport { WA_Grp } from \"../types/types\";\n\nexport const pingEveryone = async (\n  client: Client,\n  message: Message\n) => {\n  const allChats = await client.getChats();\n  const WA_BOT = allChats[BOT];\n  const mentions = [];\n  let text = \"\";\n  for (const participants of ( WA_BOT as WA_Grp )?.participants || []) {\n    text += `@${participants.id.user} `;\n    const contact = await client.getContactById(participants.id._serialized);\n    mentions.push(contact);\n  }\n  message.reply(text, \"\", { mentions });\n};\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,kBAAAE,IAAA,eAAAC,EAAAH,GACA,IAAAI,EAAoB,cAGb,MAAMF,EAAe,MAC1BG,EACAC,IACG,CAEH,MAAMC,GADW,MAAMF,EAAO,SAAS,GACf,KAAG,EACrBG,EAAW,CAAC,EAClB,IAAIC,EAAO,GACX,UAAWC,KAAkBH,GAAA,YAAAA,EAAoB,eAAgB,CAAC,EAAG,CACnEE,GAAQ,IAAIC,EAAa,GAAG,QAC5B,MAAMC,EAAU,MAAMN,EAAO,eAAeK,EAAa,GAAG,WAAW,EACvEF,EAAS,KAAKG,CAAO,CACvB,CACAL,EAAQ,MAAMG,EAAM,GAAI,CAAE,SAAAD,CAAS,CAAC,CACtC",
+  "names": ["pingEveryone_exports", "__export", "pingEveryone", "__toCommonJS", "import__", "client", "message", "WA_BOT", "mentions", "text", "participants", "contact"]
+}
