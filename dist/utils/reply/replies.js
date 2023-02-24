@@ -20,5 +20,5 @@ or Go take some rest and work on *something special* to you, utilize your *free*
      `,`Q1: There are N number of classes today and N = 0 then guess how many classes are there? *1 Point*
 A: NO Class
 B: C
-C: A`,"no class today"],memberMsgNumber:3},S=["\u270C","\u{1F44B}","\u{1F918}","\u{1F450}","\u{1F917}"],b={messages:["Hey everyone, someone joined... say Helloo to our new friend!!","Hey All, Someone joined, say Hi!!","We got a new Member, Greetings, we are glad you joined our Group!"],messageNum:3},G=["\u{1F60C}","\u270C","\u{1F91F}","\u{1F91D}","\u{1F44C}","\u{1FAC2}","\u{1F31A}","\u{1F31D}","\u26A1"];0&&(module.exports={GREETINGS,HEY_EMOJIES,HOLIDAY_REPLIES,PING_REPLIES,REACT_EMOGIES,USER_COMMANDS,USER_JOIN_GREETINGS});
+C: A`,"no class today"],memberMsgNumber:3},S=["\u270C","\u{1F44B}","\u{1F918}","\u{1F450}","\u{1F917}"],b={messages:["Hey everyone, someone joined... say Helloo to our new friend!!","Hey All, Someone joined, say Hi!!","We got a new Member, Greetings, we are glad you joined our Group!"],messageNum:3},G=["\u{1F60C}","\u270C","\u{1F91F}","\u{1F91D}","\u{1F44C}","\u{1FAC2}","\u{1F31A}","\u{1F31D}","\u26A1","\u{1F973}","\u{1F60E}","\u{1F5FF}"];0&&(module.exports={GREETINGS,HEY_EMOJIES,HOLIDAY_REPLIES,PING_REPLIES,REACT_EMOGIES,USER_COMMANDS,USER_JOIN_GREETINGS});
 //# sourceMappingURL=replies.js.map
