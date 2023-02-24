@@ -12,6 +12,7 @@ import { introduction, sendCommands } from './actions/introduction';
 import {
   GREETINGS,
   HEY_EMOJIES,
+  REACT_EMOGIES,
   USER_JOIN_GREETINGS,
 } from './utils/reply/replies';
 import { random } from './actions/sendMessage';
@@ -75,7 +76,9 @@ client.on('ready', async () => {
   log({ msg: 'Client Connected', type: 'CONNECTED', error: false });
   client.sendMessage(
     process.env.WA_BOT_ID_DEV as string,
-    `${process.env.BOT_NAME as string}: I am Connected BOSS`
+    (process.env.BOT_NAME as string) +
+      ' I am Connected BOSS ' +
+      REACT_EMOGIES[random(REACT_EMOGIES.length)]
   );
 });
 

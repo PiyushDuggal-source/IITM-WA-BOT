@@ -1,32 +1,32 @@
-import { List } from "whatsapp-web.js";
+import { List } from 'whatsapp-web.js';
 import {
   CommandButtons,
   Greetings,
   PingReplies,
   UserJoinGreetings,
-} from "../../types/types";
-import { User_AllCommands } from "../Commands/allCmds";
-import * as dotenv from "dotenv";
+} from '../../types/types';
+import { User_AllCommands } from '../Commands/allCmds';
+import * as dotenv from 'dotenv';
 dotenv.config();
 export const PING_REPLIES: PingReplies = {
   admin: [
-    "Hello Sir 🙏",
-    "Need any help Sir?🙇‍♂️",
+    'Hello Sir 🙏',
+    'Need any help Sir?🙇‍♂️',
     "Aye aye Capn'",
     "Yes Capn'",
     "I am here Capn'",
   ],
   adminMsgNumber: 5,
   members: [
-    "Hey-Yo!",
-    "Hola",
-    "Yo ✌",
-    "🤘 hey",
-    "Here I am!",
-    "👀 you called me? I am up!",
-    "Yes, my friend!",
-    "I am HERE!",
-    "I am Online!",
+    'Hey-Yo!',
+    'Hola',
+    'Yo ✌',
+    '🤘 hey',
+    'Here I am!',
+    '👀 you called me? I am up!',
+    'Yes, my friend!',
+    'I am HERE!',
+    'I am Online!',
   ],
   memberMsgNumber: 9,
 };
@@ -49,26 +49,19 @@ export const USER_COMMANDS = new List(
   `Hey.. Wanna checkout what ${
     process.env.BOT_NAME as String
   } can do?\nCheckout these commands!! 😉`,
-  "Commands",
+  'Commands',
   [
     {
-      title: "These are the commands you can perform as a USER",
+      title: 'These are the commands you can perform as a USER',
       rows: getUserCommands(User_AllCommands),
     },
   ]
 );
 
 export const GREETINGS: Greetings = {
-  admin: ["Sir", "Master", "Monsieur"],
+  admin: ['Sir', 'Master', 'Monsieur'],
   adminMsgNumber: 3,
-  member: [
-    "Fellow",
-    "Good Person",
-    "Dude",
-    "My Friend!",
-    "Good Guy",
-    "IITian",
-  ],
+  member: ['Fellow', 'Good Person', 'Dude', 'My Friend!', 'Good Guy', 'IITian'],
   memberMsgNumber: 6,
 };
 
@@ -101,30 +94,33 @@ export const HOLIDAY_REPLIES = {
 
     `Q1: There are N number of classes today and N = 0 then guess how many classes are there? *1 Point*\nA: NO Class\nB: C\nC: A`,
 
-    "no class today",
+    'no class today',
   ],
   memberMsgNumber: 3,
 };
 
-export const HEY_EMOJIES = ["✌", "👋", "🤘", "👐", "🤗"];
+export const HEY_EMOJIES = ['✌', '👋', '🤘', '👐', '🤗'];
 
 export const USER_JOIN_GREETINGS: UserJoinGreetings = {
   messages: [
     `Hey everyone, someone joined... say Helloo to our new friend!!`,
-    "Hey All, Someone joined, say Hi!!",
-    "We got a new Member, Greetings, we are glad you joined our Group!",
+    'Hey All, Someone joined, say Hi!!',
+    'We got a new Member, Greetings, we are glad you joined our Group!',
   ],
   messageNum: 3,
 };
 
 export const REACT_EMOGIES = [
-  "😌",
-  "✌",
-  "🤟",
-  "🤝",
-  "👌",
-  "🫂",
-  "🌚",
-  "🌝",
-  "⚡",
+  '😌',
+  '✌',
+  '🤟',
+  '🤝',
+  '👌',
+  '🫂',
+  '🌚',
+  '🌝',
+  '⚡',
+  '🥳',
+  '😎',
+  '🗿',
 ];
