@@ -13,7 +13,6 @@ import {
   GREETINGS,
   HEY_EMOJIES,
   RANDOM_WAKEUP_MSG,
-  REACT_EMOGIES,
   USER_JOIN_GREETINGS,
 } from './utils/reply/replies';
 import { random } from './actions/sendMessage';
