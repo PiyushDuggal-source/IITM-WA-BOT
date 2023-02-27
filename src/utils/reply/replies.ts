@@ -124,3 +124,24 @@ export const REACT_EMOGIES = [
   '😎',
   '🗿',
 ];
+
+export const RANDOM_WAKEUP_MSG = [
+  "🤖 I'm all hooked up, BOSS  🌞",
+  '💻 All systems up, BOSS 🌅',
+  "📡 I've got a strong signal, BOSS 🚀",
+  "🌐 I'm fully online, BOSS 🚀",
+  "🤝 I'm connected, BOSS 🤖",
+  "🤝 I'm synced up, BOSS 🌝",
+  "💡 I'm lit up, BOSS 🤖",
+  "🔌 I'm plugged in, BOSS 🌝",
+  "📶 I'm receiving some signal, BOSS 🌝",
+  "🚀 I'm ready for liftoff, BOSS 🚀",
+  "🛰️ I'm in orbit, BOSS 🌅",
+  "🌍 I'm globally connected, BOSS 🌞",
+  "🤖👋 Greetings, BOSS! I'm connected 🌝",
+  "📈 I'm fully operational, BOSS 🤖",
+  "🚪 I've entered the network, BOSS 🚀",
+  "💬 I'm in communication, BOSS  🌞",
+  "🤖💬 I'm online and at your service, BOSS 🌅",
+  '🤖💬 I can listen to you BOSS 🌝',
+];
