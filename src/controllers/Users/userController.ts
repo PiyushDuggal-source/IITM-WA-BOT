@@ -41,7 +41,7 @@ export const userControl = async (
     const WA_BOT = chats[BOT];
     await WA_BOT.sendMessage(
       `${process.env.BOT_NAME}: ${
-        PING_REPLIES.members[random(PING_REPLIES.memberMsgNumber)]
+        PING_REPLIES.members[random(PING_REPLIES.members.length)]
       }`
     );
     // Commands Message Reply

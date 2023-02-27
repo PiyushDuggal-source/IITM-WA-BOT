@@ -11,12 +11,11 @@ dotenv.config();
 export const PING_REPLIES: PingReplies = {
   admin: [
     'Hello Sir 🙏',
-    'Need any help Sir?🙇‍♂️',
+    'Need any help Sir?🙇♂️',
     "Aye aye Capn'",
     "Yes Capn'",
     "I am here Capn'",
   ],
-  adminMsgNumber: 5,
   members: [
     'Hey-Yo!',
     'Hola',
@@ -28,7 +27,6 @@ export const PING_REPLIES: PingReplies = {
     'I am HERE!',
     'I am Online!',
   ],
-  memberMsgNumber: 9,
 };
 
 const getUserCommands = (userCmdList: string[][]): CommandButtons => {
