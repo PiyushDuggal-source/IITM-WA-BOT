@@ -1,16 +1,16 @@
-import * as WAWebJS from "whatsapp-web.js";
-import { MessageType } from "../types/types";
-import { adminControl } from "./Admin/adminController";
-import { userControl } from "./Users/userController";
+import * as WAWebJS from 'whatsapp-web.js';
+import { adminContent } from '../actions/introduction';
+import { isMention } from '../actions/isMention';
+import { WhatsAppBot } from './waBot';
 
 export const main = async (
   client: WAWebJS.Client,
-  messageInstance: WAWebJS.Message,
-  userObj: MessageType
+  messageInstance: WAWebJS.Message
 ) => {
-  if (userObj.role === "OWNER") {
-    await adminControl(client, messageInstance, userObj);
-  } else if (userObj.role !== "NONE") {
-    await userControl(client, messageInstance, userObj);
-  }
+  const whatsAppBot = new WhatsAppBot({
+    client,
+    messageInstance,
+  });
+  const mention = isMention(messageInstance);
+  if (mention) return whatsAppBot.sendMessage(adminContent);
 };

@@ -27,7 +27,7 @@ const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
 }* (named after the first ever chatbot ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
 })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
-const adminContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
+export const adminContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
   GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
 }!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
 

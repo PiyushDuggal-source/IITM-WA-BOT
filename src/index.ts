@@ -139,7 +139,7 @@ client.on('message_create', async (message: WAWebJS.Message) => {
     userObj.role !== 'NONE' &&
     message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
-    await main(client, message, userObj);
+    await main(client, message);
     return;
   }
   // WARN: ONLY USE ONCE

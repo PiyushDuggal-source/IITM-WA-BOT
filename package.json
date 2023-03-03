@@ -25,7 +25,7 @@
     "express": "^4.18.2",
     "mongoose": "^6.8.4",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.19.2",
+    "whatsapp-web.js": "^1.19.4",
     "wwebjs-mongo": "^1.1.0"
   },
   "devDependencies": {
