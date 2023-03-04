@@ -29,6 +29,7 @@ import { pingEveryone } from './actions/pingEveryone';
 import { addUser, increaseNumberOfCmd, removeUser } from './services/mongo';
 import { connectToDb } from './utils/db/connect';
 import { removeMember } from './actions/removeMember';
+
 // @ts-ignore
 import {
   GrpJoinNotification,
@@ -37,6 +38,8 @@ import {
 } from './utils/returnTypeOfWA';
 import { sendClassNotification } from './actions/sendClassNotification';
 dotenv.config();
+
+import logger from "./utils/logger/index";
 
 // Initialized App
 const app = express();
@@ -70,11 +73,12 @@ const client = new Client({
 client.on('qr', (qr: string) => {
   qrcode.generate(qr, { small: true });
   console.log(qr);
+  logger.info("QR generated", { label: "INFO" });
 });
 
 // Event "READY"
-client.on('ready', async () => {
-  log({ msg: 'Client Connected', type: 'CONNECTED', error: false });
+client.on("ready", async () => {
+  logger.info("Client Connected", { label: "CONNECTED" });
   client.sendMessage(
     process.env.WA_BOT_ID_DEV as string,
     (process.env.BOT_NAME as string) +
@@ -265,7 +269,7 @@ setInterval(async () => {
   const chats = await client.getChats();
   const WA_BOT: WA_Grp = chats[BOT];
   sendClassNotification(WA_BOT);
-  log({ msg: 'Checked', type: 'INFO', error: false });
+  logger.info("Checked", { label: "INFO" });
 }, 5 * 60 * 1000); // every 5 minutes
 
 client.initialize();
@@ -289,11 +293,7 @@ app.get('/', (_: Request, res: Response) => {
   res.send('BOT');
 });
 app.listen(port, () =>
-  log({
-    msg: `[SERVER] Server is running on port ${port}`,
-    type: 'INFO',
-    error: false,
-  })
+  logger.info(`[SERVER] Server is running on port ${port}`, { label: "INFO" })
 );
 
 // All other pages should be returned as error pages

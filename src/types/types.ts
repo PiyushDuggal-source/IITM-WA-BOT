@@ -71,6 +71,16 @@ export type GroupLeaveORJoinImg = {
   numOfImgs: number;
 };
 
+
+export type LogType =
+  | "ERROR"
+  | "INFO"
+  | "WARNING"
+  | "GROUP_JOIN"
+  | "GROUP_LEFT"
+  | "DISCONNECTED"
+  | "CONNECTED";
+
 // YT Playlist Types
 export type YT_Playlist = {
   name: string;
