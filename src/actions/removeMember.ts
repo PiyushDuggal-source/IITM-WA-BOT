@@ -22,7 +22,7 @@ export const removeMember = async (
       );
       return;
     }
-    if (mention.includes(process.env.OWNER_CHAT_ID as never)) {
+    if (mention.includes("919871453667@c.us" as never)) {
       const recipitantId = msg.author || "";
       await disciplinaryAction({ recipitantId });
       WA_BOT.sendMessage(

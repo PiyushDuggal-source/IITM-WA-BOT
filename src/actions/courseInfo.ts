@@ -31,7 +31,7 @@ export const sendEligibility = async (
   const eligibilityImg = MessageMedia.fromFilePath(
     `${__dirname}/../assets/images/eligibility/eligibility.png`
   );
-  if (who.role === "ADMIN") {
+  if (who.role === "OWNER") {
     const chats = await client.getChats();
     const bot = chats[BOT];
     bot.sendMessage(eligibilityImg, {

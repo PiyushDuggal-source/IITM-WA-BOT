@@ -28,7 +28,12 @@ export const userControl = async (
   messageInstance: WAWebJS.Message,
   userObj: MessageType
 ) => {
-  const messageBody = messageInstance.body.slice(1);
+  let messageBody: string;
+  if (messageInstance.body.at(1) === ' ') {
+    messageBody = messageInstance.body.slice(2);
+  } else {
+    messageBody = messageInstance.body.slice(1);
+  }
   console.log("reached User Controller")
   // Ping Message Reply
   if (BOT_CHECK_MESSAGES.includes(messageBody.toLocaleLowerCase())) {
@@ -36,7 +41,7 @@ export const userControl = async (
     const WA_BOT = chats[BOT];
     await WA_BOT.sendMessage(
       `${process.env.BOT_NAME}: ${
-        PING_REPLIES.members[random(PING_REPLIES.memberMsgNumber)]
+        PING_REPLIES.members[random(PING_REPLIES.members.length)]
       }`
     );
     // Commands Message Reply
@@ -76,7 +81,7 @@ export const userControl = async (
 
   // Source Command Reply
   else if (SOURCE.includes(messageBody.toLocaleLowerCase())) {
-    sendSource(client, userObj);
+    sendSource(client,messageInstance, userObj);
     increaseNumberOfCmd({ recipitantId: userObj.chatId });
   }
 

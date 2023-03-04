@@ -3,18 +3,18 @@ export type MessageTypeOfWA = {}
 //   _data: {
 //     id: {
 //       fromMe: false,
-//       remote: '120363044220670475@g.us',
-//       id: '3EB0CBB0D8CA7EC90068',
-//       participant: '919990254656@c.us',
-//       _serialized: 'false_120363044220670475@g.us_3EB0CBB0D8CA7EC90068_919990254656@c.us'
+//       remote: '120363044xxxxxx475@g.us',
+//       id: '3EB0CBB0D8Cxxxxxxxxx68',
+//       participant: '91999xxxxxxx56@c.us',
+//       _serialized: 'false_12036xxxxxxx70475@g.us_3EBxxxxxxxxxxA7EC90068_91xxxxx56@c.us'
 //     },
-//     body: '!remove @919650692465',
+//     body: '!remove @919xxxxxx465',
 //     type: 'chat',
 //     t: 1674655819,
-//     notifyName: 'Poonam Duggal',
-//     from: '120363044220670475@g.us',
-//     to: '919871453667@c.us',
-//     author: '919990254656@c.us',
+//     notifyName: 'User Name',
+//     from: '120363xxxxxxxx0475@g.us',
+//     to: '919xxxxxxxx67@c.us',
+//     author: '91999xxxxxx6@c.us',
 //     self: 'in',
 //     ack: 1,
 //     isNewMsg: true,
@@ -28,7 +28,7 @@ export type MessageTypeOfWA = {}
 //     latestEditMsgKey: null,
 //     latestEditSenderTimestampMs: null,
 //     broadcast: false,
-//     mentionedJidList: [ '919650692465@c.us' ],
+//     mentionedJidList: [ '919xxxxxxxx45@c.us' ],
 //     isVcardOverMmsDocument: false,
 //     hasReaction: false,
 //     inviteGrpType: 'DEFAULT',
@@ -47,19 +47,19 @@ export type MessageTypeOfWA = {}
 //   mediaKey: undefined,
 //   id: {
 //     fromMe: false,
-//     remote: '120363044220670475@g.us',
-//     id: '3EB0CBB0D8CA7EC90068',
-//     participant: '919990254656@c.us',
-//     _serialized: 'false_120363044220670475@g.us_3EB0CBB0D8CA7EC90068_919990254656@c.us'
+//     remote: '1203xxxxxxxx475@g.us',
+//     id: '3EB0CBBxxxxxxxxxx90068',
+//     participant: '9199xxxxxxxxx@c.us',
+//     _serialized: 'false_120363xxxxxxxxxx70475@g.us_3EBxxxxxxxxxxC90068_91xxxxxxxx56@c.us'
 //   },
 //   ack: 1,
 //   hasMedia: false,
-//   body: '!remove @919650692465',
+//   body: '!remove @919xxxxxxxxx465',
 //   type: 'chat',
 //   timestamp: 1674655819,
-//   from: '120363044220670475@g.us',
-//   to: '919871453667@c.us',
-//   author: '919990254656@c.us',
+//   from: '1203630xxxxxxxxx475@g.us',
+//   to: '9198xxxxxxxx7@c.us',
+//   author: '919xxxxxx56@c.us',
 //   deviceType: 'web',
 //   isForwarded: undefined,
 //   forwardingScore: 0,
@@ -72,7 +72,7 @@ export type MessageTypeOfWA = {}
 //   location: undefined,
 //   vCards: [],
 //   inviteV4: undefined,
-//   mentionedIds: [ '919650692465@c.us' ],
+//   mentionedIds: [ '919xxxxxxxxx65@c.us' ],
 //   orderId: undefined,
 //   token: undefined,
 //   isGif: false,
@@ -118,3 +118,105 @@ export type GrpLeaveNotification = {}
 //   author: '91988xxxxxxxx2@c.us',
 //   recipientIds: [ '919xxxxxxxx2@c.us' ]
 //   }
+
+export type GroupChat = {}
+// GroupChat {
+//   groupMetadata: {
+//     id: {
+//       server: 'g.us',
+//       user: '120363xxxxxxxxx475',
+//       _serialized: '12036xxxxxxxxxxx475@g.us'
+//     },
+//     creation: 1659366867,
+//     owner: {
+//       server: 'c.us',
+//       user: '9198xxxxxxx67',
+//       _serialized: '919xxxxxxxx7@c.us'
+//     },
+//     subject: 'IIT-M Bot - ELIZA - dev',
+//     subjectTime: 1659594001,
+//     descTime: 0,
+//     restrict: false,
+//     announce: false,
+//     noFrequentlyForwarded: false,
+//     ephemeralDuration: 0,
+//     membershipApprovalMode: false,
+//     size: 4,
+//     support: false,
+//     suspended: false,
+//     terminated: false,
+//     uniqueShortNameMap: {},
+//     isParentGroup: false,
+//     isParentGroupClosed: false,
+//     defaultSubgroup: false,
+//     lastActivityTimestamp: 0,
+//     lastSeenActivityTimestamp: 0,
+//     incognito: false,
+//     participants: [ [Object], [Object], [Object], [Object] ],
+//     pendingParticipants: [],
+//     pastParticipants: [
+//       [Object], [Object],
+//       [Object], [Object],
+//       [Object], [Object],
+//       [Object], [Object],
+//       [Object], [Object],
+//       [Object], [Object]
+//     ],
+//     membershipApprovalRequests: []
+//   },
+//   id: {
+//     server: 'g.us',
+//     user: '12036xxxxxxxx475',
+//     _serialized: '1203xxxxxxxx0475@g.us'
+//   },
+//   name: 'IIT-M Bot - ELIZA - dev',
+//   isGroup: true,
+//   isReadOnly: false,
+//   unreadCount: 0,
+//   timestamp: 1675171518,
+//   archived: false,
+//   pinned: true,
+//   isMuted: false,
+//   muteExpiration: 0
+// }
+
+export const GroupChatParticipants ={}
+
+// [
+//   {
+//     id: {
+//       server: 'c.us',
+//       user: '916xxxxxxxxx760',
+//       _serialized: '9163xxxxxxxxx60@c.us'
+//     },
+//     isAdmin: false,
+//     isSuperAdmin: false
+//   },
+//   {
+//     id: {
+//       server: 'c.us',
+//       user: '91988xxxxxxxx2',
+//       _serialized: '9198xxxxxxxx92@c.us'
+//     },
+//     isAdmin: false,
+//     isSuperAdmin: false
+//   },
+//   {
+//     id: {
+//       server: 'c.us',
+//       user: '919xxxxxxxx783',
+//       _serialized: '919xxxxxxxx783@c.us'
+//     },
+//     isAdmin: false,
+//     isSuperAdmin: false
+//   },
+//   {
+//     id: {
+//       server: 'c.us',
+//       user: '9198xxxxxxxx67',
+//       _serialized: '919xxxxxxxx667@c.us'
+//     },
+//     isAdmin: true,
+//     isSuperAdmin: true
+//   }
+// ]

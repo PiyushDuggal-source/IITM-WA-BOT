@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../src/utils/Commands/allCmds.ts"],
-  "sourcesContent": ["import {\n  BOT_CHECK_MESSAGES,\n  USER_ADD_CMD,\n  USER_REMOVE_CMD,\n} from \"../Commands/instructions\";\nimport {\n  CALENDAR_COMMANDS,\n  CLASS_COMMAND,\n  COMMANDS,\n  HELP_CMDS,\n  NOTES_CMD,\n  PLAYLIST_CMD,\n  SOURCE,\n} from \"./instructions\";\nexport const User_AllCommands: string[][] = [\n  CALENDAR_COMMANDS,\n  CLASS_COMMAND,\n  COMMANDS,\n  NOTES_CMD,\n  PLAYLIST_CMD,\n  HELP_CMDS,\n  BOT_CHECK_MESSAGES,\n  SOURCE,\n];\n\nexport const OWNER_ADMIN_CMDS: string[][] = [USER_REMOVE_CMD, USER_ADD_CMD];\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,sBAAAE,EAAA,qBAAAC,IAAA,eAAAC,EAAAJ,GAAA,IAAAK,EAIO,oCACPA,EAQO,0BACA,MAAMF,EAA+B,CAC1C,oBACA,gBACA,WACA,YACA,eACA,YACA,qBACA,QACF,EAEaD,EAA+B,CAAC,kBAAiB,cAAY",
+  "sourcesContent": ["import {\n  BOT_CHECK_MESSAGES,\n  USER_REMOVE_CMD,\n} from \"../Commands/instructions\";\nimport {\n  CALENDAR_COMMANDS,\n  CLASS_COMMAND,\n  COMMANDS,\n  HELP_CMDS,\n  NOTES_CMD,\n  PLAYLIST_CMD,\n  SOURCE,\n} from \"./instructions\";\nexport const User_AllCommands: string[][] = [\n  CALENDAR_COMMANDS,\n  CLASS_COMMAND,\n  COMMANDS,\n  NOTES_CMD,\n  PLAYLIST_CMD,\n  HELP_CMDS,\n  BOT_CHECK_MESSAGES,\n  SOURCE,\n];\n\nexport const OWNER_ADMIN_CMDS: string[][] = [USER_REMOVE_CMD];\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,sBAAAE,EAAA,qBAAAC,IAAA,eAAAC,EAAAJ,GAAA,IAAAK,EAGO,oCACPA,EAQO,0BACA,MAAMF,EAA+B,CAC1C,oBACA,gBACA,WACA,YACA,eACA,YACA,qBACA,QACF,EAEaD,EAA+B,CAAC,iBAAe",
   "names": ["allCmds_exports", "__export", "OWNER_ADMIN_CMDS", "User_AllCommands", "__toCommonJS", "import_instructions"]
 }

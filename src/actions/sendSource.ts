@@ -1,9 +1,10 @@
-import * as WAWebJS from "whatsapp-web.js";
-import * as dotenv from "dotenv";
-import { HEY_EMOJIES } from "../utils/reply/replies";
-import { random } from "./sendMessage";
-import { MessageType } from "../types/types";
-import { BOT } from "..";
+import * as WAWebJS from 'whatsapp-web.js';
+import * as dotenv from 'dotenv';
+import { HEY_EMOJIES } from '../utils/reply/replies';
+import { random } from './sendMessage';
+import { MessageType } from '../types/types';
+import { BOT } from '..';
+import { react } from './messageActions';
 dotenv.config();
 
 const CONTENT = `Hey, Checkout how I *${process.env.BOT_NAME}* created!!${
@@ -12,11 +13,13 @@ const CONTENT = `Hey, Checkout how I *${process.env.BOT_NAME}* created!!${
 
 export const sendSource = async (
   client: WAWebJS.Client,
+  messageInstance: WAWebJS.Message,
   who: MessageType
 ) => {
-    const chats = await client.getChats();
-    const bot = chats[BOT];
-  if (who.role !== "NONE") {
+  const chats = await client.getChats();
+  const bot = chats[BOT];
+  if (who.role !== 'NONE') {
     bot.sendMessage(CONTENT);
+    react(messageInstance);
   }
 };
