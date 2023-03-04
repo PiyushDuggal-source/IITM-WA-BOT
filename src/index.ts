@@ -139,7 +139,6 @@ client.on('message_create', async (message: WAWebJS.Message) => {
     return;
   }
 
-  logger.info(`who ${who}`, { label: messageId });
   // Checks if message's first letter is BOT_PREFIX
   if (
     userObj.role !== 'NONE' &&
