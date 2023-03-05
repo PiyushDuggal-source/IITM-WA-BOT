@@ -31,9 +31,8 @@
 //   }
 // };
 
-import { execSync } from "child_process";
-import { createLogger, format, config, transports } from "winston";
-
+import { execSync } from 'child_process';
+import { createLogger, format, config, transports } from 'winston';
 
 const _paperTrailHost = process.env.PAPERTRAIL_HOST;
 const _paperTrailPort = process.env.PAPERTRAIL_PORT;
@@ -44,29 +43,29 @@ const myFormat = format.printf(
 );
 
 const logFileName = `./logs/wa-${Date.now()}.log`;
-const binaryFolderPath = "./bin";
+const binaryFolderPath = './bin';
 let binaryFileName = ``;
 
 const fileTransport = new transports.File({ filename: logFileName });
 const consoleTransport = new transports.Console();
 
 switch (process.platform) {
-  case "darwin":
-    binaryFileName = "remote_syslog_darwin";
+  case 'darwin':
+    binaryFileName = 'remote_syslog_darwin';
     break;
 
-  case "linux":
-    binaryFileName = "remote_syslog_linux";
+  case 'linux':
+    binaryFileName = 'remote_syslog_linux';
     break;
 
   default:
-    binaryFileName = "remote_syslog_linux";
+    binaryFileName = 'remote_syslog_linux';
 }
 
 const logger = createLogger({
   format: format.combine(
     format.timestamp({
-      format: "YYYY-MM-DD HH:mm:ss",
+      format: 'YYYY-MM-DD HH:mm:ss',
     }),
     myFormat
   ),
@@ -74,8 +73,13 @@ const logger = createLogger({
   transports: [fileTransport, consoleTransport],
 });
 
-const info = (string:string, label:any) => {
-  logger.info(string, {
+const log = (message: string, label: string = 'INFO') => {
+  logger.info(message, {
+    label,
+  });
+};
+const logError = (message: string, label: string = 'ERROR') => {
+  logger.error(message, {
     label,
   });
 };
@@ -88,12 +92,12 @@ try {
   try {
     execSync(killEarlierSysCmd);
   } catch (err) {
-    console.log("No earlier remote syslog process found", err);
+    console.log('No earlier remote syslog process found', err);
   }
   execSync(sysLogConnectCmd);
 } catch (err) {
   logger.error(
-    "Someting went wrong while executing remote syslog command",
+    'Someting went wrong while executing remote syslog command',
     err
   );
 }
@@ -101,8 +105,8 @@ try {
 logger.info(
   `Whats app bot rerun & logging initiated; logging at ${logFileName}`,
   {
-    label: "Bot Initialize",
+    label: 'Bot Initialize',
   }
 );
 
-export default logger;
+export { logger, log, logError };

@@ -21,13 +21,14 @@ import * as dotenv from 'dotenv';
 import { Request, Response } from 'express';
 import { COMMANDS_CMDS } from './utils/Commands/instructions';
 import { grpLeaveStickers } from './assets/assets';
-import { log } from './utils/log';
+// import { log } from "./utils/log";
 import { MessageType, WA_Grp } from './types/types';
 import { sendAndDeleteMsg } from './actions/sendAndDeleteMsg';
 import { pingEveryone } from './actions/pingEveryone';
 import { addUser, increaseNumberOfCmd, removeUser } from './services/mongo';
 import { connectToDb } from './utils/db/connect';
 import { removeMember } from './actions/removeMember';
+import { v4 as uuidv4 } from 'uuid';
 
 // @ts-ignore
 import {
@@ -38,7 +39,7 @@ import {
 import { sendClassNotification } from './actions/sendClassNotification';
 dotenv.config();
 
-import logger from "./utils/logger/index";
+import { log, logError } from './utils/logger/index';
 
 // Initialized App
 const app = express();
@@ -72,12 +73,12 @@ const client = new Client({
 client.on('qr', (qr: string) => {
   qrcode.generate(qr, { small: true });
   console.log(qr);
-  logger.info("QR generated", { label: "INFO" });
+  log('QR generated');
 });
 
 // Event "READY"
-client.on("ready", async () => {
-  logger.info("Client Connected", { label: "CONNECTED" });
+client.on('ready', async () => {
+  log('Client Connected', 'CONNECTED');
   client.sendMessage(
     process.env.WA_BOT_ID_DEV as string,
     (process.env.BOT_NAME as string) +
@@ -93,6 +94,11 @@ client.on("ready", async () => {
 client.on('message_create', async (message: WAWebJS.Message) => {
   // Check if message is from Group or Not, if yes, who contains whoean or userID
   const userObj: MessageType = await checkMessage(message);
+  const msgId: string = uuidv4();
+
+  log(`Handling Message Id: ${msgId}`, msgId);
+  log(`UserInfo ${JSON.stringify(userObj)}`, msgId);
+  log(`MessageInfo ${JSON.stringify(message.rawData)}`, msgId);
   // Mention Logic
   const str: string[] = message.mentionedIds;
   const isMention =
@@ -101,11 +107,14 @@ client.on('message_create', async (message: WAWebJS.Message) => {
       .toLowerCase()
       .split(' ')
       .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
+
+  log(`isMention ${isMention}`, msgId);
   if (
     isMention &&
     userObj.role !== 'NONE' &&
     message.body.split(' ').length === 1
   ) {
+    log(`introducing Eliza`, msgId);
     introduction(client, userObj, message);
   }
   let allChats = await client.getChats();
@@ -120,6 +129,7 @@ client.on('message_create', async (message: WAWebJS.Message) => {
     return;
   }
   if (userObj.role === 'STUDENT' && superCmdFilter(message.body)) {
+    log(`Action not permitted because of role checks`, msgId);
     WA_BOT.sendMessage(
       'You cannot perform this action, because you are not a BOT ADMIN, you will get ban if you use this frequently :)'
     );
@@ -127,13 +137,14 @@ client.on('message_create', async (message: WAWebJS.Message) => {
   }
 
   if (userObj.role !== 'NONE' && superCmdFilter(message.body)) {
-    console.log('entering removing');
+    log(`Entering removing`, msgId);
     await removeMember(WA_BOT as WAWebJS.GroupChat, userObj, message);
     return;
   }
 
   // Ping Everyone
   if (userObj.role === 'OWNER' && ['everyone'].includes(message.body)) {
+    log(`ping everyone`, msgId);
     await pingEveryone(client, message);
     return;
   }
@@ -143,6 +154,7 @@ client.on('message_create', async (message: WAWebJS.Message) => {
     userObj.role !== 'NONE' &&
     message.body[0] === (process.env.BOT_PREFIX as string)
   ) {
+    log(`running prefix cmd ${message.body}`, msgId);
     await main(client, message);
     return;
   }
@@ -166,11 +178,7 @@ client.on('message_create', async (message: WAWebJS.Message) => {
  */
 client.on('group_join', async (msg: GroupNotification) => {
   if (msg.chatId === WA_BOT_ID) {
-    log({
-      msg: `${msg.recipientIds[0]} Joined the Group`,
-      type: 'GROUP_JOIN',
-      error: false,
-    });
+    log(`${msg.recipientIds[0]} Joined the Group`, 'GROUP_JOIN');
     const contact = await client.getNumberId(msg.recipientIds[0]);
     const details = await client.getContactById(contact?._serialized || '');
     if (details.name) {
@@ -242,11 +250,7 @@ client.on('group_join', async (msg: GroupNotification) => {
 client.on('group_leave', async (notification: WAWebJS.GroupNotification) => {
   let grpId = notification.chatId;
   if (grpId === WA_BOT_ID) {
-    log({
-      msg: `${notification.recipientIds[0]} left the Group`,
-      type: 'GROUP_LEFT',
-      error: false,
-    });
+    log(`${notification.recipientIds[0]} left the Group`, 'GROUP_LEFT');
   }
   if (notification.chatId === WA_BOT_ID && notification.type !== 'remove') {
     const sticker = MessageMedia.fromFilePath(
@@ -268,7 +272,7 @@ setInterval(async () => {
   const chats = await client.getChats();
   const WA_BOT: WA_Grp = chats[BOT];
   sendClassNotification(WA_BOT);
-  logger.info("Checked", { label: "INFO" });
+  log('Checked');
 }, 5 * 60 * 1000); // every 5 minutes
 
 client.initialize();
@@ -292,7 +296,7 @@ app.get('/', (_: Request, res: Response) => {
   res.send('BOT');
 });
 app.listen(port, () =>
-  logger.info(`[SERVER] Server is running on port ${port}`, { label: "INFO" })
+  log(`[SERVER] Server is running on port ${port}`, 'INFO')
 );
 
 // All other pages should be returned as error pages
