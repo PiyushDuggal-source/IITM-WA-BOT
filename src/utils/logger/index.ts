@@ -34,7 +34,6 @@
 import { execSync } from "child_process";
 import { createLogger, format, config, transports } from "winston";
 
-
 const _paperTrailHost = process.env.PAPERTRAIL_HOST;
 const _paperTrailPort = process.env.PAPERTRAIL_PORT;
 
@@ -74,8 +73,13 @@ const logger = createLogger({
   transports: [fileTransport, consoleTransport],
 });
 
-const info = (string:string, label:any) => {
-  logger.info(string, {
+const log = (message: string, label: string = "INFO") => {
+  logger.info(message, {
+    label,
+  });
+};
+const logError = (message: string, label: string = "ERROR") => {
+  logger.error(message, {
     label,
   });
 };
@@ -105,4 +109,4 @@ logger.info(
   }
 );
 
-export default logger;
+export {logger, log, logError};
