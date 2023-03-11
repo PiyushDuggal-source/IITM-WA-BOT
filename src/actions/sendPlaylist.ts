@@ -12,7 +12,7 @@ const playlistFormatter = (playlist: YT_Playlist, content: string) => {
   playlist.forEach((playlist) => {
     content += `\n\n${playlist.name}\n${playlist.link}`;
   });
-  content += `\n\n:${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
+  content += `\n\n:${FOOTERS.footers[random(FOOTERS.footers.length)]}`;
   return content;
 };
 let userMsg = `*These are your course PlayLists ${

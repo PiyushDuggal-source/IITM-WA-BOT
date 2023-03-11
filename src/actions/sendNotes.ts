@@ -15,7 +15,7 @@ const notesFormatter = (notes: Notes, content: string) => {
       content += `\n\nName of the Notes: _${noteContent.name}_\nLink: ${noteContent.link}`;
     });
   });
-  content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
+  content += `\n\n: ${FOOTERS.footers[random(FOOTERS.footers.length)]}`;
   return content;
 };
 

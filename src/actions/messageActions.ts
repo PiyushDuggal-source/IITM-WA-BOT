@@ -1,11 +1,10 @@
-import * as WAWebJS from "whatsapp-web.js";
-import { MessageType } from "../types/types";
-import * as dotenv from "dotenv";
-import { WA_BOT_ID } from "..";
-import { UserModel } from "../models/models";
-import { REACT_EMOGIES } from "../utils/reply/replies";
-import { random } from "./sendMessage";
-import { OWNER_ADMIN_CMDS } from "../utils/Commands/allCmds";
+import * as WAWebJS from 'whatsapp-web.js';
+import { MessageType } from '../types/types';
+import * as dotenv from 'dotenv';
+import { UserModel } from '../models/models';
+import { REACT_EMOGIES } from '../utils/reply/replies';
+import { random } from './sendMessage';
+import { OWNER_ADMIN_CMDS } from '../utils/Commands/allCmds';
 dotenv.config();
 
 interface Message extends WAWebJS.Message {
@@ -20,38 +19,30 @@ interface Message extends WAWebJS.Message {
  * @returns { MessageType }
  */
 export const checkMessage = async (message: Message): Promise<MessageType> => {
-  if (
-    (message.fromMe || message.id.fromMe) &&
-    String(message.to) === String(WA_BOT_ID)
-  ) {
+  if (message.fromMe) {
     return {
       name: message._data?.notifyName,
-      role: "OWNER",
+      role: 'OWNER',
       chatId: message.from,
     };
-  } else if (String(message.from) === String(WA_BOT_ID)) {
-    const grpAdmins = await UserModel.find({ roles: "ADMIN" });
+  } else {
+    const grpAdmins = await UserModel.find({ roles: 'ADMIN' });
     const isAdmin = grpAdmins.some(
       (admin) => admin.recipitantId === message.author
     );
     if (!isAdmin) {
       return {
         name: message._data?.notifyName,
-        role: "STUDENT",
-        chatId: message.author || "",
+        role: 'STUDENT',
+        chatId: message.author || '',
       };
     } else {
       return {
         name: message._data?.notifyName,
-        role: "ADMIN",
-        chatId: message.author || "",
+        role: 'ADMIN',
+        chatId: message.author || '',
       };
     }
-  } else {
-    return {
-      role: "NONE",
-      chatId: message.author || "",
-    };
   }
 };
 
@@ -71,6 +62,6 @@ export const react = async (messageInstance: WAWebJS.Message) => {
  * @returns  { Boolean }
  */
 export const superCmdFilter = (messageBody: string): Boolean => {
-  const cmdByUser = messageBody.split(" ")[0].slice(1);
+  const cmdByUser = messageBody.split(' ')[0].slice(1);
   return OWNER_ADMIN_CMDS.some((cmds) => cmds.some((cmd) => cmd === cmdByUser));
 };

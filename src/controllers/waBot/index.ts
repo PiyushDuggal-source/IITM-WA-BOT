@@ -33,16 +33,13 @@ export class WhatsAppBot {
   }
 
   checkMessage = async (): Promise<MessageType> => {
-    if (
-      (this.messageInstance.fromMe || this.messageInstance.id.fromMe) &&
-      String(this.messageInstance.to) === String(WA_BOT_ID)
-    ) {
+    if (this.messageInstance.fromMe) {
       return {
         name: this.messageInstance._data?.notifyName,
         role: 'OWNER',
         chatId: this.messageInstance.from,
       };
-    } else if (String(this.messageInstance.from) === String(WA_BOT_ID)) {
+    } else {
       const grpAdmins = await UserModel.find({ roles: 'ADMIN' });
       const isAdmin = grpAdmins.some(
         (admin) => admin.recipitantId === this.messageInstance.author
@@ -60,40 +57,33 @@ export class WhatsAppBot {
           chatId: this.messageInstance.author || '',
         };
       }
-    } else {
-      return {
-        role: 'NONE',
-        chatId: this.messageInstance.author || '',
-      };
     }
   };
 
   sendMessage = async (
     messageToSend: WAWebJS.MessageContent,
-    classMsg?: boolean,
-    admin?: boolean
+    classMsg?: boolean
   ) => {
     const userObj = await this.checkMessage();
-    console.log(userObj)
-    if (userObj.role === 'OWNER') {
+    if (userObj.role === 'STUDENT') {
+      return sendAndDeleteMsg(
+        this.client,
+        this.messageInstance,
+        userObj.chatId,
+        messageToSend
+      );
+    } else if (userObj.role === 'ADMIN') {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
       this.waBot.sendMessage(msg);
       react(this.messageInstance);
-    } else if (userObj.role === 'ADMIN' && admin) {
-      const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
-      this.waBot.sendMessage(msg);
-      react(this.messageInstance);
-    } else if (userObj.role !== 'NONE') {
+    } else {
       if (classMsg) {
         this.waBot.sendMessage(messageToSend);
         react(this.messageInstance);
       } else {
-        sendAndDeleteMsg(
-          this.client,
-          this.messageInstance,
-          userObj.chatId,
-          messageToSend
-        );
+        const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
+        this.waBot.sendMessage(msg);
+        react(this.messageInstance);
       }
     }
   };

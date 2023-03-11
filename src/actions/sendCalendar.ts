@@ -25,7 +25,7 @@ const calendarMessageFormat = (calendar: Calendar): MessageContent => {
           }/${event.date.getDate()}`
     }`;
   });
-  return message + `\n\n: ${FOOTERS.footers[random(FOOTERS.footerMsgLength)]}`;
+  return message + `\n\n: ${FOOTERS.footers[random(FOOTERS.footers.length)]}`;
 };
 
 export const sendCalendar = async (

@@ -25,7 +25,6 @@ export const FOOTERS = {
     "Happy to help ☺",
     "Crack the thing..",
   ],
-  footerMsgLength: 11,
 };
 
 export const END_FOOTER =

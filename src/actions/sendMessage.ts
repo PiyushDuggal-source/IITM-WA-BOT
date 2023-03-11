@@ -27,7 +27,7 @@ export const sendMessage = async (
     react(messageInstance)
     } else if (help) {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
-        FOOTERS.footers[random(FOOTERS.footerMsgLength)]
+        FOOTERS.footers[random(FOOTERS.footers.length)]
       }`;
       WA_BOT.sendMessage(msg);
     react(messageInstance)
@@ -49,7 +49,7 @@ export const sendMessage = async (
       sendAndDeleteMsg(client, messageInstance, who.chatId, messageToSend);
     } else if (help) {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
-        FOOTERS.footers[random(FOOTERS.footerMsgLength)]
+        FOOTERS.footers[random(FOOTERS.footers.length)]
       }`;
       sendAndDeleteMsg(client, messageInstance, who.chatId, msg);
     } else {
