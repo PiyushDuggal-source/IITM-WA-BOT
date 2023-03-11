@@ -747,6 +747,14 @@ export const NOTES: Notes = [
 
 export const PLAYLISTS: YT_Playlist = [
   {
+    name: 'Python OPPE previous year questions | by RRG',
+    link: 'https://www.youtube.com/playlist?list=PLZd_9NahuB3G50kpQ35Y50Wfkq1q_rUwy',
+  },
+  {
+    name: 'Mathematics For data science 1 | by RRG',
+    link: 'https://www.youtube.com/playlist?list=PLZd_9NahuB3G7yNvcyVChnSM29oNYTqwO',
+  },
+  {
     name: 'Mathematics for Data Science 1 | Maths1 | Math1 | Mathematics1 | Math | BSCMA1001',
     link: 'https://www.youtube.com/playlist?list=PLZ2ps__7DhBZYDZo9A0pZ_i0xhstrk5cR',
   },

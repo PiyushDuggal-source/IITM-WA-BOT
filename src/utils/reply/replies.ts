@@ -11,7 +11,7 @@ dotenv.config();
 export const PING_REPLIES: PingReplies = {
   admin: [
     'Hello Sir 🙏',
-    'Need any help Sir?🙇♂️',
+    'Need any help Sir?🙇',
     "Aye aye Capn'",
     "Yes Capn'",
     "I am here Capn'",
