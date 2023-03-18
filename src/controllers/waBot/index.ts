@@ -1,5 +1,5 @@
 import * as WAWebJS from 'whatsapp-web.js';
-import { BOT, WA_BOT_ID } from '../..';
+import { BOT } from '../..';
 import { react } from '../../actions/messageActions';
 import { sendAndDeleteMsg } from '../../actions/sendAndDeleteMsg';
 import { UserModel } from '../../models/models';
@@ -53,7 +53,7 @@ export class WhatsAppBot {
       } else {
         return {
           name: this.messageInstance._data?.notifyName,
-          role: 'ADMIN',
+         role: 'ADMIN',
           chatId: this.messageInstance.author || '',
         };
       }

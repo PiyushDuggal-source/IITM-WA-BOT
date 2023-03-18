@@ -18,7 +18,7 @@ const CMD_NAMES = [
   "\n*Want to check my _Source Code_?* Use this command:\n",
 ];
 
-const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
+export const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
   GREETINGS.member[random(GREETINGS.memberMsgNumber)]
 }!\nI am WhatsApp Bot!!\n\nMy ${
   GREETINGS.admin[random(GREETINGS.adminMsgNumber)]

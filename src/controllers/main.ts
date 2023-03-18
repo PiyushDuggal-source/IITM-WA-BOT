@@ -1,5 +1,5 @@
 import * as WAWebJS from 'whatsapp-web.js';
-import { adminContent } from '../actions/introduction';
+import { adminContent, userContent } from '../actions/introduction';
 import { isMention } from '../actions/isMention';
 import { WhatsAppBot } from './waBot';
 
@@ -11,6 +11,8 @@ export const main = async (
     client,
     messageInstance,
   });
+  
+  // If mention
   const mention = isMention(messageInstance);
-  if (mention) return whatsAppBot.sendMessage(adminContent);
+  if (mention) return whatsAppBot.sendMessage(userContent);
 };
