@@ -1,6 +1,16 @@
 import * as WAWebJS from 'whatsapp-web.js';
 import { Roles } from '../models/models';
 
+// Command Types
+export type CommandType =
+  | 'NOTES'
+  | 'PLAYLIST'
+  | 'CALENDAR'
+  | 'HELP'
+  | 'SOURCE'
+  | 'GROUP_LINK'
+  | 'CHECK';
+
 // Ping Replies
 export type PingReplies = {
   admin: string[];
@@ -19,7 +29,7 @@ export type NONE = 'NONE';
  * `OWNER`
  */
 
-export type AllRoles = Roles | 'NONE' | 'OWNER' | 'STUDENT';
+export type AllRoles = Roles | 'OWNER' | 'STUDENT';
 export type MessageType = {
   name?: string;
   role: AllRoles;
@@ -73,15 +83,14 @@ export type GroupLeaveORJoinImg = {
   numOfImgs: number;
 };
 
-
 export type LogType =
-  | "ERROR"
-  | "INFO"
-  | "WARNING"
-  | "GROUP_JOIN"
-  | "GROUP_LEFT"
-  | "DISCONNECTED"
-  | "CONNECTED";
+  | 'ERROR'
+  | 'INFO'
+  | 'WARNING'
+  | 'GROUP_JOIN'
+  | 'GROUP_LEFT'
+  | 'DISCONNECTED'
+  | 'CONNECTED';
 
 // YT Playlist Types
 export type YT_Playlist = {
