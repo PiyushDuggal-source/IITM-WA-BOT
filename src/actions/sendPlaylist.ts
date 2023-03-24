@@ -24,7 +24,7 @@ let adminMsg = `*These are your course PlayLists ${
 }*`;
 
 const sorryMsg = `Sorry ${
-  GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+  GREETINGS.member[random(GREETINGS.memLen)]
 }\nOnly one word is allowed after !playlist command ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
 }`;

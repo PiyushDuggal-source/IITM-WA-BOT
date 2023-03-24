@@ -20,11 +20,11 @@ const notesFormatter = (notes: Notes, content: string) => {
 };
 
 let adminMsg = `*These are the Notes ${
-  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
+  GREETINGS.admin[random(GREETINGS.adminLen)]
 }* ${HEY_EMOJIES[random(HEY_EMOJIES.length)]}`;
 
 let userMsg = `*These are the Notes ${
-  GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+  GREETINGS.member[random(GREETINGS.memLen)]
 }* ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
 }\n\n*Use filter if you want specific subject's notes*\nEg: *!notes {SubjectName}* _without {}_\n\nNote: _I am not connected, associated, affiliated with any of the Owners of these links to Promote, Encourage any Channel/Group, I found the links on internet only._`;
@@ -47,7 +47,7 @@ export const sendNotes = async (
 };
 
 const sorryMsg = `Sorry ${
-  GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+  GREETINGS.member[random(GREETINGS.memLen)]
 }\nOnly one word is allowed after !notes command ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
 }`;

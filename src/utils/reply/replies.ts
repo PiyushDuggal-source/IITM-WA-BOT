@@ -27,6 +27,12 @@ export const PING_REPLIES: PingReplies = {
     'I am HERE!',
     'I am Online!',
   ],
+  get memLen() {
+    return this.members.length;
+  },
+  get adminLen() {
+    return this.admin.length;
+  },
 };
 
 const getUserCommands = (userCmdList: string[][]): CommandButtons => {
@@ -58,9 +64,13 @@ export const USER_COMMANDS = new List(
 
 export const GREETINGS: Greetings = {
   admin: ['Sir', 'Master', 'Monsieur'],
-  adminMsgNumber: 3,
   member: ['Fellow', 'Good Person', 'Dude', 'My Friend!', 'Good Guy', 'IITian'],
-  memberMsgNumber: 6,
+  get memLen() {
+    return this.member.length;
+  },
+  get adminLen() {
+    return this.admin.length;
+  },
 };
 
 export const HOLIDAY_REPLIES = {

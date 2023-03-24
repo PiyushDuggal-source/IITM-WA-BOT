@@ -5,6 +5,8 @@ import { Roles } from '../models/models';
 export type PingReplies = {
   admin: string[];
   members: string[];
+  readonly memLen: number;
+  readonly adminLen: number;
 };
 
 export type ADMIN = 'ADMIN';
@@ -45,9 +47,9 @@ export type Calendar = {
 // Introduction Type
 export type Greetings = {
   member: string[];
-  memberMsgNumber: number;
   admin: string[];
-  adminMsgNumber: number;
+  readonly memLen: number;
+  readonly adminLen: number;
 };
 
 // User Join Greetings Type

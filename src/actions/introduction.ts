@@ -19,16 +19,16 @@ const CMD_NAMES = [
 ];
 
 const userContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
-  GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+  GREETINGS.member[random(GREETINGS.memLen)]
 }!\nI am WhatsApp Bot!!\n\nMy ${
-  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
+  GREETINGS.admin[random(GREETINGS.adminLen)]
 } calls me *${
   process.env.BOT_NAME as String
 }* (named after the first ever chatbot ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
 })\n\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
 export const adminContent = `Hey ${HEY_EMOJIES[random(HEY_EMOJIES.length)]} ${
-  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
+  GREETINGS.admin[random(GREETINGS.adminLen)]
 }!\nI am Your WhatsApp Bot!!\nWhat can I do for you?\nMy Purpose is to help you in your journey to become an *IITian* ✌ fast, so for that I can keep you notified for all the major Things: Classes, Calendars, Notes and ALL\n\nType this commands to see all the commands!\n*!AllCmds*`;
 
 const getCommands = (allCommands: string[][]): string => {

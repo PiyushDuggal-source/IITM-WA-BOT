@@ -5,16 +5,16 @@ import { GREETINGS, HEY_EMOJIES } from "../utils/reply/replies";
 import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
 import { random } from "./sendMessage";
 
-let ADMIN_HELP = `Hey ${GREETINGS.admin[random(GREETINGS.adminMsgNumber)]} ${
+let ADMIN_HELP = `Hey ${GREETINGS.admin[random(GREETINGS.adminLen)]} ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
 }, Need my help!!\n\nJust do one of these simple things ${
-  GREETINGS.admin[random(GREETINGS.adminMsgNumber)]
+  GREETINGS.admin[random(GREETINGS.adminLen)]
 }:\n1. *Mention me*\n2. Type: !allCmds\n3. !cmd`;
 
-let USER_HELP = `Hey ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
+let USER_HELP = `Hey ${GREETINGS.member[random(GREETINGS.memLen)]} ${
   HEY_EMOJIES[random(HEY_EMOJIES.length)]
 }, Need my help!!\n\nJust do one of these simple things ${
-  GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+  GREETINGS.member[random(GREETINGS.memLen)]
 }:\n1. *Mention me*\n2. Type: !allCmds\n3. !cmd`;
 
 export const help = async (
