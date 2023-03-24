@@ -104,7 +104,6 @@ client.on('message_create', async (message: WAWebJS.Message) => {
       .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
   if (
     isMention &&
-    userObj.role !== 'NONE' &&
     message.body.split(' ').length === 1
   ) {
     introduction(client, userObj, message);
@@ -127,7 +126,7 @@ client.on('message_create', async (message: WAWebJS.Message) => {
     return;
   }
 
-  if (userObj.role !== 'NONE' && superCmdFilter(message.body)) {
+  if (superCmdFilter(message.body)) {
     console.log('entering removing');
     await removeMember(WA_BOT as WAWebJS.GroupChat, userObj, message);
     return;

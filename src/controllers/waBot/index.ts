@@ -1,5 +1,5 @@
 import * as WAWebJS from 'whatsapp-web.js';
-import { BOT, WA_BOT_ID } from '../..';
+import { BOT } from '../..';
 import { react } from '../../actions/messageActions';
 import { sendAndDeleteMsg } from '../../actions/sendAndDeleteMsg';
 import { HelperClass } from '../../helper';
@@ -34,16 +34,13 @@ export class WhatsAppBot {
   }
 
   checkMessage = async (): Promise<MessageType> => {
-    if (
-      (this.messageInstance.fromMe || this.messageInstance.id.fromMe) &&
-      String(this.messageInstance.to) === String(WA_BOT_ID)
-    ) {
+    if (this.messageInstance.fromMe || this.messageInstance.id.fromMe) {
       return {
         name: this.messageInstance._data?.notifyName,
         role: 'OWNER',
         chatId: this.messageInstance.from,
       };
-    } else if (String(this.messageInstance.from) === String(WA_BOT_ID)) {
+    } else {
       const grpAdmins = await UserModel.find({ roles: 'ADMIN' });
       const isAdmin = grpAdmins.some(
         (admin) => admin.recipitantId === this.messageInstance.author
@@ -61,11 +58,6 @@ export class WhatsAppBot {
           chatId: this.messageInstance.author || '',
         };
       }
-    } else {
-      return {
-        role: 'NONE',
-        chatId: this.messageInstance.author || '',
-      };
     }
   };
 
@@ -85,11 +77,15 @@ export class WhatsAppBot {
           messageToSend
         );
 
-      case 'OWNER':
-        this.waBot.sendMessage(msg);
-        return await react(this.messageInstance);
-
       case 'ADMIN':
+        return await sendAndDeleteMsg(
+          this.client,
+          this.messageInstance,
+          userObj.chatId,
+          messageToSend
+        );
+
+      case 'OWNER':
         this.waBot.sendMessage(msg);
         return await react(this.messageInstance);
 
