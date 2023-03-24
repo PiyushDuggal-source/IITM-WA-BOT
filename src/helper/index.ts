@@ -9,7 +9,16 @@ export class HelperClass {
   // constructor(userObj: MessageType) {
   //   this.userObj = userObj;
   // }
-  static messageResponse = (userObj: MessageType, message: MessageContent) => {
+
+  /**
+   * @param { MessageType } userObj
+   * @param { MessageContent } message
+   * @returns { string } message response with `header` and `footer`
+   */
+  static messageResponse = (
+    userObj: MessageType,
+    message: MessageContent
+  ): string => {
     const adminMessage =
       `Hey, ${GREETINGS.admin[random(GREETINGS.adminLen)]}` +
       message +
@@ -20,14 +29,14 @@ export class HelperClass {
       FOOTERS.footers[random(FOOTERS.footerMsgLength)];
 
     switch (userObj.role) {
-      case 'ADMIN':
-        return adminMessage;
+      case 'STUDENT':
+        return userMessage;
 
       case 'OWNER':
         return adminMessage;
 
       default:
-        return userMessage;
+        return adminMessage;
     }
   };
 }
