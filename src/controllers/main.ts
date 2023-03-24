@@ -11,6 +11,8 @@ export const main = async (
     client,
     messageInstance,
   });
+  // If mention
   const mention = isMention(messageInstance);
   if (mention) return whatsAppBot.sendMessage(adminContent);
+
 };

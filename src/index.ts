@@ -38,7 +38,7 @@ import {
 import { sendClassNotification } from './actions/sendClassNotification';
 dotenv.config();
 
-import logger from "./utils/logger/index";
+import logger from './utils/logger/index';
 
 // Initialized App
 const app = express();
@@ -72,12 +72,12 @@ const client = new Client({
 client.on('qr', (qr: string) => {
   qrcode.generate(qr, { small: true });
   console.log(qr);
-  logger.info("QR generated", { label: "INFO" });
+  logger.info('QR generated', { label: 'INFO' });
 });
 
 // Event "READY"
-client.on("ready", async () => {
-  logger.info("Client Connected", { label: "CONNECTED" });
+client.on('ready', async () => {
+  logger.info('Client Connected', { label: 'CONNECTED' });
   client.sendMessage(
     process.env.WA_BOT_ID_DEV as string,
     (process.env.BOT_NAME as string) +
@@ -92,6 +92,7 @@ client.on("ready", async () => {
  */
 client.on('message_create', async (message: WAWebJS.Message) => {
   // Check if message is from Group or Not, if yes, who contains whoean or userID
+  if (message.from !== WA_BOT_ID) return;
   const userObj: MessageType = await checkMessage(message);
   // Mention Logic
   const str: string[] = message.mentionedIds;
@@ -182,7 +183,7 @@ client.on('group_join', async (msg: GroupNotification) => {
           details.name
         }* Thanks for joining the Group!\n${
           USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
-        }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
+        }\nHey new ${GREETINGS.member[random(GREETINGS.memLen)]} ${
           HEY_EMOJIES[random(HEY_EMOJIES.length)]
         }!\nCheck out what bot(${
           process.env.BOT_NAME as String
@@ -207,10 +208,10 @@ client.on('group_join', async (msg: GroupNotification) => {
         msg,
         msg.recipientIds[0],
         `${process.env.BOT_NAME as String}: ${
-          GREETINGS.member[random(GREETINGS.memberMsgNumber)]
+          GREETINGS.member[random(GREETINGS.memLen)]
         }, Thanks for Joining the Group!\n${
           USER_JOIN_GREETINGS.messages[random(USER_JOIN_GREETINGS.messageNum)]
-        }\nHey new ${GREETINGS.member[random(GREETINGS.memberMsgNumber)]} ${
+        }\nHey new ${GREETINGS.member[random(GREETINGS.memLen)]} ${
           HEY_EMOJIES[random(HEY_EMOJIES.length)]
         }!\nCheck out what bot(${
           process.env.BOT_NAME as String
@@ -268,7 +269,7 @@ setInterval(async () => {
   const chats = await client.getChats();
   const WA_BOT: WA_Grp = chats[BOT];
   sendClassNotification(WA_BOT);
-  logger.info("Checked", { label: "INFO" });
+  logger.info('Checked', { label: 'INFO' });
 }, 5 * 60 * 1000); // every 5 minutes
 
 client.initialize();
@@ -292,7 +293,7 @@ app.get('/', (_: Request, res: Response) => {
   res.send('BOT');
 });
 app.listen(port, () =>
-  logger.info(`[SERVER] Server is running on port ${port}`, { label: "INFO" })
+  logger.info(`[SERVER] Server is running on port ${port}`, { label: 'INFO' })
 );
 
 // All other pages should be returned as error pages

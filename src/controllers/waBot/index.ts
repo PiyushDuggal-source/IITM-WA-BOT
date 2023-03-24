@@ -2,6 +2,7 @@ import * as WAWebJS from 'whatsapp-web.js';
 import { BOT, WA_BOT_ID } from '../..';
 import { react } from '../../actions/messageActions';
 import { sendAndDeleteMsg } from '../../actions/sendAndDeleteMsg';
+import { HelperClass } from '../../helper';
 import { UserModel } from '../../models/models';
 import { MessageType, WA_Grp } from '../../types/types';
 
@@ -70,31 +71,34 @@ export class WhatsAppBot {
 
   sendMessage = async (
     messageToSend: WAWebJS.MessageContent,
-    classMsg?: boolean,
-    admin?: boolean
+    classMsg?: boolean
   ) => {
     const userObj = await this.checkMessage();
-    console.log(userObj)
-    if (userObj.role === 'OWNER') {
-      const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
-      this.waBot.sendMessage(msg);
-      react(this.messageInstance);
-    } else if (userObj.role === 'ADMIN' && admin) {
-      const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
-      this.waBot.sendMessage(msg);
-      react(this.messageInstance);
-    } else if (userObj.role !== 'NONE') {
-      if (classMsg) {
-        this.waBot.sendMessage(messageToSend);
-        react(this.messageInstance);
-      } else {
-        sendAndDeleteMsg(
+    const msg = HelperClass.messageResponse(userObj, messageToSend);
+
+    switch (userObj.role) {
+      case 'STUDENT':
+        return await sendAndDeleteMsg(
           this.client,
           this.messageInstance,
           userObj.chatId,
           messageToSend
         );
-      }
+
+      case 'OWNER':
+        this.waBot.sendMessage(msg);
+        return await react(this.messageInstance);
+
+      case 'ADMIN':
+        this.waBot.sendMessage(msg);
+        return await react(this.messageInstance);
+
+      default:
+        if (classMsg) {
+          this.waBot.sendMessage(messageToSend);
+          await react(this.messageInstance);
+        }
+        break;
     }
   };
 }
