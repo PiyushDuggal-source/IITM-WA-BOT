@@ -102,10 +102,7 @@ client.on('message_create', async (message: WAWebJS.Message) => {
       .toLowerCase()
       .split(' ')
       .includes(`@${(process.env.BOT_NAME as String).toLocaleLowerCase()}`);
-  if (
-    isMention &&
-    message.body.split(' ').length === 1
-  ) {
+  if (isMention && message.body.split(' ').length === 1) {
     introduction(client, userObj, message);
   }
   let allChats = await client.getChats();

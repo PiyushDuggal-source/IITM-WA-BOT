@@ -1,11 +1,11 @@
-import * as WAWebJS from "whatsapp-web.js";
-import { MessageContent } from "whatsapp-web.js";
-import { FOOTERS } from "../utils/reply/footers";
-import * as dotenv from "dotenv";
-import { sendAndDeleteMsg } from "./sendAndDeleteMsg";
-import { MessageType } from "../types/types";
-import { BOT } from "..";
-import { react } from "./messageActions";
+import * as WAWebJS from 'whatsapp-web.js';
+import { MessageContent } from 'whatsapp-web.js';
+import { FOOTERS } from '../utils/reply/footers';
+import * as dotenv from 'dotenv';
+import { sendAndDeleteMsg } from './sendAndDeleteMsg';
+import { MessageType } from '../types/types';
+import { BOT } from '..';
+import { react } from './messageActions';
 dotenv.config();
 
 export const sendMessage = async (
@@ -19,32 +19,31 @@ export const sendMessage = async (
   },
   help?: boolean
 ) => {
-  if (who.role === "OWNER") {
+  if (who.role === 'OWNER') {
     const chats = await client.getChats();
     const WA_BOT = chats[BOT];
     if (cmds) {
       WA_BOT.sendMessage(messageToSend);
-    react(messageInstance)
+      react(messageInstance);
     } else if (help) {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend} \n:${
         FOOTERS.footers[random(FOOTERS.footerMsgLength)]
       }`;
       WA_BOT.sendMessage(msg);
-    react(messageInstance)
+      react(messageInstance);
     } else {
-      console.log("reaching here");
+      console.log('reaching here');
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
       WA_BOT.sendMessage(msg);
-    react(messageInstance)
+      react(messageInstance);
     }
-  } else if (who.role !== "NONE") {
-    console.log("reached");
+  } else if (who.role !== 'NONE') {
+    console.log('reached');
     if (classMsg?.classMsg) {
       const chats = await client.getChats();
       const WA_BOT = chats[BOT];
       WA_BOT.sendMessage(messageToSend);
-      react(messageInstance)
-
+      react(messageInstance);
     } else if (cmds) {
       sendAndDeleteMsg(client, messageInstance, who.chatId, messageToSend);
     } else if (help) {
@@ -53,7 +52,7 @@ export const sendMessage = async (
       }`;
       sendAndDeleteMsg(client, messageInstance, who.chatId, msg);
     } else {
-      console.log("endly reaching here");
+      console.log('endly reaching here');
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
       sendAndDeleteMsg(client, messageInstance, who.chatId, msg);
     }
