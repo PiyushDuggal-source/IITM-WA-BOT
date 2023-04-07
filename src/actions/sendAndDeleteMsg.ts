@@ -11,11 +11,11 @@ export const sendAndDeleteMsg = async (
   const userChat = await client.getChatById(userId);
   messageContent += `\n\n${END_FOOTER}`;
   const msg = userChat.sendMessage(messageContent);
-  // await (await msg).delete();
-  // const chatMsgs = await userChat.fetchMessages({ limit: 4 });
-  // if (chatMsgs.length < 2) {
-  //   await userChat.delete();
-  // }
+  await (await msg).delete();
+  const chatMsgs = await userChat.fetchMessages({ limit: 4 });
+  if (chatMsgs.length < 2) {
+    await userChat.delete();
+  }
   if ("react" in messageInstance) {
     react(messageInstance)
   }
