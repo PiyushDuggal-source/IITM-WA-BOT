@@ -6,6 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipDefaultLibCheck": true,
+    "strictPropertyInitialization": false,
     "skipLibCheck": true
   },
   "include": [
