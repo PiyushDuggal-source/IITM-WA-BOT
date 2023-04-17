@@ -1,15 +1,10 @@
 import * as WAWebJS from 'whatsapp-web.js';
 import { Roles } from '../models/models';
 
+export type AlwaysGroupMessage = 'SOURCE' | 'GROUP_LINK' | 'CHECK' | 'HELP';
+
 // Command Types
-export type CommandType =
-  | 'NOTES'
-  | 'PLAYLIST'
-  | 'CALENDAR'
-  | 'HELP'
-  | 'SOURCE'
-  | 'GROUP_LINK'
-  | 'CHECK';
+export type CommandType = 'NOTES' | 'PLAYLIST' | 'CALENDAR';
 
 // Ping Replies
 export type PingReplies = {
