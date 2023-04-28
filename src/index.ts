@@ -91,9 +91,11 @@ client.on("ready", async () => {
  * Event "MESSAGE_CREATE"
  * @returns { MessageTypeOfWA }
  */
-client.on("message_create", async (message: WAWebJS.Message) => {
+client.on("message", async (message: WAWebJS.Message) => {
   // Check if message is from Group or Not, if yes, who contains whoean or userID
+  console.log("checking");
   if (message.from !== WA_BOT_ID) return;
+  console.log("procceeding");
   const userObj: MessageType = await checkMessage(message);
   // Mention Logic
   const str: string[] = message.mentionedIds;
