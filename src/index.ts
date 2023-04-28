@@ -260,7 +260,7 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
     );
     const allChats = await client.getChats();
     const WA_BOT = allChats[BOT];
-    WA_BOT.sendMessage(`${process.env.BOT_NAME as String}: somebody left`);
+    client.sendMessage(WA_BOT_ID,`${process.env.BOT_NAME as String}: somebody left`);
     WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
   }
   const recipitantId = notification.recipientIds[0];
@@ -269,9 +269,7 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
 
 // For checking the classes
 setInterval(async () => {
-  const chats = await client.getChats();
-  const WA_BOT: WA_Grp = chats[BOT];
-  sendClassNotification(WA_BOT);
+  sendClassNotification(client, WA_BOT_ID);
   logger.info("Checked", { label: "INFO" });
 }, 5 * 60 * 1000); // every 5 minutes
 
