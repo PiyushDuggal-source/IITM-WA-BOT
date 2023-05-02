@@ -79,11 +79,11 @@ client.on("qr", (qr: string) => {
 // Event "READY"
 client.on("ready", async () => {
   logger.info("Client Connected", { label: "CONNECTED" });
-  client.sendMessage(
-    process.env.WA_BOT_ID_DEV as string,
-    (process.env.BOT_NAME as string) +
-      `: ${RANDOM_WAKEUP_MSG[random(RANDOM_WAKEUP_MSG.length)]}`
-  );
+  // client.sendMessage(
+  //   process.env.WA_BOT_ID_DEV as string,
+  //   (process.env.BOT_NAME as string) +
+  //     `: ${RANDOM_WAKEUP_MSG[random(RANDOM_WAKEUP_MSG.length)]}`
+  // );
 });
 
 /**
@@ -91,10 +91,14 @@ client.on("ready", async () => {
  * Event "MESSAGE_CREATE"
  * @returns { MessageTypeOfWA }
  */
-client.on("message", async (message: WAWebJS.Message) => {
+client.on("message_create", async (message: WAWebJS.Message) => {
   // Check if message is from Group or Not, if yes, who contains whoean or userID
-  console.log("checking");
-  if (message.from !== WA_BOT_ID) return;
+  console.log(message);
+  if (
+    (message.from !== "919871453667@c.us" && message.to !== WA_BOT_ID) ||
+    message.from !== WA_BOT_ID
+  )
+    return;
   console.log("procceeding");
   const userObj: MessageType = await checkMessage(message);
   // Mention Logic
@@ -112,9 +116,7 @@ client.on("message", async (message: WAWebJS.Message) => {
   ) {
     introduction(client, userObj, message);
   }
-  let allChats = await client.getChats();
-  const WA_BOT: WA_Grp = allChats[BOT];
-
+  const WA_BOT: WA_Grp = await client.getChatById(WA_BOT_ID);
   const cmd = message.body.split(",")[0].toLocaleLowerCase();
 
   // Command check logic
@@ -156,7 +158,7 @@ client.on("message", async (message: WAWebJS.Message) => {
       let recipitantId = participant.id._serialized;
       await addUser({ recipitantId });
     });
-    allChats[1].sendMessage(
+    WA_BOT.sendMessage(
       "SUCCESSFULLY ADDED ALL THE STUDENTS IN THE DB, MASTER!"
     );
     return;
@@ -260,7 +262,10 @@ client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {
     );
     const allChats = await client.getChats();
     const WA_BOT = allChats[BOT];
-    client.sendMessage(WA_BOT_ID,`${process.env.BOT_NAME as String}: somebody left`);
+    client.sendMessage(
+      WA_BOT_ID,
+      `${process.env.BOT_NAME as String}: somebody left`
+    );
     WA_BOT.sendMessage(sticker, { sendMediaAsSticker: true });
   }
   const recipitantId = notification.recipientIds[0];
@@ -288,7 +293,7 @@ client.initialize();
 //   clearInterval(intervalId);
 // }, etaMs);
 
-const port = Number(process.env.PORT) || 3005;
+const port = Number(process.env.PORT) || 3000;
 
 app.get("/", (_: Request, res: Response) => {
   res.send("BOT");
