@@ -93,10 +93,10 @@ client.on("ready", async () => {
  */
 client.on("message_create", async (message: WAWebJS.Message) => {
   // Check if message is from Group or Not, if yes, who contains whoean or userID
-  console.log(message);
+
   if (
-    (message.from !== "919871453667@c.us" && message.to !== WA_BOT_ID) ||
-    message.from !== WA_BOT_ID
+    (message.fromMe && message.to !== WA_BOT_ID) ||
+    (message.from !== WA_BOT_ID && !message.fromMe)
   )
     return;
   console.log("procceeding");
