@@ -1,0 +1,7 @@
+.env
+.git
+.wwebjs_cache
+bin
+logs
+node_modules
+src/sessions
