@@ -3,3 +3,4 @@ sessions
 .env
 .wwebjs_auth
 logs/wa-*
+.wwebjs_cache
