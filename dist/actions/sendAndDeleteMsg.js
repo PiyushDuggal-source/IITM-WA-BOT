@@ -1,4 +1,0 @@
-"use strict";var o=Object.defineProperty;var c=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var W=Object.prototype.hasOwnProperty;var f=(e,t)=>{for(var a in t)o(e,a,{get:t[a],enumerable:!0})},m=(e,t,a,i)=>{if(t&&typeof t=="object"||typeof t=="function")for(let s of g(t))!W.call(e,s)&&s!==a&&o(e,s,{get:()=>t[s],enumerable:!(i=c(t,s))||i.enumerable});return e};var M=e=>m(o({},"__esModule",{value:!0}),e);var h={};f(h,{sendAndDeleteMsg:()=>d});module.exports=M(h);var n=require("../utils/reply/footers"),r=require("./messageActions");const d=async(e,t,a,i)=>{const s=await e.getChatById(a);i+=`
-
-${n.END_FOOTER}`,await(await s.sendMessage(i)).delete(),(await s.fetchMessages({limit:4})).length<2&&await s.delete(),"react"in t&&(0,r.react)(t)};0&&(module.exports={sendAndDeleteMsg});
-//# sourceMappingURL=sendAndDeleteMsg.js.map

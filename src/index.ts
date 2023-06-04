@@ -79,11 +79,12 @@ client.on("qr", (qr: string) => {
 // Event "READY"
 client.on("ready", async () => {
   logger.info("Client Connected", { label: "CONNECTED" });
-  // client.sendMessage(
-  //   process.env.WA_BOT_ID_DEV as string,
-  //   (process.env.BOT_NAME as string) +
-  //     `: ${RANDOM_WAKEUP_MSG[random(RANDOM_WAKEUP_MSG.length)]}`
-  // );
+
+  client.sendMessage(
+    process.env.WA_BOT_ID_DEV as string,
+    (process.env.BOT_NAME as string) +
+      `: ${RANDOM_WAKEUP_MSG[random(RANDOM_WAKEUP_MSG.length)]}`
+  );
 });
 
 /**
