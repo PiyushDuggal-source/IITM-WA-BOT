@@ -5,3 +5,4 @@ bin
 logs
 node_modules
 src/sessions
+dist
