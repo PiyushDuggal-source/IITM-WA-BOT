@@ -1,7 +1,7 @@
 name: CI-CD pipeline to AWS
 env:
   EB_S3_BUCKET_NAME: "${{ secrets.EB_S3_BUCKET_NAME }}"
-  EB_APPLICATION_NAME: "iitm-wa-bot"
+  EB_APPLICATION_NAME: "iitm-wa-bot-eliza"
   EB_ENVIRONMENT_NAME: "Iitm-wa-bot-eliza-env"
   DEPLOY_PACKAGE_NAME: "IITM-wa-bot-env-${{ github.sha }}.zip"
   AWS_REGION_NAME: "ap-south-1"
