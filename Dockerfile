@@ -6,7 +6,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN NODE_ENV=development npm i
+RUN NODE_ENV=development PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm i
 
 RUN npm run build
 
