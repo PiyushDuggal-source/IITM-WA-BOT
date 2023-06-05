@@ -1,9 +1,0 @@
-services:
-  iitm-wa-bot:
-    build: .
-    env_file:
-      - .env
-    ports:
-      - "3005:3000"
-
-version: "3.8"
