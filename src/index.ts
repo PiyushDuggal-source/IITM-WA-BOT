@@ -64,7 +64,6 @@ const client = new Client({
   puppeteer: {
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_API_KEY}`,
   },
   authStrategy: new LocalAuth({
     dataPath: `${__dirname}/sessions`,
