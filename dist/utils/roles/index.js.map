@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../src/utils/roles/index.ts"],
-  "sourcesContent": ["export const ADMIN_OWNER = ['ADMIN', \"OWNER\"]\n\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,iBAAAE,IAAA,eAAAC,EAAAH,GAAO,MAAME,EAAc,CAAC,QAAS,OAAO",
-  "names": ["roles_exports", "__export", "ADMIN_OWNER", "__toCommonJS"]
-}

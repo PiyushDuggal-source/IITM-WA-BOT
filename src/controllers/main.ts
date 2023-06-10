@@ -1,7 +1,7 @@
-import * as WAWebJS from 'whatsapp-web.js';
-import { adminContent } from '../actions/introduction';
-import { isMention } from '../actions/isMention';
-import { WhatsAppBot } from './waBot';
+import * as WAWebJS from "whatsapp-web.js";
+import { adminContent } from "../actions/introduction";
+import { isMention } from "../actions/isMention";
+import { WhatsAppBot } from "./waBot";
 
 export const main = async (
   client: WAWebJS.Client,

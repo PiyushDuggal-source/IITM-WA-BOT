@@ -2,4 +2,5 @@ node_modules
 sessions
 .env
 .wwebjs_auth
+.wwebjs_cache
 logs/wa-*

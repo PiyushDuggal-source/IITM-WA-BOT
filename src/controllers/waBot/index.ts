@@ -1,9 +1,9 @@
-import * as WAWebJS from 'whatsapp-web.js';
-import { BOT, WA_BOT_ID } from '../..';
-import { react } from '../../actions/messageActions';
-import { sendAndDeleteMsg } from '../../actions/sendAndDeleteMsg';
-import { UserModel } from '../../models/models';
-import { MessageType, WA_Grp } from '../../types/types';
+import * as WAWebJS from "whatsapp-web.js";
+import { BOT, WA_BOT_ID } from "../..";
+import { react } from "../../actions/messageActions";
+import { sendAndDeleteMsg } from "../../actions/sendAndDeleteMsg";
+import { UserModel } from "../../models/models";
+import { MessageType, WA_Grp } from "../../types/types";
 
 interface Message extends WAWebJS.Message {
   _data?: {
@@ -29,7 +29,7 @@ export class WhatsAppBot {
   constructor(options: Options) {
     this.messageInstance = options.messageInstance;
     this.client = options.client;
-    this.setBot();
+    console.log("initialized waBot");
   }
 
   checkMessage = async (): Promise<MessageType> => {
@@ -39,33 +39,37 @@ export class WhatsAppBot {
     ) {
       return {
         name: this.messageInstance._data?.notifyName,
-        role: 'OWNER',
+        role: "OWNER",
         chatId: this.messageInstance.from,
       };
     } else if (String(this.messageInstance.from) === String(WA_BOT_ID)) {
-      const grpAdmins = await UserModel.find({ roles: 'ADMIN' });
+      const grpAdmins = await UserModel.find({ roles: "ADMIN" });
       const isAdmin = grpAdmins.some(
         (admin) => admin.recipitantId === this.messageInstance.author
       );
       if (!isAdmin) {
         return {
           name: this.messageInstance._data?.notifyName,
-          role: 'STUDENT',
-          chatId: this.messageInstance.author || '',
+          role: "STUDENT",
+          chatId: this.messageInstance.author || "",
         };
       } else {
         return {
           name: this.messageInstance._data?.notifyName,
-          role: 'ADMIN',
-          chatId: this.messageInstance.author || '',
+          role: "ADMIN",
+          chatId: this.messageInstance.author || "",
         };
       }
     } else {
       return {
-        role: 'NONE',
-        chatId: this.messageInstance.author || '',
+        role: "NONE",
+        chatId: this.messageInstance.author || "",
       };
     }
+  };
+
+  sendMsg = async (to: string, msg: WAWebJS.MessageContent) => {
+    this.client.sendMessage(to, msg);
   };
 
   sendMessage = async (
@@ -73,22 +77,23 @@ export class WhatsAppBot {
     classMsg?: boolean,
     admin?: boolean
   ) => {
+    await this.setBot();
+    console.log("entering sendMessage");
     const userObj = await this.checkMessage();
-    console.log(userObj)
-    if (userObj.role === 'OWNER') {
+    if (userObj.role === "OWNER") {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
-      this.waBot.sendMessage(msg);
+      await this.waBot.sendMessage(msg);
       react(this.messageInstance);
-    } else if (userObj.role === 'ADMIN' && admin) {
+    } else if (userObj.role === "ADMIN" && admin) {
       const msg = `${process.env.BOT_NAME as String}: ${messageToSend}`;
-      this.waBot.sendMessage(msg);
+      await this.waBot.sendMessage(msg);
       react(this.messageInstance);
-    } else if (userObj.role !== 'NONE') {
+    } else if (userObj.role !== "NONE") {
       if (classMsg) {
-        this.waBot.sendMessage(messageToSend);
+        await this.waBot.sendMessage(messageToSend);
         react(this.messageInstance);
       } else {
-        sendAndDeleteMsg(
+        await sendAndDeleteMsg(
           this.client,
           this.messageInstance,
           userObj.chatId,
@@ -98,11 +103,3 @@ export class WhatsAppBot {
     }
   };
 }
-
-// const clnt: WAWebJS.Client;
-// const msg: WAWebJS.Message;
-//
-// const wabt = new WhatsAppBot({
-//   client: clnt,
-//   messageInstance: msg,
-// });
