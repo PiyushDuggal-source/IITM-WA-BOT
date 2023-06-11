@@ -6,9 +6,8 @@ import {
   MessageMedia,
 } from "whatsapp-web.js";
 import qrcode = require("qrcode-terminal");
-import { checkMessage, superCmdFilter } from "./actions/messageActions";
+import { checkMessage } from "./actions/messageActions";
 import { main } from "./controllers/main";
-import { introduction, sendCommands } from "./actions/introduction";
 import {
   GREETINGS,
   HEY_EMOJIES,
@@ -19,15 +18,12 @@ import { random } from "./actions/sendMessage";
 import express from "express";
 import * as dotenv from "dotenv";
 import { Request, Response } from "express";
-import { COMMANDS_CMDS } from "./utils/Commands/instructions";
 import { grpLeaveStickers } from "./assets/assets";
 import { log } from "./utils/log";
 import { MessageType, WA_Grp } from "./types/types";
 import { sendAndDeleteMsg } from "./actions/sendAndDeleteMsg";
-import { pingEveryone } from "./actions/pingEveryone";
-import { addUser, increaseNumberOfCmd, removeUser } from "./services/mongo";
+import { addUser, removeUser } from "./services/mongo";
 import { connectToDb } from "./utils/db/connect";
-import { removeMember } from "./actions/removeMember";
 
 // @ts-ignore
 import {
