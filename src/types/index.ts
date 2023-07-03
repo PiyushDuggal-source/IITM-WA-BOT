@@ -9,3 +9,8 @@ export type ResType = {
   statusCode: number,
   error?: any,
 }
+
+export type MessageObject = {
+  messageBody: string,
+  chatId: string,
+}
