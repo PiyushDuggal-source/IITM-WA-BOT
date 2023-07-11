@@ -1,14 +1,14 @@
-import e, { Request } from "express";
+import e, { Request, Response } from "express";
 import { MessageBody } from "../types";
 import { sendMessage, sendMsgToBot } from "../actions/messageActions";
 
 const router = e.Router();
 
 router.post("/sendMessage", async (req: Request<{}, {}, MessageBody>, res) => {
+
   console.log("Entering sendMessage route");
-  const { message, chatId } = req.body;
   try {
-    await sendMessage(message, chatId);
+    await sendMessage(req.body);
   } catch (error: any) {
     res.status(500).send(error);
   }
@@ -18,7 +18,7 @@ router.post("/sendMessage", async (req: Request<{}, {}, MessageBody>, res) => {
 
 router.post(
   "/sendMsgToBot",
-  async (req: Request<{}, {}, { message: string }>, res) => {
+  async (req: Request<{}, {}, { message: string }>, res: Response) => {
     console.log("Entering sendMsgToBot route");
     const { message } = req.body;
     try {
