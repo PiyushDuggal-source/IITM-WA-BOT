@@ -3,7 +3,8 @@ import * as dotenv from "dotenv";
 import app from "./app";
 import client from "./service/connectWA";
 import { sendMessageObject } from "./service/iitm-bot-wa";
-import { MessageObject } from "./types";
+import { Message, MessageObject } from "./types";
+import { isCommand } from "./actions/messageActions";
 dotenv.config();
 
 // For Development Enviornment
@@ -29,20 +30,25 @@ client.on("ready", async () => {
  * Event "MESSAGE_CREATE"
  * @returns { MessageTypeOfWA }
  */
-client.on("message_create", async (message: WAWebJS.Message) => {
-  console.log(message);
+client.on("message_create", async (message: Message) => {
   if (
-    message.to === WA_BOT_ID ||
-    (message.from === process.env.OWNER_ID && message.to === WA_BOT_ID)
+    (message.fromMe && message.to !== WA_BOT_ID) ||
+    (message.from !== WA_BOT_ID && !message.fromMe)
   ) {
-    const messageObject: MessageObject = {
-      messageBody: message.body,
-      chatId: message.from,
-    };
-
-    console.log(messageObject);
-    await sendMessageObject(messageObject);
+    return;
   }
+  const isCmd = isCommand(message.body)
+  if (!isCmd) {
+    console.log("Leaving message_create\n");
+    return;
+  }
+  const messageObject: MessageObject = {
+    name: message._data?.notifyName,
+    messageBody: message.body.slice(1),
+    chatId: message._data?.from as string,
+  };
+
+  await sendMessageObject(messageObject);
 });
 
 /**
