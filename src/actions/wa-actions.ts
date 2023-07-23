@@ -1,6 +1,11 @@
 import fs from "fs";
 import { Response } from "express";
-
+/**
+ * Sends the QR code as an HTML page in the response.
+ *
+ * @param {Response} res - The response object to send the QR code HTML page.
+ * @return {void} This function does not return anything.
+ */
 export const sendQr = (res: Response) => {
   console.log("\nEntering sendQr");
   fs.readFile("qr.txt", (err, last_qr) => {
