@@ -1,4 +1,4 @@
-import * as WAWebJS from "whatsapp-web.js";
+// import * as WAWebJS from "whatsapp-web.js";
 import * as dotenv from "dotenv";
 import app from "./app";
 import client from "./service/connectWA";
@@ -14,9 +14,9 @@ export const WA_BOT_ID = LOCAL
   ? (process.env.WA_BOT_ID_DEV as string)
   : (process.env.WA_BOT_ID as string);
 
-const DB_URL = LOCAL
-  ? (process.env.DEV_DB_URL as string)
-  : (process.env.PROD_DB_URL as string);
+// const DB_URL = LOCAL
+//   ? (process.env.DEV_DB_URL as string)
+//   : (process.env.PROD_DB_URL as string);
 
 // Connect To DB
 
@@ -37,7 +37,7 @@ client.on("message_create", async (message: Message) => {
   ) {
     return;
   }
-  const isCmd = isCommand(message.body)
+  const isCmd = isCommand(message.body);
   if (!isCmd) {
     console.log("Leaving message_create\n");
     return;
@@ -56,14 +56,14 @@ client.on("message_create", async (message: Message) => {
  * Event "GROUP_JOIN"
  * @returns { GrpJoinNotification }
  */
-client.on("group_join", async (msg: WAWebJS.GroupNotification) => { });
+// client.on("group_join", async (msg: WAWebJS.GroupNotification) => { });
 
 /**
  * INFO:
  * Event "GROUP_LEAVE"
  * @returns { GrpLeaveNotification }
  */
-client.on("group_leave", async (notification: WAWebJS.GroupNotification) => { });
+// client.on("group_leave", async (notification: WAWebJS.GroupNotification) => { });
 
 // Initializing Client
 client.initialize();

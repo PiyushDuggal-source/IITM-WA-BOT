@@ -6,7 +6,7 @@ import { MessageBody } from "../types";
 
 export const react = async (
   messageInstance: WAWebJS.Message,
-  emoji: string
+  emoji: string,
 ) => {
   await messageInstance.react(emoji);
 };
@@ -31,7 +31,10 @@ export const isCommand = (msg: string): boolean => {
   console.log("\nEntering isCommand");
 
   // if msg contains at most 2 words and starts with "!" then it is a command
-  if (msg.split(" ").length <= 2 && msg[0] === "!") {
+  if (
+    msg.split(" ").length <= 2 &&
+    msg[0] === (process.env.BOT_PREFIX as string)
+  ) {
     console.log("Leaving isCommand\n");
     return true;
   }
