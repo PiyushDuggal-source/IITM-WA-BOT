@@ -42,13 +42,17 @@ client.on("message_create", async (message: Message) => {
     console.log("Leaving message_create\n");
     return;
   }
+
   const messageObject: MessageObject = {
     name: message._data?.notifyName,
-    messageBody: message.body.slice(1),
-    chatId: message._data?.from as string,
+    cmd: message.body.slice(1).toLowerCase(),
+    chatId: message.id.participant as string,
   };
 
-  await sendMessageObject(messageObject);
+  const res = await sendMessageObject(messageObject);
+  if (res.data.status) {
+    message.react("👍");
+  }
 });
 
 /**
