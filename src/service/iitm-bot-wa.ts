@@ -3,7 +3,5 @@ import { MessageObject } from "../types";
 
 export const sendMessageObject = async (messageObject: MessageObject) => {
   console.log(messageObject);
-  
-  await axios.post("/sendMessage", messageObject);
-  console.log("sending message");
+  return await axios.post<{status: string}>("/wa-logic-service/api/sendMessage", messageObject);
 };
