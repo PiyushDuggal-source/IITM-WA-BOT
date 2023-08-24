@@ -12,6 +12,7 @@ export const react = async (
 };
 
 export const sendMessage = async (messageObj: MessageBody) => {
+  console.log("\nEntering sendMessage");
   const userChat = await client.getChatById(messageObj.chatId);
   const msg = await userChat.sendMessage(messageObj.message);
   await msg.delete();
@@ -19,6 +20,7 @@ export const sendMessage = async (messageObj: MessageBody) => {
   if (chatMsgs.length < 2) {
     await userChat.delete();
   }
+  console.log("Leaving sendMessage\n");
 };
 
 export const sendMsgToBot = async (message: MessageContent) => {
