@@ -5,11 +5,11 @@ import { sendMessage, sendMsgToBot } from "../actions/messageActions";
 const router = e.Router();
 
 router.post("/sendMessage", async (req: Request<{}, {}, MessageBody>, res) => {
-
   console.log("Entering sendMessage route");
   try {
     await sendMessage(req.body);
   } catch (error: any) {
+    console.log(error)
     res.status(500).send(error);
   }
   res.sendStatus(200);
