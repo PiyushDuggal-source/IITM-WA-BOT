@@ -11,9 +11,7 @@ export type ReturnType =
   | "NO_CALENDAR"; // when the calendar doesn't exist
 export type MessageBody = {
   message: MessageContent;
-  type: ReturnType;
   chatId: string;
-  emoji: any;
 };
 
 export type ResType = {
@@ -21,9 +19,10 @@ export type ResType = {
   error?: any;
 };
 
+
 export type MessageObject = {
   name?: string;
-  messageBody: string;
+  cmd: string;
   chatId: string;
 };
 
@@ -32,4 +31,7 @@ export interface Message extends WAWebJS.Message {
     notifyName?: string;
     from?: string;
   };
+  id: WAWebJS.MessageId & {
+    participant: string;
+  }
 }
