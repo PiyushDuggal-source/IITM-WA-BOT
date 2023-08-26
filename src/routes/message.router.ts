@@ -10,7 +10,7 @@ router.post("/sendMessage", async (req: Request<{}, {}, MessageBody>, res) => {
     await sendMessage(req.body);
   } catch (error: any) {
     console.log(error)
-    res.status(500).send(error);
+   res.status(500).send(error);
   }
   res.sendStatus(200);
   console.log("Leaving sendMessage route");
