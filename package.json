@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
     "start": "node dist/index.js",
-    "build": "npm run clean && tsc"
+    "build": "tsc"
   },
   "author": "Piyush Duggal",
   "license": "ISC",
