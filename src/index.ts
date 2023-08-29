@@ -50,7 +50,7 @@ client.on("message_create", async (message: Message) => {
   };
 
   const res = await sendMessageObject(messageObject);
-  if (res.data.status) {
+  if (res.data.status === "success") {
     message.react("👍");
   }
 });
