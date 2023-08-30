@@ -5,6 +5,7 @@ import client from "./service/connectWA";
 import { sendMessageObject } from "./service/iitm-bot-wa";
 import { Message, MessageObject } from "./types";
 import { isCommand } from "./actions/messageActions";
+import WAWebJS from "whatsapp-web.js";
 dotenv.config();
 
 // For Development Enviornment
@@ -20,7 +21,7 @@ export const WA_BOT_ID = LOCAL
 
 // Connect To DB
 
-// Event "READY"
+// Event "READY
 client.on("ready", async () => {
   console.log("Client is ready");
 });
@@ -52,6 +53,8 @@ client.on("message_create", async (message: Message) => {
   const res = await sendMessageObject(messageObject);
   if (res.data.status === "success") {
     message.react(res.data.emoji as string);
+  } else if (res.data.status === "No such command") {
+    message.react("❌");
   }
 });
 
@@ -60,14 +63,19 @@ client.on("message_create", async (message: Message) => {
  * Event "GROUP_JOIN"
  * @returns { GrpJoinNotification }
  */
-// client.on("group_join", async (msg: WAWebJS.GroupNotification) => { });
+client.on("group_join", async (msg: WAWebJS.GroupNotification) => {
+  if (msg.chatId === WA_BOT_ID) {
+    // create a service and send the author field
+    console.log(msg);
+  }
+});
 
 /**
  * INFO:
  * Event "GROUP_LEAVE"
  * @returns { GrpLeaveNotification }
  */
-// client.on("group_leave", async (notification: WAWebJS.GroupNotification) => { });
+// client.on("group_leave", async (notification: WAWebJS.GroupNotification) => {});
 
 // Initializing Client
 client.initialize();
