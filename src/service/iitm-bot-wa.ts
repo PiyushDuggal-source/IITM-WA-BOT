@@ -11,10 +11,16 @@ export const sendMessageObject = async (messageObject: MessageObject) => {
 
 type GroupJoinNotification = {
   chatId: string;
+  name: string;
 };
 
-export const sendGroupJoinInfo = async ({ chatId }: GroupJoinNotification) => {
+export const sendGroupJoinInfo = async ({
+  chatId,
+  name,
+}: GroupJoinNotification) => {
+  console.log("Group join info sent");
   return await axios.post("/wa-logic-service/api/sendGroupJoinInfo", {
     chatId,
+    name,
   });
 };

@@ -63,12 +63,18 @@ client.on("message_create", async (message: Message) => {
  * Event "GROUP_JOIN"
  * @returns { GrpJoinNotification }
  */
-client.on("group_join", async (msg: WAWebJS.GroupNotification) => {
-  if (msg.chatId === WA_BOT_ID) {
-    // create a service and send the author field
-    await sendGroupJoinInfo({ chatId: msg.author });
-  }
-});
+client.on(
+  "group_join",
+  async (msg: WAWebJS.GroupNotification & { id: { participant: string } }) => {
+    if (msg.chatId === WA_BOT_ID) {
+      console.log(msg)
+      console.log(msg.id.participant);
+      const chat = await client.getContactById(msg.id.participant);
+      // create a service and send the author field
+      await sendGroupJoinInfo({ chatId: msg.id.participant, name: chat.pushname });
+    }
+  },
+);
 
 /**
  * INFO:

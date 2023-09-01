@@ -2,7 +2,6 @@ import e from "express";
 import { Request, Response, NextFunction } from "express";
 import { checkAPI } from "./middleware";
 import router from "./routes";
-import axios from "axios";
 import { logSlackAlert } from "./utils/slack";
 
 const app = e();
