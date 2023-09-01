@@ -20,6 +20,6 @@ router.get("/qr", (_: Request, res: Response) => {
     })
     .catch(() => sendQr(res));
 });
-router.use("/wa-service/api/", msgRouter);
+router.use("/", msgRouter);
 
 export default router;

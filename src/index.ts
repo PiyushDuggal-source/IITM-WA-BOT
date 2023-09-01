@@ -2,7 +2,7 @@
 import * as dotenv from "dotenv";
 import app from "./app";
 import client from "./service/connectWA";
-import { sendMessageObject } from "./service/iitm-bot-wa";
+import { sendGroupJoinInfo, sendMessageObject } from "./service/iitm-bot-wa";
 import { Message, MessageObject } from "./types";
 import { isCommand } from "./actions/messageActions";
 import WAWebJS from "whatsapp-web.js";
@@ -66,7 +66,7 @@ client.on("message_create", async (message: Message) => {
 client.on("group_join", async (msg: WAWebJS.GroupNotification) => {
   if (msg.chatId === WA_BOT_ID) {
     // create a service and send the author field
-    console.log(msg);
+    await sendGroupJoinInfo({ chatId: msg.author });
   }
 });
 
