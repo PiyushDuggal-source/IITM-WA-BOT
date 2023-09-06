@@ -19,7 +19,6 @@ export const WA_BOT_ID = LOCAL
 //   ? (process.env.DEV_DB_URL as string)
 //   : (process.env.PROD_DB_URL as string);
 
-// Connect To DB
 // Event "READY
 client.on("ready", async () => {
   console.log("Client is ready");
