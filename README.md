@@ -47,6 +47,11 @@
 `src/types`: All the typescript types<br>
 `src/assets`: common assets<br>
 
+## Upcoming features 🎯
+
+- **The ability to connect students with mentors.** This would be a great way for students to get advice and support from people who have experience in their chosen field.
+  - In this feature, student will volunteer to be a mentor to a student and the mentor will get the opportunity to connect with the student.
+
 ## Contributing
 
 We welcome contributions from anyone who is interested in improving `IITM_WA_BOT`. To get started, please follow these steps:
@@ -59,13 +64,14 @@ We welcome contributions from anyone who is interested in improving `IITM_WA_BOT
 6. Submit a pull request
 
 ## Author
+
 [Piyush Duggal](https://github.com/piyushduggal-source)
 
 Email: [duggalpiyush0@gmail.com](mailto:duggalpiyush0@gmail.com)<br>
 Checkout my other projects. [ here ](https://github.com/PiyushDuggal-source?tab=repositories)
 
-
 ## License
+
 The MIT License (MIT)
 
 Copyright (c) 2023 [Piyush Duggal](https://github.com/piyushduggal-source)

@@ -1,76 +1,45 @@
 import * as WAWebJS from "whatsapp-web.js";
-import { MessageType } from "../types/types";
-import * as dotenv from "dotenv";
+import { MessageContent } from "whatsapp-web.js";
+import client from "../service/connectWA";
 import { WA_BOT_ID } from "..";
-import { UserModel } from "../models/models";
-import { REACT_EMOGIES } from "../utils/reply/replies";
-import { random } from "./sendMessage";
-import { OWNER_ADMIN_CMDS } from "../utils/Commands/allCmds";
-dotenv.config();
+import { MessageBody } from "../types";
 
-interface Message extends WAWebJS.Message {
-  _data?: {
-    notifyName?: string;
-  };
-}
+export const react = async (
+  messageInstance: WAWebJS.Message,
+  emoji: string,
+) => {
+  await messageInstance.react(emoji);
+};
 
-/**
- * INFO:
- * @param { string } message Get the `Message` object
- * @returns { MessageType }
- */
-export const checkMessage = async (message: Message): Promise<MessageType> => {
-  if (
-    (message.fromMe || message.id.fromMe) &&
-    String(message.to) === String(WA_BOT_ID)
-  ) {
-    return {
-      name: message._data?.notifyName,
-      role: "OWNER",
-      chatId: message.from,
-    };
-  } else if (String(message.from) === String(WA_BOT_ID)) {
-    const grpAdmins = await UserModel.find({ roles: "ADMIN" });
-    const isAdmin = grpAdmins.some(
-      (admin) => admin.recipitantId === message.author
-    );
-    if (!isAdmin) {
-      return {
-        name: message._data?.notifyName,
-        role: "STUDENT",
-        chatId: message.author || "",
-      };
-    } else {
-      return {
-        name: message._data?.notifyName,
-        role: "ADMIN",
-        chatId: message.author || "",
-      };
-    }
-  } else {
-    return {
-      role: "NONE",
-      chatId: message.author || "",
-    };
+export const sendMessage = async (messageObj: MessageBody) => {
+  console.log("\nEntering sendMessage");
+  const userChat = await client.getChatById(messageObj.chatId);
+  const msg = await userChat.sendMessage(messageObj.message);
+  await msg.delete();
+  const chatMsgs = await userChat.fetchMessages({ limit: 3 });
+  if (chatMsgs.length < 2) {
+    await userChat.delete();
   }
+  console.log("Leaving sendMessage\n");
 };
 
-/**
- * INFO:
- * @param { WAWebJS.Message } messageInstance takes messageInstance
- * reacts on messages with random emojis
- */
-export const react = async (messageInstance: WAWebJS.Message) => {
-  await messageInstance.react(REACT_EMOGIES[random(REACT_EMOGIES.length)]);
+export const sendMsgToBot = async (message: MessageContent) => {
+  console.log("\nEntering sendMsgToBot");
+  await client.sendMessage(WA_BOT_ID, message);
+  console.log("Leaving sendMsgToBot\n");
 };
 
-/**
- * INFO:
- * This function filters the cmds.
- * @param { string } messageBody
- * @returns  { Boolean }
- */
-export const superCmdFilter = (messageBody: string): Boolean => {
-  const cmdByUser = messageBody.split(" ")[0].slice(1);
-  return OWNER_ADMIN_CMDS.some((cmds) => cmds.some((cmd) => cmd === cmdByUser));
+export const isCommand = (msg: string): boolean => {
+  console.log("\nEntering isCommand");
+
+  // if msg contains at most 2 words and starts with "!" then it is a command
+  if (
+    msg.split(" ").length <= 2 &&
+    msg[0] === (process.env.BOT_PREFIX as string)
+  ) {
+    console.log("Leaving isCommand\n");
+    return true;
+  }
+  console.log("Leaving isCommand\n");
+  return false;
 };
