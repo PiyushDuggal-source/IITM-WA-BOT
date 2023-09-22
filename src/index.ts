@@ -50,7 +50,7 @@ client.on("message_create", async (message: Message) => {
     name: message._data?.notifyName as string,
     cmd: message.body.slice(1).toLowerCase(),
     chatId: message.id.participant as string,
-    groupId: message.to,
+    groupId: message.id.remote,
   };
 
   const res = await sendMessageObject(messageObject);
