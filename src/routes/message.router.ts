@@ -18,11 +18,11 @@ router.post("/sendMessage", async (req: Request<{}, {}, MessageBody>, res) => {
 
 router.post(
   "/sendMsgToBot",
-  async (req: Request<{}, {}, { message: string }>, res: Response) => {
+  async (req: Request<{}, {}, { message: string , groupId: string}>, res: Response) => {
     console.log("Entering sendMsgToBot route");
-    const { message } = req.body;
+    const { message, groupId } = req.body;
     try {
-      await sendMsgToBot(message);
+      await sendMsgToBot(groupId, message);
     } catch (error: any) {
       res.status(500).send(error);
     }

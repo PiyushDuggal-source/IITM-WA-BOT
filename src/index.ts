@@ -11,9 +11,11 @@ dotenv.config();
 // For Development Enviornment
 const LOCAL = String(process.env.dev) === "true";
 export const BOT = LOCAL ? 1 : 0;
-export const WA_BOT_ID = LOCAL
-  ? (process.env.WA_BOT_ID_DEV as string)
-  : (process.env.WA_BOT_ID as string);
+const WA_BOT_IDs = LOCAL
+  ? (process.env.WA_BOT_IDs_DEV as string)
+  : (process.env.WA_BOT_IDs as string);
+
+export const WA_IDs = (WA_BOT_IDs as string)!.split(",");
 
 // const DB_URL = LOCAL
 //   ? (process.env.DEV_DB_URL as string)
@@ -30,12 +32,14 @@ client.on("ready", async () => {
  * @returns { MessageTypeOfWA }
  */
 client.on("message_create", async (message: Message) => {
+  console.log("Successfully  message");
   if (
-    (message.fromMe && message.to !== WA_BOT_ID) ||
-    (message.from !== WA_BOT_ID && !message.fromMe)
+    (message.fromMe && !WA_IDs.includes(message.to)) ||
+    (!WA_IDs.includes(message.from) && !message.fromMe)
   ) {
     return;
   }
+  console.log("Successfully received message");
   const isCmd = isCommand(message.body);
   if (!isCmd) {
     console.log("Leaving message_create\n");
@@ -43,9 +47,10 @@ client.on("message_create", async (message: Message) => {
   }
 
   const messageObject: MessageObject = {
-    name: message._data?.notifyName,
+    name: message._data?.notifyName as string,
     cmd: message.body.slice(1).toLowerCase(),
     chatId: message.id.participant as string,
+    groupId: message.to,
   };
 
   const res = await sendMessageObject(messageObject);
@@ -64,12 +69,14 @@ client.on("message_create", async (message: Message) => {
 client.on(
   "group_join",
   async (msg: WAWebJS.GroupNotification & { id: { participant: string } }) => {
-    if (msg.chatId === WA_BOT_ID) {
-      console.log(msg)
+    if (WA_IDs.includes(msg.chatId)) {
       console.log(msg.id.participant);
       const chat = await client.getContactById(msg.id.participant);
       // create a service and send the author field
-      await sendGroupJoinInfo({ chatId: msg.id.participant, name: chat.pushname });
+      await sendGroupJoinInfo({
+        chatId: msg.id.participant,
+        name: chat.pushname,
+      });
     }
   },
 );

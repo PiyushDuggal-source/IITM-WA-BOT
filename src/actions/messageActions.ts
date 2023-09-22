@@ -1,7 +1,7 @@
 import * as WAWebJS from "whatsapp-web.js";
 import { MessageContent } from "whatsapp-web.js";
 import client from "../service/connectWA";
-import { WA_BOT_ID } from "..";
+import { WA_IDs } from "..";
 import { MessageBody } from "../types";
 
 export const react = async (
@@ -23,9 +23,12 @@ export const sendMessage = async (messageObj: MessageBody) => {
   console.log("Leaving sendMessage\n");
 };
 
-export const sendMsgToBot = async (message: MessageContent) => {
+export const sendMsgToBot = async (
+  groupId: string,
+  message: MessageContent,
+) => {
   console.log("\nEntering sendMsgToBot");
-  await client.sendMessage(WA_BOT_ID, message);
+  await client.sendMessage(groupId, message);
   console.log("Leaving sendMsgToBot\n");
 };
 

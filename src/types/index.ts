@@ -21,9 +21,10 @@ export type ResType = {
 
 
 export type MessageObject = {
-  name?: string;
+  name: string;
   cmd: string;
   chatId: string;
+  groupId: string;
 };
 
 export interface Message extends WAWebJS.Message {
