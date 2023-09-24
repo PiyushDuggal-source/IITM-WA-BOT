@@ -1,6 +1,24 @@
-# IITM-WA-BOT
+# IITM WhatsApp Bot
 
-### This bot is for helping IITM Students to make their life easy and fast by providing the following helps:
+![GitHub Repo stars](https://img.shields.io/github/stars/piyushduggal-source/iitm-wa-bot)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/piyushduggal-source/iitm-wa-bot)
+![GitHub contributors](https://img.shields.io/github/contributors/piyushduggal-source/iitm-wa-bot)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Commands](#🗣-commands)
+- [Watch in action](<#watch-is-action-👇-(click-the-img)>)
+- [Upcoming Features](#upcoming-features-🎯)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
+- [Contact Information](#author)
+
+## Introduction
+
+#### This bot is for helping IITM Students to make their life easy and fast by providing the following helps:
 
 - Reminds about upcoming classes/events
 - Provides upcoming calendar events 📅 in the WhatsApp itself
@@ -11,6 +29,8 @@
 - Provides course playlist
   - you can also use it individually for getting all playlist or you can use the filter
     E.G: **!playlist** Stats
+
+**Note: This bot is the 1st half of the project** checkout other half: [here](https://github.com/piyushduggal-source/iitm-wa-bot-logic)
 
 ## 🗣 Commands
 
@@ -28,29 +48,22 @@
 | `!source`             | ✅ Get the bot's source code                      |
 | `!grouplink`          | Get the current group's invite link               |
 | `!promote`⭐          | Promote a user to be a bot admin                  |
+| `!ban`⭐              | Ban a user from the bot groups                    |
+| `!remove`⭐           | Remove a user from the bot groups                 |
 
 ⭐ = Commands that can only be used when you are a **bot Admin**.
 
 ## Watch is action 👇 (click the img)
 
-[<img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AAOQEOROPzsNEiunYF6dBoVr3CZtfDxkCxHdnbIHlzm57bPJ1Csf0YWLnkD_W63lO2tNZlD1GLXO-x6kamjbblvb3La-SGef=w1920-h1080-k-pd" width="100%" target="_blank">](https://drive.google.com/file/d/1tl33VralV0AXQ2EDJYnjC6r2eaCUHr-l/view)
-
-## Code Structure
-
-`src/index.ts`: 1st entry point<br>
-`src/controllers/main.js`: 2nd entry point<br>
-`src/controllers/Admin`: Admin Controller<br>
-`src/controllers/Users`: Users Controller<br>
-`src/assets`: all main functions<br>
-`src/resources`: Resources<br>
-`src/services`: Models<br>
-`src/types`: All the typescript types<br>
-`src/assets`: common assets<br>
+[<img src="https://i.imgur.com/jCKZJ4U.jpg" width="100%" target="_blank">](https://drive.google.com/file/d/1tl33VralV0AXQ2EDJYnjC6r2eaCUHr-l/view)
 
 ## Upcoming features 🎯
 
 - **The ability to connect students with mentors.** This would be a great way for students to get advice and support from people who have experience in their chosen field.
   - In this feature, student will volunteer to be a mentor to a student and the mentor will get the opportunity to connect with the student.
+- Get the Information of all the contributors.
+- Get the information of the creator.
+- <u>Have a suggestion? Contact the Author</u>
 
 ## Contributing
 
